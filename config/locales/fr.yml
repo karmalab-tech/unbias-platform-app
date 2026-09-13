@@ -17,6 +17,8 @@ fr:
     too_many_photos: "Vous pouvez ajouter jusqu'à %{max} photos par contribution."
     too_many_people: "Une photo peut contenir au maximum %{max} personnes clairement représentées."
     unsupported_file: "Fichier non pris en charge. Utilisez une image JPEG, PNG ou WebP de moins de 20 Mo."
+    own_role: "Vous ne pouvez pas changer votre propre rôle."
+    own_account: "Vous ne pouvez pas supprimer votre propre compte."
   contribution_mailer:
     code:
       subject: "Votre code de contribution Unbias AI %{code}"

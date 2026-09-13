@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :public do
       resource :settings, only: :show
+      resource :stats, only: :show
     end
 
     resources :submissions, only: :create
@@ -35,6 +36,16 @@ Rails.application.routes.draw do
     end
     resources :direct_uploads, only: :create
 
+    namespace :admin do
+      resource :dashboard, only: :show, controller: :dashboard
+      resources :calls_to_action, only: [ :index, :create, :update, :destroy ]
+      resources :buckets, only: [ :index, :update ]
+      resources :moderators, only: [ :index, :create, :update, :destroy ]
+      get "submissions/lookup", to: "submissions#lookup"
+      post "submissions/:id/withdraw", to: "submissions#withdraw"
+      post "assets/:id/withdraw", to: "submissions#withdraw_asset"
+    end
+
     namespace :moderation do
       resource :queue, only: :show, controller: :queue
       resources :assets, only: :show do
@@ -46,6 +57,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get "qr.svg", to: "qr#show"
 
   root "app#index"
 

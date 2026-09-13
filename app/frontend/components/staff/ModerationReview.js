@@ -88,6 +88,89 @@ export default function ModerationReview({
           </p>
         </section>
 
+        <section className="border-hairline border-b pb-5">
+          {pending ? (
+            <>
+              {!rejecting && (
+                <div className="grid grid-cols-2 gap-2">
+                  <Button variant="ink" onClick={onApprove} disabled={busy}>
+                    <CheckIcon className="h-5 w-5" />
+                    {t("moderation.approve")} <Key>A</Key>
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setRejecting(true)}
+                    disabled={busy}
+                  >
+                    <XMarkIcon className="h-5 w-5" />
+                    {t("moderation.reject")} <Key>R</Key>
+                  </Button>
+                </div>
+              )}
+              {rejecting && (
+                <div>
+                  <p className="mb-2 text-[14px] font-medium">
+                    {t("moderation.pickReason")}
+                  </p>
+                  <ol className="space-y-1.5">
+                    {reasons.map((reason, index) => (
+                      <li key={reason}>
+                        <button
+                          type="button"
+                          onClick={() => onReject(reason)}
+                          disabled={busy}
+                          className="rounded-btn border-hairline-strong hover:border-ink flex w-full items-center gap-3 border px-3 py-2 text-left text-[14px]"
+                        >
+                          <Key>{index + 1}</Key>
+                          {t(`moderation.reason.${reason}`)}
+                        </button>
+                      </li>
+                    ))}
+                  </ol>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="mt-2"
+                    onClick={() => setRejecting(false)}
+                  >
+                    {t("common.cancel")} <Key>Esc</Key>
+                  </Button>
+                </div>
+              )}
+            </>
+          ) : (
+            <p className="rounded-card bg-surface p-4 text-[14px]">
+              {t(`moderation.decided.${asset.status}`)}
+              {asset.decision?.reason &&
+                ` · ${t(`moderation.reason.${asset.decision.reason}`)}`}
+              {asset.decision && (
+                <span className="text-ink-55 block text-[12.5px]">
+                  {asset.decision.moderator} · {formatDate(asset.decision.at)}
+                </span>
+              )}
+            </p>
+          )}
+
+          <div className="text-ink-60 mt-4 flex items-center justify-between text-[13px]">
+            <button
+              type="button"
+              onClick={onPrev}
+              disabled={!onPrev}
+              className="flex items-center gap-1 disabled:opacity-30"
+            >
+              <ArrowLeftIcon className="h-4 w-4" /> {t("moderation.previous")}
+            </button>
+            <button
+              type="button"
+              onClick={onNext}
+              disabled={!onNext}
+              className="flex items-center gap-1 disabled:opacity-30"
+            >
+              {t("moderation.next")} <ArrowRightIcon className="h-4 w-4" />
+            </button>
+          </div>
+        </section>
+
         <section>
           <h2 className="font-display mb-3 text-[17px] font-bold tracking-[-0.01em]">
             {t("moderation.people", { count: asset.people.length })}
@@ -191,89 +274,6 @@ export default function ModerationReview({
             </ul>
           </section>
         )}
-
-        <section className="border-hairline border-t pt-5">
-          {pending ? (
-            <>
-              {!rejecting && (
-                <div className="grid grid-cols-2 gap-2">
-                  <Button variant="ink" onClick={onApprove} disabled={busy}>
-                    <CheckIcon className="h-5 w-5" />
-                    {t("moderation.approve")} <Key>A</Key>
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={() => setRejecting(true)}
-                    disabled={busy}
-                  >
-                    <XMarkIcon className="h-5 w-5" />
-                    {t("moderation.reject")} <Key>R</Key>
-                  </Button>
-                </div>
-              )}
-              {rejecting && (
-                <div>
-                  <p className="mb-2 text-[14px] font-medium">
-                    {t("moderation.pickReason")}
-                  </p>
-                  <ol className="space-y-1.5">
-                    {reasons.map((reason, index) => (
-                      <li key={reason}>
-                        <button
-                          type="button"
-                          onClick={() => onReject(reason)}
-                          disabled={busy}
-                          className="rounded-btn border-hairline-strong hover:border-ink flex w-full items-center gap-3 border px-3 py-2 text-left text-[14px]"
-                        >
-                          <Key>{index + 1}</Key>
-                          {t(`moderation.reason.${reason}`)}
-                        </button>
-                      </li>
-                    ))}
-                  </ol>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="mt-2"
-                    onClick={() => setRejecting(false)}
-                  >
-                    {t("common.cancel")} <Key>Esc</Key>
-                  </Button>
-                </div>
-              )}
-            </>
-          ) : (
-            <p className="rounded-card bg-surface p-4 text-[14px]">
-              {t(`moderation.decided.${asset.status}`)}
-              {asset.decision?.reason &&
-                ` · ${t(`moderation.reason.${asset.decision.reason}`)}`}
-              {asset.decision && (
-                <span className="text-ink-55 block text-[12.5px]">
-                  {asset.decision.moderator} · {formatDate(asset.decision.at)}
-                </span>
-              )}
-            </p>
-          )}
-
-          <div className="text-ink-60 mt-4 flex items-center justify-between text-[13px]">
-            <button
-              type="button"
-              onClick={onPrev}
-              disabled={!onPrev}
-              className="flex items-center gap-1 disabled:opacity-30"
-            >
-              <ArrowLeftIcon className="h-4 w-4" /> {t("moderation.previous")}
-            </button>
-            <button
-              type="button"
-              onClick={onNext}
-              disabled={!onNext}
-              className="flex items-center gap-1 disabled:opacity-30"
-            >
-              {t("moderation.next")} <ArrowRightIcon className="h-4 w-4" />
-            </button>
-          </div>
-        </section>
       </aside>
     </div>
   );

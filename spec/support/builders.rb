@@ -44,5 +44,8 @@ end
 
 RSpec.configure do |config|
   config.include Builders
-  config.before { RepresentationBucket.seed! if RepresentationBucket.none? }
+  config.before do
+    Rails.cache.clear
+    RepresentationBucket.seed! if RepresentationBucket.none?
+  end
 end
