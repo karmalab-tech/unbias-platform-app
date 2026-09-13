@@ -460,6 +460,9 @@ export const fr = {
         "Supprimer toutes les photos de cette contribution du stockage et les retirer du jeu de données ? Irréversible.",
     },
   },
+  installation: {
+    scan: "Scannez pour ajouter vos photos",
+  },
   errors: {
     generic: "Une erreur est survenue. Réessayez.",
     offline:

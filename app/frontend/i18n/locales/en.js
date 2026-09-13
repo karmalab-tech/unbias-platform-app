@@ -453,6 +453,9 @@ export const en = {
         "Delete every photo of this contribution from storage and remove them from the dataset? This cannot be undone.",
     },
   },
+  installation: {
+    scan: "Scan to add your photos",
+  },
   errors: {
     generic: "Something went wrong. Please try again.",
     offline:

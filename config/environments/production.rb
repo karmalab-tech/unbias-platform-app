@@ -60,6 +60,19 @@ Rails.application.configure do
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: ENV.fetch("APP_HOST", "example.com"), protocol: "https" }
 
+  # Postmark over SMTP. The server token is both the user name and the password.
+  if ENV["POSTMARK_API_TOKEN"].present?
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: "smtp.postmarkapp.com",
+      port: 587,
+      user_name: ENV["POSTMARK_API_TOKEN"],
+      password: ENV["POSTMARK_API_TOKEN"],
+      authentication: :cram_md5,
+      enable_starttls_auto: true
+    }
+  end
+
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {
   #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
