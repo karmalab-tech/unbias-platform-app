@@ -55,3 +55,7 @@ node_modules
 
 # Browser ML models, fetched by bin/fetch-ml-models
 /public/models
+
+# Playwright
+/test-results
+/playwright-report

@@ -58,6 +58,8 @@ Unbias AI is a public, image-only contribution platform building a consented, hu
 - Follow `rubocop-rails-omakase`.
 - Controllers stay thin; keep business logic in models.
 - Jobs in `app/jobs/` call a single method on a model or service; they run on Solid Queue, backed by the primary Postgres database.
+- Image processing and enrichment live in `app/services/asset_processing/`. Every machine output is an `AssetEnrichment` row with provider, model and prompt version; contributor fields on `person_annotations` are never written by machines. Flags are advisory (`ModerationFlags`).
+- Anything that changes counts (submit, moderation, withdrawal, targets, calls to action) must call `CoverageStats.bump!`.
 - Serialize JSON with Alba (see `app/serializers/`).
 - Use Solid Cache for caching and Solid Cable for Action Cable.
 

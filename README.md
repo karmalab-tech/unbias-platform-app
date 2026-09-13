@@ -1,109 +1,114 @@
 # Unbias AI
 
 A public, image-only contribution platform for building a consented,
-human-reviewed representation dataset. See `docs/` for the product brief,
-POC design, architecture and implementation plan.
+human-reviewed representation dataset. Contributors upload photos, tap the
+people in them, describe how each person is represented, and consent. A
+moderator reviews every photo. The public dashboard and the IA·gora
+installation show pending and approved people per bucket, live.
+
+The product brief, POC design, architecture, design handoff and the phased
+plan live in [`docs/`](docs). Start with `docs/PROJECT_BRIEF.md`; the
+hands-on walkthrough for each pull request is `docs/TESTING_GUIDE.md`.
 
 ## Stack
 
-- **Rails 8** (Ruby 3.3), **PostgreSQL**
-- **React 19** + **Vite 5** (HMR) + **Tailwind CSS 4.3** + **Heroicons** + **React Router**
-- **Devise** for auth, with React login / signup / password views (JSON endpoints)
-- **Solid Queue** on Postgres as the Active Job backend (no Redis)
-- **Active Storage** on **S3-compatible storage** (local disk in development)
-- **Alba** for JSON serialization
-- **letter_opener** to preview emails in development
-- **RSpec** for testing, **annotaterb** for schema annotations, **pry-rails**, **dotenv-rails**
+- **Rails 8** (Ruby 3.3) as backend and system of record, **PostgreSQL**
+- **React 19** + **Vite 5** + **Tailwind 4**, mounted by a single ERB view
+- **Devise** for staff only (admin / moderator), no contributor accounts
+- **Active Storage** with direct browser uploads to a private S3 bucket
+  (local disk in development), thumbnails through libvips
+- **Solid Queue / Solid Cache / Solid Cable** on Postgres, no Redis
+- **MediaPipe** in a Web Worker for browser-side person and face detection
+- **Anthropic Claude Sonnet 5** for server-side context, neutral captions
+  and advisory safety flags (optional; the app works without a key)
+- **Postmark** for email in production, letter_opener in development
+- **RSpec**, **Vitest**, **Playwright**, RuboCop, ESLint, Brakeman
 
 ## Getting started
 
 ```bash
-bundle install
-yarn install
-
-cp .env.example .env      # then fill in the values
-
-bin/rails db:prepare      # create + migrate
-
-bin/dev                   # or: yarn dev
+bundle install && yarn install
+cp .env.example .env          # defaults are fine locally
+bin/fetch-ml-models           # downloads the detection models into public/models
+bin/rails db:prepare db:seed  # 29 representation buckets + the first admin
+bin/dev                       # Rails, Vite, Tailwind and the Solid Queue worker
 ```
 
-`bin/dev` runs everything in `Procfile.dev` (Rails server, esbuild/Tailwind
-watchers, the Vite dev server, and a Solid Queue worker). The app is served at
-http://localhost:3000.
+Open http://localhost:3000. Staff sign in at `/login` with the seeded admin
+(`ADMIN_EMAIL` / `ADMIN_PASSWORD` from `.env`, see `.env.example`).
 
-## Environment variables
+The worker in `bin/dev` is required: a submitted photo only reaches the
+moderation queue once `ProcessAssetJob` has run.
 
-Configured via `dotenv-rails`; see `.env.example`:
+## Configuration
 
-| Variable                                                                    | Purpose                                                         |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `PASSWORD`                                                                  | Site-wide password gate. Unset/blank disables it (the default). |
-| `MAILER_SENDER`                                                             | Default "from" address for Devise mail                          |
-| `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` / `AWS_REGION` / `AWS_BUCKET` | Active Storage S3 (production)                                  |
-| `AWS_ENDPOINT_URL_S3` / `BUCKET_NAME`                                       | Non-AWS S3 providers (Tigris, R2, MinIO, …)                     |
-| `DB_POOL`                                                                   | Active Record pool size. Defaults to `RAILS_MAX_THREADS`.       |
+Everything comes from environment variables listed in `.env.example`:
+storage (S3), first admin, public host, intro video, Anthropic key,
+Postmark token, and the optional site-wide password gate. Product limits
+(photos per contribution, people per photo, thresholds, retention windows,
+model name) live in `config/unbias.yml`.
 
-## Authentication
+## Where things are
 
-Devise is set up as a JSON API consumed by React:
+| Area | Location |
+| --- | --- |
+| Taxonomy and targets | `app/models/representation.rb`, seeded into `representation_buckets` |
+| Contributor API | `app/controllers/api/` (token-scoped, see `contributor_controller.rb`) |
+| Moderation and admin API | `app/controllers/api/moderation/`, `app/controllers/api/admin/` |
+| Coverage counters | `app/models/coverage_stats.rb`, served by `/api/public/stats` |
+| Processing pipeline | `app/services/asset_processing/` |
+| Contribution flow | `app/frontend/components/contribute/` |
+| Browser detection | `app/frontend/workers/detection.worker.js`, `app/frontend/lib/detection.js` |
+| Public dashboard | `app/frontend/components/public/`, `app/frontend/pages/Home.js`, `Installation.js` |
+| Staff screens | `app/frontend/pages/Moderation.js`, `app/frontend/pages/admin/` |
+| Design tokens | `app/frontend/styles/theme.css` |
+| Strings (EN / FR) | `app/frontend/i18n/locales/`, `config/locales/` |
 
-- Endpoints live under `/users/*` via custom controllers in `app/controllers/users/`.
-- React screens are in `app/frontend/pages/` (`Login`, `ForgotPassword`, `ResetPassword`).
-- `GET /current_user` returns the signed-in user; `app/frontend/lib/auth.js` exposes `useAuth()`.
-
-## Site password gate
-
-`SitePasswordProtection` (included in `ApplicationController`) puts a single
-shared password in front of the whole app — useful for staging and client
-previews, and unrelated to Devise sign-in.
-
-- Set `PASSWORD` to switch it on; leave it unset or blank and the gate is a
-  no-op, which is the default.
-- HTML requests are redirected to `/unlock`; JSON requests get `401`.
-- The unlocked state is a digest of the password stored in the Rails session,
-  so rotating `PASSWORD` relocks everyone. Attempts are rate-limited.
-
-## Background jobs
-
-Active Job runs on Solid Queue, backed by the primary Postgres database — no
-Redis, no second service. Worker concurrency is configured in
-`config/queue.yml` and scheduled jobs in `config/recurring.yml`.
+## Tests and checks
 
 ```bash
-bin/jobs                  # run workers (bin/dev already does this)
+bin/rspec                     # backend
+yarn test                     # Vitest, detection helpers
+yarn lint && bin/rubocop      # style
+bin/brakeman --no-pager       # security scan
+yarn build:vite               # production build
+
+# Smoke test in a real browser against a test server:
+RAILS_ENV=test ACTIVE_JOB_INLINE=1 bin/rails db:test:prepare db:seed
+RAILS_ENV=test ACTIVE_JOB_INLINE=1 bin/rails server -p 3100 &
+yarn e2e
 ```
 
-In production you can either run `bin/jobs` as its own process or set
-`SOLID_QUEUE_IN_PUMA=true` to run the supervisor inside the web process. If you
-do the latter, raise `DB_POOL` above `RAILS_MAX_THREADS` so workers and Puma
-aren't fighting over the same connections.
+CI (`.github/workflows/ci.yml`) runs Brakeman, RuboCop, ESLint + Vitest +
+Vite build, RSpec, and the Playwright smoke test.
 
-## Testing
+## Deployment (Fly.io)
+
+`fly.toml` defines a `web` process (Thruster + Puma) and a `worker` process
+(`bin/jobs`), with `bin/rails db:prepare` as the release command. The
+Dockerfile fetches the detection models at build time.
 
 ```bash
-bundle exec rspec
+fly launch --copy-config --no-deploy
+fly secrets set RAILS_MASTER_KEY=... DATABASE_URL=... AWS_ACCESS_KEY_ID=... \
+  AWS_SECRET_ACCESS_KEY=... AWS_REGION=eu-west-3 AWS_BUCKET=... \
+  APP_HOST=unbias-ai.fly.dev MAILER_SENDER=... POSTMARK_API_TOKEN=... \
+  ANTHROPIC_API_KEY=... ADMIN_EMAIL=... ADMIN_PASSWORD=... PASSWORD=...
+fly deploy
 ```
 
-## Common commands
+The S3 bucket must stay private and needs a CORS rule allowing `PUT` from
+the app origin for direct uploads.
 
-```bash
-bin/rubocop                    # Ruby linting
-bin/brakeman                   # Ruby security scan
-yarn lint                      # ESLint over app/frontend
-yarn build:vite                # production Vite build
-bundle exec annotaterb models  # refresh model schema annotations
-```
+## Privacy rules baked into the code
 
-## Continuous integration
+- Contributed photos are private; only aggregate counts are ever public.
+- Sensitive representation fields are contributor-confirmed; machine output
+  is stored separately with provider, model and prompt version.
+- Browser detection never leaves the browser and never identifies anyone.
+- Drafts never submitted are deleted after 24 hours; rejected photos lose
+  their files after 30 days; withdrawal by contribution code removes files
+  and counts.
 
-`.github/workflows/ci.yml` runs on every pull request and push to `main`:
-
-- **scan_ruby** — Brakeman security scan
-- **lint** — RuboCop
-- **frontend** — ESLint + `vite build`
-- **test** — RSpec against a Postgres service, after a Vite build (request
-  specs render the layout, which needs the asset manifest)
-
-There are no system/browser tests yet; add `test:system` (and a browser)
-back to the `test` job if you introduce them.
+This repository is public under the MIT license. Contributor media,
+personal data, secrets and production data must never be committed.

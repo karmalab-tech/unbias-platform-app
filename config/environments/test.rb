@@ -4,7 +4,8 @@
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
-  config.active_job.queue_adapter = :test
+  # E2E runs need jobs to execute in-process so submitted photos reach moderation.
+  config.active_job.queue_adapter = ENV["ACTIVE_JOB_INLINE"].present? ? :inline : :test
   # Settings specified here will take precedence over those in config/application.rb.
 
   # While tests run files are not watched, reloading is not necessary.

@@ -87,3 +87,85 @@ contributor flow without browser ML, moderation, public dashboard and admin.
 - `GET /api/public/stats` is the single JSON feed behind the dashboard and
   returns an ETag; `GET /qr.svg` is the QR code.
 - The site password gate (`PASSWORD` in `.env`) is off unless set.
+
+---
+
+## PR 2 — Detection, enrichment, installation, email, smoke test
+
+Phases 5–8: browser-side detection and Monk suggestion, server-side
+processing with Claude Sonnet 5, installation mode, Postmark, purge of
+rejected media, Playwright smoke test.
+
+### 0. New setup steps
+
+```bash
+bin/fetch-ml-models            # ~30 MB of models and wasm into public/models (gitignored)
+# optional, for real enrichment:
+echo "ANTHROPIC_API_KEY=sk-ant-..." >> .env
+```
+
+Restart `bin/dev` afterwards. Without the key, photos still reach
+moderation and carry a "Processing failed" flag.
+
+### 1. Browser-side detection (phone-sized window)
+
+1. Upload a photo with one to four clearly visible people. On the
+   **Who is in this photo?** step the intro reads "Looking for people…"
+   for a second, then "We found N people. Is that right?" with numbered
+   markers on the people. Background figures under ~5 % of the image are
+   ignored; the thresholds are `detection_min_score` and
+   `detection_min_area_ratio` in `config/unbias.yml`.
+2. Tap a number to remove a false positive, tap a missed person to add one.
+   A crowd photo with more than 4 people keeps Continue disabled until you
+   remove some.
+3. On the person screen, a face that was found shows "Suggested from the
+   photo: N" under the Monk scale, with nothing pre-selected: you still pick.
+   The suggestion follows the photo's lighting, so shaded faces suggest
+   darker tones; it is assistance, not truth.
+4. Nothing leaves the browser: open the network tab, no request carries
+   image data except the direct upload to storage.
+5. In moderation, detected people are labelled "detected, confirmed by
+   contributor" and, when the contributor changed the tone, "(suggested N)".
+
+### 2. Server-side processing
+
+1. Submit a contribution, then open it in `/moderation`. Advisory flags
+   appear as chips: **Blurry** and **Low resolution** come from vips;
+   uploading the same photo twice yields **Exact duplicate** with a link to
+   the other photo; a lightly re-encoded copy yields **Possible duplicate**.
+2. With `ANTHROPIC_API_KEY` set, **Automatic context** fills in with the
+   setting and context labels, a neutral description and a caption, plus the
+   provider, model (`claude-sonnet-5`) and prompt version. The description
+   must never mention gender, age, skin tone or similar; report it if it does.
+3. Safety booleans become **Possible minor**, **Possibly AI-generated** or
+   **Possibly inappropriate** chips. Only the booleans are stored.
+4. Kill the network or use a wrong key: the photo still reaches the queue
+   with **Processing failed**; transient API errors are retried up to six
+   times by Solid Queue.
+
+### 3. Installation mode
+
+Open http://localhost:3000/installation?lang=fr on a large window: no
+navigation, oversized count, QR code and short URL, calls to action and
+charts. Submit a contribution from a phone on the same network: the count
+pulses within about three seconds. Set `INTRO_VIDEO_URL` (plus optional
+poster and subtitles URLs) to see the video autoplay muted and loop.
+
+### 4. Email and retention
+
+- Production sends through Postmark when `POSTMARK_API_TOKEN` is set;
+  development still opens emails in the browser.
+- Photos rejected more than 30 days ago lose their files daily at 4 am
+  (`PurgeRejectedMediaJob`); the record and decision stay for the audit
+  trail.
+
+### 5. Smoke test
+
+```bash
+RAILS_ENV=test ACTIVE_JOB_INLINE=1 bin/rails db:test:prepare db:seed
+RAILS_ENV=test ACTIVE_JOB_INLINE=1 bin/rails server -p 3100 &
+yarn e2e
+```
+
+`yarn test` runs the Vitest suite for the detection helpers. CI now runs
+both plus the Playwright job.
