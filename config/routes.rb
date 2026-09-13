@@ -16,6 +16,26 @@ Rails.application.routes.draw do
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   get "up" => "rails/health#show", as: :rails_health_check
 
+  namespace :api do
+    namespace :public do
+      resource :settings, only: :show
+    end
+
+    resources :submissions, only: :create
+    resource :submission, path: "submissions/current", only: [ :show, :update ] do
+      post :consent
+      post :submit
+      post :email_code
+      resources :assets, only: [ :create, :destroy ] do
+        member do
+          put :people
+          get :image
+        end
+      end
+    end
+    resources :direct_uploads, only: :create
+  end
+
   root "app#index"
 
   # Any other HTML GET request is handed to the React SPA so client-side

@@ -1,0 +1,12 @@
+<%= t("contribution_mailer.code.greeting") %>
+
+<%= t("contribution_mailer.code.body", count: @submission.people_count) %>
+
+<%= @submission.public_code %>
+
+<%= t("contribution_mailer.code.keep") %>
+<%= t("contribution_mailer.code.withdraw") %>
+<% if @submission.updates_opt_in? %>
+
+<%= t("contribution_mailer.code.updates") %>
+<% end %>

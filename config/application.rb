@@ -27,5 +27,8 @@ module UnbiasAi
     # Run Active Job (including Action Mailer's deliver_later) on Solid Queue,
     # backed by the same Postgres database as the rest of the app.
     config.active_job.queue_adapter = :solid_queue
+
+    config.i18n.available_locales = [ :en, :fr ]
+    config.i18n.default_locale = :en
   end
 end

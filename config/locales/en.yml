@@ -1,34 +1,4 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
   gate:
     password: "Password"
     submit: "Enter"
@@ -38,3 +8,22 @@ en:
   staff:
     sign_in_required: "Sign in required."
     admin_required: "Admin access required."
+  api:
+    not_found: "Not found."
+    too_many_requests: "Too many requests. Try again in a moment."
+    already_submitted: "This contribution has already been submitted."
+    not_ready: "Permission, consent and every person's labels are required before submitting."
+    no_code_yet: "The contribution has not been submitted yet."
+    too_many_photos: "You can add up to %{max} photos per contribution."
+    too_many_people: "A photo can have at most %{max} clearly represented people."
+    unsupported_file: "Unsupported file. Use a JPEG, PNG or WebP image under 20 MB."
+  contribution_mailer:
+    code:
+      subject: "Your Unbias AI contribution code %{code}"
+      greeting: "Thank you for contributing."
+      body:
+        one: "You added 1 person to the dataset."
+        other: "You added %{count} people to the dataset."
+      keep: "Keep this code safely. You will need it if you ever want to manage or withdraw your contribution."
+      withdraw: "To withdraw one or all of your photos, reply to this email with your code."
+      updates: "You asked to be kept updated about the project. We will write rarely."

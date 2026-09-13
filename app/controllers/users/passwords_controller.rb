@@ -8,7 +8,7 @@ module Users
       if resource.errors.empty?
         render json: { message: I18n.t("devise.passwords.send_instructions", default: "Password updated") }, status: :ok
       else
-        render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity
+        render json: { errors: resource.errors.full_messages }, status: :unprocessable_content
       end
     end
   end
