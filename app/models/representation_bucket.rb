@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: representation_buckets
+#
+#  id            :bigint           not null, primary key
+#  dimension     :string           not null
+#  display_order :integer          default(0), not null
+#  swatch        :string
+#  target_count  :integer          default(0), not null
+#  value         :string           not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+# Indexes
+#
+#  index_representation_buckets_on_dimension_and_value  (dimension,value) UNIQUE
+#
 class RepresentationBucket < ApplicationRecord
   validates :dimension, inclusion: { in: Representation::DIMENSIONS }
   validates :value, presence: true, uniqueness: { scope: :dimension }

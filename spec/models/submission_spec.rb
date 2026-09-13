@@ -1,5 +1,28 @@
 require "rails_helper"
 
+# == Schema Information
+#
+# Table name: submissions
+#
+#  id                      :bigint           not null, primary key
+#  email                   :string
+#  locale                  :string           default("en"), not null
+#  permission_confirmed_at :datetime
+#  public_code             :string
+#  session_token_digest    :string           not null
+#  status                  :string           default("draft"), not null
+#  submitted_at            :datetime
+#  updates_opt_in          :boolean          default(FALSE), not null
+#  withdrawn_at            :datetime
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#
+# Indexes
+#
+#  index_submissions_on_public_code            (public_code) UNIQUE
+#  index_submissions_on_session_token_digest   (session_token_digest) UNIQUE
+#  index_submissions_on_status_and_updated_at  (status,updated_at)
+#
 RSpec.describe Submission, type: :model do
   describe ".start!" do
     it "returns the raw session token once and stores only its digest" do
