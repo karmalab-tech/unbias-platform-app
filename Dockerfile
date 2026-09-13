@@ -52,6 +52,10 @@ RUN bundle install && \
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
+# Browser-side detection models (Apache-2.0) are fetched at build time, never committed.
+COPY bin/fetch-ml-models bin/
+RUN bin/fetch-ml-models
+
 # Copy application code
 COPY . .
 

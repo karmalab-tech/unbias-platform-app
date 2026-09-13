@@ -22,6 +22,11 @@ export function writeToken(token) {
 
 const withToken = (token) => ({ headers: { "X-Submission-Token": token } });
 
+export function tokenizedUrl(url, token) {
+  if (!url) return url;
+  return `${url}${url.includes("?") ? "&" : "?"}token=${encodeURIComponent(token)}`;
+}
+
 export const contributionApi = {
   start: (locale) => api.post("/api/submissions", { locale }),
   current: (token) => api.get("/api/submissions/current", withToken(token)),

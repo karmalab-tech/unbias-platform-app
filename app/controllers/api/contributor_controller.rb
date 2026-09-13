@@ -8,7 +8,9 @@ module Api
     private
 
     def load_submission
-      @submission = Submission.find_by_session_token(request.headers[TOKEN_HEADER])
+      # Image tags cannot send headers, so the image endpoint also accepts the token as a query param.
+      token = request.headers[TOKEN_HEADER].presence || (action_name == "image" ? params[:token] : nil)
+      @submission = Submission.find_by_session_token(token)
       raise ActiveRecord::RecordNotFound if @submission.nil? || @submission.withdrawn?
     end
 

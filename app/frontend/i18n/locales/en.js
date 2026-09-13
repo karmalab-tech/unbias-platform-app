@@ -137,6 +137,7 @@ export const en = {
       one: "1 person selected. Is that everyone?",
       other: "{count} people selected. Is that everyone?",
     },
+    detecting: "Looking for people in the photo…",
     manualHint:
       "Tap a person on the photo to add them. Tap a number to remove it.",
     tooMany:

@@ -140,6 +140,7 @@ export const fr = {
       one: "1 personne sélectionnée. C'est tout le monde ?",
       other: "{count} personnes sélectionnées. C'est tout le monde ?",
     },
+    detecting: "Recherche des personnes sur la photo…",
     manualHint:
       "Touchez une personne sur la photo pour l'ajouter. Touchez un numéro pour le retirer.",
     tooMany:

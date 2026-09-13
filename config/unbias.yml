@@ -11,6 +11,8 @@ shared:
   draft_ttl_hours: 24
   rejected_media_retention_days: 30
   stats_poll_seconds: 5
+  detection_min_score: 0.35
+  detection_min_area_ratio: 0.05
   installation_poll_seconds: 3
   consent_version: v0-draft
   people_milestone: 10000

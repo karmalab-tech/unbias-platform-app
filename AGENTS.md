@@ -41,6 +41,7 @@ Unbias AI is a public, image-only contribution platform building a consented, hu
 - Design tokens live in `app/frontend/styles/theme.css` as Tailwind `@theme` variables (`bg-canvas`, `text-ink-60`, `font-display`, `rounded-card`, `hatch`…). Fonts are self-hosted via `@fontsource-variable`; never load Google Fonts.
 - New pages are client-side routes inside React (React Router in `app/frontend/components/App.js`), not ERB views. Any HTML `GET` not owned by Rails falls through to the SPA (see the catch-all in `config/routes.rb`).
 - User-facing strings go through `t()` from `~/i18n`; add keys to `app/frontend/i18n/locales/{en,fr}.js`. Locale is detected once at import time from the browser; `?lang=fr` forces it.
+- Browser-side detection lives in `app/frontend/workers/detection.worker.js` (classic worker: MediaPipe needs `importScripts`) with pure helpers and Vitest tests in `app/frontend/lib/detection.js`. Models are fetched by `bin/fetch-ml-models` into the gitignored `public/models`. `yarn test` runs Vitest.
 - Read boolean query-string toggles with `useQueryFlag("present")` rather than parsing `location.search` directly — it stays in sync when another component rewrites the URL.
 
 ## Auth Conventions

@@ -13,8 +13,10 @@ import {
   contributionApi,
   directUpload,
   readToken,
+  tokenizedUrl,
   writeToken,
 } from "~/lib/contribution";
+import { detectRaw, proposePeople, warmDetector } from "~/lib/detection";
 
 const ContributionContext = createContext(null);
 
@@ -24,7 +26,14 @@ export function ContributionProvider({ children }) {
   const [submission, setSubmission] = useState(null);
   const [loading, setLoading] = useState(Boolean(readToken()));
   const previews = useRef(new Map());
+  const files = useRef(new Map());
   const starting = useRef(null);
+  const [detections, setDetections] = useState({});
+
+  // Loading the models takes a few seconds: start while the contributor picks photos.
+  useEffect(() => {
+    warmDetector();
+  }, []);
 
   // Resume a draft left on this device; a stale token is simply dropped.
   useEffect(() => {
@@ -74,6 +83,7 @@ export function ContributionProvider({ children }) {
         height: size?.height,
       });
       previews.current.set(asset.id, URL.createObjectURL(file));
+      files.current.set(asset.id, file);
       replaceAsset(asset);
       return asset;
     },
@@ -86,6 +96,7 @@ export function ContributionProvider({ children }) {
       const url = previews.current.get(id);
       if (url) URL.revokeObjectURL(url);
       previews.current.delete(id);
+      files.current.delete(id);
       setSubmission((current) => ({
         ...current,
         assets: current.assets.filter((a) => a.id !== id),
@@ -133,9 +144,49 @@ export function ContributionProvider({ children }) {
     [token]
   );
 
+  // Proposes people for a photo once; failures simply leave the contributor tapping manually.
+  const detect = useCallback(
+    async (asset) => {
+      if (!settings || detections[asset.id]) return;
+      setDetections((current) => ({
+        ...current,
+        [asset.id]: { status: "running" },
+      }));
+      try {
+        const blob =
+          files.current.get(asset.id) ??
+          (await (await fetch(tokenizedUrl(asset.image_url, token))).blob());
+        const raw = await detectRaw(blob);
+        const thresholds = {
+          minScore: settings.limits.detection_min_score,
+          minAreaRatio: settings.limits.detection_min_area_ratio,
+          iou: 0.5,
+          containment: 0.8,
+        };
+        const people = proposePeople(
+          raw,
+          settings.taxonomy.monk_swatches,
+          thresholds
+        );
+        setDetections((current) => ({
+          ...current,
+          [asset.id]: { status: "done", people },
+        }));
+      } catch {
+        setDetections((current) => ({
+          ...current,
+          [asset.id]: { status: "failed", people: [] },
+        }));
+      }
+    },
+    [settings, detections, token]
+  );
+
   const reset = useCallback(() => {
     previews.current.forEach((url) => URL.revokeObjectURL(url));
     previews.current.clear();
+    files.current.clear();
+    setDetections({});
     writeToken(null);
     setToken(null);
     setSubmission(null);
@@ -150,8 +201,9 @@ export function ContributionProvider({ children }) {
   );
 
   const imageUrl = useCallback(
-    (asset) => previews.current.get(asset.id) ?? asset.image_url,
-    []
+    (asset) =>
+      previews.current.get(asset.id) ?? tokenizedUrl(asset.image_url, token),
+    [token]
   );
 
   const value = {
@@ -168,6 +220,8 @@ export function ContributionProvider({ children }) {
     submit,
     emailCode,
     reset,
+    detect,
+    detections,
   };
 
   return (
