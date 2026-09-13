@@ -6,3 +6,5 @@ User.find_or_create_by!(email: admin_email) do |user|
   user.password = admin_password
   user.role = :admin
 end
+
+RepresentationBucket.seed!
