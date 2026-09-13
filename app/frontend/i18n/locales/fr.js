@@ -294,6 +294,169 @@ export const fr = {
     emptyBody:
       "Toutes les photos envoyées ont été vérifiées. Les nouvelles contributions apparaissent ici au fil de l'eau.",
   },
+  dashboard: {
+    peopleRepresented: "personnes représentées",
+    imagesContributed: "Images reçues",
+    contributionsToday: "Contributions (24 h)",
+    approved: "Approuvées",
+    pending: "En attente",
+    pendingReview: "En attente de vérification",
+    stillNeeded: "Encore à trouver",
+    representation: "Représentation",
+    targetEach: "{target} chacun",
+    targets: "objectifs {targets}",
+    usingThe: "Selon l'",
+    monkScale: "échelle Monk",
+    addYourPhotos: "Ajoutez vos photos",
+    reviewedByPeople:
+      "Les contributions sont vérifiées par de vraies personnes.",
+    scanToAdd: "Scannez pour ajouter des photos depuis votre téléphone",
+    videoSoon: "La vidéo d'introduction arrive bientôt.",
+    offline:
+      "Les chiffres en direct sont temporairement indisponibles. Dernières valeurs connues affichées.",
+  },
+  footer: {
+    faq: "FAQ",
+    source: "Code source",
+    credits:
+      "Une initiative ouverte de KarmaLab. Premier partenaire : IA·gora.",
+  },
+  about: {
+    title: "Une image plus large, construite ensemble.",
+    intro:
+      "Les modèles d'images génératives participent désormais à la façon dont les gens sont représentés. Leur image de la société n'est pas neutre : demandez quelque chose de neutre et les mêmes visages, corps et décors reviennent. Unbias AI est une initiative culturelle et open source qui demande si l'on peut mesurer ce biais, construire collectivement de meilleures données de représentation, adapter des modèles ouverts, puis mesurer à nouveau.",
+    loop: "Cette plateforme est l'étape de collecte. Chacun peut contribuer ses propres photos, ou celles de personnes qui ont donné leur accord, décrire qui est visible, et une vraie personne vérifie chaque image avant qu'elle ne rejoigne le jeu de données. L'objectif de cette première étape : 10 000 personnes représentées.",
+    howTitle: "Comment ça marche",
+    steps: {
+      upload: {
+        title: "Envoyer",
+        body: "Une photo que vous avez prise, ou que vous avez l'autorisation de partager. Un à quatre adultes clairement visibles.",
+      },
+      identify: {
+        title: "Identifier les personnes",
+        body: "Touchez les personnes sur la photo. Rien n'est reconnu ni apparié ; les touches servent seulement à relier les informations à la bonne personne.",
+      },
+      describe: {
+        title: "Décrire la représentation",
+        body: "Âge, couleur de peau sur l'échelle Monk, genre, corps et aides techniques visibles. Vous confirmez chaque information vous-même.",
+      },
+      consent: {
+        title: "Consentir",
+        body: "Rien n'entre dans le jeu de données sans votre consentement explicite. L'affichage public est un choix séparé et facultatif.",
+      },
+      review: {
+        title: "Vérification humaine",
+        body: "Un modérateur vérifie chaque image avant qu'elle compte comme approuvée. Les photos en attente apparaissent déjà dans la progression publique, hachurées.",
+      },
+    },
+    privacyTitle: "Vos photos",
+    privacy: {
+      private:
+        "Les photos contribuées restent privées. Elles ne sont jamais publiées sans votre autorisation séparée d'affichage public.",
+      aggregate: "Le site public ne montre jamais que des chiffres agrégés.",
+      consent:
+        "Le consentement pour l'entraînement et le jeu de données est requis ; celui pour l'affichage public est séparé et facultatif.",
+      human:
+        "Chaque image est vérifiée par une personne. Les contrôles automatiques n'ajoutent que des signalements indicatifs pour les modérateurs.",
+      code: "Votre code de contribution est la seule clé de votre contribution. Conservez-le ; nous n'avons pas besoin de votre nom.",
+    },
+    faq: {
+      account: {
+        q: "Faut-il un compte ?",
+        a: "Non. Vous recevez un code de contribution à la fin. Conservez-le : c'est ce qui vous permet de gérer ou retirer vos photos.",
+      },
+      photos: {
+        q: "Quelles photos conviennent ?",
+        a: "Des photos avec une à quatre personnes adultes clairement visibles qui vous ont donné leur accord. Tout cadre, tout cadrage. Merci de ne pas envoyer plus de trois photos de la même personne, ni d'images générées par IA.",
+      },
+      monk: {
+        q: "Qu'est-ce que l'échelle Monk ?",
+        a: "Une échelle de dix teintes de peau développée par le Dr Ellis Monk, conçue pour être plus inclusive que les échelles plus anciennes. L'application suggère une valeur quand elle peut ; vous la confirmez ou la corrigez toujours.",
+      },
+      public: {
+        q: "Ma photo sera-t-elle montrée publiquement ?",
+        a: "Seulement si vous cochez le consentement séparé et facultatif d'affichage public. Sinon votre photo sert uniquement à la recherche et à l'évaluation ou l'entraînement de modèles, sous accès contrôlé.",
+      },
+      ai: {
+        q: "Une IA décide-t-elle quelque chose sur moi ?",
+        a: "Non. Un détecteur dans le navigateur vous aide seulement à trouver les personnes à décrire, et un modèle côté serveur décrit ensuite la scène en termes neutres. Les attributs sensibles sont toujours confirmés par vous, jamais déduits comme des faits, et un modérateur prend la décision finale.",
+      },
+      withdraw: {
+        q: "Comment retirer une photo ?",
+        a: "Écrivez à start@karmalab.tech avec votre code de contribution en indiquant les photos à retirer. Nous les supprimons du stockage et de tout usage futur du jeu de données.",
+      },
+      who: {
+        q: "Qui est derrière ce projet ?",
+        a: "Unbias AI est lancé par KarmaLab et conçu pour devenir une collaboration ouverte plus large. IA·gora est le premier partenaire institutionnel et accueille l'installation. Tout le code est open source sous licence MIT ; l'accès au jeu de données lui-même reste contrôlé.",
+      },
+    },
+  },
+  admin: {
+    tabs: {
+      dashboard: "Tableau de bord",
+      ctas: "Appels à contribution",
+      settings: "Réglages",
+      lookup: "Retrouver une contribution",
+    },
+    dash: {
+      peopleApproved: "Personnes approuvées",
+      peoplePending: "Personnes en attente",
+      images: "Images comptées",
+      pendingImages: "Images à vérifier",
+      approvedImages: "Images approuvées",
+      rejectedImages: "Images refusées",
+      withdrawnImages: "Images retirées",
+      submissions: "Contributions envoyées",
+      coverage: "Couverture par catégorie",
+      bucket: "Catégorie",
+    },
+    ctas: {
+      intro:
+        "Courtes demandes affichées en haut de la page publique. Trois au maximum peuvent être actives. Formulez-les comme des demandes, pas des indicateurs : « Plus de personnes de 75 ans et plus ».",
+      add: "Ajouter un appel",
+      captionEn: "Texte (anglais)",
+      captionFr: "Texte (français)",
+      active: "Actif",
+      order: "Ordre",
+      create: "Ajouter",
+    },
+    settings: {
+      targets: "Objectifs de couverture",
+      targetsIntro:
+        "Modifier un objectif change immédiatement les barres de progression publiques. Les dimensions et catégories sont fixes pour le POC.",
+      target: "Objectif",
+      moderators: "Modérateurs",
+      moderatorsIntro:
+        "Les modérateurs ne voient que la file de modération. Les admins gèrent aussi les objectifs, les appels et cette liste. Les nouveaux comptes reçoivent un e-mail pour définir leur mot de passe.",
+      role: "Rôle",
+      added: "Ajouté le",
+      roles: { moderator: "Modérateur", admin: "Admin" },
+      invite: "Inviter",
+      invited: "Invitation envoyée à {email}.",
+    },
+    lookup: {
+      intro:
+        "Collez le code de contribution envoyé par un contributeur pour voir ses photos et en retirer une partie ou la totalité. Les fichiers retirés sont supprimés du stockage et ne comptent plus.",
+      code: "Code de contribution",
+      search: "Rechercher",
+      notFound: "Aucune contribution avec ce code.",
+      status: {
+        draft: "Brouillon",
+        submitted: "Envoyée",
+        withdrawn: "Retirée",
+      },
+      consent:
+        "Consentement entraînement : {training} · Affichage public : {display} · E-mail enregistré : {email}",
+      yes: "oui",
+      no: "non",
+      withdrawPhoto: "Retirer cette photo",
+      withdrawAll: "Retirer toute la contribution",
+      confirmAsset:
+        "Supprimer cette photo du stockage et la retirer du jeu de données ? Irréversible.",
+      confirmAll:
+        "Supprimer toutes les photos de cette contribution du stockage et les retirer du jeu de données ? Irréversible.",
+    },
+  },
   errors: {
     generic: "Une erreur est survenue. Réessayez.",
     offline:

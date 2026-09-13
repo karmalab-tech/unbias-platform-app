@@ -289,6 +289,167 @@ export const en = {
     emptyBody:
       "Every submitted photo has been reviewed. New contributions appear here as they arrive.",
   },
+  dashboard: {
+    peopleRepresented: "people represented",
+    imagesContributed: "Images contributed",
+    contributionsToday: "Contributions today",
+    approved: "Approved",
+    pending: "Pending",
+    pendingReview: "Pending review",
+    stillNeeded: "Still needed",
+    representation: "Representation",
+    targetEach: "{target} each",
+    targets: "targets {targets}",
+    usingThe: "Using the",
+    monkScale: "Monk Skin Tone scale",
+    addYourPhotos: "Add your photos",
+    reviewedByPeople: "Contributions are reviewed by real people.",
+    scanToAdd: "Scan to add photos from your phone",
+    videoSoon: "The intro video is coming soon.",
+    offline:
+      "Live numbers are temporarily unavailable. Showing the last known values.",
+  },
+  footer: {
+    faq: "FAQ",
+    source: "Source code",
+    credits: "An open initiative by KarmaLab. First partner: IA·gora.",
+  },
+  about: {
+    title: "A broader picture, built together.",
+    intro:
+      "Generative image models now take part in how people are pictured. Their picture of society is not neutral: ask for a neutral prompt and the same faces, bodies and settings tend to come back. Unbias AI is a cultural, open-source initiative that asks whether we can measure this bias, collectively build better representation data, adapt open models, and measure again.",
+    loop: "This platform is the collecting step. People contribute their own photos, or photos of people who gave permission, describe who is visible, and a real person reviews every image before it joins the dataset. The goal of this first milestone is 10,000 people represented.",
+    howTitle: "How it works",
+    steps: {
+      upload: {
+        title: "Upload",
+        body: "A photo you took, or one you have permission to share. One to four clearly visible adults.",
+      },
+      identify: {
+        title: "Identify people",
+        body: "Tap the people in the photo. Nothing is recognised or matched; the taps only attach labels to the right person.",
+      },
+      describe: {
+        title: "Describe representation",
+        body: "Age, skin tone on the Monk scale, gender, body and visible assistive devices. You confirm every label yourself.",
+      },
+      consent: {
+        title: "Consent",
+        body: "Nothing enters the dataset until you explicitly consent. Public display is a separate, optional choice.",
+      },
+      review: {
+        title: "Human review",
+        body: "A moderator reviews every image before it counts as approved. Pending photos already show in the public progress, hatched.",
+      },
+    },
+    privacyTitle: "Your photos",
+    privacy: {
+      private:
+        "Contributed photos stay private. They are never published unless you separately allow public display.",
+      aggregate: "The public website only ever shows aggregate counts.",
+      consent:
+        "Training and dataset consent is required; public display consent is separate and optional.",
+      human:
+        "Every image is reviewed by a person. Automatic checks only add advisory flags for moderators.",
+      code: "Your contribution code is the only key to your contribution. Keep it safe; we do not need your name.",
+    },
+    faq: {
+      account: {
+        q: "Do I need an account?",
+        a: "No. You receive a contribution code at the end instead. Keep it: it is what you use to manage or withdraw your photos.",
+      },
+      photos: {
+        q: "Which photos work?",
+        a: "Photos with one to four clearly visible adults who gave you permission. Any setting, any framing. Please upload no more than three photos of the same person, and no AI-generated images.",
+      },
+      monk: {
+        q: "What is the Monk Skin Tone scale?",
+        a: "A ten-step scale of skin tones developed by Dr Ellis Monk, designed to be more inclusive than older scales. The app suggests a value where it can; you always confirm or correct it.",
+      },
+      public: {
+        q: "Will my photo be shown publicly?",
+        a: "Only if you tick the separate, optional public display consent. Otherwise your photo is used only for research and model evaluation or training, under controlled access.",
+      },
+      ai: {
+        q: "Does an AI decide anything about me?",
+        a: "No. A browser-side detector only helps you find the people to label, and a server-side model later describes the scene in neutral terms. Sensitive attributes are always confirmed by you, never inferred as fact, and a moderator makes the final call.",
+      },
+      withdraw: {
+        q: "How do I withdraw a photo?",
+        a: "Email start@karmalab.tech with your contribution code and tell us which photos to remove. We delete them from storage and from any future dataset use.",
+      },
+      who: {
+        q: "Who is behind this?",
+        a: "Unbias AI is started by KarmaLab and designed to grow into a broader open collaboration. IA·gora is the first institutional partner and hosts the installation. All code is open source under the MIT license; access to the dataset itself stays controlled.",
+      },
+    },
+  },
+  admin: {
+    tabs: {
+      dashboard: "Dashboard",
+      ctas: "Calls to action",
+      settings: "Settings",
+      lookup: "Find a contribution",
+    },
+    dash: {
+      peopleApproved: "People approved",
+      peoplePending: "People pending",
+      images: "Images counted",
+      pendingImages: "Images awaiting review",
+      approvedImages: "Images approved",
+      rejectedImages: "Images rejected",
+      withdrawnImages: "Images withdrawn",
+      submissions: "Contributions submitted",
+      coverage: "Coverage by bucket",
+      bucket: "Bucket",
+    },
+    ctas: {
+      intro:
+        "Short requests shown high on the public page. At most three can be active. Write them as requests, not metrics: “More people aged 75+”.",
+      add: "Add a call to action",
+      captionEn: "Caption (English)",
+      captionFr: "Caption (French)",
+      active: "Active",
+      order: "Order",
+      create: "Add",
+    },
+    settings: {
+      targets: "Coverage targets",
+      targetsIntro:
+        "Editing a target changes the public progress bars immediately. Dimensions and buckets themselves are fixed for the POC.",
+      target: "Target",
+      moderators: "Moderators",
+      moderatorsIntro:
+        "Moderators only see the moderation queue. Admins also manage targets, calls to action and this list. New accounts receive an email to set their password.",
+      role: "Role",
+      added: "Added",
+      roles: { moderator: "Moderator", admin: "Admin" },
+      invite: "Invite",
+      invited: "Invitation sent to {email}.",
+    },
+    lookup: {
+      intro:
+        "Paste the contribution code a contributor sent by email to see their photos and withdraw some or all of them. Withdrawn files are deleted from storage and stop counting.",
+      code: "Contribution code",
+      search: "Find",
+      notFound: "No contribution with this code.",
+      status: {
+        draft: "Draft",
+        submitted: "Submitted",
+        withdrawn: "Withdrawn",
+      },
+      consent:
+        "Training consent: {training} · Public display: {display} · Email on file: {email}",
+      yes: "yes",
+      no: "no",
+      withdrawPhoto: "Withdraw this photo",
+      withdrawAll: "Withdraw the whole contribution",
+      confirmAsset:
+        "Delete this photo from storage and remove it from the dataset? This cannot be undone.",
+      confirmAll:
+        "Delete every photo of this contribution from storage and remove them from the dataset? This cannot be undone.",
+    },
+  },
   errors: {
     generic: "Something went wrong. Please try again.",
     offline:

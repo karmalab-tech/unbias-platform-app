@@ -1,0 +1,100 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import PublicHeader from "~/components/public/PublicHeader";
+import PublicFooter from "~/components/public/PublicFooter";
+import Button from "~/components/ui/Button";
+import { t } from "~/i18n";
+
+const STEPS = ["upload", "identify", "describe", "consent", "review"];
+const FAQ = ["account", "photos", "monk", "public", "ai", "withdraw", "who"];
+
+export default function About() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) document.querySelector(hash)?.scrollIntoView();
+  }, [hash]);
+
+  return (
+    <div className="bg-canvas text-ink min-h-dvh">
+      <PublicHeader hasVideo={false} />
+      <main className="md:px-gutter mx-auto max-w-3xl px-5 pt-12 pb-20">
+        <h1 className="font-display text-[clamp(34px,5vw,56px)] leading-[0.95] font-extrabold tracking-[-0.04em]">
+          {t("about.title")}
+        </h1>
+        <p className="text-ink-72 mt-6 max-w-[65ch] text-[17px] leading-[1.55]">
+          {t("about.intro")}
+        </p>
+        <p className="text-ink-72 mt-4 max-w-[65ch] text-[17px] leading-[1.55]">
+          {t("about.loop")}
+        </p>
+
+        <section className="mt-14">
+          <h2 className="font-display text-[30px] font-bold tracking-[-0.025em]">
+            {t("about.howTitle")}
+          </h2>
+          <ol className="mt-6 grid gap-3 sm:grid-cols-2">
+            {STEPS.map((step, index) => (
+              <li key={step} className="rounded-card bg-surface p-5">
+                <span className="font-display text-ink-45 tabular text-[13px] font-bold">
+                  0{index + 1}
+                </span>
+                <h3 className="font-display mt-1 text-[19px] font-bold tracking-[-0.015em]">
+                  {t(`about.steps.${step}.title`)}
+                </h3>
+                <p className="text-ink-60 mt-1.5 text-[14.5px] leading-snug">
+                  {t(`about.steps.${step}.body`)}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="mt-14">
+          <h2 className="font-display text-[30px] font-bold tracking-[-0.025em]">
+            {t("about.privacyTitle")}
+          </h2>
+          <ul className="text-ink-72 mt-5 space-y-3 text-[16px] leading-[1.5]">
+            {["private", "aggregate", "consent", "human", "code"].map((key) => (
+              <li key={key} className="flex gap-3">
+                <span className="bg-ink mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full" />
+                {t(`about.privacy.${key}`)}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section id="faq" className="mt-14 scroll-mt-8">
+          <h2 className="font-display text-[30px] font-bold tracking-[-0.025em]">
+            {t("footer.faq")}
+          </h2>
+          <dl className="divide-hairline mt-5 divide-y">
+            {FAQ.map((key) => (
+              <div key={key} className="py-5">
+                <dt className="font-display text-[19px] font-bold tracking-[-0.015em]">
+                  {t(`about.faq.${key}.q`)}
+                </dt>
+                <dd className="text-ink-72 mt-2 max-w-[65ch] text-[15.5px] leading-[1.55]">
+                  {t(`about.faq.${key}.a`)}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        <div className="mt-14 flex flex-wrap items-center gap-4">
+          <Button size="lg" to="/contribute">
+            {t("home.upload")}
+          </Button>
+          <a
+            href="mailto:start@karmalab.tech"
+            className="text-accent hover:text-accent-hover text-[15px] font-medium"
+          >
+            start@karmalab.tech
+          </a>
+        </div>
+      </main>
+      <PublicFooter />
+    </div>
+  );
+}

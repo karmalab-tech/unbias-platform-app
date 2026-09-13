@@ -1,0 +1,126 @@
+import { useEffect, useState } from "react";
+import AdminShell from "~/components/admin/AdminShell";
+import { adminApi } from "~/lib/admin";
+import { groupBuckets, percent } from "~/lib/coverage";
+import { formatNumber } from "~/lib/format";
+import { t } from "~/i18n";
+
+export default function AdminDashboard() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    adminApi
+      .dashboard()
+      .then(setData)
+      .catch((err) => setError(err.message));
+  }, []);
+
+  const coverage = data?.coverage;
+
+  return (
+    <AdminShell title={t("admin.tabs.dashboard")}>
+      {error && <p className="text-accent">{error}</p>}
+      {data && (
+        <>
+          <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <Tile
+              label={t("admin.dash.peopleApproved")}
+              value={coverage.total.approved}
+            />
+            <Tile
+              label={t("admin.dash.peoplePending")}
+              value={coverage.total.pending}
+            />
+            <Tile label={t("admin.dash.images")} value={coverage.images} />
+            <Tile
+              label={t("admin.dash.pendingImages")}
+              value={data.moderation.pending}
+            />
+            <Tile
+              label={t("admin.dash.approvedImages")}
+              value={data.assets_by_status.approved ?? 0}
+            />
+            <Tile
+              label={t("admin.dash.rejectedImages")}
+              value={data.assets_by_status.rejected ?? 0}
+            />
+            <Tile
+              label={t("admin.dash.withdrawnImages")}
+              value={data.assets_by_status.withdrawn ?? 0}
+            />
+            <Tile
+              label={t("admin.dash.submissions")}
+              value={data.submissions.submitted}
+            />
+          </dl>
+
+          <h2 className="font-display mt-12 mb-4 text-[21px] font-bold tracking-[-0.015em]">
+            {t("admin.dash.coverage")}
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="tabular w-full text-[14px]">
+              <thead className="text-ink-55 text-left text-[12px] tracking-[0.08em] uppercase">
+                <tr>
+                  <th className="py-2 pr-4 font-semibold">
+                    {t("admin.dash.bucket")}
+                  </th>
+                  <th className="py-2 pr-4 text-right font-semibold">
+                    {t("dashboard.approved")}
+                  </th>
+                  <th className="py-2 pr-4 text-right font-semibold">
+                    {t("dashboard.pending")}
+                  </th>
+                  <th className="py-2 pr-4 text-right font-semibold">
+                    {t("admin.settings.target")}
+                  </th>
+                  <th className="py-2 text-right font-semibold">%</th>
+                </tr>
+              </thead>
+              {groupBuckets(coverage.buckets).map((dimension) => (
+                <tbody key={dimension.id} className="border-hairline border-t">
+                  <tr>
+                    <th
+                      colSpan={5}
+                      className="font-display pt-4 pb-1 text-left text-[15px] font-bold"
+                    >
+                      {dimension.title}
+                    </th>
+                  </tr>
+                  {dimension.buckets.map((bucket) => (
+                    <tr key={bucket.value} className="text-ink-72">
+                      <td className="text-ink py-1 pr-4">{bucket.label}</td>
+                      <td className="py-1 pr-4 text-right">
+                        {formatNumber(bucket.approved)}
+                      </td>
+                      <td className="py-1 pr-4 text-right">
+                        {formatNumber(bucket.pending)}
+                      </td>
+                      <td className="py-1 pr-4 text-right">
+                        {formatNumber(bucket.target)}
+                      </td>
+                      <td className="py-1 text-right">
+                        {Math.round(percent(bucket.approved, bucket.target))}%
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              ))}
+            </table>
+          </div>
+        </>
+      )}
+    </AdminShell>
+  );
+}
+
+function Tile({ label, value }) {
+  return (
+    <div className="rounded-card bg-surface p-4">
+      <dt className="text-ink-60 text-[13.5px]">{label}</dt>
+      <dd className="font-display tabular mt-1 text-[28px] leading-none font-bold tracking-[-0.025em]">
+        {formatNumber(value)}
+      </dd>
+    </div>
+  );
+}
