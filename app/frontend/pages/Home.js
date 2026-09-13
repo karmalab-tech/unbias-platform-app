@@ -27,20 +27,12 @@ export default function Home() {
           </button>
         </div>
       ) : (
-        <div className="flex gap-4">
-          <Link
-            className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500"
-            to="/login"
-          >
-            Sign in
-          </Link>
-          <Link
-            className="rounded-md px-4 py-2 text-sm font-semibold text-indigo-600 ring-1 ring-indigo-600 hover:bg-indigo-50"
-            to="/signup"
-          >
-            Sign up
-          </Link>
-        </div>
+        <Link
+          className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500"
+          to="/login"
+        >
+          Sign in
+        </Link>
       )}
     </div>
   );

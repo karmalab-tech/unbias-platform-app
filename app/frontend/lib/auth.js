@@ -23,24 +23,15 @@ export function AuthProvider({ children }) {
     return data.user;
   };
 
-  const signUp = async (email, password, passwordConfirmation) => {
-    const data = await api.post("/users", {
-      user: {
-        email,
-        password,
-        password_confirmation: passwordConfirmation,
-      },
-    });
-    setUser(data.user);
-    return data.user;
-  };
-
   const signOut = async () => {
     await api.delete("/users/sign_out");
     setUser(null);
   };
 
-  const value = { user, loading, signIn, signUp, signOut };
+  const isAdmin = user?.role === "admin";
+  const isStaff = Boolean(user);
+
+  const value = { user, loading, isAdmin, isStaff, signIn, signOut };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -35,3 +35,6 @@ en:
     invalid: "Incorrect password."
     throttled: "Too many attempts. Try again later."
     locked: "Password required."
+  staff:
+    sign_in_required: "Sign in required."
+    admin_required: "Admin access required."

@@ -59,10 +59,7 @@ export default function Login() {
           {submitting ? "Signing in…" : "Sign in"}
         </button>
       </form>
-      <div className="flex justify-between text-sm">
-        <Link className="text-indigo-600 hover:underline" to="/signup">
-          Create an account
-        </Link>
+      <div className="flex justify-end text-sm">
         <Link className="text-indigo-600 hover:underline" to="/forgot-password">
           Forgot password?
         </Link>
