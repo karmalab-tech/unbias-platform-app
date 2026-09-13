@@ -4,5 +4,230 @@ export const fr = {
     close: "Fermer",
     save: "Enregistrer",
     saving: "Enregistrement...",
+    back: "Retour",
+    next: "Suivant",
+    continue: "Continuer",
+    cancel: "Annuler",
+    retry: "Réessayer",
+    remove: "Retirer",
+    loading: "Chargement",
+    copy: "Copier",
+    copied: "Copié",
+    people: {
+      one: "{count} personne",
+      other: "{count} personnes",
+    },
+    photos: {
+      one: "{count} photo",
+      other: "{count} photos",
+    },
+  },
+  nav: {
+    whatIsThis: "C'est quoi ?",
+    watchVideo: "Voir la vidéo",
+    contribute: "Contribuer",
+    signIn: "Connexion équipe",
+    moderation: "Modération",
+    admin: "Admin",
+  },
+  home: {
+    title: "Unbias AI",
+    tagline:
+      "Un jeu de données d'images public et consenti pour mesurer et corriger les biais de représentation des modèles génératifs.",
+    upload: "Ajouter des photos",
+  },
+  taxonomy: {
+    age: {
+      label: "Âge",
+      "18_29": "18–29",
+      "30_44": "30–44",
+      "45_59": "45–59",
+      "60_74": "60–74",
+      "75_plus": "75+",
+      not_sure: "Je ne sais pas",
+    },
+    skin_tone: { label: "Couleur de peau" },
+    gender: {
+      label: "Genre",
+      woman: "Femme",
+      man: "Homme",
+      non_binary: "Non-binaire / genre divers",
+      not_sure: "Je ne sais pas",
+      prefer_not_to_say: "Je préfère ne pas répondre",
+    },
+    body: {
+      label: "Corps",
+      thin: "Mince",
+      medium: "Moyen",
+      large: "Fort",
+      very_large: "Très fort",
+      not_visible: "Pas assez visible",
+      not_sure: "Je ne sais pas",
+    },
+    disability: {
+      label: "Handicap visible / aides techniques",
+      short: "Handicap / aides techniques",
+      glasses: "Lunettes",
+      hearing_aid: "Appareil auditif",
+      wheelchair: "Fauteuil roulant",
+      cane_crutches_walker: "Canne / béquilles / déambulateur",
+      prosthetic: "Prothèse",
+      limb_difference: "Différence de membre",
+      other: "Autre aide technique / handicap visible",
+      otherShort: "Autre aide technique",
+    },
+  },
+  contribute: {
+    title: "Ajoutez vos photos",
+    steps: {
+      upload: "Envoi",
+      permission: "Autorisation",
+      people: "Personnes",
+      annotate: "Décrire",
+      review: "Vérifier",
+      consent: "Consentement",
+    },
+    progress: "Photo {photo} sur {photos}",
+    progressPerson:
+      "Photo {photo} sur {photos} · Personne {person} sur {people}",
+  },
+  upload: {
+    heading: "Ajoutez vos photos",
+    intro:
+      "Des photos que vous avez prises, ou de personnes qui vous ont donné leur accord. Chacune est vérifiée par une vraie personne.",
+    cta: "Ajouter des photos",
+    addMore: "Ajouter d'autres photos",
+    takePhoto: "Prendre une photo",
+    rules: {
+      people: "1 à 4 adultes clairement visibles par photo.",
+      samePerson:
+        "Merci de ne pas envoyer plus de 3 photos de la même personne.",
+      formats: "JPEG, PNG ou WebP, 20 Mo maximum chacune.",
+      noAi: "Pas d'images générées par IA ou synthétiques.",
+    },
+    uploading: "Envoi…",
+    failed: "L'envoi a échoué.",
+    tooSmall:
+      "Cette photo est petite ({short} px sur son plus petit côté). Elle pourrait être refusée pour sa qualité ; nous l'acceptons quand même.",
+    heic: "Les fichiers HEIC ne peuvent pas être lus par ce navigateur. Sur iPhone, choisissez « Le plus compatible » dans les réglages de l'appareil photo ou exportez la photo en JPEG.",
+    unsupported:
+      "Fichier non pris en charge : {name}. Utilisez une image JPEG, PNG ou WebP de moins de 20 Mo.",
+    tooMany: "Vous pouvez ajouter jusqu'à {max} photos par contribution.",
+    count: {
+      one: "{count} photo prête",
+      other: "{count} photos prêtes",
+    },
+    faq: "C'est quoi ?",
+  },
+  permission: {
+    heading: "Avant de continuer",
+    intro: "Ceci s'applique à toutes les photos de cet envoi.",
+    adults:
+      "Toutes les personnes clairement représentées sur ces photos ont 18 ans ou plus.",
+    permission:
+      "J'ai l'accord de chaque personne clairement représentée ou identifiable pour partager ces photos.",
+    cta: "Je confirme",
+  },
+  people: {
+    heading: "Qui est sur cette photo ?",
+    found: {
+      zero: "Touchez chaque personne clairement visible.",
+      one: "Nous avons trouvé 1 personne. C'est bien ça ?",
+      other: "Nous avons trouvé {count} personnes. C'est bien ça ?",
+    },
+    selected: {
+      zero: "Touchez chaque personne clairement visible.",
+      one: "1 personne sélectionnée. C'est tout le monde ?",
+      other: "{count} personnes sélectionnées. C'est tout le monde ?",
+    },
+    manualHint:
+      "Touchez une personne sur la photo pour l'ajouter. Touchez un numéro pour le retirer.",
+    tooMany:
+      "Les photos avec plus de {max} personnes clairement visibles ne conviennent pas à ce projet. Retirez cette photo ou choisissez moins de personnes.",
+    background: "Les petites silhouettes en arrière-plan ne comptent pas.",
+    confirm: "Oui, c'est ça",
+    confirmCount: {
+      one: "Continuer avec 1 personne",
+      other: "Continuer avec {count} personnes",
+    },
+    none: "Personne n'est clairement visible ? Retirez cette photo.",
+    removePhoto: "Retirer cette photo",
+    removePerson: "Retirer la personne {n}",
+  },
+  annotate: {
+    heading: "Personne {n}",
+    intro:
+      "Confirmez ce qui est visible. Vous connaissez les personnes de vos photos mieux qu'aucun modèle.",
+    age: "Âge",
+    skinTone: "Couleur de peau",
+    skinToneHint: "Selon l'échelle Monk. Choisissez la teinte la plus proche.",
+    suggested: "suggéré",
+    suggestedTone:
+      "Suggestion à partir de la photo : {tone}. Ajustez si cela semble faux.",
+    gender: "Genre",
+    body: "Corps",
+    disability: "Handicap visible ou aide technique",
+    disabilityHint: "Facultatif. Laissez vide si rien n'est visible.",
+    required: "L'âge, la couleur de peau, le genre et le corps sont requis.",
+    nextPerson: "Personne suivante",
+    nextPhoto: "Photo suivante",
+    finishPhoto: "Photo terminée",
+  },
+  review: {
+    heading: "Vos photos",
+    intro: "Touchez une photo pour modifier quelque chose.",
+    complete: "Complète",
+    incomplete: "À compléter",
+    peopleCount: {
+      one: "1 personne",
+      other: "{count} personnes",
+    },
+    addPhotos: "Ajouter des photos",
+    cta: "Continuer vers le consentement",
+  },
+  consent: {
+    heading: "Une dernière chose",
+    intro:
+      "Vos photos restent privées. Seuls des chiffres agrégés sont publics.",
+    training:
+      "J'autorise ce projet à stocker et traiter ces photos et à les utiliser dans un jeu de données de recherche pour évaluer et entraîner des modèles d'IA open source.",
+    trainingRequired: "Requis",
+    display:
+      "J'autorise aussi que ces photos soient montrées publiquement sur le site du projet, en exposition et en installation.",
+    displayOptional: "Facultatif",
+    legal:
+      "Formulation provisoire ({version}), en attente de relecture juridique. Vous pouvez retirer votre contribution à tout moment avec votre code.",
+    cta: "Envoyer mes photos",
+    submitting: "Envoi…",
+  },
+  success: {
+    heading: "Merci !",
+    added: {
+      one: "Vous avez ajouté 1 personne au jeu de données.",
+      other: "Vous avez ajouté {count} personnes au jeu de données.",
+    },
+    pending:
+      "Vos photos attendent maintenant une vérification humaine. Elles apparaissent déjà dans la partie « en attente » de la progression publique.",
+    keep: "Conservez ce code en lieu sûr",
+    keepBody:
+      "Il vous sera nécessaire pour gérer ou retirer votre contribution.",
+    emailCta: "Recevoir le code par e-mail",
+    emailSent: "Code envoyé à {email}.",
+    another: "Ajouter d'autres photos",
+    dashboard: "Voir la progression",
+  },
+  emailModal: {
+    title: "Recevoir votre code par e-mail",
+    email: "E-mail",
+    updates: "Me tenir au courant du projet",
+    send: "Envoyer le code",
+    sending: "Envoi…",
+    privacy:
+      "Votre e-mail sert uniquement à envoyer ce code, et aux nouvelles du projet si vous cochez la case.",
+  },
+  errors: {
+    generic: "Une erreur est survenue. Réessayez.",
+    offline:
+      "Vous semblez hors ligne. Votre progression est enregistrée ; reconnectez-vous pour continuer.",
   },
 };

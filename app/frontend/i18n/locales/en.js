@@ -4,5 +4,226 @@ export const en = {
     close: "Close",
     save: "Save",
     saving: "Saving...",
+    back: "Back",
+    next: "Next",
+    continue: "Continue",
+    cancel: "Cancel",
+    retry: "Retry",
+    remove: "Remove",
+    loading: "Loading",
+    copy: "Copy",
+    copied: "Copied",
+    people: {
+      one: "{count} person",
+      other: "{count} people",
+    },
+    photos: {
+      one: "{count} photo",
+      other: "{count} photos",
+    },
+  },
+  nav: {
+    whatIsThis: "What is this?",
+    watchVideo: "Watch video",
+    contribute: "Contribute",
+    signIn: "Staff sign in",
+    moderation: "Moderation",
+    admin: "Admin",
+  },
+  home: {
+    title: "Unbias AI",
+    tagline:
+      "A public, consented image dataset built to measure and correct representation bias in generative models.",
+    upload: "Upload photos",
+  },
+  taxonomy: {
+    age: {
+      label: "Age",
+      "18_29": "18–29",
+      "30_44": "30–44",
+      "45_59": "45–59",
+      "60_74": "60–74",
+      "75_plus": "75+",
+      not_sure: "Not sure",
+    },
+    skin_tone: { label: "Skin tone" },
+    gender: {
+      label: "Gender",
+      woman: "Woman",
+      man: "Man",
+      non_binary: "Non-binary / gender-diverse",
+      not_sure: "Not sure",
+      prefer_not_to_say: "Prefer not to say",
+    },
+    body: {
+      label: "Body",
+      thin: "Thin",
+      medium: "Medium",
+      large: "Large",
+      very_large: "Very large",
+      not_visible: "Not visible enough",
+      not_sure: "Not sure",
+    },
+    disability: {
+      label: "Visible disability / assistive devices",
+      short: "Disability / assistive devices",
+      glasses: "Glasses",
+      hearing_aid: "Hearing aid",
+      wheelchair: "Wheelchair",
+      cane_crutches_walker: "Cane / crutches / walker",
+      prosthetic: "Prosthetic",
+      limb_difference: "Limb difference",
+      other: "Other assistive device / visible disability",
+      otherShort: "Other assistive device",
+    },
+  },
+  contribute: {
+    title: "Add your photos",
+    steps: {
+      upload: "Upload",
+      permission: "Permission",
+      people: "People",
+      annotate: "Describe",
+      review: "Review",
+      consent: "Consent",
+    },
+    progress: "Photo {photo} of {photos}",
+    progressPerson: "Photo {photo} of {photos} · Person {person} of {people}",
+  },
+  upload: {
+    heading: "Add your photos",
+    intro:
+      "Photos you took, or photos of people who gave you permission. Each one is reviewed by a real person.",
+    cta: "Upload photos",
+    addMore: "Add more photos",
+    takePhoto: "Take a photo",
+    rules: {
+      people: "1 to 4 clearly visible adults per photo.",
+      samePerson: "Please upload no more than 3 photos of the same person.",
+      formats: "JPEG, PNG or WebP, up to 20 MB each.",
+      noAi: "No AI-generated or synthetic images.",
+    },
+    uploading: "Uploading…",
+    failed: "Upload failed.",
+    tooSmall:
+      "This photo is small ({short} px on its shortest side). It may be rejected for quality; we will still accept it.",
+    heic: "HEIC files cannot be read by this browser. On iPhone, choose “Most compatible” in Camera settings or export the photo as JPEG.",
+    unsupported:
+      "Unsupported file: {name}. Use a JPEG, PNG or WebP image under 20 MB.",
+    tooMany: "You can add up to {max} photos per contribution.",
+    count: {
+      one: "{count} photo ready",
+      other: "{count} photos ready",
+    },
+    faq: "What is this?",
+  },
+  permission: {
+    heading: "Before we continue",
+    intro: "This applies to every photo in this batch.",
+    adults: "Everyone clearly represented in these photos is 18 or older.",
+    permission:
+      "I have permission from every clearly represented or identifiable person to share these photos.",
+    cta: "I confirm",
+  },
+  people: {
+    heading: "Who is in this photo?",
+    found: {
+      zero: "Tap each clearly visible person.",
+      one: "We found 1 person. Is that right?",
+      other: "We found {count} people. Is that right?",
+    },
+    selected: {
+      zero: "Tap each clearly visible person.",
+      one: "1 person selected. Is that everyone?",
+      other: "{count} people selected. Is that everyone?",
+    },
+    manualHint:
+      "Tap a person on the photo to add them. Tap a number to remove it.",
+    tooMany:
+      "Photos with more than {max} clearly visible people are not suitable for this project. Remove this photo or pick fewer people.",
+    background: "Tiny people in the background do not count.",
+    confirm: "Yes, that's right",
+    confirmCount: {
+      one: "Continue with 1 person",
+      other: "Continue with {count} people",
+    },
+    none: "Nobody clearly visible? Remove this photo.",
+    removePhoto: "Remove this photo",
+    removePerson: "Remove person {n}",
+  },
+  annotate: {
+    heading: "Person {n}",
+    intro:
+      "Confirm what is visible. You know the people in your photos better than any model does.",
+    age: "Age",
+    skinTone: "Skin tone",
+    skinToneHint: "Using the Monk Skin Tone scale. Pick the closest match.",
+    suggested: "suggested",
+    suggestedTone:
+      "Suggested from the photo: {tone}. Adjust if it looks wrong.",
+    gender: "Gender",
+    body: "Body",
+    disability: "Visible disability or assistive device",
+    disabilityHint: "Optional. Leave empty if nothing is visible.",
+    required: "Age, skin tone, gender and body are required.",
+    nextPerson: "Next person",
+    nextPhoto: "Next photo",
+    finishPhoto: "Done with this photo",
+  },
+  review: {
+    heading: "Your photos",
+    intro: "Tap a photo to change anything.",
+    complete: "Complete",
+    incomplete: "Needs labels",
+    peopleCount: {
+      one: "1 person",
+      other: "{count} people",
+    },
+    addPhotos: "Add photos",
+    cta: "Continue to consent",
+  },
+  consent: {
+    heading: "One last thing",
+    intro: "Your photos stay private. Only aggregate numbers are ever public.",
+    training:
+      "I allow this project to store and process these photos and to use them in a research dataset for evaluating and training open-source AI models.",
+    trainingRequired: "Required",
+    display:
+      "I also allow these photos to be shown publicly on the project website, in exhibitions and installations.",
+    displayOptional: "Optional",
+    legal:
+      "Draft wording ({version}), pending legal review. Contributors can withdraw at any time with their contribution code.",
+    cta: "Submit my photos",
+    submitting: "Submitting…",
+  },
+  success: {
+    heading: "Thank you!",
+    added: {
+      one: "You added 1 person to the dataset.",
+      other: "You added {count} people to the dataset.",
+    },
+    pending:
+      "Your photos are now waiting for human review. They already appear in the pending part of the public progress.",
+    keep: "Keep this code safely",
+    keepBody:
+      "You'll need it if you ever want to manage or withdraw your contribution.",
+    emailCta: "Get the code by email",
+    emailSent: "Code sent to {email}.",
+    another: "Add more photos",
+    dashboard: "See the progress",
+  },
+  emailModal: {
+    title: "Get your code by email",
+    email: "Email",
+    updates: "Keep me updated about the project",
+    send: "Send code",
+    sending: "Sending…",
+    privacy:
+      "Your email is only used to send this code, and for project news if you tick the box.",
+  },
+  errors: {
+    generic: "Something went wrong. Please try again.",
+    offline:
+      "You seem to be offline. Your progress is saved; reconnect to continue.",
   },
 };
