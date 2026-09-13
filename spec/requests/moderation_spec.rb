@@ -44,7 +44,7 @@ RSpec.describe "Moderation", type: :request do
     expect(json.dig("asset", "people", 0, "disability_tags")).to eq([ "wheelchair" ])
     expect(json.dig("asset", "submission", "public_code")).to start_with("UNB-")
     expect(json.dig("asset", "submission", "asset_count")).to eq(1)
-    expect(json.dig("asset", "flags")).to eq([])
+    expect(json.dig("asset", "flags")).to include("blurry", "processing_failed")
     expect(json.dig("asset", "image_url")).to eq("/api/moderation/assets/#{asset.id}/image")
 
     post "/api/moderation/assets/#{asset.id}/reject", params: { reason: "incorrect_labeling" }, as: :json

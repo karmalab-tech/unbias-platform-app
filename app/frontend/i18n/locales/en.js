@@ -278,7 +278,9 @@ export const en = {
       guidelines: "Does not meet contribution guidelines",
       other: "Other",
     },
+    distance: "hash distance {distance}",
     decided: {
+      pending_moderation: "Pending review",
       approved: "Approved",
       rejected: "Rejected",
       withdrawn: "Withdrawn by the contributor",

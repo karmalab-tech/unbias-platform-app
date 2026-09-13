@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -272,6 +273,7 @@ export default function ModerationReview({
                 </li>
               ))}
             </ul>
+            <Duplicates asset={asset} />
           </section>
         )}
       </aside>
@@ -334,5 +336,35 @@ function Automatic({ asset }) {
         </p>
       )}
     </section>
+  );
+}
+
+function Duplicates({ asset }) {
+  const duplicate = asset.enrichments.find((e) => e.kind === "duplicate");
+  const matches = [
+    ...(duplicate?.result?.exact ?? []),
+    ...(duplicate?.result?.near ?? []),
+  ];
+  if (!matches.length) return null;
+  return (
+    <ul className="text-ink-72 mt-3 space-y-1 text-[13px]">
+      {matches.map((match) => (
+        <li key={match.asset_id}>
+          <Link
+            to={`/moderation/${match.asset_id}`}
+            className="text-ink hover:text-accent font-medium"
+          >
+            {match.public_code}
+          </Link>{" "}
+          ·{" "}
+          {t(`moderation.decided.${match.status}`, {}) ===
+          `moderation.decided.${match.status}`
+            ? match.status
+            : t(`moderation.decided.${match.status}`)}
+          {match.distance > 0 &&
+            ` · ${t("moderation.distance", { distance: match.distance })}`}
+        </li>
+      ))}
+    </ul>
   );
 }

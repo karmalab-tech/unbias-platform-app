@@ -50,6 +50,9 @@ gem "alba"
 
 gem "httparty"
 
+# Server-side VLM enrichment (context, neutral caption, advisory safety flags)
+gem "anthropic"
+
 # QR code for the installation and the contribute banner
 gem "rqrcode"
 

@@ -1,11 +1,14 @@
 class ProcessAssetJob < ApplicationJob
   queue_as :default
 
-  # Enrichment steps arrive in a later phase; for now every submitted asset goes straight to moderation.
-  def perform(asset)
-    return unless asset.processing?
+  # Transient VLM errors re-enqueue the job; the pipeline skips steps that already succeeded.
+  retry_on AssetProcessing::Pipeline::Retry, wait: :polynomially_longer, attempts: 6 do |job, error|
+    asset = job.arguments.first
+    asset.update!(processing_state: :failed)
+    Rails.logger.warn("ProcessAssetJob gave up on asset #{asset.id}: #{error.message}")
+  end
 
-    asset.update!(status: :pending_moderation, processing_state: :done)
-    CoverageStats.bump!
+  def perform(asset)
+    AssetProcessing::Pipeline.new(asset).call
   end
 end

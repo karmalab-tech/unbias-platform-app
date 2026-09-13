@@ -283,7 +283,9 @@ export const fr = {
       guidelines: "Hors des consignes de contribution",
       other: "Autre",
     },
+    distance: "distance de hachage {distance}",
     decided: {
+      pending_moderation: "En attente de vérification",
       approved: "Approuvée",
       rejected: "Refusée",
       withdrawn: "Retirée par le contributeur",
