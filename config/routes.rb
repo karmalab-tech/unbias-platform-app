@@ -34,6 +34,17 @@ Rails.application.routes.draw do
       end
     end
     resources :direct_uploads, only: :create
+
+    namespace :moderation do
+      resource :queue, only: :show, controller: :queue
+      resources :assets, only: :show do
+        member do
+          post :approve
+          post :reject
+          get :image
+        end
+      end
+    end
   end
 
   root "app#index"
