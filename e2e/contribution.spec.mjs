@@ -20,6 +20,7 @@ test("a contributor submits, a moderator approves, the dashboard moves", async (
   await page.locator("footer").getByRole("button", { name: "Continue" }).click();
 
   await page.waitForURL(/permission/);
+  await page.getByRole("checkbox").first().waitFor();
   for (const box of await page.getByRole("checkbox").all()) await box.check();
   await page.getByRole("button", { name: "I confirm" }).click();
 
