@@ -1,5 +1,17 @@
 require "rails_helper"
 
+# == Schema Information
+#
+# Table name: public_call_to_actions
+#
+#  id            :bigint           not null, primary key
+#  active        :boolean          default(TRUE), not null
+#  caption_en    :string           not null
+#  caption_fr    :string
+#  display_order :integer          default(0), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
 RSpec.describe PublicCallToAction, type: :model do
   it "allows at most three active calls to action" do
     3.times { |i| PublicCallToAction.create!(caption_en: "Need #{i}", display_order: i) }
