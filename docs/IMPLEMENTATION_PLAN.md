@@ -1,6 +1,6 @@
 # Unbias AI — POC Implementation Plan
 
-> Status: **proposal, awaiting answers** to the open questions listed at the end (tracked in Notion).
+> Status: answers received (Notion, 13 Sep 2026). Decisions applied: approved-only hero, admin-managed CTAs without related buckets, "today" = last 24 h, Claude Sonnet 5 for enrichment, AWS S3 on Fly.io, Postmark, EN + FR. Progress per phase is tracked in `TESTING_GUIDE.md`.
 > Written after reading every file in `docs/` (brief, POC design, technical architecture, future improvements, design handoff, presentation deck, design prototypes) and the full starter repository.
 
 ## 1. Where the repository stands
