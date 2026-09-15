@@ -1,0 +1,17 @@
+# Product limits. Adjust here; the frontend reads them from /api/public/settings.
+shared:
+  max_photos_per_submission: 20
+  max_people_per_photo: 4
+  min_short_side_px: 768
+  max_file_bytes: 20971520
+  accepted_content_types:
+    - image/jpeg
+    - image/png
+    - image/webp
+  draft_ttl_hours: 24
+  rejected_media_retention_days: 30
+  stats_poll_seconds: 5
+  installation_poll_seconds: 3
+  consent_version: v0-draft
+  people_milestone: 10000
+  max_active_calls_to_action: 3

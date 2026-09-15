@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { LockClosedIcon } from "@heroicons/react/24/outline";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import AuthLayout, { buttonClass, fieldClass } from "~/components/AuthLayout";
 import FormError from "~/components/FormError";
 import { useAuth } from "~/lib/auth";
+import { t } from "~/i18n";
 
 export default function Login() {
   const { signIn } = useAuth();
   const navigate = useNavigate();
+  const [search] = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -19,7 +20,8 @@ export default function Login() {
     setSubmitting(true);
     try {
       await signIn(email, password);
-      navigate("/");
+      const target = search.get("return");
+      navigate(target && target.startsWith("/") ? target : "/moderation");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -28,15 +30,23 @@ export default function Login() {
   };
 
   return (
-    <AuthLayout title="Sign in" icon={LockClosedIcon}>
+    <AuthLayout
+      title={t("staff.signInTitle")}
+      subtitle={t("staff.signInSubtitle")}
+    >
       <form className="space-y-4" onSubmit={handleSubmit}>
         <FormError message={error} />
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
-            Email
+          <label
+            className="text-ink-72 mb-2 block text-[14.5px] font-medium"
+            htmlFor="email"
+          >
+            {t("staff.email")}
           </label>
           <input
+            id="email"
             type="email"
+            autoComplete="email"
             className={fieldClass}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -44,11 +54,16 @@ export default function Login() {
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
-            Password
+          <label
+            className="text-ink-72 mb-2 block text-[14.5px] font-medium"
+            htmlFor="password"
+          >
+            {t("staff.password")}
           </label>
           <input
+            id="password"
             type="password"
+            autoComplete="current-password"
             className={fieldClass}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -56,17 +71,17 @@ export default function Login() {
           />
         </div>
         <button type="submit" className={buttonClass} disabled={submitting}>
-          {submitting ? "Signing in…" : "Sign in"}
+          {submitting ? t("staff.signingIn") : t("staff.signIn")}
         </button>
       </form>
-      <div className="flex justify-between text-sm">
-        <Link className="text-indigo-600 hover:underline" to="/signup">
-          Create an account
+      <p className="text-[14px]">
+        <Link
+          className="text-accent hover:text-accent-hover"
+          to="/forgot-password"
+        >
+          {t("staff.forgot")}
         </Link>
-        <Link className="text-indigo-600 hover:underline" to="/forgot-password">
-          Forgot password?
-        </Link>
-      </div>
+      </p>
     </AuthLayout>
   );
 }

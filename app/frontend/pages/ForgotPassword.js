@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import AuthLayout, { buttonClass, fieldClass } from "~/components/AuthLayout";
 import FormError from "~/components/FormError";
 import { api } from "~/lib/api";
@@ -29,7 +28,6 @@ export default function ForgotPassword() {
     <AuthLayout
       title="Reset your password"
       subtitle="We'll email you a link to set a new password."
-      icon={EnvelopeIcon}
     >
       {sent ? (
         <p className="rounded-md bg-green-50 px-3 py-2 text-sm text-green-700">

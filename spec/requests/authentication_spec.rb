@@ -8,23 +8,11 @@ RSpec.describe "Authentication", type: :request do
   end
 
   describe "POST /users (sign up)" do
-    it "creates a user and returns it as JSON" do
-      post user_registration_path,
-           params: { user: credentials.merge(password_confirmation: "password123") },
-           as: :json
+    it "is not routable: staff accounts are created by admins" do
+      post "/users", params: { user: credentials }, as: :json
 
-      expect(response).to have_http_status(:created)
-      expect(json.dig("user", "email")).to eq("user@example.com")
-      expect(User.count).to eq(1)
-    end
-
-    it "returns errors for an invalid registration" do
-      post user_registration_path,
-           params: { user: { email: "user@example.com", password: "x" } },
-           as: :json
-
-      expect(response).to have_http_status(:unprocessable_entity)
-      expect(json["errors"]).to be_present
+      expect(response).to have_http_status(:not_found)
+      expect(User.count).to eq(0)
     end
   end
 
@@ -36,6 +24,7 @@ RSpec.describe "Authentication", type: :request do
 
       expect(response).to have_http_status(:ok)
       expect(json.dig("user", "email")).to eq("user@example.com")
+      expect(json.dig("user", "role")).to eq("moderator")
     end
 
     it "returns 401 with a JSON body for bad credentials" do

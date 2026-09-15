@@ -1,0 +1,87 @@
+/* Design tokens from docs/DESIGN_HANDOFF.md. The Design Language page wins on conflicts. */
+@theme {
+  --font-display: "Archivo Variable", "Archivo", sans-serif;
+  --font-ui: "Instrument Sans Variable", "Instrument Sans", system-ui, sans-serif;
+
+  --color-canvas: #faf6ef;
+  --color-surface: #f7efe2;
+  --color-surface-warm: #f7e6d6;
+  --color-shell: #312c26;
+
+  --color-ink: #17150f;
+  --color-ink-72: rgba(23, 21, 15, 0.72);
+  --color-ink-60: rgba(23, 21, 15, 0.6);
+  --color-ink-55: rgba(23, 21, 15, 0.55);
+  --color-ink-45: rgba(23, 21, 15, 0.45);
+  --color-ink-40: rgba(23, 21, 15, 0.4);
+  --color-hairline: rgba(23, 21, 15, 0.1);
+  --color-hairline-strong: rgba(23, 21, 15, 0.14);
+
+  --color-accent: #e1462a;
+  --color-accent-hover: #b8351b;
+
+  --color-data-approved: #17150f;
+  --color-data-pending: #e3dac9;
+  --color-data-track: #eae1d3;
+
+  --color-tint-age: #e7e1f6;
+  --color-key-age: #7c6bb2;
+  --color-tint-skin: #fae4b6;
+  --color-key-skin: #b07a4e;
+  --color-tint-body: #dde8cf;
+  --color-key-body: #4f8f86;
+  --color-key-gender: #c46b8a;
+  --color-key-disability: #c98b3f;
+
+  --radius-bar: 4px;
+  --radius-qr: 8px;
+  --radius-btn: 9px;
+  --radius-card: 13px;
+  --radius-banner: 16px;
+  --radius-media: 18px;
+
+  --spacing-s1: 6px;
+  --spacing-s2: 9px;
+  --spacing-s3: 14px;
+  --spacing-s4: 22px;
+  --spacing-s5: 30px;
+  --spacing-s6: 44px;
+  --spacing-gutter: 56px;
+}
+
+@utility hatch {
+  background-color: var(--color-data-pending);
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-ink) 0 1.6px,
+    transparent 1.6px 4.4px
+  );
+}
+
+@utility hatch-lg {
+  background-color: var(--color-data-pending);
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-ink) 0 2px,
+    transparent 2px 5.5px
+  );
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@layer base {
+  html {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}

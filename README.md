@@ -1,25 +1,8 @@
-# Rails + React + Vite Template
+# Unbias AI
 
-An opinionated starter for React + Rails apps, with authentication, background
-jobs, and cloud storage already wired up so a new project can get going fast.
-
-<!-- BEGIN: template setup — delete this whole section once you've done it -->
-
-## Starting a new project from this template
-
-This template uses the placeholder name `RailsReactVite` / `rails_react_vite`.
-Before your first commit, rename it to your project and delete this section.
-
-1. Find every occurrence: `grep -rniI "rails_react_vite\|railsreactvite" . --exclude-dir=node_modules --exclude-dir=.git`
-2. Replace the identifiers (case-sensitive):
-   - `RailsReactVite` → `YourAppName` (the Ruby module in `config/application.rb`)
-   - `rails_react_vite` → `your_app_name` (DB names in `config/database.yml`, Kamal service/image and storage volume in `config/deploy.yml`, Docker tags in `Dockerfile`)
-   - `Rails React Vite` → `Your App Name` (layout `<title>` and PWA name in `app/views/`)
-3. Recreate the databases under the new names: `bin/rails db:drop db:create db:migrate`
-   (skip `db:drop` if you have data you care about).
-4. Delete this section from `README.md` and the matching note in `AGENTS.md`.
-
-<!-- END: template setup -->
+A public, image-only contribution platform for building a consented,
+human-reviewed representation dataset. See `docs/` for the product brief,
+POC design, architecture and implementation plan.
 
 ## Stack
 
@@ -66,7 +49,7 @@ Configured via `dotenv-rails`; see `.env.example`:
 Devise is set up as a JSON API consumed by React:
 
 - Endpoints live under `/users/*` via custom controllers in `app/controllers/users/`.
-- React screens are in `app/frontend/pages/` (`Login`, `Signup`, `ForgotPassword`, `ResetPassword`).
+- React screens are in `app/frontend/pages/` (`Login`, `ForgotPassword`, `ResetPassword`).
 - `GET /current_user` returns the signed-in user; `app/frontend/lib/auth.js` exposes `useAuth()`.
 
 ## Site password gate

@@ -10,9 +10,138 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_08_06_120000) do
+ActiveRecord::Schema[8.0].define(version: 2026_09_13_160001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "asset_enrichments", force: :cascade do |t|
+    t.bigint "asset_id", null: false
+    t.string "kind", null: false
+    t.string "status", default: "pending", null: false
+    t.jsonb "result", default: {}, null: false
+    t.float "confidence"
+    t.string "provider"
+    t.string "model"
+    t.string "model_version"
+    t.string "prompt_version"
+    t.jsonb "raw_response"
+    t.text "error"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id", "kind"], name: "index_asset_enrichments_on_asset_id_and_kind", unique: true
+    t.index ["asset_id"], name: "index_asset_enrichments_on_asset_id"
+  end
+
+  create_table "assets", force: :cascade do |t|
+    t.bigint "submission_id", null: false
+    t.integer "position", default: 0, null: false
+    t.string "status", default: "draft", null: false
+    t.string "processing_state", default: "pending", null: false
+    t.integer "width"
+    t.integer "height"
+    t.string "content_type"
+    t.bigint "byte_size"
+    t.string "sha256"
+    t.string "phash"
+    t.boolean "people_confirmed", default: false, null: false
+    t.datetime "submitted_at"
+    t.datetime "moderated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["phash"], name: "index_assets_on_phash"
+    t.index ["sha256"], name: "index_assets_on_sha256"
+    t.index ["status", "submitted_at"], name: "index_assets_on_status_and_submitted_at"
+    t.index ["submission_id"], name: "index_assets_on_submission_id"
+  end
+
+  create_table "consents", force: :cascade do |t|
+    t.bigint "submission_id", null: false
+    t.boolean "training_allowed", default: false, null: false
+    t.boolean "public_display_allowed", default: false, null: false
+    t.string "consent_version", null: false
+    t.datetime "accepted_at", null: false
+    t.datetime "withdrawn_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["submission_id"], name: "index_consents_on_submission_id", unique: true
+  end
+
+  create_table "moderation_decisions", force: :cascade do |t|
+    t.bigint "asset_id", null: false
+    t.bigint "moderator_id", null: false
+    t.string "decision", null: false
+    t.string "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_moderation_decisions_on_asset_id"
+    t.index ["moderator_id"], name: "index_moderation_decisions_on_moderator_id"
+  end
+
+  create_table "person_annotations", force: :cascade do |t|
+    t.bigint "asset_id", null: false
+    t.integer "person_index", null: false
+    t.jsonb "detection_region", default: {}, null: false
+    t.string "detection_source", default: "manual", null: false
+    t.string "age_bucket"
+    t.integer "skin_tone_auto"
+    t.integer "skin_tone_confirmed"
+    t.string "gender"
+    t.string "body"
+    t.string "disability_tags", default: [], null: false, array: true
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id", "person_index"], name: "index_person_annotations_on_asset_id_and_person_index", unique: true
+    t.index ["asset_id"], name: "index_person_annotations_on_asset_id"
+  end
+
+  create_table "public_call_to_actions", force: :cascade do |t|
+    t.string "caption_en", null: false
+    t.string "caption_fr"
+    t.boolean "active", default: true, null: false
+    t.integer "display_order", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "representation_buckets", force: :cascade do |t|
+    t.string "dimension", null: false
+    t.string "value", null: false
+    t.integer "display_order", default: 0, null: false
+    t.integer "target_count", default: 0, null: false
+    t.string "swatch"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dimension", "value"], name: "index_representation_buckets_on_dimension_and_value", unique: true
+  end
 
   create_table "solid_cable_messages", force: :cascade do |t|
     t.binary "channel", null: false
@@ -156,6 +285,23 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_06_120000) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "submissions", force: :cascade do |t|
+    t.string "public_code"
+    t.string "session_token_digest", null: false
+    t.string "status", default: "draft", null: false
+    t.string "locale", default: "en", null: false
+    t.datetime "permission_confirmed_at"
+    t.string "email"
+    t.boolean "updates_opt_in", default: false, null: false
+    t.datetime "submitted_at"
+    t.datetime "withdrawn_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["public_code"], name: "index_submissions_on_public_code", unique: true
+    t.index ["session_token_digest"], name: "index_submissions_on_session_token_digest", unique: true
+    t.index ["status", "updated_at"], name: "index_submissions_on_status_and_updated_at"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -164,10 +310,20 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_06_120000) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role", default: "moderator", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role"], name: "index_users_on_role"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "asset_enrichments", "assets"
+  add_foreign_key "assets", "submissions"
+  add_foreign_key "consents", "submissions"
+  add_foreign_key "moderation_decisions", "assets"
+  add_foreign_key "moderation_decisions", "users", column: "moderator_id"
+  add_foreign_key "person_annotations", "assets"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

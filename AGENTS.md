@@ -1,14 +1,9 @@
-# Rails React Vite Template — AI Assistant Guide
+# Unbias AI — AI Assistant Guide
 
 > `CLAUDE.md` and `.github/copilot-instructions.md` are symlinks to this file, so Claude Code, GitHub Copilot, and Codex all read the same source of truth.
 
-Rails 8 + React 19 + Vite starter with authentication, background jobs, and cloud storage wired up.
+Unbias AI is a public, image-only contribution platform building a consented, human-reviewed representation dataset. Canonical product and architecture specs live in `docs/` (`PROJECT_BRIEF.md`, `POC_DESIGN.md`, `TECHNICAL_ARCHITECTURE.md`, `DESIGN_HANDOFF.md`, `IMPLEMENTATION_PLAN.md`). Read them before changing product behaviour.
 
-<!-- BEGIN: template setup — delete this note (and the matching README section) once the rename is done -->
-
-> **Fresh clone?** This is still the template: the app is named with the placeholder `RailsReactVite` / `rails_react_vite`. Before building features, rename it to the real project — see "Starting a new project from this template" in `README.md` — then delete this note. If you're an agent and the placeholder name is still present, ask the user what to rename it to before generating new code that hard-codes it.
-
-<!-- END: template setup -->
 
 ## Tech Stack
 
@@ -17,7 +12,7 @@ Rails 8 + React 19 + Vite starter with authentication, background jobs, and clou
 | Backend          | Ruby 3.3.7, Rails 8.0.2, PostgreSQL                                    |
 | Asset pipeline   | Propshaft + jsbundling-rails (esbuild) + cssbundling-rails + vite_rails |
 | Frontend         | React 19, Vite 5, Tailwind CSS 4.3, Heroicons, React Router            |
-| Auth             | Devise (JSON endpoints + React views)                                  |
+| Auth             | Devise for staff only (admin / moderator roles, JSON endpoints, no public sign-up) |
 | Background jobs  | Solid Queue on PostgreSQL (Active Job adapter)                         |
 | Caching / Cable  | Solid Cache, Solid Cable                                               |
 | Storage          | Active Storage → AWS S3 (production), local disk (development)         |
@@ -42,7 +37,8 @@ Rails 8 + React 19 + Vite starter with authentication, background jobs, and clou
 - React 19 automatic JSX — do **not** `import React from "react"`.
 - Import alias `~/` → `app/frontend/` is provided by `vite-plugin-ruby` at build time, and mirrored in `eslint.config.mjs` and `jsconfig.json` so linting and editors resolve it too. Keep those two in sync.
 - Tailwind 4 via `@tailwindcss/vite` (dev HMR) and `@tailwindcss/cli` (prod build from `app/assets/stylesheets/application.tailwind.css`). `prettier-plugin-tailwindcss` sorts classes — don't reorder by hand.
-- Icons come from `@heroicons/react` (e.g. `import { LockClosedIcon } from "@heroicons/react/24/outline"`).
+- Icons come from `@heroicons/react` outline set (1.5px stroke matches the design language).
+- Design tokens live in `app/frontend/styles/theme.css` as Tailwind `@theme` variables (`bg-canvas`, `text-ink-60`, `font-display`, `rounded-card`, `hatch`…). Fonts are self-hosted via `@fontsource-variable`; never load Google Fonts.
 - New pages are client-side routes inside React (React Router in `app/frontend/components/App.js`), not ERB views. Any HTML `GET` not owned by Rails falls through to the SPA (see the catch-all in `config/routes.rb`).
 - User-facing strings go through `t()` from `~/i18n`; add keys to `app/frontend/i18n/locales/{en,fr}.js`. Locale is detected once at import time from the browser; `?lang=fr` forces it.
 - Read boolean query-string toggles with `useQueryFlag("present")` rather than parsing `location.search` directly — it stays in sync when another component rewrites the URL.
@@ -50,10 +46,11 @@ Rails 8 + React 19 + Vite starter with authentication, background jobs, and clou
 ## Auth Conventions
 
 - A site-wide password gate sits in front of everything, independent from Devise. `SitePasswordProtection` (included in `ApplicationController`) redirects HTML requests to `/unlock` and returns `401` JSON until the visitor submits `ENV["PASSWORD"]`; the unlocked state is a digest stored in the Rails session. Blank/unset `PASSWORD` disables the gate entirely, which is the default.
-- Devise is API-style: custom controllers under `app/controllers/users/` (`sessions`, `registrations`, `passwords`) respond with JSON, not HTML.
+- Devise is API-style and staff-only: custom controllers under `app/controllers/users/` (`sessions`, `passwords`) respond with JSON, not HTML. Registrations are disabled; admins create moderators, who receive a set-your-password email.
+- `users.role` is `moderator` or `admin`. Controllers guard with `require_staff!` / `require_admin!` from `StaffAuthorization`. Contributors never have accounts.
 - Failed authentication returns `401 { error: … }` via `JsonFailureApp` (defined in `config/initializers/devise.rb`) instead of redirecting.
 - The React frontend talks to Devise through `app/frontend/lib/api.js` (adds the CSRF token + `Accept: application/json`) and `app/frontend/lib/auth.js` (`AuthProvider` / `useAuth`). `GET /current_user` returns the signed-in user.
-- Auth screens live in `app/frontend/pages/` (`Login`, `Signup`, `ForgotPassword`, `ResetPassword`). The password-reset email links to the React `/reset-password` route (`app/views/devise/mailer/reset_password_instructions.html.erb`).
+- Auth screens live in `app/frontend/pages/` (`Login`, `ForgotPassword`, `ResetPassword`). The password-reset email links to the React `/reset-password` route (`app/views/devise/mailer/reset_password_instructions.html.erb`).
 
 ## Backend Conventions
 

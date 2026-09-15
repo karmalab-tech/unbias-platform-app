@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { KeyIcon } from "@heroicons/react/24/outline";
 import AuthLayout, { buttonClass, fieldClass } from "~/components/AuthLayout";
 import FormError from "~/components/FormError";
 import { api } from "~/lib/api";
@@ -35,7 +34,7 @@ export default function ResetPassword() {
   };
 
   return (
-    <AuthLayout title="Choose a new password" icon={KeyIcon}>
+    <AuthLayout title="Choose a new password">
       <form className="space-y-4" onSubmit={handleSubmit}>
         <FormError message={error} />
         {!resetPasswordToken && (

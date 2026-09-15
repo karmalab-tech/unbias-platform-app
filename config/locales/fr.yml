@@ -1,0 +1,31 @@
+fr:
+  gate:
+    password: "Mot de passe"
+    submit: "Entrer"
+    invalid: "Mot de passe incorrect."
+    throttled: "Trop de tentatives. Réessayez plus tard."
+    locked: "Mot de passe requis."
+  staff:
+    sign_in_required: "Connexion requise."
+    admin_required: "Accès administrateur requis."
+  api:
+    not_found: "Introuvable."
+    too_many_requests: "Trop de requêtes. Réessayez dans un instant."
+    already_submitted: "Cette contribution a déjà été envoyée."
+    not_ready: "L'autorisation, le consentement et les informations de chaque personne sont requis avant l'envoi."
+    no_code_yet: "La contribution n'a pas encore été envoyée."
+    too_many_photos: "Vous pouvez ajouter jusqu'à %{max} photos par contribution."
+    too_many_people: "Une photo peut contenir au maximum %{max} personnes clairement représentées."
+    unsupported_file: "Fichier non pris en charge. Utilisez une image JPEG, PNG ou WebP de moins de 20 Mo."
+    own_role: "Vous ne pouvez pas changer votre propre rôle."
+    own_account: "Vous ne pouvez pas supprimer votre propre compte."
+  contribution_mailer:
+    code:
+      subject: "Votre code de contribution Unbias AI %{code}"
+      greeting: "Merci pour votre contribution."
+      body:
+        one: "Vous avez ajouté 1 personne au jeu de données."
+        other: "Vous avez ajouté %{count} personnes au jeu de données."
+      keep: "Conservez ce code en lieu sûr. Il vous sera nécessaire pour gérer ou retirer votre contribution."
+      withdraw: "Pour retirer une ou toutes vos photos, répondez à cet e-mail avec votre code."
+      updates: "Vous avez demandé à recevoir des nouvelles du projet. Nous écrirons rarement."

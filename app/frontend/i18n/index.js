@@ -51,11 +51,20 @@ function resolve(dict, key) {
   }, dict);
 }
 
+function pluralize(value, vars) {
+  if (typeof value !== "object" || value === null) return value;
+  const count = Number(vars?.count ?? 0);
+  if (count === 0 && value.zero !== undefined) return value.zero;
+  return count === 1 ? value.one : value.other;
+}
+
 export function t(key, vars) {
   const active = translations[locale] || translations[DEFAULT_LOCALE];
   let value = resolve(active, key);
   if (value === undefined) value = resolve(translations[DEFAULT_LOCALE], key);
   if (value === undefined) return key;
+  value = pluralize(value, vars);
+  if (typeof value !== "string") return key;
 
   if (vars) {
     return Object.entries(vars).reduce(

@@ -1,0 +1,50 @@
+# Fly.io configuration. Run `fly launch --copy-config --no-deploy` once, then
+# `fly secrets set` for every variable listed in .env.example.
+app = "unbias-ai"
+primary_region = "cdg"
+
+[build]
+
+[deploy]
+  release_command = "bin/rails db:prepare"
+
+[env]
+  RAILS_ENV = "production"
+  RAILS_LOG_TO_STDOUT = "true"
+  RAILS_SERVE_STATIC_FILES = "true"
+  WEB_CONCURRENCY = "1"
+  RAILS_MAX_THREADS = "5"
+
+[processes]
+  web = "bin/thrust bin/rails server"
+  worker = "bin/jobs"
+
+[http_service]
+  internal_port = 80
+  force_https = true
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["web"]
+
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 200
+    hard_limit = 250
+
+[[http_service.checks]]
+  interval = "30s"
+  timeout = "5s"
+  grace_period = "10s"
+  method = "GET"
+  path = "/up"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"
+  processes = ["web"]
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"
+  processes = ["worker"]

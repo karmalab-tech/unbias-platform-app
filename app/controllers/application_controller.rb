@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   # Site-wide password gate, independent from Devise sign-in.
   include SitePasswordProtection
+  include StaffAuthorization
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern

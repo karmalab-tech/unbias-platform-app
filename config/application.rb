@@ -6,7 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module RailsReactVite
+module UnbiasAi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
@@ -27,5 +27,8 @@ module RailsReactVite
     # Run Active Job (including Action Mailer's deliver_later) on Solid Queue,
     # backed by the same Postgres database as the rest of the app.
     config.active_job.queue_adapter = :solid_queue
+
+    config.i18n.available_locales = [ :en, :fr ]
+    config.i18n.default_locale = :en
   end
 end

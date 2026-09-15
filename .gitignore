@@ -49,3 +49,6 @@ node_modules
 
 # We use yarn, not bun
 /bun.lock
+
+# macOS
+.DS_Store

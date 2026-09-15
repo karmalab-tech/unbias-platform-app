@@ -1,47 +1,49 @@
-import { Link } from "react-router-dom";
-import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
-import { buttonClass } from "~/components/AuthLayout";
-import { useAuth } from "~/lib/auth";
+import { useState } from "react";
+import PublicHeader from "~/components/public/PublicHeader";
+import Hero from "~/components/public/Hero";
+import NeedCards from "~/components/public/NeedCards";
+import RepresentationCharts from "~/components/public/RepresentationCharts";
+import ContributeBanner from "~/components/public/ContributeBanner";
+import PublicFooter from "~/components/public/PublicFooter";
+import VideoOverlay from "~/components/public/VideoOverlay";
+import usePolling from "~/lib/usePolling";
+import { useSettings } from "~/lib/settings";
+import { t } from "~/i18n";
 
 export default function Home() {
-  const { user, loading, signOut } = useAuth();
-
-  if (loading) {
-    return <div className="p-8 text-gray-500">Loading…</div>;
-  }
+  const settings = useSettings();
+  const { data: stats, error } = usePolling(
+    "/api/public/stats",
+    settings?.limits?.stats_poll_seconds ?? 5
+  );
+  const [videoOpen, setVideoOpen] = useState(false);
+  const loading = !stats;
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-gray-50 px-4 text-center">
-      <h1 className="text-2xl font-semibold text-gray-900">
-        Rails + React + Vite
-      </h1>
-
-      {user ? (
-        <div className="w-full max-w-sm space-y-4 rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
-          <p className="text-gray-700">
-            Signed in as <span className="font-medium">{user.email}</span>
-          </p>
-          <button className={buttonClass} onClick={signOut}>
-            <ArrowRightOnRectangleIcon className="mr-2 h-5 w-5" />
-            Sign out
-          </button>
-        </div>
-      ) : (
-        <div className="flex gap-4">
-          <Link
-            className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500"
-            to="/login"
-          >
-            Sign in
-          </Link>
-          <Link
-            className="rounded-md px-4 py-2 text-sm font-semibold text-indigo-600 ring-1 ring-indigo-600 hover:bg-indigo-50"
-            to="/signup"
-          >
-            Sign up
-          </Link>
-        </div>
+    <div className="bg-canvas text-ink min-h-dvh">
+      <PublicHeader onWatchVideo={() => setVideoOpen(true)} hasVideo />
+      <h1 className="sr-only">{t("home.title")}</h1>
+      <Hero
+        stats={stats}
+        loading={loading}
+        onWatchVideo={() => setVideoOpen(true)}
+        poster={settings?.intro_video_poster_url}
+      />
+      <NeedCards needs={stats?.needs} />
+      <RepresentationCharts buckets={stats?.buckets} loading={loading} />
+      {error && (
+        <p className="text-ink-60 md:px-gutter mx-auto max-w-[1512px] px-5 pb-6 text-[14px]">
+          {t("dashboard.offline")}
+        </p>
       )}
+      <ContributeBanner />
+      <PublicFooter />
+      <VideoOverlay
+        open={videoOpen}
+        onClose={() => setVideoOpen(false)}
+        src={settings?.intro_video_url}
+        subtitles={settings?.intro_video_subtitles_url}
+      />
     </div>
   );
 }
