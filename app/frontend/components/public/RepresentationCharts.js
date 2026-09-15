@@ -10,12 +10,16 @@ import { t } from "~/i18n";
 
 const COLUMN_WIDTHS = "xl:grid-cols-[1fr_1.12fr_1fr_1fr_1.16fr]";
 
-export default function RepresentationCharts({ buckets, loading }) {
+export default function RepresentationCharts({
+  buckets,
+  loading,
+  containerClass = "max-w-[1512px]",
+}) {
   const dimensions = groupBuckets(buckets);
 
   return (
     <section className="border-hairline border-t">
-      <div className="md:px-gutter mx-auto max-w-[1512px] px-5 py-8">
+      <div className={`md:px-gutter mx-auto ${containerClass} px-5 py-8`}>
         <div className="mb-7 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
           <h2 className="font-display text-[30px] leading-none font-bold tracking-[-0.025em]">
             {t("dashboard.representation")}
@@ -80,7 +84,12 @@ function TargetNote({ buckets }) {
     targets.length === 1
       ? t("dashboard.targetEach", { target: formatNumber(targets[0]) })
       : t("dashboard.targets", {
-          targets: buckets.map((b) => formatNumber(b.target)).join(" / "),
+          targets: (buckets.length <= 3
+            ? buckets.map((b) => b.target)
+            : targets
+          )
+            .map(formatNumber)
+            .join(" / "),
         });
   return (
     <span className="text-ink-45 tabular ml-auto text-[11.5px]">{text}</span>

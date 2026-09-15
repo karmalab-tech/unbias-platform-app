@@ -137,6 +137,7 @@ export const en = {
       one: "1 person selected. Is that everyone?",
       other: "{count} people selected. Is that everyone?",
     },
+    detecting: "Looking for people in the photo…",
     manualHint:
       "Tap a person on the photo to add them. Tap a number to remove it.",
     tooMany:
@@ -277,7 +278,9 @@ export const en = {
       guidelines: "Does not meet contribution guidelines",
       other: "Other",
     },
+    distance: "hash distance {distance}",
     decided: {
+      pending_moderation: "Pending review",
       approved: "Approved",
       rejected: "Rejected",
       withdrawn: "Withdrawn by the contributor",
@@ -449,6 +452,9 @@ export const en = {
       confirmAll:
         "Delete every photo of this contribution from storage and remove them from the dataset? This cannot be undone.",
     },
+  },
+  installation: {
+    scan: "Scan to add your photos",
   },
   errors: {
     generic: "Something went wrong. Please try again.",

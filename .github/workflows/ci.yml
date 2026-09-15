@@ -54,6 +54,8 @@ jobs:
 
       - name: Lint frontend code
         run: yarn lint
+      - name: Unit tests
+        run: yarn test
 
       - name: Build frontend assets
         run: yarn build:vite
@@ -106,3 +108,56 @@ jobs:
         run: |
           bin/rails db:test:prepare
           bundle exec rspec
+
+  e2e:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev libvips42 pkg-config
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: .node-version
+          cache: yarn
+      - name: Install JS packages
+        run: yarn install --frozen-lockfile
+      - name: Install Playwright browser
+        run: yarn playwright install --with-deps chromium
+      - name: Fetch browser models
+        run: bin/fetch-ml-models
+      - name: Build frontend assets
+        env:
+          RAILS_ENV: test
+        run: bin/vite build --mode=test
+      - name: Start the app
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          ACTIVE_JOB_INLINE: "1"
+        run: |
+          bin/rails db:test:prepare db:seed
+          (bin/rails server -p 3100 -b 127.0.0.1 > tmp/e2e-server.log 2>&1 &)
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:3100/up && break; sleep 1; done
+      - name: Smoke test
+        env:
+          PLAYWRIGHT_BASE_URL: http://127.0.0.1:3100
+        run: yarn e2e
+      - name: Server log on failure
+        if: failure()
+        run: tail -n 200 tmp/e2e-server.log

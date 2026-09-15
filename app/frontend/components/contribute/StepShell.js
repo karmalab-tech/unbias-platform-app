@@ -46,7 +46,10 @@ export default function StepShell({
           </h1>
         )}
         {intro && (
-          <p className="text-ink-60 mt-3 text-[15.5px] leading-[1.5]">
+          <p
+            className="text-ink-60 mt-3 text-[15.5px] leading-[1.5]"
+            aria-live="polite"
+          >
             {intro}
           </p>
         )}

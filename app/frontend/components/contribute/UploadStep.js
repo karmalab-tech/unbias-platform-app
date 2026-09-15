@@ -8,6 +8,7 @@ import {
   useContribution,
 } from "~/components/contribute/ContributionContext";
 import { isHeic, readImageSize } from "~/lib/contribution";
+import { loadSettings } from "~/lib/settings";
 import { t } from "~/i18n";
 
 let nextLocalId = 1;
@@ -49,7 +50,7 @@ export default function UploadStep() {
   };
 
   const onFiles = async (fileList) => {
-    if (!limits) return;
+    const { limits } = settings ?? (await loadSettings());
     const files = Array.from(fileList);
     const room =
       limits.max_photos_per_submission -

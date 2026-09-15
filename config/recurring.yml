@@ -2,6 +2,9 @@ shared:
   purge_stale_drafts:
     class: PurgeStaleDraftsJob
     schedule: every hour at minute 37
+  purge_rejected_media:
+    class: PurgeRejectedMediaJob
+    schedule: every day at 4am
 
 production:
   clear_solid_queue_finished_jobs:

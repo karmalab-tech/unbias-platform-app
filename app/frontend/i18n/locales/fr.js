@@ -140,6 +140,7 @@ export const fr = {
       one: "1 personne sélectionnée. C'est tout le monde ?",
       other: "{count} personnes sélectionnées. C'est tout le monde ?",
     },
+    detecting: "Recherche des personnes sur la photo…",
     manualHint:
       "Touchez une personne sur la photo pour l'ajouter. Touchez un numéro pour le retirer.",
     tooMany:
@@ -282,7 +283,9 @@ export const fr = {
       guidelines: "Hors des consignes de contribution",
       other: "Autre",
     },
+    distance: "distance de hachage {distance}",
     decided: {
+      pending_moderation: "En attente de vérification",
       approved: "Approuvée",
       rejected: "Refusée",
       withdrawn: "Retirée par le contributeur",
@@ -456,6 +459,9 @@ export const fr = {
       confirmAll:
         "Supprimer toutes les photos de cette contribution du stockage et les retirer du jeu de données ? Irréversible.",
     },
+  },
+  installation: {
+    scan: "Scannez pour ajouter vos photos",
   },
   errors: {
     generic: "Une erreur est survenue. Réessayez.",

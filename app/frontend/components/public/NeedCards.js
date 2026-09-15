@@ -5,12 +5,17 @@ import { locale } from "~/i18n";
 const TINTS = ["bg-tint-age", "bg-tint-skin", "bg-tint-body"];
 
 // Admin-written requests, not metrics. Every card leads to the contribute flow.
-export default function NeedCards({ needs }) {
+export default function NeedCards({
+  needs,
+  containerClass = "max-w-[1512px]",
+}) {
   if (!needs?.length) return null;
 
   return (
     <section className="border-hairline border-t">
-      <div className="md:px-gutter mx-auto grid max-w-[1512px] gap-4 px-5 pt-[30px] pb-8 md:grid-cols-3 md:gap-6">
+      <div
+        className={`md:px-gutter mx-auto grid ${containerClass} gap-4 px-5 pt-[30px] pb-8 md:grid-cols-3 md:gap-6`}
+      >
         {needs.slice(0, 3).map((need, index) => (
           <Link
             key={need.id}

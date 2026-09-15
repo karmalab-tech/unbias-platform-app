@@ -4,7 +4,8 @@ module Api
       def show
         render json: {
           limits: limits.slice(:max_photos_per_submission, :max_people_per_photo, :min_short_side_px, :max_file_bytes,
-                               :accepted_content_types, :stats_poll_seconds, :installation_poll_seconds),
+                               :accepted_content_types, :stats_poll_seconds, :installation_poll_seconds,
+                               :detection_min_score, :detection_min_area_ratio),
           consent_version: limits.consent_version,
           people_milestone: limits.people_milestone,
           intro_video_url: ENV["INTRO_VIDEO_URL"].presence,

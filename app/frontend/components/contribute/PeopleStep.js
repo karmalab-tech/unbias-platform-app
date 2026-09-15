@@ -21,7 +21,8 @@ export function regionAround(point, w = 0.24, h = 0.32) {
 
 export default function PeopleStep() {
   const navigate = useNavigate();
-  const { settings, imageUrl, savePeople, removePhoto } = useContribution();
+  const { settings, imageUrl, savePeople, removePhoto, detect, detections } =
+    useContribution();
   const { photos, photoIndex, asset, fromReview } = usePhoto();
   const [people, setPeople] = useState(asset?.people ?? []);
   const [busy, setBusy] = useState(false);
@@ -31,9 +32,28 @@ export default function PeopleStep() {
     setPeople(asset?.people ?? []);
   }, [asset?.id]);
 
+  const detection = asset ? detections[asset.id] : null;
+  const untouched =
+    asset && !asset.people_confirmed && asset.people.length === 0;
+
+  useEffect(() => {
+    if (untouched && settings && !detection) detect(asset);
+  }, [asset?.id, untouched, settings, detection, detect, asset]);
+
+  useEffect(() => {
+    if (untouched && detection?.status === "done") setPeople(detection.people);
+  }, [asset?.id, untouched, detection]);
+
   if (!asset) return <Navigate to="/contribute/upload" replace />;
 
   const max = settings?.limits?.max_people_per_photo ?? 4;
+  const detecting = untouched && detection?.status === "running";
+  const proposed = detection?.status === "done" && detection.people.length > 0;
+  const intro = detecting
+    ? t("people.detecting")
+    : proposed && untouched
+      ? t("people.found", { count: people.length })
+      : t("people.selected", { count: people.length });
   const tooMany = people.length > max;
   const suffix = fromReview ? "?from=review" : "";
 
@@ -94,7 +114,7 @@ export default function PeopleStep() {
         photos: photos.length,
       })}
       title={t("people.heading")}
-      intro={t("people.selected", { count: people.length })}
+      intro={intro}
       footer={
         <>
           {error && <p className="text-accent text-[14px]">{error}</p>}

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Downloads the browser-side detection models (Apache-2.0, Google MediaPipe) and copies the
+# tasks-vision wasm runtime into public/models. Run once locally; the Dockerfile runs it at build.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+MODELS="public/models"
+BASE="https://storage.googleapis.com/mediapipe-models"
+mkdir -p "$MODELS/wasm"
+
+fetch() {
+  local url="$1" target="$2"
+  if [ -s "$target" ]; then echo "present  $target"; return; fi
+  echo "fetching $target"
+  curl -fsSL "$url" -o "$target.tmp" && mv "$target.tmp" "$target"
+}
+
+fetch "$BASE/object_detector/efficientdet_lite0/float16/latest/efficientdet_lite0.tflite" "$MODELS/efficientdet_lite0.tflite"
+fetch "$BASE/face_detector/blaze_face_short_range/float16/latest/blaze_face_short_range.tflite" "$MODELS/blaze_face_short_range.tflite"
+cp node_modules/@mediapipe/tasks-vision/wasm/vision_wasm_internal.{js,wasm} "$MODELS/wasm/"
+cp node_modules/@mediapipe/tasks-vision/wasm/vision_wasm_nosimd_internal.{js,wasm} "$MODELS/wasm/"
+echo "models ready in $MODELS"

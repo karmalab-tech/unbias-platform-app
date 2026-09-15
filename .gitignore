@@ -52,3 +52,10 @@ node_modules
 
 # macOS
 .DS_Store
+
+# Browser ML models, fetched by bin/fetch-ml-models
+/public/models
+
+# Playwright
+/test-results
+/playwright-report
