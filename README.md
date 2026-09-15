@@ -7,8 +7,29 @@ moderator reviews every photo. The public dashboard and the IA·gora
 installation show pending and approved people per bucket, live.
 
 The product brief, POC design, architecture, design handoff and the phased
-plan live in [`docs/`](docs). Start with `docs/PROJECT_BRIEF.md`; the
-hands-on walkthrough for each pull request is `docs/TESTING_GUIDE.md`.
+plan live in [`docs/`](docs). Start with `docs/PROJECT_BRIEF.md`. The
+click-through walkthrough of every feature is `docs/TESTING_GUIDE.md`; ideas
+deliberately left out of the POC are in `docs/FUTURE_IMPROVEMENTS.md`.
+
+## Status
+
+The POC described in `docs/IMPLEMENTATION_PLAN.md` is implemented end to end
+(phases 0–8): contribution flow with browser-side detection, server-side
+processing with Claude, moderation, public dashboard, installation mode,
+admin, EN + FR, CI with unit, request and browser smoke tests.
+
+Still to do before a public launch:
+
+- Run one real enrichment with an Anthropic key and read the generated
+  description: it must never name sensitive attributes.
+- Tune the Monk skin tone suggestion on a diverse photo set (FACET subset);
+  sampling and thresholds are isolated in `app/frontend/workers/detection.worker.js`
+  and `app/frontend/lib/detection.js`.
+- Replace the placeholder consent wording (`consent_version: v0-draft` in
+  `config/unbias.yml`) and bump the version.
+- First deployment on Fly.io with a private S3 bucket (see below), the intro
+  video assets for installation mode, and a changed admin password.
+- Keep the site-wide `PASSWORD` gate on until launch.
 
 ## Stack
 
@@ -38,7 +59,22 @@ Open http://localhost:3000. Staff sign in at `/login` with the seeded admin
 (`ADMIN_EMAIL` / `ADMIN_PASSWORD` from `.env`, see `.env.example`).
 
 The worker in `bin/dev` is required: a submitted photo only reaches the
-moderation queue once `ProcessAssetJob` has run.
+moderation queue once `ProcessAssetJob` has run. Without
+`ANTHROPIC_API_KEY`, photos still reach moderation and carry a
+"Processing failed" flag instead of an automatic context.
+
+## Routes
+
+| Path | Who | What |
+| --- | --- | --- |
+| `/` | public | Live dashboard, polls `/api/public/stats` every 5 s |
+| `/about` | public | About and FAQ |
+| `/contribute` | public | Contribution flow; draft resumes from a token in localStorage |
+| `/installation` | public | Full-screen wall for IA·gora, polls every 3 s, `?lang=fr` |
+| `/login` | staff | Devise JSON sign-in |
+| `/moderation` | moderator, admin | Oldest-first queue, review, approve / reject |
+| `/admin` | admin | Dashboard, calls to action, targets, moderators, lookup by code |
+| `/qr.svg` | public | QR code pointing at `/contribute` on `APP_HOST` |
 
 ## Configuration
 
@@ -46,23 +82,29 @@ Everything comes from environment variables listed in `.env.example`:
 storage (S3), first admin, public host, intro video, Anthropic key,
 Postmark token, and the optional site-wide password gate. Product limits
 (photos per contribution, people per photo, thresholds, retention windows,
-model name) live in `config/unbias.yml`.
+model name, consent version) live in `config/unbias.yml` and are served to
+the frontend by `/api/public/settings`.
 
 ## Where things are
 
 | Area | Location |
 | --- | --- |
 | Taxonomy and targets | `app/models/representation.rb`, seeded into `representation_buckets` |
+| Submission lifecycle, codes, tokens | `app/models/submission.rb`, `app/models/asset.rb` |
 | Contributor API | `app/controllers/api/` (token-scoped, see `contributor_controller.rb`) |
 | Moderation and admin API | `app/controllers/api/moderation/`, `app/controllers/api/admin/` |
 | Coverage counters | `app/models/coverage_stats.rb`, served by `/api/public/stats` |
-| Processing pipeline | `app/services/asset_processing/` |
-| Contribution flow | `app/frontend/components/contribute/` |
+| Processing pipeline | `app/services/asset_processing/`, run by `app/jobs/process_asset_job.rb` |
+| Retention jobs | `app/jobs/purge_*`, scheduled in `config/recurring.yml` |
+| JSON shapes | `app/serializers/` (Alba) |
+| Contribution flow | `app/frontend/components/contribute/`, state in `ContributionContext.js` |
 | Browser detection | `app/frontend/workers/detection.worker.js`, `app/frontend/lib/detection.js` |
 | Public dashboard | `app/frontend/components/public/`, `app/frontend/pages/Home.js`, `Installation.js` |
 | Staff screens | `app/frontend/pages/Moderation.js`, `app/frontend/pages/admin/` |
 | Design tokens | `app/frontend/styles/theme.css` |
 | Strings (EN / FR) | `app/frontend/i18n/locales/`, `config/locales/` |
+| Tests | `spec/` (RSpec), `app/frontend/lib/*.test.js` (Vitest), `e2e/` (Playwright) |
+| Deployment | `fly.toml`, `Dockerfile`, `.github/workflows/ci.yml` |
 
 ## Tests and checks
 
