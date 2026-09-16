@@ -167,6 +167,7 @@ export const en = {
     disability: "Visible disability or assistive device",
     disabilityHint: "Optional. Leave empty if nothing is visible.",
     required: "Age, skin tone, gender and body are required.",
+    viewPhoto: "See the photo full screen",
     nextPerson: "Next person",
     nextPhoto: "Next photo",
     finishPhoto: "Done with this photo",

@@ -12,6 +12,7 @@ export default function PhotoWithMarkers({
   selected = null,
   onAdd,
   onRemove,
+  onOpen,
   className = "",
   imageClass = "max-h-[60vh]",
 }) {
@@ -35,6 +36,14 @@ export default function PhotoWithMarkers({
         onClick={handleClick}
         draggable={false}
       />
+      {onOpen && (
+        <button
+          type="button"
+          onClick={onOpen}
+          aria-label={t("annotate.viewPhoto")}
+          className="absolute inset-0 cursor-zoom-in"
+        />
+      )}
       {people.map((person, index) => {
         const { x, y } = center(person.detection_region ?? {});
         const isSelected = selected === index;
@@ -56,7 +65,9 @@ export default function PhotoWithMarkers({
               isSelected
                 ? "bg-accent scale-125 text-white"
                 : "bg-ink text-canvas"
-            } ${selected !== null && !isSelected ? "opacity-60" : ""}`}
+            } ${selected !== null && !isSelected ? "opacity-60" : ""} ${
+              onRemove ? "" : "pointer-events-none"
+            }`}
             style={{ left: `${x * 100}%`, top: `${y * 100}%` }}
           >
             {index + 1}

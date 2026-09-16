@@ -6,6 +6,7 @@ import MonkScale from "~/components/ui/MonkScale";
 import { BodySilhouette } from "~/components/ui/Silhouettes";
 import StepShell from "~/components/contribute/StepShell";
 import PhotoWithMarkers from "~/components/contribute/PhotoWithMarkers";
+import PhotoLightbox from "~/components/contribute/PhotoLightbox";
 import {
   nextIncompletePhoto,
   useContribution,
@@ -34,6 +35,7 @@ export default function AnnotationStep() {
   const { settings, imageUrl, savePeople } = useContribution();
   const { photos, photoIndex, personIndex, asset, fromReview } = usePhoto();
   const [sentinel, stuck] = useStuck(HEADER_HEIGHT);
+  const [zoomed, setZoomed] = useState(false);
   const [draft, setDraft] = useState(asset?.people?.[personIndex] ?? null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
@@ -146,11 +148,17 @@ export default function AnnotationStep() {
           src={imageUrl(asset)}
           people={people}
           selected={personIndex}
+          onOpen={() => setZoomed(true)}
           imageClass={`transition-[max-height] duration-300 ${
             stuck ? "max-h-[22vh]" : "max-h-[40vh]"
           }`}
         />
       </div>
+      <PhotoLightbox
+        src={imageUrl(asset)}
+        open={zoomed}
+        onClose={() => setZoomed(false)}
+      />
 
       <h1 className="font-display mt-6 text-[30px] leading-[1.05] font-bold tracking-[-0.025em]">
         {t("annotate.heading", { n: personIndex + 1 })}

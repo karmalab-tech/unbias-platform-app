@@ -170,7 +170,7 @@ yarn e2e
 `yarn test` runs the Vitest suite for the detection helpers. CI now runs
 both plus the Playwright job.
 
-## PR 3 — Contribution flow polish: photo stack, sticky photo, focused questions
+## PR 3 — Contribution flow polish: photo stack, sticky photo, full screen, focused questions
 
 No new setup. Run the app as usual and contribute with **three or more
 photos** in one batch, in a phone-sized window.
@@ -196,7 +196,17 @@ photos** in one batch, in a phone-sized window.
 3. Every step now starts scrolled to its own top, including when you move
    from person 1 to person 2.
 
-### 3. Questions fade in as you reach them
+### 3. The photo full screen
+
+1. On a person screen, tap the photo (anywhere, including on a number). It
+   opens full screen over the form, fading in while it scales up, with the
+   numbered markers gone and a close button in the corner.
+2. Tap the photo again, tap the close button, or press Escape: it fades back
+   out. The page behind does not scroll while it is open.
+3. It works the same when the photo is pinned and small: you always get the
+   photo at full size.
+
+### 4. Questions fade in as you reach them
 
 1. On a fresh person, **Age** is at full strength and every question below it
    is dimmed.
