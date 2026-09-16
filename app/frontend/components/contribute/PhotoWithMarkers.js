@@ -13,6 +13,7 @@ export default function PhotoWithMarkers({
   onAdd,
   onRemove,
   className = "",
+  imageClass = "max-h-[60vh]",
 }) {
   const handleClick = (event) => {
     if (!onAdd) return;
@@ -25,12 +26,12 @@ export default function PhotoWithMarkers({
 
   return (
     <div
-      className={`rounded-media bg-surface relative overflow-hidden ${className}`}
+      className={`rounded-media bg-surface relative mx-auto w-fit overflow-hidden ${className}`}
     >
       <img
         src={src}
         alt=""
-        className={`block max-h-[60vh] w-full object-contain ${onAdd ? "cursor-crosshair" : ""}`}
+        className={`block max-w-full ${imageClass} ${onAdd ? "cursor-crosshair" : ""}`}
         onClick={handleClick}
         draggable={false}
       />

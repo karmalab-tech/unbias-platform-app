@@ -1,10 +1,12 @@
+import { useEffect } from "react";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { t } from "~/i18n";
 
 export default function StepShell({
   label,
   back,
+  media,
   title,
   intro,
   children,
@@ -12,7 +14,13 @@ export default function StepShell({
   wide = false,
 }) {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const width = wide ? "max-w-3xl" : "max-w-lg";
+
+  // Every step starts at its own top, not where the previous one was scrolled to.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <div className="bg-canvas text-ink flex min-h-dvh flex-col">
@@ -40,6 +48,7 @@ export default function StepShell({
       </header>
 
       <main className={`mx-auto w-full ${width} flex-1 px-4 pt-6 pb-32`}>
+        {media && <div className="mb-8">{media}</div>}
         {title && (
           <h1 className="font-display text-[30px] leading-[1.05] font-bold tracking-[-0.025em]">
             {title}
