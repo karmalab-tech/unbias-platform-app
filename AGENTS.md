@@ -18,6 +18,7 @@ Unbias AI is a public, image-only contribution platform building a consented, hu
 | Backend          | Ruby 3.3.7, Rails 8.0.2, PostgreSQL                                    |
 | Asset pipeline   | Propshaft + jsbundling-rails (esbuild) + cssbundling-rails + vite_rails |
 | Frontend         | React 19, Vite 5, Tailwind CSS 4, Heroicons outline, React Router 7    |
+| Sketch chrome    | `drawably` (hand-drawn SVG controls), contribute flow only             |
 | Browser ML       | `@mediapipe/tasks-vision` (EfficientDet-Lite0 people, BlazeFace faces) in a classic Web Worker |
 | Server ML        | `anthropic` gem, model and limits in `config/unbias.yml`               |
 | Auth             | Devise for staff only (admin / moderator roles, JSON endpoints, no public sign-up) |
@@ -57,6 +58,7 @@ Unbias AI is a public, image-only contribution platform building a consented, hu
 - User-facing strings go through `t()` from `~/i18n`; add keys to `app/frontend/i18n/locales/{en,fr}.js` (plural forms are `{ one, other, zero }` objects). Locale is detected once at import time from the browser; `?lang=fr` forces it.
 - Product limits come from `/api/public/settings` through `loadSettings()` / `useSettings()` in `~/lib/settings`; never hard-code a limit in the frontend. Await `loadSettings()` before logic that depends on it.
 - Browser-side detection lives in `app/frontend/workers/detection.worker.js` (classic worker: MediaPipe needs `importScripts`, never `{ type: "module" }`) with pure helpers and Vitest tests in `app/frontend/lib/detection.js`. Detection output is a proposal the contributor confirms; it never writes annotations by itself.
+- The contribute flow wears hand-drawn chrome from `drawably`: `SketchButton` / `SketchCheckbox` / `SketchCard` in `~/components/contribute/Sketch`, seeded via `seedFrom` so a control keeps its stroke across re-renders. It is an accent layer — colours, type and spacing still come from `theme.css`. Nothing outside `/contribute` uses it; `drawably/style.css` is imported into the `drawably` cascade layer (below Tailwind's `utilities`) and the token bridge in `styles/sketch.css` is scoped to `.sketch`, which only `StepShell` sets.
 - Read boolean query-string toggles with `useQueryFlag("present")` rather than parsing `location.search` directly — it stays in sync when another component rewrites the URL.
 - Polling uses `usePolling` from `~/lib/usePolling` with intervals from settings (`stats_poll_seconds`, `installation_poll_seconds`).
 - Uploads go through `DirectUpload` from `@rails/activestorage` (`directUpload()` in `~/lib/contribution`); it adds the CSRF header itself, do not add a second one.

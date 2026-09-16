@@ -23,7 +23,7 @@ export default function StepShell({
   }, [pathname]);
 
   return (
-    <div className="bg-canvas text-ink flex min-h-dvh flex-col">
+    <div className="sketch bg-canvas text-ink flex min-h-dvh flex-col">
       <header className="border-hairline bg-canvas/95 sticky top-0 z-10 border-b backdrop-blur-sm">
         <div className={`mx-auto flex h-14 ${width} items-center gap-2 px-4`}>
           {back !== false && (

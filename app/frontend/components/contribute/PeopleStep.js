@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import Button from "~/components/ui/Button";
+import { SketchButton } from "~/components/contribute/Sketch";
 import StepShell from "~/components/contribute/StepShell";
 import PhotoWithMarkers from "~/components/contribute/PhotoWithMarkers";
 import { useContribution } from "~/components/contribute/ContributionContext";
@@ -123,23 +123,26 @@ export default function PeopleStep() {
               {t("people.tooMany", { max })}
             </p>
           )}
-          <Button
+          <SketchButton
+            sketchKey="people-confirm"
             full
+            state={busy ? "loading" : "idle"}
             onClick={confirm}
             disabled={busy || people.length === 0 || tooMany}
           >
             {people.length === 0
               ? t("people.confirm")
               : t("people.confirmCount", { count: people.length })}
-          </Button>
-          <Button
+          </SketchButton>
+          <SketchButton
+            sketchKey="people-remove-photo"
             variant="ghost"
             size="sm"
             onClick={removeThisPhoto}
             disabled={busy}
           >
             {t("people.removePhoto")}
-          </Button>
+          </SketchButton>
         </>
       }
     >

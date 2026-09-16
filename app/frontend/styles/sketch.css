@@ -1,0 +1,32 @@
+/* Bridges drawably's chrome onto the design tokens in theme.css. Scoped to
+   `.sketch` so the sketched look stays inside the contribute flow. */
+.sketch {
+  --drawably-stroke: var(--color-ink);
+  --drawably-fill: var(--color-ink);
+  --drawably-paper: var(--color-canvas);
+  --drawably-error: var(--color-accent);
+  --drawably-success: var(--color-ink);
+}
+
+/* drawably ships Inter on its host and buttons; the design language is
+   Instrument Sans everywhere the copy is read in sentences. */
+.drawably-host,
+.drawably-button {
+  font-family: inherit;
+}
+
+/* The sketched outline already reads as the focus ring, but it is drawn in ink
+   and the handoff asks for the accent. */
+.sketch .drawably-svg .drawably-focus {
+  stroke: var(--color-accent);
+}
+
+.sketch-pen--accent {
+  --drawably-stroke: var(--color-accent);
+  --drawably-fill: var(--color-accent);
+}
+
+.sketch-pen--muted {
+  --drawably-stroke: var(--color-ink-60);
+  --drawably-fill: var(--color-ink-60);
+}

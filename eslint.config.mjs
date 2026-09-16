@@ -36,6 +36,9 @@ export default [
       react: {
         version: "detect",
       },
+      // drawably is ESM-only with no `main`, which the alias resolver's CJS
+      // lookup cannot follow; Vite resolves it from `exports` at build time.
+      "import/core-modules": ["drawably", "drawably/react"],
       "import/resolver": {
         alias: {
           map: [["~", "./app/frontend"]],

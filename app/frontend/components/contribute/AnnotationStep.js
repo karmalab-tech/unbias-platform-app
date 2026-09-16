@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import Button from "~/components/ui/Button";
+import { SketchButton } from "~/components/contribute/Sketch";
 import ChoiceGrid from "~/components/ui/Choice";
 import MonkScale from "~/components/ui/MonkScale";
 import { BodySilhouette } from "~/components/ui/Silhouettes";
@@ -132,9 +132,15 @@ export default function AnnotationStep() {
           {!complete && (
             <p className="text-ink-55 text-[13px]">{t("annotate.required")}</p>
           )}
-          <Button full onClick={save} disabled={!complete || busy}>
+          <SketchButton
+            sketchKey="annotate-save"
+            full
+            state={busy ? "loading" : "idle"}
+            onClick={save}
+            disabled={!complete || busy}
+          >
             {cta}
-          </Button>
+          </SketchButton>
         </>
       }
     >
