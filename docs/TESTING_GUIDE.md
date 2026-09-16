@@ -170,7 +170,7 @@ yarn e2e
 `yarn test` runs the Vitest suite for the detection helpers. CI now runs
 both plus the Playwright job.
 
-## PR 3 — Contribution flow polish: photo stack, sticky photo, full screen, focused questions
+## PR 3 — Contribution flow polish: photo stack, sticky photo, zoomable full screen, focused questions
 
 No new setup. Run the app as usual and contribute with **three or more
 photos** in one batch, in a phone-sized window.
@@ -205,6 +205,13 @@ photos** in one batch, in a phone-sized window.
    out. The page behind does not scroll while it is open.
 3. It works the same when the photo is pinned and small: you always get the
    photo at full size.
+4. On a phone, pinch to zoom in up to five times, around the point between
+   your fingers, and drag with one finger to move around. The photo stops at
+   its own edges. Pinch back in and it snaps to fit and recentres.
+5. While it is open the browser's own pinch zoom is off: the page behind
+   never zooms or pans, and neither does the interface around the photo.
+6. Zoomed in, a tap goes back to the fitted photo rather than closing; tap
+   again to close. The close button closes at any zoom level.
 
 ### 4. Questions fade in as you reach them
 
