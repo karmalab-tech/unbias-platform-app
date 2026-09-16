@@ -225,3 +225,57 @@ photos** in one batch, in a phone-sized window.
    order keeps it at full strength.
 4. Re-open a person you already described (from **Your photos**): nothing is
    dimmed, everything is answered.
+
+---
+
+## PR 4 — Hand-drawn chrome in the contribute flow
+
+The contribute flow now draws its buttons, checkboxes and panels as pen
+sketches, using [drawably](https://www.npmjs.com/package/drawably). This is an
+accent layer only: colours, type, spacing and layout still come from
+`docs/DESIGN_HANDOFF.md` and `app/frontend/styles/theme.css`. Nothing outside
+`/contribute` changes — the dashboard, moderation, admin and auth screens are
+untouched.
+
+### 1. Where the pen shows up
+
+1. Go to `/contribute/upload`. **Upload photos** is a solid accent blob with a
+   wobbly edge rather than a rounded rectangle. The heading is still Archivo
+   and the body still Instrument Sans.
+2. Add a photo and continue. On **Before we continue** the two confirmations
+   sit inside a hand-drawn box, and each checkbox is a sketched square that
+   gets a pen tick when you check it.
+3. Work through to **One last thing**: two sketched panels, the required one
+   and the optional one, each with its own sketched checkbox.
+4. Submit. On the thank-you screen the contribution code is boxed by hand,
+   and **Copy**, **Get the code by email**, **Add more photos** and **See the
+   progress** are all sketched.
+5. The person and describe screens keep their existing photo markers and
+   answer grids; only the footer buttons are sketched.
+
+### 2. It is still a real form
+
+1. Tab through any step. Focus lands on the real controls in order and the
+   focus ring is drawn in the accent colour around the sketch.
+2. Space toggles a focused checkbox; Enter activates a focused button.
+3. A screen reader announces the checkboxes and buttons normally — the sketch
+   is an `aria-hidden` SVG behind the real control, never a replacement for it.
+
+### 3. Motion
+
+1. Strokes wobble gently on a 1200 ms cycle, and a button re-draws itself when
+   you hover or press it.
+2. Turn on "reduce motion" in your OS accessibility settings and reload: every
+   stroke freezes to a single static sketch.
+3. While a step is submitting, its button dims and boils faster; **Copy** on
+   the thank-you screen flicks to the success state for two seconds.
+
+### 4. Things to know
+
+- The sketch is seeded per control, so a given button looks the same each time
+  the step is rendered rather than re-rolling on every keystroke.
+- `drawably/style.css` is imported into the `drawably` cascade layer, which
+  sits below Tailwind's `utilities`, so utility classes still win. Its rules
+  are all namespaced under `.drawably-*` and the token bridge in
+  `app/frontend/styles/sketch.css` is scoped to `.sketch`, which only
+  `StepShell` sets.

@@ -1449,6 +1449,11 @@ doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
+drawably@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/drawably/-/drawably-0.4.2.tgz#51bb976d299be430c668ef69c8a588090c7e74ed"
+  integrity sha512-kHLnj08iHHVgwXxn7htKszWMlGIOy+CqUTekInCwoAqITwIAYjD4E/K7PMF6GLj5bM/t7sxysv1WmVGPOKDJzA==
+
 dunder-proto@^1.0.0, dunder-proto@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/dunder-proto/-/dunder-proto-1.0.1.tgz#d7ae667e1dc83482f8b70fd0f6eefc50da30f58a"

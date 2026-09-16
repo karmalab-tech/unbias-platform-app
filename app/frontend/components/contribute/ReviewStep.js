@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { CheckIcon, PlusIcon } from "@heroicons/react/24/outline";
-import Button from "~/components/ui/Button";
+import { SketchButton } from "~/components/contribute/Sketch";
 import StepShell from "~/components/contribute/StepShell";
 import { useContribution } from "~/components/contribute/ContributionContext";
 import { t } from "~/i18n";
@@ -19,13 +19,14 @@ export default function ReviewStep() {
       intro={t("review.intro")}
       wide
       footer={
-        <Button
+        <SketchButton
+          sketchKey="review-continue"
           full
           onClick={() => navigate("/contribute/consent")}
           disabled={!allComplete}
         >
           {t("review.cta")}
-        </Button>
+        </SketchButton>
       }
     >
       <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">

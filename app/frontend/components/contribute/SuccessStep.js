@@ -4,9 +4,13 @@ import {
   ClipboardDocumentIcon,
   EnvelopeIcon,
 } from "@heroicons/react/24/outline";
-import Button from "~/components/ui/Button";
-import Field, { Checkbox, inputClass } from "~/components/ui/Field";
+import Field, { inputClass } from "~/components/ui/Field";
 import Modal from "~/components/ui/Modal";
+import {
+  SketchButton,
+  SketchCard,
+  SketchCheckbox,
+} from "~/components/contribute/Sketch";
 import StepShell from "~/components/contribute/StepShell";
 import { useContribution } from "~/components/contribute/ContributionContext";
 import { t } from "~/i18n";
@@ -43,12 +47,17 @@ export default function SuccessStep() {
       title={t("success.heading")}
       footer={
         <div className="flex flex-col gap-2 sm:flex-row">
-          <Button full variant="secondary" onClick={startOver}>
+          <SketchButton
+            sketchKey="success-another"
+            full
+            variant="secondary"
+            onClick={startOver}
+          >
             {t("success.another")}
-          </Button>
-          <Button full variant="ink" to="/">
+          </SketchButton>
+          <SketchButton sketchKey="success-dashboard" full variant="ink" to="/">
             {t("success.dashboard")}
-          </Button>
+          </SketchButton>
         </div>
       }
     >
@@ -66,14 +75,26 @@ export default function SuccessStep() {
         <p className="text-ink-60 mt-1 text-[14.5px]">
           {t("success.keepBody")}
         </p>
-        <code className="rounded-btn bg-canvas font-display tabular mt-5 block px-4 py-3 text-center text-[26px] font-bold tracking-[0.08em]">
-          {submission.public_code}
-        </code>
+        <SketchCard
+          sketchKey="success-code"
+          className="rounded-btn bg-canvas mt-5"
+        >
+          <code className="font-display tabular block px-4 py-3 text-center text-[26px] font-bold tracking-[0.08em]">
+            {submission.public_code}
+          </code>
+        </SketchCard>
         <div className="mt-3 flex justify-end">
-          <Button variant="ink" size="sm" onClick={copy} aria-live="polite">
+          <SketchButton
+            sketchKey="success-copy"
+            variant="ink"
+            size="sm"
+            state={copied ? "success" : "idle"}
+            onClick={copy}
+            aria-live="polite"
+          >
             <ClipboardDocumentIcon className="h-5 w-5" />
             {copied ? t("common.copied") : t("common.copy")}
-          </Button>
+          </SketchButton>
         </div>
         <div className="mt-4">
           {sentTo || submission.email_sent ? (
@@ -81,10 +102,14 @@ export default function SuccessStep() {
               {t("success.emailSent", { email: sentTo ?? "…" })}
             </p>
           ) : (
-            <Button variant="secondary" onClick={() => setModal(true)}>
+            <SketchButton
+              sketchKey="success-email"
+              variant="secondary"
+              onClick={() => setModal(true)}
+            >
               <EnvelopeIcon className="h-5 w-5" />
               {t("success.emailCta")}
-            </Button>
+            </SketchButton>
           )}
         </div>
       </section>
@@ -134,15 +159,25 @@ function EmailCodeModal({ open, onClose, onSend }) {
             onChange={(event) => setEmail(event.target.value)}
           />
         </Field>
-        <Checkbox checked={updates} onChange={setUpdates}>
+        <SketchCheckbox
+          sketchKey="success-updates"
+          checked={updates}
+          onChange={setUpdates}
+        >
           {t("emailModal.updates")}
-        </Checkbox>
+        </SketchCheckbox>
         <p className="text-ink-55 text-[13px] leading-snug">
           {t("emailModal.privacy")}
         </p>
-        <Button type="submit" full disabled={busy}>
+        <SketchButton
+          sketchKey="success-email-send"
+          type="submit"
+          full
+          state={busy ? "loading" : "idle"}
+          disabled={busy}
+        >
           {busy ? t("emailModal.sending") : t("emailModal.send")}
-        </Button>
+        </SketchButton>
       </form>
     </Modal>
   );

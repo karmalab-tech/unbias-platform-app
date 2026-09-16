@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "~/components/ui/Button";
-import { Checkbox } from "~/components/ui/Field";
+import {
+  SketchButton,
+  SketchCard,
+  SketchCheckbox,
+} from "~/components/contribute/Sketch";
 import StepShell from "~/components/contribute/StepShell";
 import PhotoStack from "~/components/contribute/PhotoStack";
 import {
@@ -45,24 +48,37 @@ export default function PermissionStep() {
       footer={
         <>
           {error && <p className="text-accent text-[14px]">{error}</p>}
-          <Button
+          <SketchButton
+            sketchKey="permission-confirm"
             full
+            state={busy ? "loading" : "idle"}
             onClick={confirm}
             disabled={!adults || !permission || busy}
           >
             {t("permission.cta")}
-          </Button>
+          </SketchButton>
         </>
       }
     >
-      <div className="rounded-card bg-surface space-y-5 p-5">
-        <Checkbox checked={adults} onChange={setAdults}>
+      <SketchCard
+        sketchKey="permission-panel"
+        className="rounded-card bg-surface space-y-5 p-5"
+      >
+        <SketchCheckbox
+          sketchKey="permission-adults"
+          checked={adults}
+          onChange={setAdults}
+        >
           {t("permission.adults")}
-        </Checkbox>
-        <Checkbox checked={permission} onChange={setPermission}>
+        </SketchCheckbox>
+        <SketchCheckbox
+          sketchKey="permission-permission"
+          checked={permission}
+          onChange={setPermission}
+        >
           {t("permission.permission")}
-        </Checkbox>
-      </div>
+        </SketchCheckbox>
+      </SketchCard>
     </StepShell>
   );
 }

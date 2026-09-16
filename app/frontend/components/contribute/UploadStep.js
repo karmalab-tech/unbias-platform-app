@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CameraIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import Button from "~/components/ui/Button";
+import { SketchButton } from "~/components/contribute/Sketch";
 import StepShell from "~/components/contribute/StepShell";
 import {
   nextIncompletePhoto,
@@ -121,9 +121,15 @@ export default function UploadStep() {
       intro={t("upload.intro")}
       footer={
         readyCount > 0 && (
-          <Button full onClick={proceed} disabled={uploading}>
+          <SketchButton
+            sketchKey="upload-continue"
+            full
+            state={uploading ? "loading" : "idle"}
+            onClick={proceed}
+            disabled={uploading}
+          >
             {uploading ? t("upload.uploading") : t("common.continue")}
-          </Button>
+          </SketchButton>
         )
       }
     >
@@ -139,7 +145,8 @@ export default function UploadStep() {
         onChange={(event) => onFiles(event.target.files)}
       />
 
-      <Button
+      <SketchButton
+        sketchKey="upload-pick"
         full
         size="lg"
         variant={readyCount > 0 ? "secondary" : "primary"}
@@ -148,7 +155,7 @@ export default function UploadStep() {
       >
         <CameraIcon className="h-6 w-6" />
         {readyCount > 0 ? t("upload.addMore") : t("upload.cta")}
-      </Button>
+      </SketchButton>
 
       {notice && (
         <p

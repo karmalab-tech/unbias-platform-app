@@ -1,4 +1,10 @@
+/* Layer order is declared before Tailwind's own statement so `drawably` sits
+   below `utilities`; unlayered CSS would otherwise outrank every utility. */
+@layer theme, base, drawably, components, utilities;
+
 @import "tailwindcss";
 @import "@fontsource-variable/archivo/wght.css";
 @import "@fontsource-variable/instrument-sans/wght.css";
 @import "../styles/theme.css";
+@import "drawably/style.css" layer(drawably);
+@import "../styles/sketch.css" layer(drawably);
