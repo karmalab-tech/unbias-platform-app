@@ -170,6 +170,7 @@ export const fr = {
     disability: "Handicap visible ou aide technique",
     disabilityHint: "Facultatif. Laissez vide si rien n'est visible.",
     required: "L'âge, la couleur de peau, le genre et le corps sont requis.",
+    viewPhoto: "Voir la photo en plein écran",
     nextPerson: "Personne suivante",
     nextPhoto: "Photo suivante",
     finishPhoto: "Photo terminée",

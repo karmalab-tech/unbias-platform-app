@@ -169,3 +169,59 @@ yarn e2e
 
 `yarn test` runs the Vitest suite for the detection helpers. CI now runs
 both plus the Playwright job.
+
+## PR 3 — Contribution flow polish: photo stack, sticky photo, zoomable full screen, focused questions
+
+No new setup. Run the app as usual and contribute with **three or more
+photos** in one batch, in a phone-sized window.
+
+### 1. The batch as a stack of prints
+
+1. Upload three or more photos and continue. The **Before we continue**
+   (permission) screen now opens with the batch fanned out above the
+   heading, like a pile of paper prints, with "N photos" under it.
+2. Finish the labels and continue to **One last thing** (consent): the same
+   stack sits above the heading there.
+3. The pile shows at most five prints; the caption always counts the whole
+   batch. Remove a photo on the way through and the count follows.
+4. With a single photo the stack is one print, barely tilted.
+
+### 2. Sticky photo while describing a person
+
+1. On a person screen (age, skin tone, gender, body), scroll down. The photo
+   pins under the header instead of scrolling away, shrinks to about a fifth
+   of the screen and gets a hairline under it; the numbered marker of the
+   person you are describing stays on it.
+2. Scroll back up: the photo grows to its full size again.
+3. Every step now starts scrolled to its own top, including when you move
+   from person 1 to person 2.
+
+### 3. The photo full screen
+
+1. On a person screen, tap the photo (anywhere, including on a number). It
+   opens full screen over the form, fading in while it scales up, with the
+   numbered markers gone and a close button in the corner.
+2. Tap the photo again, tap the close button, or press Escape: it fades back
+   out. The page behind does not scroll while it is open.
+3. It works the same when the photo is pinned and small: you always get the
+   photo at full size.
+4. On a phone, pinch to zoom in up to five times, around the point between
+   your fingers, and drag with one finger to move around. The photo stops at
+   its own edges. Pinch back in and it snaps to fit and recentres.
+5. While it is open the browser's own pinch zoom is off: the page behind
+   never zooms or pans, and neither does the interface around the photo.
+6. Zoomed in, a tap goes back to the fitted photo rather than closing; tap
+   again to close. The close button closes at any zoom level.
+
+### 4. Questions fade in as you reach them
+
+1. On a fresh person, **Age** is at full strength and every question below it
+   is dimmed.
+2. Answer Age: **Skin tone** comes up to full strength, the ones below stay
+   dimmed. The same happens down the form; the optional disability question
+   comes up once the four required answers are in.
+3. A dimmed question is never disabled: hover or tab into it and it comes up
+   to full strength, and you can answer out of order. Answering one out of
+   order keeps it at full strength.
+4. Re-open a person you already described (from **Your photos**): nothing is
+   dimmed, everything is answered.

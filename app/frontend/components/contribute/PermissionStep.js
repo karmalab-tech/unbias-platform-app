@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "~/components/ui/Button";
 import { Checkbox } from "~/components/ui/Field";
 import StepShell from "~/components/contribute/StepShell";
+import PhotoStack from "~/components/contribute/PhotoStack";
 import {
   nextIncompletePhoto,
   useContribution,
@@ -37,6 +38,7 @@ export default function PermissionStep() {
   return (
     <StepShell
       back="/contribute/upload"
+      media={<PhotoStack />}
       label={t("contribute.steps.permission")}
       title={t("permission.heading")}
       intro={t("permission.intro")}

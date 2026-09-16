@@ -12,7 +12,9 @@ export default function PhotoWithMarkers({
   selected = null,
   onAdd,
   onRemove,
+  onOpen,
   className = "",
+  imageClass = "max-h-[60vh]",
 }) {
   const handleClick = (event) => {
     if (!onAdd) return;
@@ -25,15 +27,23 @@ export default function PhotoWithMarkers({
 
   return (
     <div
-      className={`rounded-media bg-surface relative overflow-hidden ${className}`}
+      className={`rounded-media bg-surface relative mx-auto w-fit overflow-hidden ${className}`}
     >
       <img
         src={src}
         alt=""
-        className={`block max-h-[60vh] w-full object-contain ${onAdd ? "cursor-crosshair" : ""}`}
+        className={`block max-w-full ${imageClass} ${onAdd ? "cursor-crosshair" : ""}`}
         onClick={handleClick}
         draggable={false}
       />
+      {onOpen && (
+        <button
+          type="button"
+          onClick={onOpen}
+          aria-label={t("annotate.viewPhoto")}
+          className="absolute inset-0 cursor-zoom-in"
+        />
+      )}
       {people.map((person, index) => {
         const { x, y } = center(person.detection_region ?? {});
         const isSelected = selected === index;
@@ -55,7 +65,9 @@ export default function PhotoWithMarkers({
               isSelected
                 ? "bg-accent scale-125 text-white"
                 : "bg-ink text-canvas"
-            } ${selected !== null && !isSelected ? "opacity-60" : ""}`}
+            } ${selected !== null && !isSelected ? "opacity-60" : ""} ${
+              onRemove ? "" : "pointer-events-none"
+            }`}
             style={{ left: `${x * 100}%`, top: `${y * 100}%` }}
           >
             {index + 1}

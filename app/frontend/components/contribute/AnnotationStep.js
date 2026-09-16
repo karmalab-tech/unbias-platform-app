@@ -6,14 +6,23 @@ import MonkScale from "~/components/ui/MonkScale";
 import { BodySilhouette } from "~/components/ui/Silhouettes";
 import StepShell from "~/components/contribute/StepShell";
 import PhotoWithMarkers from "~/components/contribute/PhotoWithMarkers";
+import PhotoLightbox from "~/components/contribute/PhotoLightbox";
 import {
   nextIncompletePhoto,
   useContribution,
 } from "~/components/contribute/ContributionContext";
 import usePhoto from "~/components/contribute/usePhoto";
+import useStuck from "~/lib/useStuck";
 import { t } from "~/i18n";
 
 const REQUIRED = ["age_bucket", "skin_tone_confirmed", "gender", "body"];
+const ORDER = [...REQUIRED, "disability_tags"];
+const HEADER_HEIGHT = 56;
+
+const answered = (draft, field) =>
+  Array.isArray(draft[field])
+    ? draft[field].length > 0
+    : draft[field] !== null && draft[field] !== undefined;
 
 const options = (dimension, values) =>
   values.map((value) => ({
@@ -25,6 +34,8 @@ export default function AnnotationStep() {
   const navigate = useNavigate();
   const { settings, imageUrl, savePeople } = useContribution();
   const { photos, photoIndex, personIndex, asset, fromReview } = usePhoto();
+  const [sentinel, stuck] = useStuck(HEADER_HEIGHT);
+  const [zoomed, setZoomed] = useState(false);
   const [draft, setDraft] = useState(asset?.people?.[personIndex] ?? null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
@@ -62,6 +73,10 @@ export default function AnnotationStep() {
     (field) => draft[field] !== null && draft[field] !== undefined
   );
   const lastPerson = personIndex === people.length - 1;
+  // Questions past the one being answered stay dimmed, so the current one carries the focus.
+  const current = ORDER.findIndex((field) => !answered(draft, field));
+  const dimmed = (field) =>
+    ORDER.indexOf(field) > current && !answered(draft, field);
   const set = (field) => (value) =>
     setDraft((current) => ({ ...current, [field]: value }));
   const suffix = fromReview ? "?from=review" : "";
@@ -123,11 +138,26 @@ export default function AnnotationStep() {
         </>
       }
     >
-      <PhotoWithMarkers
+      <div ref={sentinel} aria-hidden="true" />
+      <div
+        className={`bg-canvas sticky top-14 z-[5] -mx-4 px-4 pt-2 pb-3 ${
+          stuck ? "border-hairline border-b" : ""
+        }`}
+      >
+        <PhotoWithMarkers
+          src={imageUrl(asset)}
+          people={people}
+          selected={personIndex}
+          onOpen={() => setZoomed(true)}
+          imageClass={`transition-[max-height] duration-300 ${
+            stuck ? "max-h-[22vh]" : "max-h-[40vh]"
+          }`}
+        />
+      </div>
+      <PhotoLightbox
         src={imageUrl(asset)}
-        people={people}
-        selected={personIndex}
-        className="max-h-[40vh]"
+        open={zoomed}
+        onClose={() => setZoomed(false)}
       />
 
       <h1 className="font-display mt-6 text-[30px] leading-[1.05] font-bold tracking-[-0.025em]">
@@ -140,7 +170,7 @@ export default function AnnotationStep() {
       )}
 
       <div className="mt-6 space-y-8">
-        <Section title={t("annotate.age")}>
+        <Section title={t("annotate.age")} dimmed={dimmed("age_bucket")}>
           <ChoiceGrid
             options={choices.age}
             value={draft.age_bucket}
@@ -152,6 +182,7 @@ export default function AnnotationStep() {
         <Section
           title={t("annotate.skinTone")}
           hint={t("annotate.skinToneHint")}
+          dimmed={dimmed("skin_tone_confirmed")}
         >
           <MonkScale
             swatches={taxonomy.monk_swatches}
@@ -161,7 +192,7 @@ export default function AnnotationStep() {
           />
         </Section>
 
-        <Section title={t("annotate.gender")}>
+        <Section title={t("annotate.gender")} dimmed={dimmed("gender")}>
           <ChoiceGrid
             options={choices.gender}
             value={draft.gender}
@@ -169,7 +200,7 @@ export default function AnnotationStep() {
           />
         </Section>
 
-        <Section title={t("annotate.body")}>
+        <Section title={t("annotate.body")} dimmed={dimmed("body")}>
           <ChoiceGrid
             options={choices.body}
             value={draft.body}
@@ -189,6 +220,7 @@ export default function AnnotationStep() {
         <Section
           title={t("annotate.disability")}
           hint={t("annotate.disabilityHint")}
+          dimmed={dimmed("disability_tags")}
         >
           <ChoiceGrid
             options={choices.disability}
@@ -202,9 +234,13 @@ export default function AnnotationStep() {
   );
 }
 
-function Section({ title, hint, children }) {
+function Section({ title, hint, dimmed = false, children }) {
   return (
-    <section>
+    <section
+      className={`transition-opacity duration-300 ${
+        dimmed ? "opacity-40 focus-within:opacity-100 hover:opacity-100" : ""
+      }`}
+    >
       <h2 className="font-display text-[17px] font-bold tracking-[-0.01em]">
         {title}
       </h2>

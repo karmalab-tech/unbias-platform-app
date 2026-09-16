@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "~/components/ui/Button";
 import { Checkbox } from "~/components/ui/Field";
 import StepShell from "~/components/contribute/StepShell";
+import PhotoStack from "~/components/contribute/PhotoStack";
 import { useContribution } from "~/components/contribute/ContributionContext";
 import { t } from "~/i18n";
 
@@ -37,6 +38,7 @@ export default function ConsentStep() {
   return (
     <StepShell
       back="/contribute/review"
+      media={<PhotoStack />}
       label={t("contribute.steps.consent")}
       title={t("consent.heading")}
       intro={t("consent.intro")}
