@@ -14,15 +14,14 @@ primary_region = "cdg"
   RAILS_SERVE_STATIC_FILES = "true"
   WEB_CONCURRENCY = "1"
   RAILS_MAX_THREADS = "5"
-  HTTP_PORT = "80"
-  TARGET_PORT = "3000"
+  PORT = "8080"
 
 [processes]
-  web = "bin/thrust bin/rails server"
+  web = "bin/rails server -b 0.0.0.0"
   worker = "bin/jobs"
 
 [http_service]
-  internal_port = 80
+  internal_port = 8080
   force_https = true
   auto_stop_machines = "off"
   auto_start_machines = true
