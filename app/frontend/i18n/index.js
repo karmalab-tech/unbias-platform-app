@@ -9,18 +9,29 @@ import { fr } from "~/i18n/locales/fr";
 
 const translations = { en, fr };
 const DEFAULT_LOCALE = "en";
+const STORAGE_KEY = "unbias.locale";
+
+export const LANGUAGES = [
+  { code: "en", label: "English" },
+  { code: "fr", label: "Français" },
+];
 
 function detectLocale() {
   if (typeof navigator === "undefined") return DEFAULT_LOCALE;
 
   // Allow forcing a locale via ?lang=fr / ?lang=en for testing & kiosks.
+  // A forced locale is remembered so the footer switcher survives reloads.
   try {
     const forced = new URLSearchParams(window.location.search).get("lang");
-    if (forced && translations[forced.toLowerCase().slice(0, 2)]) {
-      return forced.toLowerCase().slice(0, 2);
+    const code = forced && forced.toLowerCase().slice(0, 2);
+    if (code && translations[code]) {
+      localStorage.setItem(STORAGE_KEY, code);
+      return code;
     }
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored && translations[stored]) return stored;
   } catch {
-    // window may be unavailable; ignore and fall back to navigator.
+    // window or storage may be unavailable; ignore and fall back to navigator.
   }
 
   const preferred =
@@ -37,6 +48,26 @@ function detectLocale() {
 }
 
 export const locale = detectLocale();
+
+export function hasStoredLocale() {
+  try {
+    return Boolean(translations[localStorage.getItem(STORAGE_KEY)]);
+  } catch {
+    return false;
+  }
+}
+
+// Locale is resolved at import time, so applying a choice reloads the page.
+export function chooseLocale(code) {
+  try {
+    localStorage.setItem(STORAGE_KEY, code);
+  } catch {
+    // storage unavailable: fall back to a forced query parameter below.
+  }
+  const url = new URL(window.location.href);
+  url.searchParams.set("lang", code);
+  window.location.replace(url);
+}
 
 if (typeof document !== "undefined") {
   document.documentElement.lang = locale;

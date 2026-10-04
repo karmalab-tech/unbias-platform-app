@@ -316,7 +316,8 @@ export const en = {
   footer: {
     faq: "FAQ",
     source: "Source code",
-    credits: "An open initiative by KarmaLab. First partner: IA·gora.",
+    language: "Language",
+    credits: "An open initiative by KarmaLab.",
   },
   about: {
     title: "A broader picture, built together.",
@@ -461,6 +462,7 @@ export const en = {
     },
   },
   installation: {
+    chooseLanguage: "Choose your language",
     scan: "Scan to add your photos",
   },
   errors: {

@@ -66,7 +66,7 @@ export const fr = {
     },
     disability: {
       label: "Handicap visible / aides techniques",
-      short: "Handicap / aides techniques",
+      short: "Handicap / aides",
       glasses: "Lunettes",
       hearing_aid: "Appareil auditif",
       wheelchair: "Fauteuil roulant",
@@ -322,6 +322,7 @@ export const fr = {
   footer: {
     faq: "FAQ",
     source: "Code source",
+    language: "Langue",
     credits:
       "Une initiative ouverte de KarmaLab. Premier partenaire : IA·gora.",
   },
@@ -468,6 +469,7 @@ export const fr = {
     },
   },
   installation: {
+    chooseLanguage: "Choisissez votre langue",
     scan: "Scannez pour ajouter vos photos",
   },
   errors: {

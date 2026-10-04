@@ -14,45 +14,56 @@ export default function RepresentationCharts({
   buckets,
   loading,
   containerClass = "max-w-[1512px]",
+  compact = false,
 }) {
   const dimensions = groupBuckets(buckets);
+  const padLeft = compact ? "xl:pl-4" : "xl:pl-[30px]";
+  const padRight = compact ? "xl:pr-4" : "xl:pr-[30px]";
 
   return (
     <section className="border-hairline border-t">
-      <div className={`md:px-gutter mx-auto ${containerClass} px-5 py-8`}>
-        <div className="mb-7 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
-          <h2 className="font-display text-[30px] leading-none font-bold tracking-[-0.025em]">
-            {t("dashboard.representation")}
-          </h2>
-          <ul className="text-ink-60 flex gap-[26px] text-[13px]">
-            <li className="flex items-center gap-2">
-              <span className="bg-data-approved inline-block h-3 w-3 rounded-[2px]" />{" "}
-              {t("dashboard.approved")}
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="hatch inline-block h-3 w-3 rounded-[2px]" />{" "}
-              {t("dashboard.pending")}
-            </li>
-          </ul>
-        </div>
+      <div
+        className={`md:px-gutter mx-auto ${containerClass} px-5 ${compact ? "py-6" : "py-8"}`}
+      >
+        {!compact && (
+          <div
+            className={`${compact ? "mb-4" : "mb-7"} flex flex-wrap items-end justify-between gap-x-6 gap-y-3`}
+          >
+            <h2 className="font-display text-[30px] leading-none font-bold tracking-[-0.025em]">
+              {t("dashboard.representation")}
+            </h2>
+            <ul className="text-ink-60 flex gap-[26px] text-[13px]">
+              <li className="flex items-center gap-2">
+                <span className="bg-data-approved inline-block h-3 w-3 rounded-[2px]" />{" "}
+                {t("dashboard.approved")}
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="hatch inline-block h-3 w-3 rounded-[2px]" />{" "}
+                {t("dashboard.pending")}
+              </li>
+            </ul>
+          </div>
+        )}
 
         <div
-          className={`grid gap-y-10 md:grid-cols-2 md:gap-x-[30px] ${COLUMN_WIDTHS} xl:gap-y-0`}
+          className={`grid gap-y-10 md:grid-cols-2 ${compact ? "md:gap-x-4" : "md:gap-x-[30px]"} ${COLUMN_WIDTHS} xl:gap-y-0`}
         >
           {dimensions.map((dimension, index) => (
             <div
               key={dimension.id}
-              className={`border-hairline ${index > 0 ? "border-t pt-8 md:border-t-0 md:pt-0 xl:border-l xl:pl-[30px]" : ""} ${
-                index < dimensions.length - 1 ? "xl:pr-[30px]" : ""
-              } ${index === 1 && loading ? "" : ""}`}
+              className={`border-hairline ${index > 0 ? `border-t pt-8 md:border-t-0 md:pt-0 xl:border-l ${padLeft}` : ""} ${index < dimensions.length - 1 ? padRight : ""}`}
             >
-              <div className="mb-[22px] flex flex-wrap items-center gap-x-[9px] gap-y-1">
-                <span
-                  className="h-[9px] w-[9px] rounded-full"
-                  style={{ background: dimension.key }}
-                />
+              <div className="mb-[22px] flex items-start gap-x-[9px]">
+                {!compact && (
+                  <span
+                    className="mt-1.5 h-[9px] w-[9px] shrink-0 rounded-full"
+                    style={{ background: dimension.key }}
+                  />
+                )}
                 <h3 className="font-display text-[17px] leading-tight font-bold tracking-[-0.01em]">
-                  {dimension.title}
+                  {dimension.id === "disability"
+                    ? t("taxonomy.disability.short")
+                    : dimension.title}
                 </h3>
                 <TargetNote buckets={dimension.buckets} />
               </div>
@@ -92,7 +103,9 @@ function TargetNote({ buckets }) {
             .join(" / "),
         });
   return (
-    <span className="text-ink-45 tabular ml-auto text-[11.5px]">{text}</span>
+    <span className="text-ink-45 tabular ml-auto shrink-0 pl-2 text-[11.5px] whitespace-nowrap">
+      {text}
+    </span>
   );
 }
 
@@ -113,9 +126,9 @@ function Chart({ dimension, loading }) {
         <LabelledRows
           buckets={dimension.buckets}
           loading={loading}
-          labelWidth={dimension.id === "disability" ? 118 : 44}
+          labelWidth={dimension.id === "disability" ? 140 : 44}
           valueWidth={dimension.id === "disability" ? 50 : 52}
-          gap={dimension.id === "disability" ? 12 : 14}
+          gap={dimension.id === "disability" ? 7 : 14}
         />
       );
   }

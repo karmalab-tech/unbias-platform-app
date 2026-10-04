@@ -8,19 +8,20 @@ const TINTS = ["bg-tint-age", "bg-tint-skin", "bg-tint-body"];
 export default function NeedCards({
   needs,
   containerClass = "max-w-[1512px]",
+  compact = false,
 }) {
   if (!needs?.length) return null;
 
   return (
-    <section className="border-hairline border-t">
+    <section>
       <div
-        className={`md:px-gutter mx-auto grid ${containerClass} gap-4 px-5 pt-[30px] pb-8 md:grid-cols-3 md:gap-6`}
+        className={`md:px-gutter mx-auto grid ${containerClass} gap-4 px-5 ${compact ? "py-6" : "pt-[30px] pb-8"} md:grid-cols-3 md:gap-6`}
       >
         {needs.slice(0, 3).map((need, index) => (
           <Link
             key={need.id}
             to="/contribute"
-            className={`rounded-card flex items-center gap-5 px-6 py-[22px] ${TINTS[index % TINTS.length]} hover:brightness-[0.98]`}
+            className={`rounded-card flex items-center gap-5 px-6 ${compact ? "py-3" : "py-[22px]"} ${TINTS[index % TINTS.length]} hover:brightness-[0.98]`}
           >
             <UserPlusIcon
               className="h-[42px] w-[42px] shrink-0"
