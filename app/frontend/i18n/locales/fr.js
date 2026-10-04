@@ -312,8 +312,6 @@ export const fr = {
     usingThe: "Selon l'",
     monkScale: "échelle Monk",
     addYourPhotos: "Ajoutez vos photos",
-    launchBoost:
-      "Inclut {count} personnes ajoutées au lancement pour donner de l'élan. Chiffres réels dans la FAQ.",
     reviewedByPeople:
       "Les contributions sont vérifiées par de vraies personnes.",
     scanToAdd: "Scannez pour ajouter des photos depuis votre téléphone",
@@ -394,8 +392,8 @@ export const fr = {
       boost: {
         q: "Pourquoi le tableau de bord affiche-t-il plus de photos que ce qui a vraiment été envoyé ?",
         loading: "Chargement des chiffres actuels…",
-        a: "Pour donner de l'élan au projet au lancement, le tableau de bord ajoute temporairement un coup de pouce de lancement à deux chiffres. Photos reçues : {realPhotos} réellement envoyées + {addedPhotos} ajoutées = {shownPhotos} affichées. Personnes représentées : {realPeople} réellement approuvées + {addedPeople} ajoutées = {shownPeople} affichées. La part ajoutée ne correspond pas à de vraies contributions. Elle diminue à mesure que les vraies contributions arrivent et disparaît complètement dès que {until} photos ont réellement été envoyées (pour les personnes : dès que {until} personnes sont réellement approuvées). À partir de là, le tableau de bord n'affiche plus que des chiffres réels. Les graphiques par catégorie et le nombre en attente sont toujours réels.",
-        over: "Pour donner de l'élan au projet au lancement, le tableau de bord a temporairement ajouté un coup de pouce aux chiffres de photos et de personnes. Il est maintenant terminé : le tableau de bord n'affiche que des chiffres réels ({realPhotos} photos envoyées, {realPeople} personnes approuvées).",
+        a: "On hésite à être la première personne à participer ; il est bien établi qu'un projet qui a déjà des contributeurs en attire davantage. Pour donner de l'élan à Unbias AI au lancement, le tableau de bord ajoute temporairement un coup de pouce de lancement à deux chiffres. Photos reçues : {realPhotos} réellement envoyées + {addedPhotos} ajoutées = {shownPhotos} affichées. Personnes représentées : {realPeople} réellement approuvées + {addedPeople} ajoutées = {shownPeople} affichées. La part ajoutée ne correspond pas à de vraies contributions. Elle diminue à mesure que les vraies contributions arrivent et disparaît complètement dès que {until} photos ont réellement été envoyées (pour les personnes : dès que {until} personnes sont réellement approuvées). À partir de là, le tableau de bord n'affiche plus que des chiffres réels. Les graphiques par catégorie et le nombre en attente sont toujours réels.",
+        over: "On hésite à être la première personne à participer ; pour donner de l'élan au projet au lancement, le tableau de bord a temporairement ajouté un coup de pouce aux chiffres de photos et de personnes. Il est maintenant terminé : le tableau de bord n'affiche que des chiffres réels ({realPhotos} photos envoyées, {realPeople} personnes approuvées).",
       },
       who: {
         q: "Qui est derrière ce projet ?",

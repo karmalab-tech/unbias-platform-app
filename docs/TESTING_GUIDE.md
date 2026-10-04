@@ -232,8 +232,8 @@ Defaults live in `config/unbias.yml` (`launch_boost_*`); the test environment
 turns the boost off so the other specs see real numbers.
 
 1. Open `/` on a fresh database: photos contributed starts at 1,573 and the
-   headline people count at 1,100, with a small footnote under the bar linking
-   to the FAQ. `/installation` shows the same footnote in text.
+   headline people count at 1,100. There is no note on the dashboard itself; the
+   disclosure lives in the FAQ.
 2. Submit a contribution: photos contributed goes up by one per photo. The
    number never goes down and never shows less than the real count.
 3. Open `/about#faq-boost`: it lists real, added and shown for photos and for
@@ -242,5 +242,5 @@ turns the boost off so the other specs see real numbers.
 4. The charts by category and the pending count are always real.
 5. The admin dashboard always shows real numbers (it does not use the boost).
 6. Set `launch_boost_photos_floor` and `launch_boost_people_floor` to 0 (or
-   reach 2,500): the footnote disappears and the FAQ says the boost has ended.
+   reach 2,500): the FAQ says the boost has ended.
 
