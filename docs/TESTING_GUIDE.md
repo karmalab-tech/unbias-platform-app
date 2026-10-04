@@ -225,3 +225,22 @@ photos** in one batch, in a phone-sized window.
    order keeps it at full strength.
 4. Re-open a person you already described (from **Your photos**): nothing is
    dimmed, everything is answered.
+
+## PR 4 — Disclosed launch boost on the dashboard
+
+Defaults live in `config/unbias.yml` (`launch_boost_*`); the test environment
+turns the boost off so the other specs see real numbers.
+
+1. Open `/` on a fresh database: photos contributed starts at 1,573 and the
+   headline people count at 1,100, with a small footnote under the bar linking
+   to the FAQ. `/installation` shows the same footnote in text.
+2. Submit a contribution: photos contributed goes up by one per photo. The
+   number never goes down and never shows less than the real count.
+3. Open `/about#faq-boost`: it lists real, added and shown for photos and for
+   approved people, and says the added part disappears at 2,500 real photos
+   (people: 2,500 real approved people). Check `?lang=fr` too.
+4. The charts by category and the pending count are always real.
+5. The admin dashboard always shows real numbers (it does not use the boost).
+6. Set `launch_boost_photos_floor` and `launch_boost_people_floor` to 0 (or
+   reach 2,500): the footnote disappears and the FAQ says the boost has ended.
+

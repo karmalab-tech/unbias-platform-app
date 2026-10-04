@@ -73,6 +73,14 @@ export default function Installation() {
                 )}
               />
             </dl>
+            {stats?.launch_boost?.active && (
+              <p className="text-ink-55 mt-5 text-[16px]">
+                {t("dashboard.launchBoost", {
+                  count: formatNumber(stats.launch_boost.people_approved.added),
+                })}{" "}
+                {host}/about#faq-boost
+              </p>
+            )}
           </div>
         </div>
 

@@ -307,6 +307,8 @@ export const en = {
     usingThe: "Using the",
     monkScale: "Monk Skin Tone scale",
     addYourPhotos: "Add your photos",
+    launchBoost:
+      "Includes {count} people added at launch to build momentum. Real figures in the FAQ.",
     reviewedByPeople: "Contributions are reviewed by real people.",
     scanToAdd: "Scan to add photos from your phone",
     videoSoon: "The intro video is coming soon.",
@@ -381,6 +383,12 @@ export const en = {
       withdraw: {
         q: "How do I withdraw a photo?",
         a: "Email start@karmalab.tech with your contribution code and tell us which photos to remove. We delete them from storage and from any future dataset use.",
+      },
+      boost: {
+        q: "Why does the dashboard show more photos than were really uploaded?",
+        loading: "Loading the current figures…",
+        a: "To give the project momentum at launch, the dashboard temporarily adds a launch boost to two figures. Photos contributed: {realPhotos} really uploaded + {addedPhotos} added = {shownPhotos} shown. People represented: {realPeople} really approved + {addedPeople} added = {shownPeople} shown. The added part is not real contributions. It shrinks as real contributions arrive and disappears completely once {until} photos have really been uploaded (for people: once {until} people are really approved). From then on the dashboard shows only real numbers. The charts by category and the pending count always show real numbers only.",
+        over: "To give the project momentum at launch, the dashboard temporarily added a launch boost to the photo and people counts. That boost has now ended: the dashboard shows only real numbers ({realPhotos} photos uploaded, {realPeople} people approved).",
       },
       who: {
         q: "Who is behind this?",

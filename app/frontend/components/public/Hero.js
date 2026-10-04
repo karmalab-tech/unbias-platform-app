@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Track } from "~/components/public/Bars";
 import { formatNumber } from "~/lib/format";
+import { Link } from "react-router-dom";
 import { t } from "~/i18n";
 
 export default function Hero({
@@ -65,6 +66,17 @@ export default function Hero({
                 value={figure(stillNeeded)}
               />
             </dl>
+            {stats?.launch_boost?.active && (
+              <p className="text-ink-55 mt-4 text-[13.5px]">
+                <Link to="/about#faq-boost" className="underline">
+                  {t("dashboard.launchBoost", {
+                    count: formatNumber(
+                      stats.launch_boost.people_approved.added
+                    ),
+                  })}
+                </Link>
+              </p>
+            )}
           </div>
         </div>
 
