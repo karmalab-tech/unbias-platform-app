@@ -3,12 +3,14 @@ import { Track } from "~/components/public/Bars";
 import RepresentationCharts from "~/components/public/RepresentationCharts";
 import NeedCards from "~/components/public/NeedCards";
 import usePolling from "~/lib/usePolling";
+import { useOfflineDashboard } from "~/lib/offline";
 import { useSettings } from "~/lib/settings";
 import { formatNumber } from "~/lib/format";
 import { LANGUAGES, chooseLocale, hasStoredLocale, t } from "~/i18n";
 
 // IA·gora screen: no navigation, autoplaying muted intro with subtitles, QR hand-off, faster polling.
 export default function Installation() {
+  useOfflineDashboard();
   const settings = useSettings();
   const { data: stats } = usePolling(
     "/api/public/stats",

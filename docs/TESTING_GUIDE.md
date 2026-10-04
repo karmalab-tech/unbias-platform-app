@@ -244,3 +244,15 @@ turns the boost off so the other specs see real numbers.
 6. Set `launch_boost_photos_floor` and `launch_boost_people_floor` to 0 (or
    reach 2,500): the FAQ says the boost has ended.
 
+
+## PR 5 — Dashboard keeps working without network
+
+Only the home page (`/`) and `/installation` are cached, by `public/sw.js`. The contribute flow, staff pages and everything behind a login are never cached. The worker is registered in production builds only, so test it on a deployed or production-built server (not `bin/dev`).
+
+1. Open `/` (or `/installation`) with network and wait a few seconds for the numbers to load.
+2. Cut the network (airplane mode, or Chrome DevTools → Network → Offline) and refresh: the page loads with the last numbers, charts, fonts and QR code.
+3. Restore the network: within one polling interval the numbers update from the server, and the next refresh serves the latest page.
+4. Offline, open `/contribute`: the browser's own "no connection" page appears, since contributing needs the server.
+5. After a deploy, the next online visit picks up the new version; the old one is only used while offline.
+
+The first visit must happen online. Browsers may clear cached data after long idle periods (Safari: about a week), so open the installation once online on the day.

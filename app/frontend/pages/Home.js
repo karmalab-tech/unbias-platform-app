@@ -7,10 +7,12 @@ import ContributeBanner from "~/components/public/ContributeBanner";
 import PublicFooter from "~/components/public/PublicFooter";
 import VideoOverlay from "~/components/public/VideoOverlay";
 import usePolling from "~/lib/usePolling";
+import { useOfflineDashboard } from "~/lib/offline";
 import { useSettings } from "~/lib/settings";
 import { t } from "~/i18n";
 
 export default function Home() {
+  useOfflineDashboard();
   const settings = useSettings();
   const { data: stats, error } = usePolling(
     "/api/public/stats",
