@@ -3,17 +3,30 @@ import { useLocation } from "react-router-dom";
 import PublicHeader from "~/components/public/PublicHeader";
 import PublicFooter from "~/components/public/PublicFooter";
 import Button from "~/components/ui/Button";
+import usePolling from "~/lib/usePolling";
+import { formatNumber } from "~/lib/format";
 import { t } from "~/i18n";
 
 const STEPS = ["upload", "identify", "describe", "consent", "review"];
-const FAQ = ["account", "photos", "monk", "public", "ai", "withdraw", "who"];
+const FAQ = [
+  "account",
+  "photos",
+  "monk",
+  "public",
+  "ai",
+  "withdraw",
+  "boost",
+  "who",
+];
 
 export default function About() {
   const { hash } = useLocation();
+  const { data: stats } = usePolling("/api/public/stats", 30);
+  const boost = stats?.launch_boost;
 
   useEffect(() => {
     if (hash) document.querySelector(hash)?.scrollIntoView();
-  }, [hash]);
+  }, [hash, stats]);
 
   return (
     <div className="bg-canvas text-ink min-h-dvh">
@@ -70,12 +83,14 @@ export default function About() {
           </h2>
           <dl className="divide-hairline mt-5 divide-y">
             {FAQ.map((key) => (
-              <div key={key} className="py-5">
+              <div key={key} id={`faq-${key}`} className="scroll-mt-8 py-5">
                 <dt className="font-display text-[19px] font-bold tracking-[-0.015em]">
                   {t(`about.faq.${key}.q`)}
                 </dt>
                 <dd className="text-ink-72 mt-2 max-w-[65ch] text-[15.5px] leading-[1.55]">
-                  {t(`about.faq.${key}.a`)}
+                  {key === "boost"
+                    ? boostAnswer(boost)
+                    : t(`about.faq.${key}.a`)}
                 </dd>
               </div>
             ))}
@@ -97,4 +112,18 @@ export default function About() {
       <PublicFooter />
     </div>
   );
+}
+
+function boostAnswer(boost) {
+  if (!boost) return t("about.faq.boost.loading");
+  const key = boost.active ? "a" : "over";
+  return t(`about.faq.boost.${key}`, {
+    realPhotos: formatNumber(boost.photos.real),
+    addedPhotos: formatNumber(boost.photos.added),
+    shownPhotos: formatNumber(boost.photos.shown),
+    realPeople: formatNumber(boost.people_approved.real),
+    addedPeople: formatNumber(boost.people_approved.added),
+    shownPeople: formatNumber(boost.people_approved.shown),
+    until: formatNumber(boost.until),
+  });
 }

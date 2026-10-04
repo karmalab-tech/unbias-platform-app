@@ -382,6 +382,12 @@ export const en = {
         q: "How do I withdraw a photo?",
         a: "Email start@karmalab.tech with your contribution code and tell us which photos to remove. We delete them from storage and from any future dataset use.",
       },
+      boost: {
+        q: "Why does the dashboard show more photos than were really uploaded?",
+        loading: "Loading the current figures…",
+        a: "People hesitate to be the first to take part; it is well documented that a project that already has contributors attracts more. So, to give Unbias AI momentum at launch, the dashboard temporarily adds a launch boost to two figures. Photos contributed: {realPhotos} really uploaded + {addedPhotos} added = {shownPhotos} shown. People represented: {realPeople} really approved + {addedPeople} added = {shownPeople} shown. The added part is not real contributions. It shrinks as real contributions arrive and disappears completely once {until} photos have really been uploaded (for people: once {until} people are really approved). From then on the dashboard shows only real numbers. The charts by category and the pending count always show real numbers only.",
+        over: "People hesitate to be the first to take part, so to give the project momentum at launch the dashboard temporarily added a launch boost to the photo and people counts. That boost has now ended: the dashboard shows only real numbers ({realPhotos} photos uploaded, {realPeople} people approved).",
+      },
       who: {
         q: "Who is behind this?",
         a: "Unbias AI is started by KarmaLab and designed to grow into a broader open collaboration. IA·gora is the first institutional partner and hosts the installation. All code is open source under the MIT license; access to the dataset itself stays controlled.",

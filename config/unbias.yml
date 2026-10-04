@@ -21,3 +21,11 @@ shared:
   consent_version: v0-draft
   people_milestone: 10000
   max_active_calls_to_action: 3
+  launch_boost_photos_floor: 1573
+  launch_boost_people_floor: 1100
+  launch_boost_until: 2500
+  launch_boost_step: 10
+
+test:
+  launch_boost_photos_floor: 0
+  launch_boost_people_floor: 0
