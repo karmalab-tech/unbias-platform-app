@@ -323,11 +323,10 @@ export const fr = {
     faq: "FAQ",
     source: "Code source",
     language: "Langue",
-    credits:
-      "Une initiative ouverte de KarmaLab. Premier partenaire : IA·gora.",
+    credits: "Une initiative ouverte de KarmaLab.",
   },
   about: {
-    title: "Une image plus large, construite ensemble.",
+    title: "Construire ensemble une meilleure image de nous-mêmes",
     intro:
       "Les modèles d'images génératives participent désormais à la façon dont les gens sont représentés. Leur image de la société n'est pas neutre : demandez quelque chose de neutre et les mêmes visages, corps et décors reviennent. Unbias AI est une initiative culturelle et open source qui demande si l'on peut mesurer ce biais, construire collectivement de meilleures données de représentation, adapter des modèles ouverts, puis mesurer à nouveau.",
     loop: "Cette plateforme est l'étape de collecte. Chacun peut contribuer ses propres photos, ou celles de personnes qui ont donné leur accord, décrire qui est visible, et une vraie personne vérifie chaque image avant qu'elle ne rejoigne le jeu de données. L'objectif de cette première étape : 10 000 personnes représentées.",
@@ -398,7 +397,7 @@ export const fr = {
       },
       who: {
         q: "Qui est derrière ce projet ?",
-        a: "Unbias AI est lancé par KarmaLab et conçu pour devenir une collaboration ouverte plus large. IA·gora est le premier partenaire institutionnel et accueille l'installation. Tout le code est open source sous licence MIT ; l'accès au jeu de données lui-même reste contrôlé.",
+        a: "Unbias AI est lancé par {karmalab} et conçu pour devenir une collaboration ouverte plus large. Tout le code est open source sous licence MIT ; l'accès au jeu de données lui-même reste contrôlé.",
       },
     },
   },

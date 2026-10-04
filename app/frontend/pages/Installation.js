@@ -8,7 +8,7 @@ import { useSettings } from "~/lib/settings";
 import { formatNumber } from "~/lib/format";
 import { LANGUAGES, chooseLocale, hasStoredLocale, t } from "~/i18n";
 
-// IA·gora screen: no navigation, autoplaying muted intro with subtitles, QR hand-off, faster polling.
+// Installation screen: no navigation, autoplaying muted intro with subtitles, QR hand-off, faster polling.
 export default function Installation() {
   useOfflineDashboard();
   const settings = useSettings();

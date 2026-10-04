@@ -320,7 +320,7 @@ export const en = {
     credits: "An open initiative by KarmaLab.",
   },
   about: {
-    title: "A broader picture, built together.",
+    title: "Let's build a better picture of ourselves",
     intro:
       "Generative image models now take part in how people are pictured. Their picture of society is not neutral: ask for a neutral prompt and the same faces, bodies and settings tend to come back. Unbias AI is a cultural, open-source initiative that asks whether we can measure this bias, collectively build better representation data, adapt open models, and measure again.",
     loop: "This platform is the collecting step. People contribute their own photos, or photos of people who gave permission, describe who is visible, and a real person reviews every image before it joins the dataset. The goal of this first milestone is 10,000 people represented.",
@@ -391,7 +391,7 @@ export const en = {
       },
       who: {
         q: "Who is behind this?",
-        a: "Unbias AI is started by KarmaLab and designed to grow into a broader open collaboration. IA·gora is the first institutional partner and hosts the installation. All code is open source under the MIT license; access to the dataset itself stays controlled.",
+        a: "Unbias AI is started by {karmalab} and designed to grow into a broader open collaboration. All code is open source under the MIT license; access to the dataset itself stays controlled.",
       },
     },
   },

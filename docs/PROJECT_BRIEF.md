@@ -25,7 +25,7 @@ The POC must:
 - obtain explicit permission and dataset/training consent;
 - human-review every image before approval;
 - expose live approved/pending representation progress;
-- work as both a website and part of the IA·gora installation;
+- work as both a website and part of the installation;
 - provide lightweight moderation and admin tools.
 
 The POC is **image-only**. Dataset export, LoRA training, video, partial-permission blurring and unique-person tracking are deferred.
@@ -105,7 +105,7 @@ Information hierarchy:
 5. Strong contribution CTA
 6. About / FAQ / credits
 
-The IA·gora installation uses the same visual system at large scale, includes a permanent QR code and reacts to new contributions.
+The installation uses the same visual system at large scale, includes a permanent QR code and reacts to new contributions.
 
 ## Visual Identity
 
@@ -168,8 +168,6 @@ Processing failures must not make contributions disappear.
 
 The initiative is currently a **KarmaLab project**, designed to grow into a broader open collaborative initiative.
 
-**IA·gora is the first institutional partner.**
-
 Partners may host the installation, activate communities, reach underrepresented groups, contribute expertise, experiment through exhibitions/workshops/research, and distribute the initiative and its open outputs.
 
 The project is primarily cultural, artistic and open-source, not a SaaS product.
@@ -195,7 +193,7 @@ If this brief is less specific than a detailed document, the detailed document w
 6. Browser-side people detection
 7. Monk skin-tone suggestion
 8. Server-side context/caption and advisory checks
-9. IA·gora installation mode
+9. Installation mode
 10. Testing, accessibility and polish
 
 The first useful milestone is:

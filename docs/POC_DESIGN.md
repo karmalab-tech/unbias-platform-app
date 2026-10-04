@@ -15,7 +15,7 @@ The POC has four core jobs:
     coverage goals.
 
 The platform works both as a normal website and as the contribution
-backend for the IA·gora installation.
+backend for the installation.
 
 ## 2. POC Principles
 
@@ -431,7 +431,7 @@ are removed from pending counts.
 
 ## 10. Public Dashboard / Homepage
 
-Use the same visual system for the public website and IA·gora
+Use the same visual system for the public website and
 installation.
 
 ### Header
@@ -482,7 +482,7 @@ Pending and approved are visually distinct.
 
 Include: - What is this? - FAQ - Contribute - project / KarmaLab credits
 
-## 11. IA·gora Installation Mode
+## 11. Installation Mode
 
 Large interactive screen(s) show: - intro video / fullscreen play
 button - live total toward 10,000 people - representation progress -

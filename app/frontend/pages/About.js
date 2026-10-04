@@ -32,7 +32,7 @@ export default function About() {
     <div className="bg-canvas text-ink min-h-dvh">
       <PublicHeader hasVideo={false} />
       <main className="md:px-gutter mx-auto max-w-3xl px-5 pt-12 pb-20">
-        <h1 className="font-display text-[clamp(34px,5vw,56px)] leading-[0.95] font-extrabold tracking-[-0.04em]">
+        <h1 className="font-display text-[clamp(30px,4.2vw,46px)] leading-[0.95] font-extrabold tracking-[-0.04em]">
           {t("about.title")}
         </h1>
         <p className="text-ink-72 mt-6 max-w-[65ch] text-[17px] leading-[1.55]">
@@ -90,7 +90,9 @@ export default function About() {
                 <dd className="text-ink-72 mt-2 max-w-[65ch] text-[15.5px] leading-[1.55]">
                   {key === "boost"
                     ? boostAnswer(boost)
-                    : t(`about.faq.${key}.a`)}
+                    : key === "who"
+                      ? whoAnswer()
+                      : t(`about.faq.${key}.a`)}
                 </dd>
               </div>
             ))}
@@ -111,6 +113,24 @@ export default function About() {
       </main>
       <PublicFooter />
     </div>
+  );
+}
+
+function whoAnswer() {
+  const [before, after] = t("about.faq.who.a").split("{karmalab}");
+  return (
+    <>
+      {before}
+      <a
+        href="https://www.karmalab.tech"
+        target="_blank"
+        rel="noreferrer"
+        className="text-accent hover:text-accent-hover font-medium"
+      >
+        KarmaLab
+      </a>
+      {after}
+    </>
   );
 }
 

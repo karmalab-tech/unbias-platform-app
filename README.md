@@ -3,7 +3,7 @@
 A public, image-only contribution platform for building a consented,
 human-reviewed representation dataset. Contributors upload photos, tap the
 people in them, describe how each person is represented, and consent. A
-moderator reviews every photo. The public dashboard and the IA·gora
+moderator reviews every photo. The public dashboard and the
 installation show pending and approved people per bucket, live.
 
 The product brief, POC design, architecture, design handoff and the phased
@@ -70,7 +70,7 @@ moderation queue once `ProcessAssetJob` has run. Without
 | `/` | public | Live dashboard, polls `/api/public/stats` every 5 s |
 | `/about` | public | About and FAQ |
 | `/contribute` | public | Contribution flow; draft resumes from a token in localStorage |
-| `/installation` | public | Full-screen wall for IA·gora, polls every 3 s, `?lang=fr` |
+| `/installation` | public | Full-screen wall, polls every 3 s, `?lang=fr` |
 | `/login` | staff | Devise JSON sign-in |
 | `/moderation` | moderator, admin | Oldest-first queue, review, approve / reject |
 | `/admin` | admin | Dashboard, calls to action, targets, moderators, lookup by code |

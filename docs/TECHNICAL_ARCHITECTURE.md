@@ -9,7 +9,7 @@ It covers the system needed to support: - public contribution -
 multi-image uploads - browser-side people detection - browser-side Monk
 skin-tone suggestions - contributor annotations - consent - server-side
 image enrichment - automatic quality/safety flags - human moderation -
-public coverage counters - IA·gora installation mode - lightweight admin
+public coverage counters - installation mode - lightweight admin
 tools
 
 Dataset export/versioning, LoRA training, video contributions,
@@ -123,7 +123,7 @@ Rails application
     └── aggregate coverage counters
            │
            ├── public dashboard
-           └── IA·gora installation
+           └── installation
 ```
 
 ## 6. Image Upload Architecture
@@ -558,7 +558,7 @@ Correctness matters more than millisecond-level freshness.
 
 ## 16. Real-Time Dashboard / Installation Updates
 
-The public website and IA·gora installation should react shortly after a
+The public website and installation should react shortly after a
 contribution or moderation decision.
 
 For the POC, use the simplest mechanism that feels live.
