@@ -14,9 +14,11 @@ primary_region = "cdg"
   RAILS_SERVE_STATIC_FILES = "true"
   WEB_CONCURRENCY = "1"
   RAILS_MAX_THREADS = "5"
+  HTTP_PORT = "80"
+  TARGET_PORT = "3000"
 
 [processes]
-  web = "bin/thrust bin/rails server"
+  web = "./bin/thrust ./bin/rails server"
   worker = "bin/jobs"
 
 [http_service]
@@ -35,7 +37,7 @@ primary_region = "cdg"
 [[http_service.checks]]
   interval = "30s"
   timeout = "5s"
-  grace_period = "10s"
+  grace_period = "60s"
   method = "GET"
   path = "/up"
 
