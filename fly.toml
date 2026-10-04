@@ -18,7 +18,7 @@ primary_region = "cdg"
   TARGET_PORT = "3000"
 
 [processes]
-  web = "./bin/thrust ./bin/rails server"
+  web = "bin/thrust bin/rails server"
   worker = "bin/jobs"
 
 [http_service]
