@@ -120,7 +120,7 @@ export default function UploadStep() {
       title={t("upload.heading")}
       intro={t("upload.intro")}
       footer={
-        readyCount > 0 && (
+        (readyCount > 0 || uploading) && (
           <Button full onClick={proceed} disabled={uploading}>
             {uploading ? t("upload.uploading") : t("common.continue")}
           </Button>
@@ -222,6 +222,15 @@ function Thumb({
         alt=""
         className={`h-full w-full object-cover ${error ? "opacity-40" : ""}`}
       />
+      {progress !== null && (
+        <div
+          role="status"
+          aria-label={t("upload.uploading")}
+          className="bg-canvas/60 absolute inset-0 flex items-center justify-center"
+        >
+          <span className="border-ink/20 border-t-accent h-7 w-7 animate-spin rounded-full border-[3px]" />
+        </div>
+      )}
       {progress !== null && (
         <div className="bg-ink/20 absolute inset-x-0 bottom-0 h-1.5">
           <div
