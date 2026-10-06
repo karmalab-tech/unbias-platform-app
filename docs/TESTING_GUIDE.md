@@ -47,7 +47,9 @@ contributor flow without browser ML, moderation, public dashboard and admin.
    to reopen it. **Continue to consent** is enabled only when all are complete.
 8. Consent: the first box is required, the second optional. **Submit**.
 9. Success: "You added N people", a code `UNB-XXXX-XXXX`, **Copy**, and
-   **Get the code by email** → an email opens in letter_opener.
+   **Get the code by email** → an email opens in letter_opener. Below, a
+   **Follow the project on Instagram** card opens
+   https://www.instagram.com/karmalab.tech in a new tab.
 10. Back on the dashboard within ~5 s the hatched **pending** segment grows.
 11. Add `?lang=fr` to any URL to check the French copy.
 

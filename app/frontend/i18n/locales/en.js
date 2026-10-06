@@ -213,6 +213,10 @@ export const en = {
     emailSent: "Code sent to {email}.",
     another: "Add more photos",
     dashboard: "See the progress",
+    followTitle: "Follow the project on Instagram",
+    followBody:
+      "Follow us to keep up with the project and see what your contribution helps build.",
+    followCta: "Follow @karmalab.tech",
   },
   emailModal: {
     title: "Get your code by email",
