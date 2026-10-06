@@ -219,7 +219,7 @@ export const fr = {
     dashboard: "Voir la progression",
     followTitle: "Suivez le projet sur Instagram",
     followBody:
-      "Suivez @karmalab.tech pour rester informé·e du projet et voir à quoi sert votre contribution.",
+      "Suivez-nous pour rester informé·e du projet et voir à quoi sert votre contribution.",
     followCta: "Suivre @karmalab.tech",
   },
   emailModal: {

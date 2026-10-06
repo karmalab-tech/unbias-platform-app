@@ -68,9 +68,6 @@ export default function ConsentStep() {
             {t("consent.display")}
           </Checkbox>
         </div>
-        <p className="text-ink-55 text-[13px] leading-snug">
-          {t("consent.legal", { version: settings?.consent_version ?? "" })}
-        </p>
       </div>
     </StepShell>
   );

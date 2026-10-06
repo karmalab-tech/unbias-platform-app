@@ -215,7 +215,7 @@ export const en = {
     dashboard: "See the progress",
     followTitle: "Follow the project on Instagram",
     followBody:
-      "Follow @karmalab.tech to keep up with the project and see what your contribution helps build.",
+      "Follow us to keep up with the project and see what your contribution helps build.",
     followCta: "Follow @karmalab.tech",
   },
   emailModal: {

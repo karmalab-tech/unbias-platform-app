@@ -67,14 +67,16 @@ export default function SuccessStep() {
         <p className="text-ink-60 mt-1 text-[14.5px]">
           {t("success.keepBody")}
         </p>
-        <code className="rounded-btn bg-canvas font-display tabular mt-5 block px-4 py-3 text-center text-[26px] font-bold tracking-[0.08em]">
-          {submission.public_code}
-        </code>
-        <div className="mt-3 flex justify-end">
-          <Button variant="ink" size="sm" onClick={copy} aria-live="polite">
-            <ClipboardDocumentIcon className="h-5 w-5" />
-            {copied ? t("common.copied") : t("common.copy")}
-          </Button>
+        <div className="bg-canvas rounded-btn mt-5 flex px-3 py-3">
+          <code className="font-display tabular block grow text-center text-[26px] font-bold tracking-[0.08em]">
+            {submission.public_code}
+          </code>
+          <div className="flex justify-end">
+            <Button variant="ink" size="sm" onClick={copy} aria-live="polite">
+              <ClipboardDocumentIcon className="h-5 w-5" />
+              {copied ? t("common.copied") : t("common.copy")}
+            </Button>
+          </div>
         </div>
         <div className="mt-4">
           {sentTo || submission.email_sent ? (
@@ -82,7 +84,7 @@ export default function SuccessStep() {
               {t("success.emailSent", { email: sentTo ?? "…" })}
             </p>
           ) : (
-            <Button variant="secondary" onClick={() => setModal(true)}>
+            <Button variant="secondary" onClick={() => setModal(true)} full>
               <EnvelopeIcon className="h-5 w-5" />
               {t("success.emailCta")}
             </Button>
@@ -103,6 +105,7 @@ export default function SuccessStep() {
           href="https://www.instagram.com/karmalab.tech"
           target="_blank"
           rel="noopener noreferrer"
+          full
         >
           {t("success.followCta")}
           <ArrowTopRightOnSquareIcon className="h-5 w-5" />
