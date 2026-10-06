@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
+  ArrowTopRightOnSquareIcon,
   ClipboardDocumentIcon,
   EnvelopeIcon,
 } from "@heroicons/react/24/outline";
@@ -87,6 +88,25 @@ export default function SuccessStep() {
             </Button>
           )}
         </div>
+      </section>
+
+      <section className="rounded-banner border-ink/10 mt-4 border p-6">
+        <h2 className="font-display text-[21px] font-bold tracking-[-0.015em]">
+          {t("success.followTitle")}
+        </h2>
+        <p className="text-ink-60 mt-1 text-[14.5px]">
+          {t("success.followBody")}
+        </p>
+        <Button
+          variant="secondary"
+          className="mt-4"
+          href="https://www.instagram.com/karmalab.tech"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t("success.followCta")}
+          <ArrowTopRightOnSquareIcon className="h-5 w-5" />
+        </Button>
       </section>
 
       <EmailCodeModal
