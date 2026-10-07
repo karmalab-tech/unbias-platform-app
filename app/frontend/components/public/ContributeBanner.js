@@ -21,13 +21,15 @@ export default function ContributeBanner({ showQr = true }) {
         </Link>
         {showQr && (
           <div className="border-hairline-strong hidden items-center gap-[22px] md:flex md:border-l md:pl-[44px]">
-            <img
-              src="/qr.svg"
-              alt=""
-              className="rounded-qr h-[94px] w-[94px]"
-              width="94"
-              height="94"
-            />
+            <div className="rounded-lg bg-white p-3">
+              <img
+                src="/qr.svg"
+                alt=""
+                className="h-[94px] w-[94px]"
+                width="94"
+                height="94"
+              />
+            </div>
             <p className="max-w-[170px] text-[17px] leading-[1.35] font-medium">
               {t("dashboard.scanToAdd")}
             </p>
