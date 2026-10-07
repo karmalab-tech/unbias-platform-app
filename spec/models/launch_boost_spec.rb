@@ -25,18 +25,31 @@ RSpec.describe LaunchBoost do
     expect(series[2_499]).to eq(2_500)
   end
 
+  it "scales the bucket boost with its target and ends when the bucket reaches its share of the milestone" do
+    bucket = ->(approved, target = 1_000) { { approved: approved, target: target } }
+    series = (0..260).map { |real| LaunchBoost.bucket_shown(bucket.(real)) }
+
+    expect(series.first).to eq(110)
+    expect(series.each_cons(2).all? { |a, b| b >= a }).to be(true)
+    expect(series.each_with_index.all? { |value, real| value >= real }).to be(true)
+    expect(series[250..]).to eq((250..260).to_a)
+    expect(LaunchBoost.bucket_shown(bucket.(0, 0))).to eq(0)
+  end
+
   it "adds nothing when the floor is zero" do
     expect(LaunchBoost.shown(7, floor: 0)).to eq(7)
   end
 
-  it "adds the boost to photos and approved people but leaves buckets and pending untouched" do
-    stats = { images: 3, total: { approved: 1, pending: 2, target: 10_000 }, buckets: [ :kept ] }
+  it "adds the boost to photos, approved people and approved bucket bars but leaves pending untouched" do
+    bucket = { dimension: "age", value: "18_24", approved: 1, pending: 4, target: 1_000 }
+    stats = { images: 3, total: { approved: 1, pending: 2, target: 10_000 }, buckets: [ bucket ] }
     result = LaunchBoost.apply(stats)
 
     expect(result[:images]).to be > 1_573
     expect(result[:total]).to include(pending: 2, target: 10_000)
     expect(result[:total][:approved]).to be > 1_100
-    expect(result[:buckets]).to eq([ :kept ])
+    expect(result[:buckets].first).to include(pending: 4, target: 1_000)
+    expect(result[:buckets].first[:approved]).to be > 1
     expect(result[:launch_boost]).to include(active: true, until: 2_500)
     expect(result[:launch_boost][:photos]).to include(real: 3, shown: result[:images])
   end
