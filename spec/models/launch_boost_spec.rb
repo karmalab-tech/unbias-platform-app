@@ -44,6 +44,16 @@ RSpec.describe LaunchBoost do
     expect(floors).to eq(%w[18_24 25_34 35_44 45_54 55_64 65_plus].map { |value| LaunchBoost.bucket_shown(bucket.(value)) })
   end
 
+  it "starts hand-set buckets at their own floor" do
+    start = ->(dimension, value, target) { LaunchBoost.bucket_shown(dimension: dimension, value: value, approved: 0, target: target) }
+
+    expect(start.("gender", "non_binary", 2_000)).to eq(148)
+    expect(start.("body", "thin", 2_500)).to eq(183)
+    expect(start.("disability", "glasses", 1_500)).to eq(171)
+    expect(start.("disability", "wheelchair", 500)).to eq(3)
+    expect(start.("age", "75_plus", 2_000)).to be < start.("age", "30_44", 2_000)
+  end
+
   it "adds nothing when the floor is zero" do
     expect(LaunchBoost.shown(7, floor: 0)).to eq(7)
   end

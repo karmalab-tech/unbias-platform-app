@@ -1,5 +1,12 @@
 # Disclosed launch floor for the public figures; shrinks to nothing as real numbers reach launch_boost_until.
 module LaunchBoost
+  BUCKET_FLOORS = {
+    "age:60_74" => 76, "age:75_plus" => 31, "gender:non_binary" => 148, "body:thin" => 183,
+    "disability:glasses" => 171, "disability:hearing_aid" => 6, "disability:wheelchair" => 3,
+    "disability:cane_crutches_walker" => 5, "disability:prosthetic" => 2, "disability:limb_difference" => 2,
+    "disability:other" => 4
+  }.freeze
+
   def self.shown(real, floor:, until_real: nil, step: nil)
     limits = Rails.configuration.x.unbias
     until_real ||= limits.launch_boost_until
@@ -11,13 +18,14 @@ module LaunchBoost
     [ [ at.(base) + real - base, at.(base + step) ].min, real ].max
   end
 
-  # Buckets get the people boost scaled to their target, skewed 0.4x-1.6x by a stable per-bucket factor so bars differ.
+  # Buckets start at a hand-set floor or, failing that, the people boost scaled to their target and skewed 0.4x-1.6x per bucket.
   def self.bucket_shown(bucket)
     limits = Rails.configuration.x.unbias
+    key = "#{bucket[:dimension]}:#{bucket[:value]}"
     scale = bucket[:target].fdiv(limits.people_milestone)
-    skew = 0.4 + 1.2 * (Zlib.crc32("#{bucket[:dimension]}:#{bucket[:value]}") % 1_000) / 1_000.0
-    shown(bucket[:approved], floor: (limits.launch_boost_people_floor * scale * skew).round,
-          until_real: (limits.launch_boost_until * scale).round, step: 1)
+    skew = 0.4 + 1.2 * (Zlib.crc32(key) % 1_000) / 1_000.0
+    floor = limits.launch_boost_people_floor.positive? ? BUCKET_FLOORS.fetch(key) { (limits.launch_boost_people_floor * scale * skew).round } : 0
+    shown(bucket[:approved], floor: floor, until_real: (limits.launch_boost_until * scale).round, step: 1)
   end
 
   def self.apply(stats)
