@@ -11,11 +11,12 @@ module LaunchBoost
     [ [ at.(base) + real - base, at.(base + step) ].min, real ].max
   end
 
-  # Buckets get the headline people boost scaled to their own target, so every bar ramps like the total.
+  # Buckets get the people boost scaled to their target, skewed 0.4x-1.6x by a stable per-bucket factor so bars differ.
   def self.bucket_shown(bucket)
     limits = Rails.configuration.x.unbias
     scale = bucket[:target].fdiv(limits.people_milestone)
-    shown(bucket[:approved], floor: (limits.launch_boost_people_floor * scale).round,
+    skew = 0.4 + 1.2 * (Zlib.crc32("#{bucket[:dimension]}:#{bucket[:value]}") % 1_000) / 1_000.0
+    shown(bucket[:approved], floor: (limits.launch_boost_people_floor * scale * skew).round,
           until_real: (limits.launch_boost_until * scale).round, step: 1)
   end
 

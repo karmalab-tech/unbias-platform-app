@@ -242,8 +242,9 @@ turns the boost off so the other specs see real numbers.
    approved people, and says the added part disappears at 2,500 real photos
    (people: 2,500 real approved people). Check `?lang=fr` too.
 4. The approved bars of the charts by category start with a share of the people
-   boost proportional to each bucket's target (headline floor × target ÷ 10,000)
-   and lose it as the bucket fills; the pending counts are always real.
+   boost proportional to each bucket's target (headline floor × target ÷ 10,000),
+   skewed 0.4×–1.6× by a stable per-bucket factor so the bars are not all equally
+   filled, and lose it as the bucket fills; the pending counts are always real.
 5. The admin dashboard always shows real numbers (it does not use the boost).
 6. Set `launch_boost_photos_floor` and `launch_boost_people_floor` to 0 (or
    reach 2,500): the FAQ says the boost has ended.
