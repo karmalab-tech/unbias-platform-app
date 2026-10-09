@@ -10,6 +10,7 @@ export default function Hero({
   loading,
   onWatchVideo,
   poster,
+  videoUrl,
   showSecondaryStats = true,
 }) {
   const total = stats?.total ?? { approved: 0, pending: 0, target: 10000 };
@@ -71,12 +72,26 @@ export default function Hero({
           className="press border-ink hatch-well relative block aspect-4/3 w-full cursor-pointer overflow-hidden border-2 text-left lg:order-3 lg:aspect-auto lg:w-[396px] lg:shrink-0"
           aria-label={t("nav.watchVideo")}
         >
-          {poster && (
-            <img
-              src={poster}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
+          {videoUrl ? (
+            <video
+              src={videoUrl}
+              poster={poster ?? undefined}
+              className="bg-ink absolute inset-0 h-full w-full object-contain"
+              autoPlay
+              muted
+              loop
+              playsInline
+              disablePictureInPicture
+              aria-hidden="true"
             />
+          ) : (
+            poster && (
+              <img
+                src={poster}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )
           )}
           <span className="border-ink bg-signal text-ink mono-caps absolute top-1/2 left-1/2 flex min-h-13 -translate-x-1/2 -translate-y-1/2 items-center gap-3 border-2 px-5 text-[14px] font-bold whitespace-nowrap">
             <span aria-hidden="true">▶</span>

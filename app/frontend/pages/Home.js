@@ -30,6 +30,7 @@ export default function Home() {
         loading={loading}
         onWatchVideo={() => setVideoOpen(true)}
         poster={settings?.intro_video_poster_url}
+        videoUrl={settings?.intro_video_url}
       />
       <NeedCards needs={stats?.needs} />
       <RepresentationCharts buckets={stats?.buckets} loading={loading} />
