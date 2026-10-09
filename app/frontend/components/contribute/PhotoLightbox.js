@@ -204,7 +204,7 @@ export default function PhotoLightbox({ src, open, onClose }) {
         type="button"
         onClick={onClose}
         aria-label={t("common.close")}
-        className="bg-canvas/15 text-canvas hover:bg-canvas/25 absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full"
+        className="bg-canvas/15 text-on-dark hover:bg-canvas/25 absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full"
       >
         <XMarkIcon className="h-6 w-6" />
       </button>

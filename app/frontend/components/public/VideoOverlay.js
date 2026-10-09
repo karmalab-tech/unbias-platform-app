@@ -16,7 +16,7 @@ export default function VideoOverlay({ open, onClose, src, subtitles }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-[26px] bg-[rgba(18,16,12,0.94)] p-4"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-[26px] bg-[rgba(37,30,29,0.94)] p-4"
       onClick={onClose}
       role="presentation"
     >

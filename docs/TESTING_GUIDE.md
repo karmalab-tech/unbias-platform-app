@@ -150,8 +150,12 @@ moderation and carry a "Processing failed" flag.
 Open http://localhost:3000/installation?lang=fr on a large window: no
 navigation, oversized count, QR code and short URL, calls to action and
 charts. Submit a contribution from a phone on the same network: the count
-pulses within about three seconds. Set `INTRO_VIDEO_URL` (plus optional
-poster and subtitles URLs) to see the video autoplay muted and loop.
+pulses within about three seconds. The intro video (`intro_video_url` in
+`config/unbias.yml`, overridable with `INTRO_VIDEO_URL`, plus optional
+poster and subtitles URLs) autoplays muted and loops.
+
+Open http://localhost:3000/video for a second screen: the intro video
+alone, full screen, muted, looping, with no controls.
 
 ### 4. Email and retention
 
@@ -254,12 +258,14 @@ turns the boost off so the other specs see real numbers.
 
 ## PR 5 — Dashboard keeps working without network
 
-Only the home page (`/`) and `/installation` are cached, by `public/sw.js`. The contribute flow, staff pages and everything behind a login are never cached. The worker is registered in production builds only, so test it on a deployed or production-built server (not `bin/dev`).
+Only the home page (`/`), `/installation` and `/video` are cached, by `public/sw.js`. The contribute flow, staff pages and everything behind a login are never cached. The worker is registered in production builds only, so test it on a deployed or production-built server (not `bin/dev`).
 
 1. Open `/` (or `/installation`) with network and wait a few seconds for the numbers to load.
 2. Cut the network (airplane mode, or Chrome DevTools → Network → Offline) and refresh: the page loads with the last numbers, charts, fonts and QR code.
 3. Restore the network: within one polling interval the numbers update from the server, and the next refresh serves the latest page.
 4. Offline, open `/contribute`: the browser's own "no connection" page appears, since contributing needs the server.
 5. After a deploy, the next online visit picks up the new version; the old one is only used while offline.
+
+6. On `/installation` and `/video`, the first online visit streams the intro video and saves a copy in Cache Storage (DevTools → Application → Cache storage → `unbias-video-v1`). Offline, both pages play the saved copy. The video host must allow CORS `GET` from the site's origin, otherwise the video keeps streaming and is not saved. Home does not save it, so phones don't download it.
 
 The first visit must happen online. Browsers may clear cached data after long idle periods (Safari: about a week), so open the installation once online on the day.

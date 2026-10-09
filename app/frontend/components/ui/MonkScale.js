@@ -22,7 +22,7 @@ export default function MonkScale({ swatches, value, suggested, onChange }) {
               onClick={() => onChange(tone)}
               className={`rounded-card flex flex-col items-center gap-1.5 border p-1.5 transition-colors ${
                 on
-                  ? "border-ink bg-ink text-canvas"
+                  ? "border-ink bg-ink text-on-dark"
                   : "border-ink/15 text-ink hover:border-ink/40 bg-white/40"
               }`}
             >

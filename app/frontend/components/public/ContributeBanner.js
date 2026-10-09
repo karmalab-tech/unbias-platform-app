@@ -1,36 +1,32 @@
 import { Link } from "react-router-dom";
-import { CameraIcon } from "@heroicons/react/24/outline";
+import iconNewPhoto from "~/images/icons/icon_new_photo.png";
 import { t } from "~/i18n";
 
 export default function ContributeBanner({ showQr = true }) {
   return (
-    <section className="md:px-gutter mx-auto max-w-[1512px] px-5 pb-12">
-      <div className="rounded-banner bg-surface-warm flex flex-col gap-8 px-6 py-8 md:flex-row md:items-center md:justify-between md:gap-10 md:px-[44px] md:py-[34px]">
-        <Link to="/contribute" className="flex items-center gap-[26px]">
-          <span className="bg-accent flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full text-white">
-            <CameraIcon className="h-[34px] w-[34px]" strokeWidth={1.5} />
-          </span>
+    <section className="md:px-gutter mx-auto max-w-[1512px] px-4 pb-14">
+      <div className="bg-ink text-cream border-ink shadow-hard-signal flex flex-col gap-8 border-2 px-6 py-7 md:flex-row md:items-center md:justify-between md:gap-10 md:px-10 md:py-8">
+        <Link to="/contribute" className="group flex items-center gap-6">
+          <img src={iconNewPhoto} alt="" className="h-22 w-22 shrink-0" />
           <span>
-            <span className="font-display block text-[clamp(26px,3vw,33px)] leading-none font-bold tracking-[-0.03em]">
-              {t("dashboard.addYourPhotos")}
+            <span className="display-caps block text-[clamp(30px,3.4vw,44px)] leading-[0.95] group-hover:underline">
+              {t("dashboard.addYourPhotos")} <span aria-hidden="true">→</span>
             </span>
-            <span className="text-ink-60 mt-1.5 block text-[15.5px]">
+            <span className="text-peach mt-2 block text-[16px]">
               {t("dashboard.reviewedByPeople")}
             </span>
           </span>
         </Link>
         {showQr && (
-          <div className="border-hairline-strong hidden items-center gap-[22px] md:flex md:border-l md:pl-[44px]">
-            <div className="rounded-lg bg-white p-3">
-              <img
-                src="/qr.svg"
-                alt=""
-                className="h-[94px] w-[94px]"
-                width="94"
-                height="94"
-              />
-            </div>
-            <p className="max-w-[170px] text-[17px] leading-[1.35] font-medium">
+          <div className="border-peach hidden items-center gap-6 md:flex md:border-l-2 md:pl-10">
+            <img
+              src="/qr.svg"
+              alt=""
+              className="bg-cream h-[104px] w-[104px] p-2"
+              width="104"
+              height="104"
+            />
+            <p className="mono-caps text-peach max-w-[190px] text-[12px] leading-relaxed">
               {t("dashboard.scanToAdd")}
             </p>
           </div>

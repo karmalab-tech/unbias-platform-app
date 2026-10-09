@@ -1,9 +1,6 @@
-import {
-  CheckCircleIcon,
-  PhotoIcon,
-  PlayCircleIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
+import iconBolt from "~/images/icons/icon_bolt.png";
+import iconPeople from "~/images/icons/icon_people.png";
+import iconPhotos from "~/images/icons/icon_photos.png";
 import { Track } from "~/components/public/Bars";
 import { formatNumber } from "~/lib/format";
 import { t } from "~/i18n";
@@ -23,19 +20,19 @@ export default function Hero({
   const figure = (value) => (loading ? "—" : formatNumber(value));
 
   return (
-    <section className="md:px-gutter mx-auto max-w-[1512px] px-5 pt-8 pb-8 md:pt-[44px] md:pb-9">
-      <div className="flex flex-col gap-8 lg:flex-row lg:items-stretch lg:gap-[44px]">
+    <section className="md:px-gutter mx-auto max-w-[1512px] px-4 pt-8 pb-8 md:pt-12 md:pb-10">
+      <div className="flex flex-col gap-8 lg:flex-row lg:items-stretch lg:gap-10">
         <div className="flex flex-1 flex-col justify-between">
           <div>
-            <div className="flex flex-wrap items-baseline gap-x-[22px]">
-              <span className="font-display tabular text-[clamp(64px,12vw,124px)] leading-[0.88] font-extrabold tracking-[-0.045em]">
+            <div className="flex flex-wrap items-baseline gap-x-5">
+              <span className="font-display tabular text-[clamp(72px,13vw,148px)] leading-[0.86] font-extrabold tracking-[-0.01em] font-stretch-70%">
                 {figure(total.approved)}
               </span>
-              <span className="font-display text-ink-40 tabular text-[clamp(24px,4vw,48px)] leading-none font-medium tracking-[-0.02em]">
+              <span className="font-display tabular text-[clamp(28px,4vw,52px)] leading-none font-extrabold font-stretch-75%">
                 / {formatNumber(total.target)}
               </span>
             </div>
-            <p className="text-ink-55 mt-5 text-[14px] font-semibold tracking-[0.2em] uppercase">
+            <p className="mono-caps mt-4 text-[13px] font-bold tracking-[0.12em]">
               {t("dashboard.peopleRepresented")}
             </p>
           </div>
@@ -48,7 +45,7 @@ export default function Hero({
               pending={loading ? 0 : total.pending}
               target={total.target}
             />
-            <dl className="mt-[22px] flex flex-wrap gap-x-16 gap-y-4">
+            <dl className="mt-5 flex flex-wrap gap-x-14 gap-y-4">
               <LegendItem
                 swatch="bg-data-approved"
                 label={t("dashboard.approved")}
@@ -71,7 +68,7 @@ export default function Hero({
         <button
           type="button"
           onClick={onWatchVideo}
-          className="rounded-media bg-surface relative block aspect-[4/3] w-full overflow-hidden text-left lg:order-3 lg:aspect-auto lg:w-[396px] lg:shrink-0"
+          className="press border-ink hatch-well relative block aspect-4/3 w-full cursor-pointer overflow-hidden border-2 text-left lg:order-3 lg:aspect-auto lg:w-[396px] lg:shrink-0"
           aria-label={t("nav.watchVideo")}
         >
           {poster && (
@@ -81,30 +78,29 @@ export default function Hero({
               className="absolute inset-0 h-full w-full object-cover"
             />
           )}
-          <span className="pointer-events-none absolute inset-0 bg-[rgba(18,16,12,0.24)]" />
-          <span className="rounded-btn bg-accent hover:bg-accent-hover absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[11px] px-[22px] py-[14px] text-[15.5px] font-semibold whitespace-nowrap text-white">
-            <PlayCircleIcon className="h-5 w-5" />
+          <span className="border-ink bg-signal text-ink mono-caps absolute top-1/2 left-1/2 flex min-h-13 -translate-x-1/2 -translate-y-1/2 items-center gap-3 border-2 px-5 text-[14px] font-bold whitespace-nowrap">
+            <span aria-hidden="true">▶</span>
             {t("nav.watchVideo")}
           </span>
         </button>
 
         {showSecondaryStats && (
-          <dl className="flex flex-col gap-5 py-0.5 sm:flex-row sm:gap-8 lg:order-2 lg:w-[236px] lg:shrink-0 lg:flex-col lg:justify-between">
+          <dl className="flex flex-col gap-5 sm:flex-row lg:order-2 lg:w-[260px] lg:shrink-0 lg:flex-col lg:justify-between">
             <Stat
-              tint="bg-tint-age"
-              icon={UsersIcon}
+              tone="ink"
+              icon={iconPeople}
               label={t("dashboard.peopleRepresented")}
               value={figure(total.approved)}
             />
             <Stat
-              tint="bg-tint-skin"
-              icon={PhotoIcon}
+              tone="lime"
+              icon={iconPhotos}
               label={t("dashboard.imagesContributed")}
               value={figure(stats?.images)}
             />
             <Stat
-              tint="bg-tint-body"
-              icon={CheckCircleIcon}
+              tone="peach"
+              icon={iconBolt}
               label={t("dashboard.contributionsToday")}
               value={figure(stats?.contributions_last_24h)}
             />
@@ -118,30 +114,36 @@ export default function Hero({
 function LegendItem({ swatch, label, value }) {
   return (
     <div>
-      <dt className="text-ink-72 flex items-center gap-2 text-[14.5px] font-medium">
+      <dt className="mono-caps flex items-center gap-2.5 text-[12px]">
         <span
-          className={`inline-block h-[15px] w-[15px] rounded-[3px] ${swatch}`}
+          className={`border-ink inline-block h-4 w-4 border-2 ${swatch}`}
         />
         {label}
       </dt>
-      <dd className="font-display tabular mt-1 text-[25px] font-bold tracking-[-0.01em]">
+      <dd className="font-display tabular mt-1.5 text-[30px] leading-none font-extrabold font-stretch-75%">
         {value}
       </dd>
     </div>
   );
 }
 
-function Stat({ tint, icon: Icon, label, value }) {
+const TONES = {
+  lime: "bg-lime text-ink shadow-hard",
+  peach: "bg-peach text-ink shadow-hard",
+  ink: "bg-ink text-cream shadow-hard-signal",
+};
+
+export function Stat({ tone, icon, label, value }) {
   return (
-    <div className="flex items-center gap-3.5">
-      <span
-        className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full ${tint}`}
-      >
-        <Icon className="h-7 w-7" strokeWidth={1.5} />
-      </span>
-      <div>
-        <dt className="text-ink-60 text-[14.5px]">{label}</dt>
-        <dd className="font-display tabular text-[30px] leading-[1.15] font-bold tracking-[-0.025em]">
+    <div
+      className={`border-ink flex flex-1 items-center gap-3.5 border-2 px-4 py-3 ${TONES[tone]}`}
+    >
+      <img src={icon} alt="" className="h-14 w-14 shrink-0 object-contain" />
+      <div className="min-w-0">
+        <dt className="mono-caps text-[11px] leading-tight font-bold tracking-[0.08em]">
+          {label}
+        </dt>
+        <dd className="font-display tabular mt-1 text-[34px] leading-none font-extrabold font-stretch-70%">
           {value}
         </dd>
       </div>

@@ -23,6 +23,7 @@ export const fr = {
     },
   },
   nav: {
+    main: "Principal",
     whatIsThis: "C'est quoi ?",
     watchVideo: "Voir la vidéo",
     contribute: "Contribuer",
@@ -303,7 +304,7 @@ export const fr = {
       "Toutes les photos envoyées ont été vérifiées. Les nouvelles contributions apparaissent ici au fil de l'eau.",
   },
   dashboard: {
-    peopleRepresented: "personnes représentées",
+    peopleRepresented: "Personnes représentées",
     imagesContributed: "Images reçues",
     contributionsToday: "Contributions (24 h)",
     approved: "Approuvées",
@@ -324,6 +325,7 @@ export const fr = {
       "Les chiffres en direct sont temporairement indisponibles. Dernières valeurs connues affichées.",
   },
   footer: {
+    platform: "plateforme",
     faq: "FAQ",
     source: "Code source",
     language: "Langue",

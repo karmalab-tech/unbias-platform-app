@@ -44,7 +44,7 @@ export default function ReviewStep() {
                 <span
                   className={`absolute top-2 left-2 flex items-center gap-1 rounded-full px-2 py-1 text-[11.5px] font-semibold ${
                     asset.complete
-                      ? "bg-ink text-canvas"
+                      ? "bg-ink text-on-dark"
                       : "bg-accent text-white"
                   }`}
                 >

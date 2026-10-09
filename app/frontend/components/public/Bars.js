@@ -8,13 +8,13 @@ export function Track({
   approved,
   pending,
   target,
-  height = 11,
+  height = 14,
   large = false,
   className = "",
 }) {
   return (
     <div
-      className={`rounded-bar bg-data-track flex overflow-hidden ${className}`}
+      className={`border-ink bg-data-track flex overflow-hidden border-2 ${className}`}
       style={{ height }}
       role="img"
       aria-label={`${formatNumber(approved)} / ${formatNumber(target)}`}
@@ -47,7 +47,7 @@ export function LabelledRows({
           style={{ marginBottom: gap }}
         >
           <span
-            className="text-ink-72 shrink-0 text-[12.5px] leading-tight font-medium"
+            className="mono-caps shrink-0 text-[11px] leading-tight tracking-[0.06em]"
             style={{ width: labelWidth }}
           >
             {bucket.label}
@@ -59,7 +59,7 @@ export function LabelledRows({
             target={bucket.target}
           />
           <span
-            className="tabular shrink-0 text-right text-[12px] font-semibold"
+            className="tabular shrink-0 text-right font-mono text-[12px] font-bold"
             style={{ width: valueWidth }}
           >
             {loading ? "—" : formatNumber(bucket.approved)}
@@ -76,15 +76,15 @@ export function LabelAboveRows({ buckets, gap = 21, loading = false }) {
       {buckets.map((bucket) => (
         <li key={bucket.value} style={{ marginBottom: gap }}>
           <div className="mb-2 flex items-baseline justify-between gap-3">
-            <span className="text-ink-72 text-[12.5px] leading-tight font-medium">
+            <span className="mono-caps text-[11px] leading-tight tracking-[0.06em]">
               {bucket.label}
             </span>
-            <span className="tabular text-[12px] font-semibold">
+            <span className="tabular font-mono text-[12px] font-bold">
               {loading ? "—" : formatNumber(bucket.approved)}
             </span>
           </div>
           <Track
-            height={12}
+            height={16}
             approved={loading ? 0 : bucket.approved}
             pending={loading ? 0 : bucket.pending}
             target={bucket.target}
@@ -104,11 +104,11 @@ export function SwatchColumns({ buckets, loading = false }) {
           key={bucket.value}
           className="flex min-w-0 flex-1 flex-col items-center gap-[7px]"
         >
-          <span className="text-ink-60 tabular text-[10.5px] font-semibold">
+          <span className="tabular font-mono text-[10.5px] font-bold">
             {loading ? "—" : formatNumber(bucket.approved)}
           </span>
           <div
-            className="rounded-bar bg-data-track flex w-full flex-auto flex-col justify-end overflow-hidden"
+            className="border-ink bg-data-track flex w-full flex-auto flex-col justify-end overflow-hidden border-2"
             role="img"
             aria-label={`${bucket.label}: ${formatNumber(bucket.approved)} / ${formatNumber(bucket.target)}`}
           >
@@ -126,7 +126,7 @@ export function SwatchColumns({ buckets, loading = false }) {
             />
           </div>
           <span
-            className="border-ink/10 h-[13px] w-full shrink-0 rounded-[3px] border"
+            className="border-ink h-[14px] w-full shrink-0 border-2"
             style={{ background: bucket.swatch }}
             title={bucket.label}
           />

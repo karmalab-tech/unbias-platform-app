@@ -183,7 +183,7 @@ export default function ModerationReview({
                 className="rounded-card border-hairline-strong border p-4"
               >
                 <div className="mb-3 flex items-center gap-2">
-                  <span className="bg-ink font-display text-canvas flex h-7 w-7 items-center justify-center rounded-full text-[13px] font-bold">
+                  <span className="bg-ink font-display text-on-dark flex h-7 w-7 items-center justify-center rounded-full text-[13px] font-bold">
                     {index + 1}
                   </span>
                   <span className="text-ink-55 text-[12px]">

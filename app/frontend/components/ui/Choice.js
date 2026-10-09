@@ -38,7 +38,7 @@ export default function ChoiceGrid({
             onClick={() => toggle(option.value)}
             className={`rounded-card flex min-h-14 items-center gap-3 border px-4 py-3 text-left text-[15px] leading-tight font-medium transition-colors ${
               on
-                ? "border-ink bg-ink text-canvas"
+                ? "border-ink bg-ink text-on-dark"
                 : "border-ink/15 text-ink hover:border-ink/40 bg-white/40"
             }`}
           >

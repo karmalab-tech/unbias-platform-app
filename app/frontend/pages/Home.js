@@ -34,7 +34,7 @@ export default function Home() {
       <NeedCards needs={stats?.needs} />
       <RepresentationCharts buckets={stats?.buckets} loading={loading} />
       {error && (
-        <p className="text-ink-60 md:px-gutter mx-auto max-w-[1512px] px-5 pb-6 text-[14px]">
+        <p className="mono-caps md:px-gutter mx-auto max-w-[1512px] px-4 pb-6 text-[12px]">
           {t("dashboard.offline")}
         </p>
       )}

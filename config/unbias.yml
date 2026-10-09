@@ -20,6 +20,7 @@ shared:
   installation_poll_seconds: 3
   consent_version: v0-draft
   people_milestone: 10000
+  intro_video_url: https://karmalab-cdn.s3.us-east-1.amazonaws.com/unbias_video_installation_fr.mp4
   max_active_calls_to_action: 3
   launch_boost_photos_floor: 1573
   launch_boost_people_floor: 1100

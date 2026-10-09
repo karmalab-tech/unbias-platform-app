@@ -27,7 +27,7 @@ export default function StaffShell({ children, wide = true }) {
   }
 
   const link = ({ isActive }) =>
-    `rounded-full px-3 py-1.5 text-[14px] font-medium ${isActive ? "bg-ink text-canvas" : "text-ink-72 hover:text-ink"}`;
+    `rounded-full px-3 py-1.5 text-[14px] font-medium ${isActive ? "bg-ink text-on-dark" : "text-ink-72 hover:text-ink"}`;
 
   return (
     <div className="bg-canvas text-ink min-h-dvh">

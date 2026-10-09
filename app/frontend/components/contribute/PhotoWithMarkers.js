@@ -61,10 +61,10 @@ export default function PhotoWithMarkers({
                 ? t("people.removePerson", { n: index + 1 })
                 : `${index + 1}`
             }
-            className={`font-display absolute flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-[15px] font-bold shadow-[0_0_0_3px_rgba(250,246,239,0.9)] transition-transform ${
+            className={`font-display absolute flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-[15px] font-bold shadow-[0_0_0_3px_rgba(255,248,232,0.9)] transition-transform ${
               isSelected
                 ? "bg-accent scale-125 text-white"
-                : "bg-ink text-canvas"
+                : "bg-ink text-on-dark"
             } ${selected !== null && !isSelected ? "opacity-60" : ""} ${
               onRemove ? "" : "pointer-events-none"
             }`}

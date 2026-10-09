@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const DASHBOARD_PAGES = ["/", "/installation"];
+const DASHBOARD_PAGES = ["/", "/installation", "/video"];
 
 // Caches the dashboard so a refresh without network still shows the last numbers.
 export function useOfflineDashboard() {

@@ -1,4 +1,3 @@
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import {
   LabelAboveRows,
   LabelledRows,
@@ -8,7 +7,8 @@ import { groupBuckets } from "~/lib/coverage";
 import { formatNumber } from "~/lib/format";
 import { t } from "~/i18n";
 
-const COLUMN_WIDTHS = "xl:grid-cols-[1fr_1.12fr_1fr_1fr_1.16fr]";
+const COLUMN_WIDTHS =
+  "xl:grid-cols-[minmax(0,1fr)_minmax(0,1.12fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.16fr)]";
 
 export default function RepresentationCharts({
   buckets,
@@ -21,27 +21,16 @@ export default function RepresentationCharts({
   const padRight = compact ? "xl:pr-4" : "xl:pr-[30px]";
 
   return (
-    <section className="border-hairline border-t">
+    <section className="border-ink border-t-2">
       <div
-        className={`md:px-gutter mx-auto ${containerClass} px-5 ${compact ? "py-6" : "py-8"}`}
+        className={`md:px-gutter mx-auto ${containerClass} px-4 ${compact ? "py-6" : "py-10"}`}
       >
         {!compact && (
-          <div
-            className={`${compact ? "mb-4" : "mb-7"} flex flex-wrap items-end justify-between gap-x-6 gap-y-3`}
-          >
-            <h2 className="font-display text-[30px] leading-none font-bold tracking-[-0.025em]">
+          <div className="border-ink mb-8 flex flex-wrap items-end justify-between gap-x-6 gap-y-3 border-b-2 pb-3">
+            <h2 className="display-caps text-[40px] leading-none">
               {t("dashboard.representation")}
             </h2>
-            <ul className="text-ink-60 flex gap-[26px] text-[13px]">
-              <li className="flex items-center gap-2">
-                <span className="bg-data-approved inline-block h-3 w-3 rounded-[2px]" />{" "}
-                {t("dashboard.approved")}
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="hatch inline-block h-3 w-3 rounded-[2px]" />{" "}
-                {t("dashboard.pending")}
-              </li>
-            </ul>
+            <ChartLegend />
           </div>
         )}
 
@@ -51,16 +40,15 @@ export default function RepresentationCharts({
           {dimensions.map((dimension, index) => (
             <div
               key={dimension.id}
-              className={`border-hairline ${index > 0 ? `border-t pt-8 md:border-t-0 md:pt-0 xl:border-l ${padLeft}` : ""} ${index < dimensions.length - 1 ? padRight : ""}`}
+              className={`border-ink ${index > 0 ? `border-t-2 pt-8 md:border-t-0 md:pt-0 xl:border-l-2 ${padLeft}` : ""} ${index < dimensions.length - 1 ? padRight : ""}`}
             >
-              <div className="mb-[22px] flex items-start gap-x-[9px]">
+              <div className="mb-5 flex flex-wrap items-start gap-x-2.5 gap-y-1">
                 {!compact && (
-                  <span
-                    className="mt-1.5 h-[9px] w-[9px] shrink-0 rounded-full"
-                    style={{ background: dimension.key }}
-                  />
+                  <span className="font-mono text-[12px] font-bold">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 )}
-                <h3 className="font-display text-[17px] leading-tight font-bold tracking-[-0.01em]">
+                <h3 className="mono-caps text-[13px] leading-tight font-bold tracking-[0.12em]">
                   {dimension.id === "disability"
                     ? t("taxonomy.disability.short")
                     : dimension.title}
@@ -73,10 +61,10 @@ export default function RepresentationCharts({
                   href="https://en.wikipedia.org/wiki/Monk_Skin_Tone_Scale"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-ink-55 hover:text-accent mt-[9px] inline-flex items-center gap-1 text-[11.5px]"
+                  className="mono-caps mt-2.5 inline-flex items-center gap-1 text-[11px] tracking-[0.06em] hover:underline"
                 >
-                  {t("dashboard.usingThe")} <em>{t("dashboard.monkScale")}</em>
-                  <ArrowUpRightIcon className="h-[9px] w-[9px]" />
+                  {t("dashboard.usingThe")} {t("dashboard.monkScale")}
+                  <span aria-hidden="true">↗</span>
                 </a>
               )}
             </div>
@@ -84,6 +72,23 @@ export default function RepresentationCharts({
         </div>
       </div>
     </section>
+  );
+}
+
+export function ChartLegend({ className = "" }) {
+  return (
+    <ul
+      className={`mono-caps flex flex-wrap gap-x-5 gap-y-2 text-[12px] tracking-[0.08em] ${className}`}
+    >
+      <li className="flex items-center gap-2">
+        <span className="bg-data-approved border-ink inline-block h-3.5 w-3.5 border-2" />
+        {t("dashboard.approved")}
+      </li>
+      <li className="flex items-center gap-2">
+        <span className="hatch border-ink inline-block h-3.5 w-3.5 border-2" />
+        {t("dashboard.pending")}
+      </li>
+    </ul>
   );
 }
 
@@ -103,7 +108,7 @@ function TargetNote({ buckets }) {
             .join(" / "),
         });
   return (
-    <span className="text-ink-45 tabular ml-auto shrink-0 pl-2 text-[11.5px] whitespace-nowrap">
+    <span className="mono-caps tabular ml-auto shrink-0 pl-2 text-[11px] tracking-[0.06em] whitespace-nowrap">
       {text}
     </span>
   );
@@ -126,7 +131,7 @@ function Chart({ dimension, loading }) {
         <LabelledRows
           buckets={dimension.buckets}
           loading={loading}
-          labelWidth={dimension.id === "disability" ? 140 : 44}
+          labelWidth={dimension.id === "disability" ? 120 : 44}
           valueWidth={dimension.id === "disability" ? 50 : 52}
           gap={dimension.id === "disability" ? 7 : 14}
         />

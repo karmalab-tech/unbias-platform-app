@@ -1,0 +1,16 @@
+#stage { --ground:#000000; --main:#FB48C4; --second:#EDEDEF; --accent:#8A8A94; color:var(--second); font-family:var(--sans, system-ui, sans-serif) }
+.ground { position:absolute; inset:0; background:var(--ground); overflow:hidden }
+.words { position:absolute; margin:0; display:flex; flex-direction:column; gap:40px } .words > * { margin:0 }
+.line { font-family:var(--sans, system-ui, sans-serif); font-size:80px; line-height:1.1; font-weight:300; letter-spacing:-.02em }
+.pk { color:var(--main) }
+.txt-slide { left:140px; right:140px; top:0; bottom:0; justify-content:center }
+.card { position:absolute; box-sizing:border-box; border-radius:22px; border:1px solid color-mix(in srgb, var(--second) 8%, transparent); background:color-mix(in srgb, var(--ground) 90%, var(--second)); overflow:hidden }
+.pf img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
+.pf svg { position:absolute; inset:0; width:100%; height:100% }
+.ph-body { fill:color-mix(in srgb, var(--ground) 78%, var(--second)) }
+.ring { position:absolute; box-sizing:border-box; border:4px solid var(--main); border-radius:26px }
+.bar { position:absolute; height:16px; border-radius:8px; background:color-mix(in srgb, var(--second) 18%, var(--ground)) }
+.mock-h { position:absolute; margin:0; font-weight:700; letter-spacing:-.03em; line-height:1; color:var(--ground) }
+.wm { position:absolute; left:40px; bottom:28px; width:84px; height:84px }
+.src { position:absolute; margin:0; left:140px; bottom:52px; font-size:26px; font-weight:400; color:var(--accent) }
+.webcap { position:absolute; margin:0; white-space:nowrap; font-family:var(--mono, ui-monospace, monospace); font-weight:500; font-size:30px; color:var(--accent) }

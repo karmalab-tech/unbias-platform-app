@@ -8,7 +8,7 @@ module Api
                                :detection_min_score, :detection_min_area_ratio),
           consent_version: limits.consent_version,
           people_milestone: limits.people_milestone,
-          intro_video_url: ENV["INTRO_VIDEO_URL"].presence,
+          intro_video_url: ENV["INTRO_VIDEO_URL"].presence || limits.intro_video_url,
           intro_video_poster_url: ENV["INTRO_VIDEO_POSTER_URL"].presence,
           intro_video_subtitles_url: ENV["INTRO_VIDEO_SUBTITLES_URL"].presence,
           taxonomy: {

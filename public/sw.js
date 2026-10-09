@@ -1,5 +1,5 @@
 const CACHE = "unbias-dashboard-v1";
-const PAGES = ["/", "/installation"];
+const PAGES = ["/", "/installation", "/video"];
 const DATA = ["/api/public/stats", "/api/public/settings", "/qr.svg"];
 const FALLBACK_MS = 4000;
 
@@ -14,7 +14,9 @@ self.addEventListener("activate", (event) => {
       .keys()
       .then((names) =>
         Promise.all(
-          names.filter((name) => name !== CACHE).map((name) => caches.delete(name))
+          names
+            .filter((name) => name.startsWith("unbias-dashboard-") && name !== CACHE)
+            .map((name) => caches.delete(name))
         )
       )
       .then(() => self.clients.claim())

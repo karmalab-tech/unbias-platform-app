@@ -23,6 +23,7 @@ export const en = {
     },
   },
   nav: {
+    main: "Main",
     whatIsThis: "What is this?",
     watchVideo: "Watch video",
     contribute: "Contribute",
@@ -318,6 +319,7 @@ export const en = {
       "Live numbers are temporarily unavailable. Showing the last known values.",
   },
   footer: {
+    platform: "platform",
     faq: "FAQ",
     source: "Source code",
     language: "Language",
