@@ -10,6 +10,7 @@ import usePolling from "~/lib/usePolling";
 import { useOfflineDashboard } from "~/lib/offline";
 import { useSettings } from "~/lib/settings";
 import { formatNumber } from "~/lib/format";
+import { INSTAGRAM_HANDLE, INSTAGRAM_URL } from "~/lib/social";
 import { LANGUAGES, chooseLocale, hasStoredLocale, t } from "~/i18n";
 
 // Installation screen: no navigation, autoplaying muted intro with subtitles, QR hand-off, faster polling.
@@ -145,6 +146,14 @@ export default function Installation() {
               <p className="text-peach mt-3 text-[16px]">
                 {t("dashboard.reviewedByPeople")}
               </p>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mono-caps text-cream hover:text-signal mt-3 inline-block text-[16px] font-bold"
+              >
+                {t("installation.followOn", { handle: INSTAGRAM_HANDLE })}
+              </a>
             </div>
           </div>
         </div>

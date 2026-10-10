@@ -108,6 +108,7 @@ Unbias AI is a public, image-only contribution platform building a consented, hu
 - The repository is public under MIT. Contributor media, personal data, secrets, production data and ML models (`public/models`) never enter git.
 - Do not put model identifiers of the assistant in commits, PRs or code comments.
 - Commit messages are short imperative sentences describing the change.
+- Never commit to `main` or a detached HEAD: create a new branch, commit there and push it with `git push -u origin <branch>`.
 
 ## General
 

@@ -26,6 +26,7 @@ export const en = {
     main: "Main",
     whatIsThis: "What is this?",
     watchVideo: "Watch video",
+    instagram: "Instagram",
     contribute: "Contribute",
     signIn: "Staff sign in",
     moderation: "Moderation",
@@ -470,6 +471,7 @@ export const en = {
   installation: {
     chooseLanguage: "Choose your language",
     scan: "Scan to add your photos",
+    followOn: "Instagram {handle}",
   },
   errors: {
     generic: "Something went wrong. Please try again.",
