@@ -36,6 +36,21 @@
   --spacing-s5: 30px;
   --spacing-s6: 44px;
   --spacing-gutter: 40px;
+
+  --animate-tap-hint: tap-hint 1.1s ease-in-out infinite;
+  @keyframes tap-hint {
+    0%,
+    100% {
+      transform: translateY(-10px);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+  }
+}
+
+@utility marker-round {
+  border-radius: 9999px;
 }
 
 @utility hatch {

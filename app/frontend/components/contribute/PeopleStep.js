@@ -144,6 +144,7 @@ export default function PeopleStep() {
         people={people}
         onAdd={add}
         onRemove={remove}
+        hint
       />
       <p className="text-ink-60 mt-4 text-[14.5px] leading-snug">
         {t("people.manualHint")} {t("people.background")}
