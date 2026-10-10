@@ -2,7 +2,7 @@
 
 > `CLAUDE.md` and `.github/copilot-instructions.md` are symlinks to this file, so Claude Code, GitHub Copilot, and Codex all read the same source of truth.
 
-Unbias AI is a public, image-only contribution platform building a consented, human-reviewed representation dataset. Canonical product and architecture specs live in `docs/` (`PROJECT_BRIEF.md`, `POC_DESIGN.md`, `TECHNICAL_ARCHITECTURE.md`, `DESIGN_HANDOFF.md`, `IMPLEMENTATION_PLAN.md`). Read them before changing product behaviour. `docs/FUTURE_IMPROVEMENTS.md` and `IMPLEMENTATION_PLAN.md` §7 list what is deliberately out of scope; do not add any of it without an explicit scope change.
+Unbias AI is a public, image-only contribution platform building a consented, human-reviewed representation dataset. Canonical product and architecture specs live in `docs/` (`PROJECT_BRIEF.md`, `POC_DESIGN.md`, `TECHNICAL_ARCHITECTURE.md`, `DESIGN_LANGUAGE.md`, `DESIGN_HANDOFF.md`, `IMPLEMENTATION_PLAN.md`). Read them before changing product behaviour. `docs/FUTURE_IMPROVEMENTS.md` and `IMPLEMENTATION_PLAN.md` §7 list what is deliberately out of scope; do not add any of it without an explicit scope change.
 
 ## Where the project stands
 
@@ -51,8 +51,9 @@ Unbias AI is a public, image-only contribution platform building a consented, hu
 - React 19 automatic JSX — do **not** `import React from "react"`.
 - Import alias `~/` → `app/frontend/` is provided by `vite-plugin-ruby` at build time, and mirrored in `eslint.config.mjs` and `jsconfig.json` so linting and editors resolve it too. Keep those two in sync.
 - Tailwind 4 via `@tailwindcss/vite` (dev HMR) and `@tailwindcss/cli` (prod build from `app/assets/stylesheets/application.tailwind.css`). `prettier-plugin-tailwindcss` sorts classes — don't reorder by hand.
-- Icons come from `@heroicons/react` outline set (1.5px stroke matches the design language).
-- Design tokens live in `app/frontend/styles/theme.css` as Tailwind `@theme` variables (`bg-canvas`, `text-ink-60`, `font-display`, `rounded-card`, `hatch`…). Fonts are self-hosted via `@fontsource-variable` (Archivo, Instrument Sans); never load Google Fonts. Follow `docs/DESIGN_HANDOFF.md` and the prototypes in `docs/design/`; there are no further designs coming.
+- Icons come from `@heroicons/react` outline set (1.5px stroke) plus the illustrated PNGs in `app/frontend/images/icons/`.
+- There is one visual language, **Signal / Edge**, defined by the Home page and documented in `docs/DESIGN_LANGUAGE.md`; it applies to every screen, including contribute, staff, admin, auth, the password gate, error pages and emails. Square corners, 2px ink lines, flat palette tokens, hard offset shadows, `display-caps` titles and `mono-caps` labels. Never introduce another style, a Tailwind default colour, `rounded-*` or soft shadows; `app/frontend/lib/designLanguage.test.js` fails on them. Update the doc first when the language needs to grow.
+- Design tokens live in `app/frontend/styles/theme.css` as Tailwind `@theme` variables and utilities (`bg-canvas`, `text-ink-60`, `bg-signal`, `font-display`, `hatch`, `press`, `notice`, `display-caps`, `mono-caps`…). Fonts are self-hosted via `@fontsource-variable` (Archivo, JetBrains Mono); never load Google Fonts. Reuse `ui/Button`, `ui/Field`, `ui/Choice`, `ui/Modal` and `notice` before writing a new control. `docs/DESIGN_HANDOFF.md` covers the dashboard's structure, behaviour and data.
 - New pages are client-side routes inside React (React Router in `app/frontend/components/App.js`), not ERB views. Any HTML `GET` not owned by Rails falls through to the SPA (see the catch-all in `config/routes.rb`).
 - User-facing strings go through `t()` from `~/i18n`; add keys to `app/frontend/i18n/locales/{en,fr}.js` (plural forms are `{ one, other, zero }` objects). Locale is detected once at import time from the browser; `?lang=fr` forces it.
 - Product limits come from `/api/public/settings` through `loadSettings()` / `useSettings()` in `~/lib/settings`; never hard-code a limit in the frontend. Await `loadSettings()` before logic that depends on it.

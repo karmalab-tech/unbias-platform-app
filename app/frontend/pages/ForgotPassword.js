@@ -30,14 +30,14 @@ export default function ForgotPassword() {
       subtitle="We'll email you a link to set a new password."
     >
       {sent ? (
-        <p className="rounded-md bg-green-50 px-3 py-2 text-sm text-green-700">
+        <p className="notice bg-lime">
           If that email exists, a reset link is on its way.
         </p>
       ) : (
         <form className="space-y-4" onSubmit={handleSubmit}>
           <FormError message={error} />
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className="mono-caps mb-2 block text-[12px] font-bold tracking-[0.08em]">
               Email
             </label>
             <input
@@ -53,8 +53,11 @@ export default function ForgotPassword() {
           </button>
         </form>
       )}
-      <p className="text-center text-sm">
-        <Link className="text-indigo-600 hover:underline" to="/login">
+      <p className="mono-caps text-[12px] font-bold">
+        <Link
+          className="hover:bg-lime underline underline-offset-4"
+          to="/login"
+        >
           Back to sign in
         </Link>
       </p>

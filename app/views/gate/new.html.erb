@@ -1,19 +1,23 @@
-<div class="flex min-h-screen items-center justify-center bg-black px-6">
-  <div class="w-full max-w-sm">
-
-    <%= form_with url: unlock_path, method: :post, class: "mt-8 space-y-4" do |form| %>
+<div class="bg-canvas text-ink flex min-h-dvh flex-col">
+  <header class="bg-ink text-cream border-ink border-b-2">
+    <div class="mx-auto flex min-h-19 w-full max-w-md items-center px-4">
+      <span class="display-caps text-[30px] leading-none tracking-[0.04em]">Unbias</span>
+    </div>
+  </header>
+  <main class="mx-auto w-full max-w-md flex-1 px-4 pt-10">
+    <%= form_with url: unlock_path, method: :post, class: "space-y-4" do |form| %>
       <%= form.password_field :password,
             autofocus: true,
             autocomplete: "current-password",
             placeholder: t("gate.password"),
-            class: "w-full rounded-md border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-white/40 focus:border-white/60 focus:outline-none" %>
+            class: "border-ink bg-cream text-ink placeholder:text-ink-45 block w-full border-2 px-4 py-3 text-[15.5px]" %>
 
       <% if flash[:alert].present? %>
-        <p class="text-sm text-red-400"><%= flash[:alert] %></p>
+        <p class="notice" role="alert"><%= flash[:alert] %></p>
       <% end %>
 
       <%= form.submit t("gate.submit"),
-            class: "w-full cursor-pointer rounded-md bg-white px-4 py-3 font-medium text-black hover:bg-white/90" %>
+            class: "press border-ink bg-signal text-ink mono-caps min-h-14 w-full cursor-pointer border-2 px-[22px] text-[14px] font-bold" %>
     <% end %>
-  </div>
+  </main>
 </div>

@@ -53,22 +53,22 @@ export default function SuccessStep() {
         </div>
       }
     >
-      <p className="font-display text-[21px] leading-[1.25] font-bold tracking-[-0.015em]">
+      <p className="display-caps text-[24px] leading-none">
         {t("success.added", { count: submission.people_count })}
       </p>
       <p className="text-ink-60 mt-3 text-[15.5px] leading-[1.5]">
         {t("success.pending")}
       </p>
 
-      <section className="rounded-banner bg-surface-warm mt-8 p-6">
-        <h2 className="font-display text-[21px] font-bold tracking-[-0.015em]">
+      <section className="border-ink bg-peach mt-8 border-2 p-6">
+        <h2 className="display-caps text-[24px] leading-none">
           {t("success.keep")}
         </h2>
         <p className="text-ink-60 mt-1 text-[14.5px]">
           {t("success.keepBody")}
         </p>
-        <div className="bg-canvas rounded-btn mt-5 flex px-3 py-3">
-          <code className="font-display tabular block grow text-center text-[26px] font-bold tracking-[0.08em]">
+        <div className="bg-canvas border-ink mt-5 flex border-2 px-3 py-3">
+          <code className="font-display tabular block grow text-center text-[26px] font-extrabold tracking-[0.08em] font-stretch-75%">
             {submission.public_code}
           </code>
           <div className="flex justify-end">
@@ -92,8 +92,8 @@ export default function SuccessStep() {
         </div>
       </section>
 
-      <section className="rounded-banner border-ink/10 mt-4 border p-6">
-        <h2 className="font-display text-[21px] font-bold tracking-[-0.015em]">
+      <section className="border-ink mt-4 border-2 p-6">
+        <h2 className="display-caps text-[24px] leading-none">
           {t("success.followTitle")}
         </h2>
         <p className="text-ink-60 mt-1 text-[14.5px]">

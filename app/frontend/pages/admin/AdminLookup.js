@@ -54,13 +54,13 @@ export default function AdminLookup() {
           {t("admin.lookup.search")}
         </Button>
       </form>
-      {error && <p className="text-accent mt-4 text-[14px]">{error}</p>}
+      {error && <p className="notice mt-4">{error}</p>}
 
       {submission && (
         <section className="mt-8">
-          <div className="rounded-card bg-surface flex flex-wrap items-baseline justify-between gap-3 p-4 text-[14px]">
+          <div className="border-ink bg-surface flex flex-wrap items-baseline justify-between gap-3 border-2 p-4 text-[14px]">
             <div>
-              <span className="font-display tabular text-[19px] font-bold tracking-[0.04em]">
+              <span className="font-display tabular text-[19px] font-extrabold tracking-[0.04em] font-stretch-75%">
                 {submission.public_code}
               </span>
               <span className="text-ink-60 ml-3">
@@ -89,7 +89,7 @@ export default function AdminLookup() {
             {submission.assets.map((asset) => (
               <li
                 key={asset.id}
-                className="rounded-card border-hairline-strong overflow-hidden border"
+                className="border-ink overflow-hidden border-2"
               >
                 <div className="bg-surface aspect-[4/5]">
                   {asset.image_url && (

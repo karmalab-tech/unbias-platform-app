@@ -117,12 +117,8 @@ export default function PeopleStep() {
       intro={intro}
       footer={
         <>
-          {error && <p className="text-accent text-[14px]">{error}</p>}
-          {tooMany && (
-            <p className="text-accent text-[14px]">
-              {t("people.tooMany", { max })}
-            </p>
-          )}
+          {error && <p className="notice">{error}</p>}
+          {tooMany && <p className="notice">{t("people.tooMany", { max })}</p>}
           <Button
             full
             onClick={confirm}

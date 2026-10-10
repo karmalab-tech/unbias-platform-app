@@ -20,7 +20,7 @@ export default function AdminDashboard() {
 
   return (
     <AdminShell title={t("admin.tabs.dashboard")}>
-      {error && <p className="text-accent">{error}</p>}
+      {error && <p className="notice">{error}</p>}
       {data && (
         <>
           <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -55,12 +55,12 @@ export default function AdminDashboard() {
             />
           </dl>
 
-          <h2 className="font-display mt-12 mb-4 text-[21px] font-bold tracking-[-0.015em]">
+          <h2 className="display-caps mt-12 mb-4 text-[24px] leading-none">
             {t("admin.dash.coverage")}
           </h2>
           <div className="overflow-x-auto">
             <table className="tabular w-full text-[14px]">
-              <thead className="text-ink-55 text-left text-[12px] tracking-[0.08em] uppercase">
+              <thead className="mono-caps text-left text-[11px] font-bold tracking-[0.08em]">
                 <tr>
                   <th className="py-2 pr-4 font-semibold">
                     {t("admin.dash.bucket")}
@@ -78,11 +78,11 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               {groupBuckets(coverage.buckets).map((dimension) => (
-                <tbody key={dimension.id} className="border-hairline border-t">
+                <tbody key={dimension.id} className="border-ink border-t-2">
                   <tr>
                     <th
                       colSpan={5}
-                      className="font-display pt-4 pb-1 text-left text-[15px] font-bold"
+                      className="mono-caps pt-4 pb-1 text-left text-[13px] font-bold tracking-[0.12em]"
                     >
                       {dimension.title}
                     </th>
@@ -116,9 +116,9 @@ export default function AdminDashboard() {
 
 function Tile({ label, value }) {
   return (
-    <div className="rounded-card bg-surface p-4">
+    <div className="border-ink bg-surface border-2 p-4">
       <dt className="text-ink-60 text-[13.5px]">{label}</dt>
-      <dd className="font-display tabular mt-1 text-[28px] leading-none font-bold tracking-[-0.025em]">
+      <dd className="font-display tabular mt-1 text-[28px] leading-none font-extrabold font-stretch-75%">
         {formatNumber(value)}
       </dd>
     </div>

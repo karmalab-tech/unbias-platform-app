@@ -128,7 +128,7 @@ export default function AnnotationStep() {
       })}
       footer={
         <>
-          {error && <p className="text-accent text-[14px]">{error}</p>}
+          {error && <p className="notice">{error}</p>}
           {!complete && (
             <p className="text-ink-55 text-[13px]">{t("annotate.required")}</p>
           )}
@@ -141,7 +141,7 @@ export default function AnnotationStep() {
       <div ref={sentinel} aria-hidden="true" />
       <div
         className={`bg-canvas sticky top-14 z-[5] -mx-4 px-4 pt-2 pb-3 ${
-          stuck ? "border-hairline border-b" : ""
+          stuck ? "border-ink border-b-2" : ""
         }`}
       >
         <PhotoWithMarkers
@@ -160,7 +160,7 @@ export default function AnnotationStep() {
         onClose={() => setZoomed(false)}
       />
 
-      <h1 className="font-display mt-6 text-[30px] leading-[1.05] font-bold tracking-[-0.025em]">
+      <h1 className="display-caps mt-6 text-[34px] leading-[0.95]">
         {t("annotate.heading", { n: personIndex + 1 })}
       </h1>
       {personIndex === 0 && photoIndex === 0 && (
@@ -241,7 +241,7 @@ function Section({ title, hint, dimmed = false, children }) {
         dimmed ? "opacity-40 focus-within:opacity-100 hover:opacity-100" : ""
       }`}
     >
-      <h2 className="font-display text-[17px] font-bold tracking-[-0.01em]">
+      <h2 className="mono-caps text-[13px] font-bold tracking-[0.12em]">
         {title}
       </h2>
       {hint && <p className="text-ink-55 mt-1 mb-3 text-[13px]">{hint}</p>}

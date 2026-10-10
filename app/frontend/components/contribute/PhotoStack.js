@@ -20,7 +20,7 @@ export default function PhotoStack() {
         {visible.map((asset, index) => (
           <div
             key={asset.id}
-            className="border-hairline-strong bg-canvas absolute top-1 left-1/2 rounded-[7px] border p-2"
+            className="border-ink bg-canvas shadow-hard-sm absolute top-1 left-1/2 border-2 p-2"
             style={{
               transform: `translateX(calc(-50% + ${SHIFT[index]}px)) rotate(${TILT[index]}deg)`,
               zIndex: visible.length - index,
@@ -29,7 +29,7 @@ export default function PhotoStack() {
             <img
               src={imageUrl(asset)}
               alt=""
-              className="bg-surface h-[128px] w-[104px] rounded-[3px] object-cover"
+              className="bg-surface h-[128px] w-[104px] object-cover"
               draggable={false}
             />
           </div>

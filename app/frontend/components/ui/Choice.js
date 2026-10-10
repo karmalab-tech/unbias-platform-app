@@ -36,10 +36,10 @@ export default function ChoiceGrid({
             role={multiple ? "checkbox" : "radio"}
             aria-checked={on}
             onClick={() => toggle(option.value)}
-            className={`rounded-card flex min-h-14 items-center gap-3 border px-4 py-3 text-left text-[15px] leading-tight font-medium transition-colors ${
+            className={`flex min-h-14 items-center gap-3 border-2 px-4 py-3 text-left text-[15px] leading-tight font-medium ${
               on
-                ? "border-ink bg-ink text-on-dark"
-                : "border-ink/15 text-ink hover:border-ink/40 bg-white/40"
+                ? "border-ink bg-ink text-cream"
+                : "border-ink text-ink hover:bg-peach bg-cream"
             }`}
           >
             {renderOption ? renderOption(option, on) : option.label}

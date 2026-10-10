@@ -41,7 +41,7 @@ export default function ResetPassword() {
           <FormError message="Missing reset token. Please use the link from your email." />
         )}
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className="mono-caps mb-2 block text-[12px] font-bold tracking-[0.08em]">
             New password
           </label>
           <input
@@ -53,7 +53,7 @@ export default function ResetPassword() {
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className="mono-caps mb-2 block text-[12px] font-bold tracking-[0.08em]">
             Confirm new password
           </label>
           <input
@@ -72,8 +72,11 @@ export default function ResetPassword() {
           {submitting ? "Updating…" : "Update password"}
         </button>
       </form>
-      <p className="text-center text-sm">
-        <Link className="text-indigo-600 hover:underline" to="/login">
+      <p className="mono-caps text-[12px] font-bold">
+        <Link
+          className="hover:bg-lime underline underline-offset-4"
+          to="/login"
+        >
           Back to sign in
         </Link>
       </p>

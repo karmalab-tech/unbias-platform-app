@@ -44,7 +44,7 @@ export default function PermissionStep() {
       intro={t("permission.intro")}
       footer={
         <>
-          {error && <p className="text-accent text-[14px]">{error}</p>}
+          {error && <p className="notice">{error}</p>}
           <Button
             full
             onClick={confirm}
@@ -55,7 +55,7 @@ export default function PermissionStep() {
         </>
       }
     >
-      <div className="rounded-card bg-surface space-y-5 p-5">
+      <div className="border-ink bg-surface space-y-5 border-2 p-5">
         <Checkbox checked={adults} onChange={setAdults}>
           {t("permission.adults")}
         </Checkbox>

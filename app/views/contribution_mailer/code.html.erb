@@ -1,6 +1,6 @@
 <p><%= t("contribution_mailer.code.greeting") %></p>
 <p><%= t("contribution_mailer.code.body", count: @submission.people_count) %></p>
-<p style="font-size: 24px; font-weight: bold; letter-spacing: 0.08em;"><%= @submission.public_code %></p>
+<p style="display: inline-block; border: 2px solid #29211f; background: #fb4748; padding: 12px 18px; font-size: 24px; font-weight: 900; letter-spacing: 0.08em;"><%= @submission.public_code %></p>
 <p><%= t("contribution_mailer.code.keep") %></p>
 <p><%= t("contribution_mailer.code.withdraw") %></p>
 <% if @submission.updates_opt_in? %>

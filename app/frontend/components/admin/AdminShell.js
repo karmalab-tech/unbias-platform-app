@@ -14,21 +14,21 @@ export default function AdminShell({ title, children }) {
   return (
     <StaffShell wide={false}>
       <AdminGuard>
-        <nav className="border-hairline mb-8 flex flex-wrap gap-1 border-b pb-3">
+        <nav className="border-ink mb-8 flex flex-wrap gap-1 border-b-2 pb-3">
           {TABS.map((tab) => (
             <NavLink
               key={tab.to}
               to={tab.to}
               end={tab.end}
               className={({ isActive }) =>
-                `rounded-full px-3 py-1.5 text-[14px] font-medium ${isActive ? "bg-surface text-ink" : "text-ink-60 hover:text-ink"}`
+                `mono-caps px-3.5 py-2.5 text-[13px] ${isActive ? "bg-signal text-ink font-bold" : "text-ink hover:bg-peach"}`
               }
             >
               {t(`admin.tabs.${tab.key}`)}
             </NavLink>
           ))}
         </nav>
-        <h1 className="font-display mb-6 text-[30px] leading-none font-bold tracking-[-0.025em]">
+        <h1 className="display-caps mb-6 text-[34px] leading-[0.95]">
           {title}
         </h1>
         {children}
@@ -44,4 +44,4 @@ function AdminGuard({ children }) {
 }
 
 export const inputClass =
-  "rounded-btn border border-ink/20 bg-white/60 px-3 py-2 text-[14.5px] text-ink focus:border-ink focus:outline-none";
+  "border-2 border-ink bg-cream px-3 py-2 text-[14.5px] text-ink";

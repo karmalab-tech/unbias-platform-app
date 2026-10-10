@@ -269,3 +269,16 @@ Only the home page (`/`), `/installation` and `/video` are cached, by `public/sw
 6. On `/installation` and `/video`, the first online visit streams the intro video and saves a copy in Cache Storage (DevTools → Application → Cache storage → `unbias-video-v1`). Offline, both pages play the saved copy. The video host must allow CORS `GET` from the site's origin, otherwise the video keeps streaming and is not saved. Home does not save it, so phones don't download it.
 
 The first visit must happen online. Browsers may clear cached data after long idle periods (Safari: about a week), so open the installation once online on the day.
+
+## PR 6 — One visual language (Signal / Edge)
+
+Spec: `docs/DESIGN_LANGUAGE.md`. Every screen should look like the Home page: cream ground, ink header bar with the eye icon, square corners, 2px ink lines, hard shadows, condensed uppercase titles, mono caps labels.
+
+1. Open `/`, then `/about`, `/contribute`, `/login`, `/forgot-password`. Check the header bar, titles, inputs and buttons match Home. Nothing is rounded and no text is red or blue.
+2. Contribute with a photo: step header has a square back button, the person markers are squares, chips on thumbnails are square, upload progress is a bordered bar with a signal fill, the code on the success page sits in a bordered box.
+3. Trigger errors (sign in with a wrong password, submit the consent step unchecked): they appear as a signal-coloured block with an ink border.
+4. Sign in as staff: `/moderation` and `/admin` use the ink header bar with the current tab in signal. Dialogs (reject reason, admin) have an ink border and a coloured hard shadow.
+5. Visit `/does-not-exist.html` and set `PASSWORD` to see the gate: both use the same header, border and button.
+6. Open the password-reset email and the contribution code email (letter_opener): ink header bar, cream ground, signal call to action.
+7. Share the home URL in a chat app, or open `/og-image.png`: the preview is the eye icon, title and tagline in the same language. The browser tab shows the eye favicon.
+8. `yarn test` fails if a `rounded-*`, Tailwind default colour, `outline-none` or second typeface sneaks back into `app/frontend` or `app/views/gate`.

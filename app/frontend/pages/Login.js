@@ -38,7 +38,7 @@ export default function Login() {
         <FormError message={error} />
         <div>
           <label
-            className="text-ink-72 mb-2 block text-[14.5px] font-medium"
+            className="mono-caps mb-2 block text-[12px] font-bold tracking-[0.08em]"
             htmlFor="email"
           >
             {t("staff.email")}
@@ -55,7 +55,7 @@ export default function Login() {
         </div>
         <div>
           <label
-            className="text-ink-72 mb-2 block text-[14.5px] font-medium"
+            className="mono-caps mb-2 block text-[12px] font-bold tracking-[0.08em]"
             htmlFor="password"
           >
             {t("staff.password")}
@@ -74,9 +74,9 @@ export default function Login() {
           {submitting ? t("staff.signingIn") : t("staff.signIn")}
         </button>
       </form>
-      <p className="text-[14px]">
+      <p className="mono-caps text-[12px] font-bold">
         <Link
-          className="text-accent hover:text-accent-hover"
+          className="hover:bg-lime underline underline-offset-4"
           to="/forgot-password"
         >
           {t("staff.forgot")}

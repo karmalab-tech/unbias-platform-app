@@ -20,14 +20,14 @@ export default function MonkScale({ swatches, value, suggested, onChange }) {
               aria-checked={on}
               aria-label={`${t("annotate.skinTone")} ${tone}`}
               onClick={() => onChange(tone)}
-              className={`rounded-card flex flex-col items-center gap-1.5 border p-1.5 transition-colors ${
+              className={`flex flex-col items-center gap-1.5 border-2 p-1.5 ${
                 on
-                  ? "border-ink bg-ink text-on-dark"
-                  : "border-ink/15 text-ink hover:border-ink/40 bg-white/40"
+                  ? "border-ink bg-ink text-cream"
+                  : "border-ink text-ink hover:bg-peach bg-cream"
               }`}
             >
               <span
-                className="border-ink/10 block h-12 w-full rounded-[7px] border"
+                className="border-ink block h-12 w-full border-2"
                 style={{ background: hex }}
               />
               <span className="tabular text-xs font-semibold">

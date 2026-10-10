@@ -183,7 +183,7 @@ export default function PhotoLightbox({ src, open, onClose }) {
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerCancel}
-      className={`bg-shell fixed inset-0 z-40 flex touch-none items-center justify-center overflow-hidden p-4 transition-opacity duration-200 select-none ${
+      className={`bg-ink fixed inset-0 z-40 flex touch-none items-center justify-center overflow-hidden p-4 transition-opacity duration-200 select-none ${
         shown ? "opacity-100" : "opacity-0"
       }`}
     >
@@ -204,7 +204,7 @@ export default function PhotoLightbox({ src, open, onClose }) {
         type="button"
         onClick={onClose}
         aria-label={t("common.close")}
-        className="bg-canvas/15 text-on-dark hover:bg-canvas/25 absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full"
+        className="border-cream text-cream hover:bg-cream hover:text-ink absolute top-4 right-4 flex h-11 w-11 items-center justify-center border-2"
       >
         <XMarkIcon className="h-6 w-6" />
       </button>

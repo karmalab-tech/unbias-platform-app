@@ -81,7 +81,7 @@ function ModerationScreen() {
   return (
     <>
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3">
-        <h1 className="font-display text-[30px] leading-none font-bold tracking-[-0.025em]">
+        <h1 className="display-caps text-[34px] leading-[0.95]">
           {t("moderation.title")}
         </h1>
         {summary && (
@@ -95,15 +95,11 @@ function ModerationScreen() {
         )}
       </div>
 
-      {error && (
-        <p className="rounded-card bg-surface text-accent mb-4 px-4 py-3 text-[14px]">
-          {error}
-        </p>
-      )}
+      {error && <p className="notice mb-4">{error}</p>}
 
       {queue && items.length === 0 && !asset && (
-        <div className="rounded-banner bg-surface p-10 text-center">
-          <p className="font-display text-[21px] font-bold tracking-[-0.015em]">
+        <div className="border-ink bg-surface border-2 p-10 text-center">
+          <p className="display-caps text-[24px] leading-none">
             {t("moderation.emptyTitle")}
           </p>
           <p className="text-ink-60 mt-2 text-[15.5px]">

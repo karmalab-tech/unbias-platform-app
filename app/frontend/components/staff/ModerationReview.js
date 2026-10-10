@@ -68,9 +68,9 @@ export default function ModerationReview({
       </div>
 
       <aside className="space-y-6 lg:sticky lg:top-6 lg:self-start">
-        <section className="rounded-card bg-surface p-4 text-[14px] leading-snug">
+        <section className="border-ink bg-surface border-2 p-4 text-[14px] leading-snug">
           <div className="flex items-baseline justify-between gap-3">
-            <span className="font-display tabular text-[17px] font-bold tracking-[0.04em]">
+            <span className="font-display tabular text-[17px] font-extrabold tracking-[0.04em] font-stretch-75%">
               {asset.submission.public_code}
             </span>
             <span className="text-ink-60">
@@ -89,7 +89,7 @@ export default function ModerationReview({
           </p>
         </section>
 
-        <section className="border-hairline border-b pb-5">
+        <section className="border-ink border-b-2 pb-5">
           {pending ? (
             <>
               {!rejecting && (
@@ -120,7 +120,7 @@ export default function ModerationReview({
                           type="button"
                           onClick={() => onReject(reason)}
                           disabled={busy}
-                          className="rounded-btn border-hairline-strong hover:border-ink flex w-full items-center gap-3 border px-3 py-2 text-left text-[14px]"
+                          className="border-ink hover:bg-peach flex w-full items-center gap-3 border-2 px-3 py-2 text-left text-[14px]"
                         >
                           <Key>{index + 1}</Key>
                           {t(`moderation.reason.${reason}`)}
@@ -140,7 +140,7 @@ export default function ModerationReview({
               )}
             </>
           ) : (
-            <p className="rounded-card bg-surface p-4 text-[14px]">
+            <p className="border-ink bg-surface border-2 p-4 text-[14px]">
               {t(`moderation.decided.${asset.status}`)}
               {asset.decision?.reason &&
                 ` · ${t(`moderation.reason.${asset.decision.reason}`)}`}
@@ -173,17 +173,14 @@ export default function ModerationReview({
         </section>
 
         <section>
-          <h2 className="font-display mb-3 text-[17px] font-bold tracking-[-0.01em]">
+          <h2 className="mono-caps mb-3 text-[13px] font-bold tracking-[0.12em]">
             {t("moderation.people", { count: asset.people.length })}
           </h2>
           <ol className="space-y-3">
             {asset.people.map((person, index) => (
-              <li
-                key={person.id}
-                className="rounded-card border-hairline-strong border p-4"
-              >
+              <li key={person.id} className="border-ink border-2 p-4">
                 <div className="mb-3 flex items-center gap-2">
-                  <span className="bg-ink font-display text-on-dark flex h-7 w-7 items-center justify-center rounded-full text-[13px] font-bold">
+                  <span className="font-display bg-ink text-cream flex h-7 w-7 items-center justify-center text-[13px] font-extrabold">
                     {index + 1}
                   </span>
                   <span className="text-ink-55 text-[12px]">
@@ -207,7 +204,7 @@ export default function ModerationReview({
                     {person.skin_tone_confirmed ? (
                       <>
                         <span
-                          className="border-ink/15 inline-block h-4 w-4 rounded border"
+                          className="border-ink inline-block h-4 w-4 border-2"
                           style={{
                             background:
                               swatches[person.skin_tone_confirmed - 1],
@@ -260,14 +257,14 @@ export default function ModerationReview({
 
         {asset.flags.length > 0 && (
           <section>
-            <h2 className="font-display mb-2 text-[17px] font-bold tracking-[-0.01em]">
+            <h2 className="mono-caps mb-2 text-[13px] font-bold tracking-[0.12em]">
               {t("moderation.flags")}
             </h2>
             <ul className="flex flex-wrap gap-2">
               {asset.flags.map((flag) => (
                 <li
                   key={flag}
-                  className="bg-tint-skin text-ink rounded-full px-3 py-1 text-[12.5px] font-semibold"
+                  className="bg-peach border-ink mono-caps border-2 px-3 py-1 text-[11px] font-bold"
                 >
                   {t(`moderation.flag.${flag}`)}
                 </li>
@@ -292,7 +289,7 @@ function Row({ label, value }) {
 
 function Key({ children }) {
   return (
-    <kbd className="font-ui ml-1 rounded border border-current/30 px-1.5 py-0.5 text-[11px] font-semibold opacity-70">
+    <kbd className="mono-caps ml-1 border-2 border-current px-1.5 py-0.5 text-[10px] font-bold">
       {children}
     </kbd>
   );
@@ -305,7 +302,7 @@ function Automatic({ asset }) {
 
   return (
     <section>
-      <h2 className="font-display mb-2 text-[17px] font-bold tracking-[-0.01em]">
+      <h2 className="mono-caps mb-2 text-[13px] font-bold tracking-[0.12em]">
         {t("moderation.automatic")}
       </h2>
       {context?.status === "done" ? (
@@ -352,7 +349,7 @@ function Duplicates({ asset }) {
         <li key={match.asset_id}>
           <Link
             to={`/moderation/${match.asset_id}`}
-            className="text-ink hover:text-accent font-medium"
+            className="text-ink hover:bg-lime font-medium"
           >
             {match.public_code}
           </Link>{" "}

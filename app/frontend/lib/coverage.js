@@ -1,12 +1,12 @@
 import { t } from "~/i18n";
 
-// Dimension order, chart form and key colours come from the design handoff.
+// Dimension order and chart form follow docs/DESIGN_LANGUAGE.md.
 export const DIMENSIONS = [
-  { id: "age", form: "rows", key: "var(--color-key-age)" },
-  { id: "skin_tone", form: "columns", key: "var(--color-key-skin)" },
-  { id: "gender", form: "label-above", key: "var(--color-key-gender)" },
-  { id: "body", form: "label-above", key: "var(--color-key-body)" },
-  { id: "disability", form: "rows", key: "var(--color-key-disability)" },
+  { id: "age", form: "rows" },
+  { id: "skin_tone", form: "columns" },
+  { id: "gender", form: "label-above" },
+  { id: "body", form: "label-above" },
+  { id: "disability", form: "rows" },
 ];
 
 export function bucketLabel(dimension, value) {

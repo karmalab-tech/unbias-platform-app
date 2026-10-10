@@ -27,7 +27,7 @@ export default function PhotoWithMarkers({
 
   return (
     <div
-      className={`rounded-media bg-surface relative mx-auto w-fit overflow-hidden ${className}`}
+      className={`bg-surface relative mx-auto w-fit overflow-hidden ${className}`}
     >
       <img
         src={src}
@@ -61,10 +61,8 @@ export default function PhotoWithMarkers({
                 ? t("people.removePerson", { n: index + 1 })
                 : `${index + 1}`
             }
-            className={`font-display absolute flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-[15px] font-bold shadow-[0_0_0_3px_rgba(255,248,232,0.9)] transition-transform ${
-              isSelected
-                ? "bg-accent scale-125 text-white"
-                : "bg-ink text-on-dark"
+            className={`font-display border-ink absolute flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center border-2 text-[15px] font-extrabold transition-transform ${
+              isSelected ? "bg-signal text-ink scale-125" : "bg-ink text-cream"
             } ${selected !== null && !isSelected ? "opacity-60" : ""} ${
               onRemove ? "" : "pointer-events-none"
             }`}

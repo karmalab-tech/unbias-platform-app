@@ -48,18 +48,11 @@ export default function AdminCallsToAction() {
       <p className="text-ink-60 mb-6 max-w-[65ch] text-[15px]">
         {t("admin.ctas.intro")}
       </p>
-      {error && (
-        <p className="rounded-card bg-surface text-accent mb-4 px-4 py-3 text-[14px]">
-          {error}
-        </p>
-      )}
+      {error && <p className="notice mb-4">{error}</p>}
 
       <ul className="space-y-3">
         {ctas.map((cta) => (
-          <li
-            key={cta.id}
-            className="rounded-card border-hairline-strong border p-4"
-          >
+          <li key={cta.id} className="border-ink border-2 p-4">
             <CtaForm
               value={cta}
               onSave={(body) => run(() => adminApi.updateCta(cta.id, body))}
@@ -69,8 +62,11 @@ export default function AdminCallsToAction() {
         ))}
       </ul>
 
-      <form onSubmit={create} className="rounded-card bg-surface mt-8 p-4">
-        <h2 className="font-display mb-3 text-[17px] font-bold tracking-[-0.01em]">
+      <form
+        onSubmit={create}
+        className="border-ink bg-surface mt-8 border-2 p-4"
+      >
+        <h2 className="mono-caps mb-3 text-[13px] font-bold tracking-[0.12em]">
           {t("admin.ctas.add")}
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">
@@ -130,7 +126,7 @@ function CtaForm({ value, onSave, onDelete }) {
         <label className="flex items-center gap-2 text-[13.5px]">
           <input
             type="checkbox"
-            className="accent-accent h-4 w-4"
+            className="accent-ink h-4 w-4"
             checked={form.active}
             onChange={(e) => setForm({ ...form, active: e.target.checked })}
           />

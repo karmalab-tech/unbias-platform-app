@@ -16,7 +16,7 @@ export default function VideoOverlay({ open, onClose, src, subtitles }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-[26px] bg-[rgba(37,30,29,0.94)] p-4"
+      className="bg-ink/95 fixed inset-0 z-50 flex flex-col items-center justify-center gap-[26px] p-4"
       onClick={onClose}
       role="presentation"
     >
@@ -26,7 +26,7 @@ export default function VideoOverlay({ open, onClose, src, subtitles }) {
         role="dialog"
         aria-modal="true"
         aria-label={t("nav.watchVideo")}
-        className="aspect-video w-full max-w-[64vw] overflow-hidden rounded-[10px] bg-black outline-none max-md:max-w-full"
+        className="bg-ink aspect-video w-full max-w-[64vw] overflow-hidden max-md:max-w-full"
         onClick={(event) => event.stopPropagation()}
       >
         {src ? (
@@ -40,7 +40,7 @@ export default function VideoOverlay({ open, onClose, src, subtitles }) {
             {subtitles && <track kind="subtitles" src={subtitles} default />}
           </video>
         ) : (
-          <p className="flex h-full items-center justify-center px-6 text-center text-[15.5px] text-white/70">
+          <p className="text-cream flex h-full items-center justify-center px-6 text-center text-[15.5px]">
             {t("dashboard.videoSoon")}
           </p>
         )}
@@ -48,7 +48,7 @@ export default function VideoOverlay({ open, onClose, src, subtitles }) {
       <button
         type="button"
         onClick={onClose}
-        className="text-[15px] text-white/60 hover:text-white"
+        className="text-cream text-[15px] hover:underline"
       >
         {t("common.close")}
       </button>

@@ -33,7 +33,7 @@ export default function ReviewStep() {
           <li key={asset.id}>
             <Link
               to={`/contribute/photos/${index + 1}/people?from=review`}
-              className="rounded-card bg-surface focus-visible:outline-accent block overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="border-ink bg-surface focus-visible:outline-signal block overflow-hidden border-2 focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               <div className="relative aspect-[4/5]">
                 <img
@@ -42,10 +42,8 @@ export default function ReviewStep() {
                   className="h-full w-full object-cover"
                 />
                 <span
-                  className={`absolute top-2 left-2 flex items-center gap-1 rounded-full px-2 py-1 text-[11.5px] font-semibold ${
-                    asset.complete
-                      ? "bg-ink text-on-dark"
-                      : "bg-accent text-white"
+                  className={`border-ink mono-caps absolute top-2 left-2 flex items-center gap-1 border-2 px-2 py-1 text-[10.5px] font-bold ${
+                    asset.complete ? "bg-ink text-cream" : "bg-signal text-ink"
                   }`}
                 >
                   {asset.complete && <CheckIcon className="h-3.5 w-3.5" />}
@@ -63,7 +61,7 @@ export default function ReviewStep() {
         <li>
           <Link
             to="/contribute/upload"
-            className="rounded-card border-ink/25 text-ink-72 hover:border-ink/50 flex aspect-[4/5] flex-col items-center justify-center gap-2 border border-dashed text-[14px] font-medium"
+            className="border-ink text-ink hover:bg-peach flex aspect-[4/5] flex-col items-center justify-center gap-2 border-2 border-dashed text-[14px] font-medium"
           >
             <PlusIcon className="h-7 w-7" />
             {t("review.addPhotos")}

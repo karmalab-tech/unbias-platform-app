@@ -44,7 +44,7 @@ export default function ConsentStep() {
       intro={t("consent.intro")}
       footer={
         <>
-          {error && <p className="text-accent text-[14px]">{error}</p>}
+          {error && <p className="notice">{error}</p>}
           <Button full onClick={send} disabled={!training || busy}>
             {busy ? t("consent.submitting") : t("consent.cta")}
           </Button>
@@ -52,16 +52,16 @@ export default function ConsentStep() {
       }
     >
       <div className="space-y-6">
-        <div className="rounded-card bg-surface p-5">
-          <p className="text-ink-55 mb-3 text-[12px] font-semibold tracking-[0.15em] uppercase">
+        <div className="border-ink bg-surface border-2 p-5">
+          <p className="mono-caps mb-3 text-[12px] font-bold tracking-[0.12em]">
             {t("consent.trainingRequired")}
           </p>
           <Checkbox checked={training} onChange={setTraining} required>
             {t("consent.training")}
           </Checkbox>
         </div>
-        <div className="rounded-card bg-surface p-5">
-          <p className="text-ink-55 mb-3 text-[12px] font-semibold tracking-[0.15em] uppercase">
+        <div className="border-ink bg-surface border-2 p-5">
+          <p className="mono-caps mb-3 text-[12px] font-bold tracking-[0.12em]">
             {t("consent.displayOptional")}
           </p>
           <Checkbox checked={display} onChange={setDisplay}>

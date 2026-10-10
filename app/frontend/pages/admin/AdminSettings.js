@@ -41,20 +41,20 @@ function Targets() {
 
   return (
     <section>
-      <h2 className="font-display text-[21px] font-bold tracking-[-0.015em]">
+      <h2 className="display-caps text-[24px] leading-none">
         {t("admin.settings.targets")}
       </h2>
       <p className="text-ink-60 mt-1 mb-5 max-w-[65ch] text-[14.5px]">
         {t("admin.settings.targetsIntro")}
       </p>
-      {error && <p className="text-accent mb-4 text-[14px]">{error}</p>}
+      {error && <p className="notice mb-4">{error}</p>}
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {DIMENSIONS.map((dimension) => (
           <div key={dimension.id}>
-            <h3 className="font-display mb-2 text-[15px] font-bold">
+            <h3 className="mono-caps mb-2 text-[13px] font-bold tracking-[0.12em]">
               {t(`taxonomy.${dimension.id}.label`)}
             </h3>
-            <ul className="divide-hairline divide-y">
+            <ul className="divide-ink divide-y-2">
               {buckets
                 .filter((b) => b.dimension === dimension.id)
                 .map((bucket) => (
@@ -65,7 +65,7 @@ function Targets() {
                     <span className="flex items-center gap-2">
                       {bucket.swatch && (
                         <span
-                          className="border-ink/10 h-4 w-4 rounded border"
+                          className="border-ink h-4 w-4 border-2"
                           style={{ background: bucket.swatch }}
                         />
                       )}
@@ -135,17 +135,17 @@ function Moderators() {
 
   return (
     <section className="mt-14">
-      <h2 className="font-display text-[21px] font-bold tracking-[-0.015em]">
+      <h2 className="display-caps text-[24px] leading-none">
         {t("admin.settings.moderators")}
       </h2>
       <p className="text-ink-60 mt-1 mb-5 max-w-[65ch] text-[14.5px]">
         {t("admin.settings.moderatorsIntro")}
       </p>
-      {error && <p className="text-accent mb-4 text-[14px]">{error}</p>}
+      {error && <p className="notice mb-4">{error}</p>}
       {notice && <p className="text-ink-72 mb-4 text-[14px]">{notice}</p>}
 
       <table className="w-full text-[14px]">
-        <thead className="text-ink-55 text-left text-[12px] tracking-[0.08em] uppercase">
+        <thead className="mono-caps text-left text-[11px] font-bold tracking-[0.08em]">
           <tr>
             <th className="py-2 pr-4 font-semibold">{t("staff.email")}</th>
             <th className="py-2 pr-4 font-semibold">
@@ -157,7 +157,7 @@ function Moderators() {
             <th className="py-2" />
           </tr>
         </thead>
-        <tbody className="divide-hairline divide-y">
+        <tbody className="divide-ink divide-y-2">
           {users.map((u) => (
             <tr key={u.id}>
               <td className="py-2 pr-4">{u.email}</td>
@@ -199,7 +199,7 @@ function Moderators() {
 
       <form
         onSubmit={invite}
-        className="rounded-card bg-surface mt-6 flex flex-wrap items-end gap-3 p-4"
+        className="border-ink bg-surface mt-6 flex flex-wrap items-end gap-3 border-2 p-4"
       >
         <label className="text-ink-72 text-[13px] font-medium">
           {t("staff.email")}

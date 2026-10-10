@@ -6,7 +6,7 @@ people in them, describe how each person is represented, and consent. A
 moderator reviews every photo. The public dashboard and the
 installation show pending and approved people per bucket, live.
 
-The product brief, POC design, architecture, design handoff and the phased
+The product brief, POC design, architecture, design language, design handoff and the phased
 plan live in [`docs/`](docs). Start with `docs/PROJECT_BRIEF.md`. The
 click-through walkthrough of every feature is `docs/TESTING_GUIDE.md`; ideas
 deliberately left out of the POC are in `docs/FUTURE_IMPROVEMENTS.md`.
@@ -101,7 +101,7 @@ the frontend by `/api/public/settings`.
 | Browser detection | `app/frontend/workers/detection.worker.js`, `app/frontend/lib/detection.js` |
 | Public dashboard | `app/frontend/components/public/`, `app/frontend/pages/Home.js`, `Installation.js` |
 | Staff screens | `app/frontend/pages/Moderation.js`, `app/frontend/pages/admin/` |
-| Design tokens | `app/frontend/styles/theme.css` |
+| Design tokens and language | `app/frontend/styles/theme.css`, `docs/DESIGN_LANGUAGE.md` |
 | Strings (EN / FR) | `app/frontend/i18n/locales/`, `config/locales/` |
 | Tests | `spec/` (RSpec), `app/frontend/lib/*.test.js` (Vitest), `e2e/` (Playwright) |
 | Deployment | `fly.toml`, `Dockerfile`, `.github/workflows/ci.yml` |

@@ -153,7 +153,7 @@ export default function UploadStep() {
       {notice && (
         <p
           role="status"
-          className="rounded-card bg-surface text-ink mt-4 px-4 py-3 text-[14px] leading-snug"
+          className="border-ink bg-surface text-ink mt-4 border-2 px-4 py-3 text-[14px] leading-snug"
         >
           {notice}
         </p>
@@ -192,14 +192,17 @@ export default function UploadStep() {
         </p>
       )}
 
-      <ul className="border-hairline text-ink-72 mt-8 space-y-2 border-t pt-6 text-[14.5px] leading-snug">
+      <ul className="border-ink text-ink-72 mt-8 space-y-2 border-t-2 pt-6 text-[14.5px] leading-snug">
         <li>{t("upload.rules.people")}</li>
         <li>{t("upload.rules.samePerson")}</li>
         <li>{t("upload.rules.formats")}</li>
         <li>{t("upload.rules.noAi")}</li>
       </ul>
       <p className="mt-6 text-[14.5px]">
-        <Link to="/about" className="text-accent hover:text-accent-hover">
+        <Link
+          to="/about"
+          className="text-ink hover:bg-lime underline underline-offset-4"
+        >
           {t("upload.faq")}
         </Link>
       </p>
@@ -216,7 +219,7 @@ function Thumb({
   onRemove,
 }) {
   return (
-    <li className="rounded-card bg-surface relative aspect-square overflow-hidden">
+    <li className="border-ink bg-surface relative aspect-square overflow-hidden border-2">
       <img
         src={src}
         alt=""
@@ -226,22 +229,22 @@ function Thumb({
         <div
           role="status"
           aria-label={t("upload.uploading")}
-          className="bg-canvas/60 absolute inset-0 flex items-center justify-center"
+          className="bg-canvas/80 absolute inset-0 flex items-center justify-center"
         >
-          <span className="border-ink/20 border-t-accent h-7 w-7 animate-spin rounded-full border-[3px]" />
+          <span className="border-ink border-t-signal h-7 w-7 animate-spin border-[3px]" />
         </div>
       )}
       {progress !== null && (
-        <div className="bg-ink/20 absolute inset-x-0 bottom-0 h-1.5">
+        <div className="bg-cream border-ink absolute inset-x-0 bottom-0 h-3 border-t-2">
           <div
-            className="bg-accent h-full transition-[width]"
+            className="bg-signal h-full transition-[width]"
             style={{ width: `${Math.round(progress * 100)}%` }}
           />
         </div>
       )}
       {warning && !error && (
         <span
-          className="bg-canvas/90 text-ink absolute top-1 left-1 rounded-full px-2 py-0.5 text-[11px] font-semibold"
+          className="bg-cream border-ink text-ink mono-caps absolute top-1 left-1 border-2 px-2 py-0.5 text-[10px] font-bold"
           title={warning}
         >
           !
@@ -251,7 +254,7 @@ function Thumb({
         <button
           type="button"
           onClick={onRetry}
-          className="bg-shell/60 absolute inset-0 flex items-center justify-center px-2 text-center text-[12px] font-semibold text-white"
+          className="bg-ink/80 text-cream absolute inset-0 flex items-center justify-center px-2 text-center text-[12px] font-semibold"
         >
           {t("common.retry")}
         </button>
@@ -260,7 +263,7 @@ function Thumb({
         type="button"
         onClick={onRemove}
         aria-label={t("common.remove")}
-        className="bg-canvas/90 text-ink hover:bg-canvas absolute top-1 right-1 flex h-7 w-7 items-center justify-center rounded-full"
+        className="bg-cream border-ink text-ink hover:bg-peach absolute top-1 right-1 flex h-7 w-7 items-center justify-center border-2"
       >
         <XMarkIcon className="h-4 w-4" />
       </button>

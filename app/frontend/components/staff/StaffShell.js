@@ -1,4 +1,5 @@
 import { Link, Navigate, NavLink, useLocation } from "react-router-dom";
+import iconEye from "~/images/icons/icon_eye.png";
 import { useAuth } from "~/lib/auth";
 import { t } from "~/i18n";
 
@@ -10,7 +11,7 @@ export default function StaffShell({ children, wide = true }) {
   if (loading) {
     return (
       <div
-        className="bg-canvas text-ink-60 flex min-h-dvh items-center justify-center"
+        className="bg-canvas text-ink-60 mono-caps flex min-h-dvh items-center justify-center"
         role="status"
       >
         {t("common.loading")}
@@ -27,21 +28,25 @@ export default function StaffShell({ children, wide = true }) {
   }
 
   const link = ({ isActive }) =>
-    `rounded-full px-3 py-1.5 text-[14px] font-medium ${isActive ? "bg-ink text-on-dark" : "text-ink-72 hover:text-ink"}`;
+    `px-3.5 py-2.5 ${isActive ? "bg-signal font-bold text-ink" : "text-peach hover:text-cream"}`;
 
   return (
     <div className="bg-canvas text-ink min-h-dvh">
-      <header className="border-hairline border-b">
+      <header className="bg-ink text-cream border-ink border-b-2">
         <div
-          className={`mx-auto flex h-14 items-center gap-6 px-6 ${wide ? "max-w-[1600px]" : "max-w-5xl"}`}
+          className={`mx-auto flex min-h-19 items-center gap-8 px-6 ${wide ? "max-w-[1600px]" : "max-w-5xl"}`}
         >
           <Link
             to="/"
-            className="font-display text-[17px] font-bold tracking-[-0.01em]"
+            aria-label={t("home.title")}
+            className="flex items-center gap-3"
           >
-            {t("home.title")}
+            <img src={iconEye} alt="" className="h-13 w-13" />
+            <span className="display-caps text-[30px] leading-none tracking-[0.04em]">
+              Unbias
+            </span>
           </Link>
-          <nav className="flex items-center gap-1">
+          <nav className="mono-caps flex items-center gap-1 text-[13px] tracking-[0.08em]">
             <NavLink to="/moderation" className={link}>
               {t("nav.moderation")}
             </NavLink>
@@ -51,12 +56,12 @@ export default function StaffShell({ children, wide = true }) {
               </NavLink>
             )}
           </nav>
-          <div className="text-ink-60 ml-auto flex items-center gap-4 text-[13.5px]">
+          <div className="mono-caps text-peach ml-auto flex items-center gap-4 text-[12px]">
             <span className="hidden sm:inline">{user.email}</span>
             <button
               type="button"
               onClick={signOut}
-              className="text-ink-72 hover:text-ink font-medium"
+              className="hover:text-cream cursor-pointer font-bold"
             >
               {t("staff.signOut")}
             </button>

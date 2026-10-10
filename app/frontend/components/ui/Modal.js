@@ -21,7 +21,7 @@ export default function Modal({ open, onClose, title, children }) {
 
   return (
     <div
-      className="bg-shell/70 fixed inset-0 z-40 flex items-end justify-center p-4 sm:items-center"
+      className="bg-ink/80 fixed inset-0 z-40 flex items-end justify-center p-4 sm:items-center"
       onClick={onClose}
       role="presentation"
     >
@@ -31,18 +31,16 @@ export default function Modal({ open, onClose, title, children }) {
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="rounded-banner bg-canvas w-full max-w-md p-6 outline-none"
+        className="bg-canvas border-ink shadow-hard-signal w-full max-w-md border-2 p-6"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-4 flex items-start justify-between gap-4">
-          <h2 className="font-display text-[21px] leading-[1.25] font-bold tracking-[-0.015em]">
-            {title}
-          </h2>
+          <h2 className="display-caps text-[24px] leading-none">{title}</h2>
           <button
             type="button"
             onClick={onClose}
             aria-label={t("common.close")}
-            className="text-ink-60 hover:text-ink rounded-full p-1"
+            className="border-ink hover:bg-peach border-2 p-1"
           >
             <XMarkIcon className="h-6 w-6" />
           </button>
