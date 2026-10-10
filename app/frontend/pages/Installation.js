@@ -33,7 +33,7 @@ export default function Installation() {
     <div className="bg-canvas text-ink flex h-dvh flex-col overflow-hidden">
       {!hasStoredLocale() && <LocalePicker />}
       <section className="px-gutter mx-auto grid min-h-0 w-full max-w-[1900px] flex-1 gap-10 py-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-stretch">
-        <div className="flex min-h-0 flex-col justify-end space-y-12">
+        <div className="flex min-h-0 flex-col justify-around">
           <div>
             <div
               className={`mt-3 flex flex-wrap items-baseline gap-x-6 ${bump ? "motion-safe:animate-[pulse_0.6s_ease-out_1]" : ""}`}
