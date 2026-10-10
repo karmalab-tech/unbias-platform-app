@@ -5,11 +5,11 @@ import { Stat } from "~/components/public/Hero";
 import iconBolt from "~/images/icons/icon_bolt.png";
 import iconPeople from "~/images/icons/icon_people.png";
 import iconPhotos from "~/images/icons/icon_photos.png";
-import { useCachedVideo } from "~/lib/cachedVideo";
 import usePolling from "~/lib/usePolling";
 import { useOfflineDashboard } from "~/lib/offline";
 import { useSettings } from "~/lib/settings";
 import { formatNumber } from "~/lib/format";
+import { INSTAGRAM_HANDLE, INSTAGRAM_URL } from "~/lib/social";
 import { LANGUAGES, chooseLocale, hasStoredLocale, t } from "~/i18n";
 
 // Installation screen: no navigation, autoplaying muted intro with subtitles, QR hand-off, faster polling.
@@ -26,7 +26,6 @@ export default function Installation() {
     target: settings?.people_milestone ?? 10000,
   };
   const bump = useBumpOnChange(total.approved + total.pending);
-  const videoSrc = useCachedVideo(settings?.intro_video_url);
   const host = typeof window !== "undefined" ? window.location.host : "";
 
   return (
@@ -102,47 +101,35 @@ export default function Installation() {
         </div>
 
         <div className="flex min-h-0 flex-col gap-6">
-          <div className="border-ink hatch-well shadow-hard relative min-h-0 flex-1 overflow-hidden border-2">
-            {settings?.intro_video_url ? (
-              <video
-                className="bg-ink absolute inset-0 h-full w-full object-contain"
-                src={videoSrc ?? undefined}
-                poster={settings.intro_video_poster_url ?? undefined}
-                autoPlay
-                muted
-                loop
-                playsInline
-              >
-                {settings.intro_video_subtitles_url && (
-                  <track
-                    kind="subtitles"
-                    src={settings.intro_video_subtitles_url}
-                    default
-                  />
-                )}
-              </video>
-            ) : (
-              <p className="mono-caps absolute inset-0 flex items-center justify-center px-8 text-center text-[15px]">
-                {t("dashboard.videoSoon")}
-              </p>
-            )}
+          <div className="border-ink bg-lime shadow-hard flex shrink-0 flex-col justify-center gap-2 border-2 px-8 py-5">
+            <p className="display-caps text-[clamp(28px,2.6vw,44px)] leading-[0.95]">
+              {t("installation.followTitle")}
+            </p>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="tabular font-mono text-[clamp(16px,1.4vw,22px)] font-bold"
+            >
+              {INSTAGRAM_HANDLE}
+            </a>
           </div>
-          <div className="bg-ink text-cream border-ink shadow-hard-signal flex shrink-0 items-center gap-6 border-2 px-6 py-5">
+          <div className="bg-ink text-cream border-ink shadow-hard-signal flex min-h-0 flex-1 items-center gap-8 border-2 px-8 py-6">
             <img
               src="/qr.svg"
               alt=""
-              className="bg-cream h-[clamp(96px,14vh,150px)] w-[clamp(96px,14vh,150px)] p-3"
+              className="bg-cream h-[clamp(140px,28vh,300px)] w-[clamp(140px,28vh,300px)] shrink-0 p-4"
               width="150"
               height="150"
             />
-            <div>
-              <p className="display-caps text-[clamp(28px,2.4vw,40px)] leading-[0.95]">
+            <div className="min-w-0">
+              <p className="display-caps text-[clamp(30px,2.8vw,52px)] leading-[0.95]">
                 {t("installation.scan")}
               </p>
-              <p className="tabular mt-2 font-mono text-[20px] font-bold">
+              <p className="tabular mt-3 font-mono text-[clamp(16px,1.3vw,24px)] font-bold whitespace-nowrap">
                 {host}/contribute
               </p>
-              <p className="text-peach mt-3 text-[16px]">
+              <p className="text-peach mt-4 text-[clamp(16px,1.4vw,22px)]">
                 {t("dashboard.reviewedByPeople")}
               </p>
             </div>

@@ -26,6 +26,7 @@ export const fr = {
     main: "Principal",
     whatIsThis: "C'est quoi ?",
     watchVideo: "Voir la vidéo",
+    instagram: "Instagram",
     contribute: "Contribuer",
     signIn: "Connexion équipe",
     moderation: "Modération",
@@ -476,6 +477,7 @@ export const fr = {
   installation: {
     chooseLanguage: "Choisissez votre langue",
     scan: "Scannez pour ajouter vos photos",
+    followTitle: "Suivez-nous sur Instagram",
   },
   errors: {
     generic: "Une erreur est survenue. Réessayez.",

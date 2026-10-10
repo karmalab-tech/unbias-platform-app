@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import iconEye from "~/images/icons/icon_eye.png";
 import { t } from "~/i18n";
+import { INSTAGRAM_URL } from "~/lib/social";
 
 const navItem =
   "px-3.5 py-2.5 text-peach hover:text-cream aria-[current=page]:bg-signal aria-[current=page]:font-bold aria-[current=page]:text-ink";
@@ -35,6 +36,14 @@ export default function PublicHeader({ onWatchVideo, hasVideo }) {
               {t("nav.watchVideo")}
             </button>
           )}
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={navItem}
+          >
+            {t("nav.instagram")}
+          </a>
         </nav>
         <Link
           to="/contribute"
