@@ -101,35 +101,35 @@ export default function Installation() {
         </div>
 
         <div className="flex min-h-0 flex-col gap-6">
-          <div className="border-ink bg-lime shadow-hard flex min-h-0 flex-1 flex-col justify-center gap-4 border-2 px-8 py-6">
-            <p className="display-caps text-[clamp(40px,4vw,72px)] leading-[0.95]">
+          <div className="border-ink bg-lime shadow-hard flex shrink-0 flex-col justify-center gap-2 border-2 px-8 py-5">
+            <p className="display-caps text-[clamp(28px,2.6vw,44px)] leading-[0.95]">
               {t("installation.followTitle")}
             </p>
             <a
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="tabular font-mono text-[clamp(20px,2vw,32px)] font-bold"
+              className="tabular font-mono text-[clamp(16px,1.4vw,22px)] font-bold"
             >
               {INSTAGRAM_HANDLE}
             </a>
           </div>
-          <div className="bg-ink text-cream border-ink shadow-hard-signal flex shrink-0 items-center gap-6 border-2 px-6 py-5">
+          <div className="bg-ink text-cream border-ink shadow-hard-signal flex min-h-0 flex-1 items-center gap-8 border-2 px-8 py-6">
             <img
               src="/qr.svg"
               alt=""
-              className="bg-cream h-[clamp(96px,14vh,150px)] w-[clamp(96px,14vh,150px)] p-3"
+              className="bg-cream h-[clamp(140px,28vh,300px)] w-[clamp(140px,28vh,300px)] shrink-0 p-4"
               width="150"
               height="150"
             />
-            <div>
-              <p className="display-caps text-[clamp(28px,2.4vw,40px)] leading-[0.95]">
+            <div className="min-w-0">
+              <p className="display-caps text-[clamp(30px,2.8vw,52px)] leading-[0.95]">
                 {t("installation.scan")}
               </p>
-              <p className="tabular mt-2 font-mono text-[20px] font-bold">
+              <p className="tabular mt-3 font-mono text-[clamp(16px,1.3vw,24px)] font-bold whitespace-nowrap">
                 {host}/contribute
               </p>
-              <p className="text-peach mt-3 text-[16px]">
+              <p className="text-peach mt-4 text-[clamp(16px,1.4vw,22px)]">
                 {t("dashboard.reviewedByPeople")}
               </p>
             </div>
