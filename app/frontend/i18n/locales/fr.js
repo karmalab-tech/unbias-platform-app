@@ -477,7 +477,7 @@ export const fr = {
   installation: {
     chooseLanguage: "Choisissez votre langue",
     scan: "Scannez pour ajouter vos photos",
-    followOn: "Instagram {handle}",
+    followTitle: "Suivez-nous sur Instagram",
   },
   errors: {
     generic: "Une erreur est survenue. Réessayez.",

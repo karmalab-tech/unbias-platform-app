@@ -148,14 +148,14 @@ moderation and carry a "Processing failed" flag.
 ### 3. Installation mode
 
 Open http://localhost:3000/installation?lang=fr on a large window: no
-navigation, oversized count, QR code and short URL, calls to action and
-charts. Submit a contribution from a phone on the same network: the count
-pulses within about three seconds. The intro video (`intro_video_url` in
-`config/unbias.yml`, overridable with `INTRO_VIDEO_URL`, plus optional
-poster and subtitles URLs) autoplays muted and loops.
+navigation, oversized count, QR code and short URL, a "Follow us on
+Instagram" frame with the handle, calls to action and charts. Submit a contribution from a phone on the same network: the count
+pulses within about three seconds. The page has no video.
 
 Open http://localhost:3000/video for a second screen: the intro video
-alone, full screen, muted, looping, with no controls.
+(`intro_video_url` in `config/unbias.yml`, overridable with
+`INTRO_VIDEO_URL`, plus optional poster and subtitles URLs) alone, full
+screen, muted, looping, with no controls.
 
 ### 4. Email and retention
 
@@ -266,7 +266,7 @@ Only the home page (`/`), `/installation` and `/video` are cached, by `public/sw
 4. Offline, open `/contribute`: the browser's own "no connection" page appears, since contributing needs the server.
 5. After a deploy, the next online visit picks up the new version; the old one is only used while offline.
 
-6. On `/installation` and `/video`, the first online visit streams the intro video and saves a copy in Cache Storage (DevTools → Application → Cache storage → `unbias-video-v1`). Offline, both pages play the saved copy. The video host must allow CORS `GET` from the site's origin, otherwise the video keeps streaming and is not saved. Home does not save it, so phones don't download it.
+6. On `/video`, the first online visit streams the intro video and saves a copy in Cache Storage (DevTools → Application → Cache storage → `unbias-video-v1`). Offline, the page plays the saved copy. The video host must allow CORS `GET` from the site's origin, otherwise the video keeps streaming and is not saved. Home does not save it, so phones don't download it.
 
 The first visit must happen online. Browsers may clear cached data after long idle periods (Safari: about a week), so open the installation once online on the day.
 
