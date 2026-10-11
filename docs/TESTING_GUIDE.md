@@ -36,7 +36,9 @@ contributor flow without browser ML, moderation, public dashboard and admin.
    photos. Try a HEIC or a GIF: it is refused with an explanation. A photo
    under 768 px on its short side shows a `!` badge (warning, not a block).
 3. **Continue** → tick both permission boxes → **I confirm**.
-4. **Who is in this photo?** Tap the photo once per person (up to 4). Tap a
+4. **Who is in this photo?** A pointing hand bobs over the photo until you tap;
+   tapping still works through it. Tap the photo once per person (up to 4):
+   the hand disappears and each person gets a round red numbered marker. Tap a
    number to remove it. Try **Remove this photo** on one of them.
 5. **Person 1**: pick age, Monk skin tone, gender, body; assistive devices are
    optional. The button stays disabled until the four required fields are set.

@@ -53,7 +53,7 @@ All figures use `tabular`. Counts are absolute and comma-grouped, never percenta
 
 ## Shape, lines and depth
 
-- **Radius: none.** No `rounded-*` utility anywhere, including avatars, badges, spinners and close buttons.
+- **Radius: none.** No `rounded-*` utility anywhere, including avatars, badges, spinners and close buttons. The one exception is the people-step tap marker (`marker-round`), a circle that must read as a pin on the photo.
 - **Lines:** 2px `ink` (`border-2 border-ink`) for controls, cards, inputs, panels, chart tracks, header/footer rules and dividers (`divide-y-2`). Dashed 2px for "add" slots.
 - **Shadows:** `shadow-hard` (6px ink), `shadow-hard-signal` (6px signal), `shadow-hard-lime` (4px lime), `shadow-hard-sm` (4px ink). Used on cards, banners, modals and thumbnails, never blurred.
 - **Press:** interactive blocks use `press` (+ `press-sm`, `press-signal`, `press-lime`): the shadow halves on hover and disappears on press as the element drops into place.
@@ -73,7 +73,8 @@ All figures use `tabular`. Counts are absolute and comma-grouped, never percenta
 | **Panel** | `border-2 border-ink bg-surface p-4/5` for inset content; cards on Home use lime, peach, cream or ink grounds with `shadow-hard`. |
 | **Chip / badge** | `mono-caps`, 10–11px, `border-2 border-ink`, `bg-cream`, `bg-peach` or `bg-signal`. Square. |
 | **Modal** | Ink scrim (`bg-ink/80`), `border-2 border-ink bg-canvas shadow-hard-signal`, title `display-caps` 24px, square close button with 2px border. |
-| **Marker** (photo person markers) | 36px square, `border-2 border-ink`, `bg-ink text-cream`; selected `bg-signal text-ink` at 125%. |
+| **Marker** (photo person markers) | 36px square, `border-2 border-ink`, `bg-ink text-cream`; selected `bg-signal text-ink` at 125%. In the people step (`hint`) it is a `marker-round` circle, `bg-signal text-ink`. |
+| **Tap hint** (`PhotoWithMarkers hint`) | Pointing hand, cream fill with 2px ink stroke, centred on the photo and bobbing up and down (`animate-tap-hint`) until the first person is marked. Never intercepts taps. |
 | **Table** | `mono-caps` 11px head, `divide-y-2 divide-ink` rows, tabular figures. |
 | **Links** | Ink text, underline with 4px offset, `hover:bg-lime`. Never coloured text. |
 | **Progress / track** | `Track` in `public/Bars`: 2px ink border, cream track, ink approved segment, hatched pending segment. Upload progress is the same: cream track, signal fill. |
