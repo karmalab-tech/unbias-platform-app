@@ -415,6 +415,20 @@ export const en = {
       regenerate: "Regenerate",
       noImages: "Nothing generated yet.",
       update: "Update outdated",
+      dropHere: "Drop your own images here",
+      chooseFiles: "Choose files",
+      dropHint:
+        "They fill the free spots in order ({count} free). Drop an image on a single spot to replace it. JPEG, PNG or WebP; shown cropped to 3:4. Uploaded images are kept when the wording changes.",
+      dropOnSlot: "Drop an image here to replace this spot",
+      uploading: "Uploading {done} of {total}…",
+      uploadFailed: "{name}: {reason} ({count} file(s) not uploaded).",
+      remove: "Remove",
+      uploadErrors: {
+        unsupported_type: "use JPEG, PNG or WebP",
+        too_large: "file too large",
+        no_free_position: "no free spot left, remove or replace an image first",
+        bad_position: "unknown spot",
+      },
       promptEn: "English prompt (sent to the model)",
       promptFr: "French wording (shown to French visitors)",
       wordingHint:
@@ -422,6 +436,7 @@ export const en = {
       status: {
         succeeded: "Done",
         outdated: "Outdated",
+        uploaded: "Uploaded",
         generating: "Generating",
         queued: "Queued",
         failed: "Failed",

@@ -70,7 +70,13 @@ There is deliberately no body (or beauty, or character) step: after gender, age 
 
 ## Admin
 
-`/admin/experience` (admins only) lists every prompt in tree order, indented by depth, with its French wording below, a strip of 15 status squares (done ink, outdated lime, generating hatched, queued peach, failed signal, not started cream), the done count and a Generate (Retry failed, or Update outdated) button. "Generate everything missing" queues every prompt at once. Clicking a prompt opens its English and French wording for editing and its 15 images with their status and error; Regenerate replaces a single image. The list refreshes every `stats_poll_seconds`.
+`/admin/experience` (admins only) lists every prompt in tree order, indented by depth, with its French wording below, a strip of 15 status squares (done ink, outdated lime, generating hatched, queued peach, failed signal, not started cream), the done count and a Generate (Retry failed, or Update outdated) button. "Generate everything missing" queues every prompt at once. Clicking a prompt opens its English and French wording for editing and its 15 images with their status and error; Regenerate replaces a single image, Remove empties its spot. The list refreshes every `stats_poll_seconds`.
+
+### Your own images
+
+A prompt can use images made outside the app (for example the ones already used on posters and flyers). Open the prompt in `/admin/experience` and drop files on the dashed zone, or pick them with Choose files: each file goes to the next free spot, one request per file (`POST /api/admin/experience_prompts/:id/upload`), and files beyond the free spots are refused with a notice. Dropping one file on a single spot replaces that spot. JPEG, PNG or WebP up to `max_file_bytes`; the page crops them to 3:4.
+
+Uploaded images are stored like generated ones but with `source: uploaded`: they are never marked outdated when the English wording changes, Generate leaves them alone, and Regenerate or Remove turns the spot back into a normal generated one.
 
 ## Serving
 

@@ -55,6 +55,33 @@ RSpec.describe "Bias experience", type: :request do
       .to have_enqueued_job(GenerateExperiencePromptJob).exactly(33).times
   end
 
+  it "uploads an admin's own images and clears one" do
+    sign_in admin
+    ExperiencePrompt.seed!
+    prompt = ExperiencePrompt.find_by!(path: "person")
+
+    post "/api/admin/experience_prompts/#{prompt.id}/upload",
+         params: { file: fixture_file_upload("person.jpg", "image/jpeg") }
+    expect(response).to have_http_status(:created)
+    expect(json).to include("position" => 1, "status" => "succeeded", "source" => "uploaded")
+
+    post "/api/admin/experience_prompts/#{prompt.id}/upload",
+         params: { file: fixture_file_upload("person.jpg", "image/jpeg"), position: 7 }
+    expect(json["position"]).to eq(7)
+
+    get "/api/admin/experience_prompts/#{prompt.id}"
+    expect(json["free_positions"]).not_to include(1, 7)
+
+    delete "/api/admin/experience_images/#{json["images"].first["id"]}"
+    expect(response).to have_http_status(:no_content)
+    expect(prompt.reload.free_positions).to include(1)
+
+    post "/api/admin/experience_prompts/#{prompt.id}/upload",
+         params: { file: fixture_file_upload("person.jpg", "image/jpeg"), position: 99 }
+    expect(response).to have_http_status(:unprocessable_content)
+    expect(json["error"]).to eq("bad_position")
+  end
+
   it "edits the wording, which marks earlier images outdated" do
     sign_in admin
     ExperiencePrompt.seed!

@@ -421,6 +421,21 @@ export const fr = {
       regenerate: "Régénérer",
       noImages: "Rien de généré pour l’instant.",
       update: "Mettre à jour",
+      dropHere: "Déposez vos propres images ici",
+      chooseFiles: "Choisir des fichiers",
+      dropHint:
+        "Elles remplissent les emplacements libres dans l’ordre ({count} libres). Déposez une image sur un emplacement pour la remplacer. JPEG, PNG ou WebP ; affichées recadrées en 3:4. Les images importées sont conservées si le texte change.",
+      dropOnSlot: "Déposez une image ici pour remplacer cet emplacement",
+      uploading: "Import {done} sur {total}…",
+      uploadFailed: "{name} : {reason} ({count} fichier(s) non importé(s)).",
+      remove: "Retirer",
+      uploadErrors: {
+        unsupported_type: "utilisez JPEG, PNG ou WebP",
+        too_large: "fichier trop lourd",
+        no_free_position:
+          "plus d’emplacement libre, retirez ou remplacez d’abord une image",
+        bad_position: "emplacement inconnu",
+      },
       promptEn: "Prompt anglais (envoyé au modèle)",
       promptFr: "Texte français (montré aux visiteurs francophones)",
       wordingHint:
@@ -428,6 +443,7 @@ export const fr = {
       status: {
         succeeded: "Terminée",
         outdated: "Obsolète",
+        uploaded: "Importée",
         generating: "En cours",
         queued: "En attente",
         failed: "Échec",

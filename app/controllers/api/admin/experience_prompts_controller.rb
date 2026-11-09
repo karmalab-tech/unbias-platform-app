@@ -1,10 +1,15 @@
 module Api
   module Admin
     class ExperiencePromptsController < BaseController
+      rescue_from ExperiencePrompt::UploadError do |error|
+        render json: { error: error.message }, status: :unprocessable_content
+      end
+
       def index
         ExperiencePrompt.seed!
         counts = ExperienceImage.group(:experience_prompt_id, :status).count
         outdated = ExperienceImage.succeeded.joins(:experience_prompt)
+                                  .where(source: "generated")
                                   .where("experience_images.prompt IS DISTINCT FROM experience_prompts.prompt")
                                   .group(:experience_prompt_id).count
         render json: {
@@ -20,11 +25,20 @@ module Api
           id: prompt.id,
           prompt: prompt.prompt,
           prompt_fr: prompt.prompt_fr,
-          images: prompt.images.with_attached_file.map do |image|
-            image.slice(:id, :position, :status, :error, :attempts, :model, :generated_at)
-                 .merge(url: image.display_path, outdated: image.succeeded? && image.prompt != prompt.prompt)
-          end
+          free_positions: prompt.free_positions,
+          images: prompt.images.with_attached_file.map { |image| image_json(image) }
         }
+      end
+
+      def upload
+        prompt = ExperiencePrompt.find(params[:id])
+        image = prompt.upload!(params.require(:file), position: params[:position].presence&.to_i)
+        render json: image_json(image), status: :created
+      end
+
+      def clear_image
+        ExperienceImage.find(params[:id]).clear!
+        head :no_content
       end
 
       def update
@@ -49,6 +63,11 @@ module Api
       end
 
       private
+
+      def image_json(image)
+        image.slice(:id, :position, :status, :source, :error, :attempts, :model, :generated_at)
+             .merge(url: image.display_path, outdated: image.outdated?)
+      end
 
       def summary(prompt, counts, outdated)
         statuses = ExperienceImage.statuses.keys.index_with { |status| counts[[ prompt.id, status ]].to_i }

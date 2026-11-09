@@ -47,9 +47,11 @@ Rails.application.routes.draw do
       post "assets/:id/withdraw", to: "submissions#withdraw_asset"
       resources :experience_prompts, only: [ :index, :show, :update ] do
         post :generate, on: :member
+        post :upload, on: :member
         post :generate_all, on: :collection
       end
       post "experience_images/:id/regenerate", to: "experience_prompts#regenerate_image"
+      delete "experience_images/:id", to: "experience_prompts#clear_image"
     end
 
     namespace :moderation do

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AdminShell, { inputClass } from "~/components/admin/AdminShell";
 import Button from "~/components/ui/Button";
 import { adminApi } from "~/lib/admin";
@@ -19,6 +19,7 @@ const STATUS_ORDER = [
 const STATUS_CLASS = {
   succeeded: "bg-ink",
   outdated: "bg-lime",
+  uploaded: "bg-ink",
   generating: "hatch",
   queued: "bg-peach",
   failed: "bg-signal",
@@ -94,6 +95,8 @@ export default function AdminExperience() {
             onSave={(body) =>
               act(() => adminApi.updateExperiencePrompt(prompt.id, body))
             }
+            onClear={(id) => act(() => adminApi.clearExperienceImage(id))}
+            onChanged={() => setRefresh((n) => n + 1)}
           />
         ))}
       </ul>
@@ -124,6 +127,8 @@ function PromptRow({
   onGenerate,
   onRegenerate,
   onSave,
+  onClear,
+  onChanged,
   refresh,
 }) {
   const { counts } = prompt;
@@ -177,20 +182,52 @@ function PromptRow({
         <PromptDetail
           id={prompt.id}
           refresh={refresh}
+          perPrompt={perPrompt}
           onRegenerate={onRegenerate}
           onSave={onSave}
+          onClear={onClear}
+          onChanged={onChanged}
         />
       )}
     </li>
   );
 }
 
-function PromptDetail({ id, refresh, onRegenerate, onSave }) {
+function PromptDetail({
+  id,
+  perPrompt,
+  refresh,
+  onRegenerate,
+  onSave,
+  onClear,
+  onChanged,
+}) {
+  const settings = useSettings();
   const [data, setData] = useState(null);
+  const [progress, setProgress] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     adminApi.experiencePrompt(id).then(setData);
   }, [id, refresh]);
+
+  // One request per file, in order; the server picks the next free spot unless a spot is given.
+  const uploadFiles = async (files, position) => {
+    const list = [...files].slice(0, position ? 1 : undefined);
+    if (list.length === 0) return;
+    setError(null);
+    for (const [index, file] of list.entries()) {
+      setProgress({ done: index, total: list.length });
+      try {
+        await adminApi.uploadExperienceImage(id, file, position);
+      } catch (err) {
+        setError(uploadError(err, file, list.length - index));
+        break;
+      }
+    }
+    setProgress(null);
+    onChanged();
+  };
 
   if (!data) return null;
 
@@ -201,13 +238,86 @@ function PromptDetail({ id, refresh, onRegenerate, onSave }) {
         data={data}
         onSave={onSave}
       />
-      {data.images.length === 0 ? (
-        <p className="text-ink-55 text-[13px]">
-          {t("admin.experience.noImages")}
-        </p>
-      ) : (
-        <Images images={data.images} onRegenerate={onRegenerate} />
-      )}
+      <DropZone
+        free={data.free_positions.length}
+        accept={settings?.limits?.accepted_content_types}
+        progress={progress}
+        onFiles={(files) => uploadFiles(files)}
+      />
+      {error && <p className="notice">{error}</p>}
+      <Images
+        images={data.images}
+        perPrompt={perPrompt}
+        busy={progress !== null}
+        onDropFile={(files, position) => uploadFiles(files, position)}
+        onRegenerate={onRegenerate}
+        onClear={onClear}
+      />
+    </div>
+  );
+}
+
+function uploadError(err, file, remaining) {
+  const reason = t(`admin.experience.uploadErrors.${err.message}`);
+  return t("admin.experience.uploadFailed", {
+    name: file.name,
+    reason: reason.startsWith("admin.") ? err.message : reason,
+    count: remaining,
+  });
+}
+
+function filesFrom(event) {
+  event.preventDefault();
+  return event.dataTransfer?.files ?? [];
+}
+
+function DropZone({ free, accept, progress, onFiles }) {
+  const [over, setOver] = useState(false);
+  const inputRef = useRef(null);
+
+  return (
+    <div
+      onDragOver={(event) => {
+        event.preventDefault();
+        setOver(true);
+      }}
+      onDragLeave={() => setOver(false)}
+      onDrop={(event) => {
+        setOver(false);
+        onFiles(filesFrom(event));
+      }}
+      className={`border-ink flex flex-wrap items-center gap-x-4 gap-y-2 border-2 border-dashed p-4 ${over ? "bg-lime" : ""}`}
+    >
+      <p className="mono-caps text-[12px] font-bold">
+        {progress
+          ? t("admin.experience.uploading", {
+              done: progress.done + 1,
+              total: progress.total,
+            })
+          : t("admin.experience.dropHere")}
+      </p>
+      <Button
+        size="sm"
+        variant="secondary"
+        disabled={progress !== null || free === 0}
+        onClick={() => inputRef.current?.click()}
+      >
+        {t("admin.experience.chooseFiles")}
+      </Button>
+      <input
+        ref={inputRef}
+        type="file"
+        multiple
+        accept={accept?.join(",")}
+        className="hidden"
+        onChange={(event) => {
+          onFiles(event.target.files);
+          event.target.value = "";
+        }}
+      />
+      <p className="text-ink-60 w-full text-[13px]">
+        {t("admin.experience.dropHint", { count: free })}
+      </p>
     </div>
   );
 }
@@ -257,47 +367,96 @@ function Wording({ data, onSave }) {
   );
 }
 
-function Images({ images, onRegenerate }) {
+function Images({
+  images,
+  perPrompt,
+  busy,
+  onDropFile,
+  onRegenerate,
+  onClear,
+}) {
+  const byPosition = new Map(images.map((image) => [image.position, image]));
   return (
     <ul className="grid grid-cols-4 gap-3 sm:grid-cols-8">
-      {images.map((image) => (
-        <li key={image.id} className="flex flex-col gap-1.5">
-          <div
-            className={`border-ink aspect-[3/4] border-2 ${image.url ? "" : STATUS_CLASS[image.status]}`}
-          >
-            {image.url && (
-              <img
-                src={image.url}
-                alt=""
-                className="h-full w-full object-cover"
-              />
-            )}
-          </div>
-          <p className="mono-caps text-[10px] font-bold">
-            {String(image.position).padStart(2, "0")} ·{" "}
-            {t(
-              `admin.experience.status.${image.outdated ? "outdated" : image.status}`
-            )}
-          </p>
-          {image.error && (
-            <p
-              className="text-ink-60 line-clamp-3 text-[11px]"
-              title={image.error}
-            >
-              {image.error}
-            </p>
-          )}
-          {(image.status === "succeeded" || image.status === "failed") && (
-            <button
-              type="button"
-              onClick={() => onRegenerate(image.id)}
-              className="mono-caps hover:bg-lime cursor-pointer self-start text-[10px] underline underline-offset-4"
-            >
-              {t("admin.experience.regenerate")}
-            </button>
-          )}
-        </li>
+      {Array.from({ length: perPrompt }, (_, index) => (
+        <Slot
+          key={index}
+          position={index + 1}
+          image={byPosition.get(index + 1)}
+          busy={busy}
+          onDropFile={onDropFile}
+          onRegenerate={onRegenerate}
+          onClear={onClear}
+        />
       ))}
     </ul>
+  );
+}
+
+function slotLabel(image) {
+  if (!image) return "pending";
+  if (image.outdated) return "outdated";
+  if (image.status === "succeeded" && image.source === "uploaded") {
+    return "uploaded";
+  }
+  return image.status;
+}
+
+function Slot({ position, image, busy, onDropFile, onRegenerate, onClear }) {
+  const [over, setOver] = useState(false);
+  const status = slotLabel(image);
+  const action =
+    "mono-caps hover:bg-lime cursor-pointer self-start text-[10px] underline underline-offset-4";
+
+  return (
+    <li className="flex flex-col gap-1.5">
+      <div
+        title={t("admin.experience.dropOnSlot")}
+        onDragOver={(event) => {
+          if (busy) return;
+          event.preventDefault();
+          event.stopPropagation();
+          setOver(true);
+        }}
+        onDragLeave={() => setOver(false)}
+        onDrop={(event) => {
+          event.stopPropagation();
+          setOver(false);
+          onDropFile(filesFrom(event), position);
+        }}
+        className={`border-ink aspect-[3/4] border-2 ${over ? "bg-lime outline-signal outline-2" : image?.url ? "" : STATUS_CLASS[status] || STATUS_CLASS.pending}`}
+      >
+        {image?.url && !over && (
+          <img src={image.url} alt="" className="h-full w-full object-cover" />
+        )}
+      </div>
+      <p className="mono-caps text-[10px] font-bold">
+        {String(position).padStart(2, "0")} ·{" "}
+        {t(`admin.experience.status.${status}`)}
+      </p>
+      {image?.error && (
+        <p className="text-ink-60 line-clamp-3 text-[11px]" title={image.error}>
+          {image.error}
+        </p>
+      )}
+      {image && (image.status === "succeeded" || image.status === "failed") && (
+        <div className="flex flex-wrap gap-x-3">
+          <button
+            type="button"
+            onClick={() => onRegenerate(image.id)}
+            className={action}
+          >
+            {t("admin.experience.regenerate")}
+          </button>
+          <button
+            type="button"
+            onClick={() => onClear(image.id)}
+            className={action}
+          >
+            {t("admin.experience.remove")}
+          </button>
+        </div>
+      )}
+    </li>
   );
 }

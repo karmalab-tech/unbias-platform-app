@@ -297,6 +297,7 @@ Spec: `docs/BIAS_EXPERIENCE.md`.
 4. A refused or failing image turns signal with the API's message under its thumbnail; the row's button becomes "Retry failed". Regenerate under a thumbnail replaces just that image.
 5. "Generate everything missing" queues all prompts; at most `image_generation_concurrency` calls run at once.
 6. Open a prompt, change the French wording and save: the public page shows it, with the words not in the parent prompt still highlighted. Change the English prompt: its squares turn lime (outdated), its images disappear from the public page, and the button becomes "Update outdated". Run `bin/rails db:seed` again: your wording is kept.
+7. Open *Create a photo of a person.* and drop 16 JPEGs on the dashed zone (or Choose files): "Uploading 1 of 16…", spots 1–15 fill and show "Uploaded", and a notice says the 16th was not uploaded because no spot is free. Drop one image on spot 3: it replaces that spot only. Remove empties a spot. Change the English prompt: uploaded images stay (not outdated) and Generate leaves them alone. The public page shows them.
 
 ### 2. Play it
 

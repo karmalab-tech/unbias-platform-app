@@ -54,6 +54,43 @@ RSpec.describe ExperiencePrompt do
     expect { prompt.generate! }.to have_enqueued_job(GenerateExperienceImageJob).exactly(2).times
   end
 
+  describe "#upload!" do
+    let(:prompt) { described_class.find_by(path: "person") }
+
+    def photo(name = "person.jpg", type = "image/jpeg")
+      Rack::Test::UploadedFile.new(Rails.root.join("spec/fixtures/files", name), type)
+    end
+
+    it "fills the free spots in order and replaces a chosen spot" do
+      prompt.images.create!(position: 1, status: :succeeded, prompt: prompt.prompt)
+      first = prompt.upload!(photo)
+      expect(first.position).to eq(2)
+      expect(first).to be_uploaded
+      expect(first).to be_succeeded
+      expect(first.file).to be_attached
+
+      replaced = prompt.upload!(photo, position: 1)
+      expect(replaced.position).to eq(1)
+      expect(replaced.reload).to be_uploaded
+      expect(prompt.free_positions).to eq((3..15).to_a)
+    end
+
+    it "keeps uploaded images when the English wording changes" do
+      image = prompt.upload!(photo)
+      prompt.update!(prompt: "Create a portrait of a person.")
+      expect(image.reload).to be_current
+      expect { prompt.generate! }.to have_enqueued_job(GenerateExperienceImageJob).exactly(14).times
+      expect(prompt.display_paths.first).to be_present
+    end
+
+    it "refuses other file types and a full prompt" do
+      expect { prompt.upload!(photo("../../../README.md", "text/plain")) }
+        .to raise_error(ExperiencePrompt::UploadError, "unsupported_type")
+      15.times { prompt.upload!(photo) }
+      expect { prompt.upload!(photo) }.to raise_error(ExperiencePrompt::UploadError, "no_free_position")
+    end
+  end
+
   describe ExperienceImage do
     let(:image) { described_class.create!(experience_prompt: ExperiencePrompt.find_by(path: "person/woman"), position: 3) }
 

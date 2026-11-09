@@ -53,8 +53,28 @@ class ExperiencePrompt < ApplicationRecord
   end
 
   def display_paths
-    current = images.select { |image| image.succeeded? && image.prompt == prompt }.index_by(&:position)
+    current = images.select(&:current?).index_by(&:position)
     (1..self.class.images_per_prompt).map { |position| current[position]&.display_path }
+  end
+
+  class UploadError < StandardError; end
+
+  # Puts an admin's own image at `position`, or at the first spot without a current image.
+  def upload!(file, position: nil)
+    limits = Rails.configuration.x.unbias
+    type = Marcel::MimeType.for(file.tempfile, name: file.original_filename)
+    raise UploadError, "unsupported_type" unless limits.accepted_content_types.include?(type)
+    raise UploadError, "too_large" if file.size > limits.max_file_bytes
+
+    position ||= free_positions.first or raise UploadError, "no_free_position"
+    raise UploadError, "bad_position" unless (1..self.class.images_per_prompt).cover?(position)
+
+    images.find_or_create_by!(position: position).tap { |image| image.upload!(file) }
+  end
+
+  def free_positions
+    taken = images.select(&:current?).map(&:position)
+    (1..self.class.images_per_prompt).to_a - taken
   end
 
   # Queues one job per image that is missing, failed or made from an older English prompt.
@@ -62,7 +82,7 @@ class ExperiencePrompt < ApplicationRecord
     transaction do
       (1..self.class.images_per_prompt).each { |position| images.find_or_create_by!(position: position) }
     end
-    images.where(status: %w[pending failed]).or(images.succeeded.where.not(prompt: prompt)).find_each do |image|
+    images.where(status: %w[pending failed]).or(images.succeeded.generated.where.not(prompt: prompt)).find_each do |image|
       image.update!(status: :queued, error: nil)
       GenerateExperienceImageJob.perform_later(image)
     end
