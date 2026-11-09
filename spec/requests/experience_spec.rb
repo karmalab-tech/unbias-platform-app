@@ -11,22 +11,22 @@ RSpec.describe "Bias experience", type: :request do
 
   def finished_image(path, position)
     prompt = ExperiencePrompt.find_by!(path: path)
-    image = prompt.images.create!(position: position, status: :succeeded)
+    image = prompt.images.create!(position: position, status: :succeeded, prompt: prompt.prompt)
     image.file.attach(io: Rails.root.join("spec/fixtures/files/person.jpg").open, filename: "01.jpeg", content_type: "image/jpeg")
     image
   end
 
   it "serves the tree with the finished images only" do
-    ExperiencePrompt.sync!
+    ExperiencePrompt.seed!
     finished_image("person/woman", 2)
 
     get "/api/public/experience"
 
     expect(response).to have_http_status(:ok)
-    expect(json["images_per_prompt"]).to eq(20)
-    expect(json["steps"]).to eq(%w[gender age origin body])
+    expect(json["images_per_prompt"]).to eq(15)
     woman = json["prompts"].find { |prompt| prompt["path"] == "person/woman" }
-    expect(woman).to include("parent" => "person", "step" => "gender")
+    expect(woman["parent"]).to eq("person")
+    expect(woman.dig("segments", "en")).to include({ "text" => "woman", "added" => true })
     expect(woman.dig("segments", "fr").pluck("text").join).to eq("Crée une photo d’une femme.")
     expect(woman["images"][0]).to be_nil
     expect(woman["images"][1]).to start_with("/rails/active_storage/representations/redirect/")
@@ -55,9 +55,26 @@ RSpec.describe "Bias experience", type: :request do
       .to have_enqueued_job(GenerateExperiencePromptJob).exactly(121).times
   end
 
+  it "edits the wording, which marks earlier images outdated" do
+    sign_in admin
+    ExperiencePrompt.seed!
+    image = finished_image("person/woman", 1)
+
+    patch "/api/admin/experience_prompts/#{image.experience_prompt_id}",
+          params: { experience_prompt: { prompt: "Create a photo of a female person.", prompt_fr: "Une personne." } }, as: :json
+    expect(json).to include("prompt" => "Create a photo of a female person.", "prompt_fr" => "Une personne.")
+
+    get "/api/admin/experience_prompts"
+    row = json["prompts"].find { |prompt| prompt["path"] == "person/woman" }
+    expect(row["counts"]).to include("outdated" => 1, "succeeded" => 0)
+
+    get "/api/public/experience"
+    expect(json["prompts"].find { |prompt| prompt["path"] == "person/woman" }["images"].compact).to be_empty
+  end
+
   it "shows a prompt's images and regenerates one" do
     sign_in admin
-    ExperiencePrompt.sync!
+    ExperiencePrompt.seed!
     image = finished_image("person", 1)
 
     get "/api/admin/experience_prompts/#{image.experience_prompt_id}"

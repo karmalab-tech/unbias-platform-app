@@ -4,7 +4,7 @@ RSpec.describe GenerateExperienceImageJob do
   include ActiveJob::TestHelper
 
   it "marks the image failed once transient retries run out" do
-    ExperiencePrompt.sync!
+    ExperiencePrompt.seed!
     image = ExperiencePrompt.first.images.create!(position: 1, status: :queued)
     allow_any_instance_of(ImageGeneration::OpenaiClient).to receive(:generate).and_raise(ImageGeneration::Transient, "OpenAI 503")
     stub_const("ENV", ENV.to_h.merge("OPENAI_API_KEY" => "test"))

@@ -420,8 +420,14 @@ export const fr = {
       retry: "Relancer les échecs",
       regenerate: "Régénérer",
       noImages: "Rien de généré pour l’instant.",
+      update: "Mettre à jour",
+      promptEn: "Prompt anglais (envoyé au modèle)",
+      promptFr: "Texte français (montré aux visiteurs francophones)",
+      wordingHint:
+        "Les mots absents du prompt parent sont surlignés. Modifier le prompt anglais rend ses images obsolètes jusqu’à ce que « Mettre à jour » les remplace.",
       status: {
         succeeded: "Terminée",
+        outdated: "Obsolète",
         generating: "En cours",
         queued: "En attente",
         failed: "Échec",
@@ -495,6 +501,7 @@ export const fr = {
     },
   },
   experience: {
+    wannaHelp: "Envie d’aider ?",
     pick: "Choisissez un prompt",
     backTo: "Revenir à ce prompt",
     gridLabel: "{count} images générées à partir de : {prompt}",

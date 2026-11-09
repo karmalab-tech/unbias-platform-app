@@ -21,6 +21,10 @@ export const adminApi = {
     api.post(`/api/admin/submissions/${id}/withdraw`, {}),
   withdrawAsset: (id) => api.post(`/api/admin/assets/${id}/withdraw`, {}),
   experiencePrompt: (id) => api.get(`/api/admin/experience_prompts/${id}`),
+  updateExperiencePrompt: (id, body) =>
+    api.patch(`/api/admin/experience_prompts/${id}`, {
+      experience_prompt: body,
+    }),
   generateExperiencePrompt: (id) =>
     api.post(`/api/admin/experience_prompts/${id}/generate`, {}),
   generateAllExperience: () =>

@@ -24,6 +24,7 @@ Five colours plus ink at fixed opacities. All are Tailwind `@theme` tokens (`bg-
 | `lime` | `#dfe75c` | Secondary stat card, hover on links, success notice, press shadow variant |
 | `peach` | `#f0ad98` | Pending data, tertiary card, hover on secondary controls, hatch ground, disabled primary |
 | `surface` | `#f8ebd0` | Inset panels that need a quiet ground (consent text, summaries) |
+| `night` | `#191312` | Ground of the bias experience only (see Dark stage) |
 | `ink-72 / 60 / 55 / 45 / 40` | ink at that % | Body copy, secondary copy, captions, placeholders, empty values |
 
 Rules:
@@ -107,7 +108,7 @@ Where a taxonomy comes from outside the product, name it and link out (the Monk 
 
 ## Dark stage (bias experience)
 
-`/experience` is the one surface on an `ink` ground. It keeps the language (square corners, 2px lines, Archivo, `mono-caps`, hard shadow) but inverts it: cream text and lines on ink, and emphasis comes from cream opacity instead of fills. Current prompt: full cream with a `shadow-hard-signal`, added words on a signal block. Next prompts: cream at 80% with a 40% border, added words in lime. History: cream at 35% with a 10% border. Photos sit borderless and shadowless and float (`animate-float`). Empty tiles are cream at 5%. No titles, no step counters; the only label is one 10px `mono-caps` instruction at 40%. See `docs/BIAS_EXPERIENCE.md`.
+`/experience` is the one surface on a dark ground, `night` (`#191312`, ink's hue, darker; used nowhere else). It keeps the language (square corners, 2px lines, Archivo, `mono-caps`, hard shadow) but inverts it: cream text and lines on night, and emphasis comes from cream opacity instead of fills. Current prompt: full cream with a `shadow-hard-signal`, added words on a signal block. Next prompts: cream at 80% with a 40% border, added words in lime. History: cream at 35% with a 10% border. Photos are 3:4 portraits, borderless and shadowless, and float (`animate-float`). Empty tiles are cream at 5%. No titles, no step counters; the only label is one 10px `mono-caps` instruction at 40%. In exhibition mode the header's eye icon and wordmark sit top left and the contribute QR code bottom left with a 12px `mono-caps` "Wanna help?". See `docs/BIAS_EXPERIENCE.md`.
 
 ## Outside the app
 

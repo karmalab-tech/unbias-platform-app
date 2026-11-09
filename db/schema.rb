@@ -113,6 +113,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_09_120000) do
   create_table "experience_prompts", force: :cascade do |t|
     t.string "path", null: false
     t.string "prompt", null: false
+    t.string "prompt_fr", null: false
     t.integer "depth", null: false
     t.integer "position", null: false
     t.boolean "in_tree", default: true, null: false

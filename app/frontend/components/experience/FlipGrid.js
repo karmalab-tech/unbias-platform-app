@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { floatTiming, waveDelay } from "~/lib/experience";
+import { GRID_COLUMNS, floatTiming, waveDelay } from "~/lib/experience";
 
 export const FLIP_MS = 620;
 export const WAVE_STEP_MS = 70;
@@ -8,7 +8,7 @@ export function waveTotalMs(count) {
   return waveDelay(count - 1, WAVE_STEP_MS) + FLIP_MS;
 }
 
-// Each tile floats on its own; a new set goes on the hidden face and the tiles turn in a diagonal wave.
+// Portrait tiles (3:4) that float on their own; a new set goes on the hidden face and the tiles turn in a diagonal wave.
 export default function FlipGrid({ version, urls, count, label }) {
   const empty = Array(count).fill(null);
   const [state, setState] = useState({
@@ -24,10 +24,19 @@ export default function FlipGrid({ version, urls, count, label }) {
     setState({ version, turns, faces });
   }
 
+  const rows = Math.ceil(count / GRID_COLUMNS);
+  const ratio = (GRID_COLUMNS * 3) / (rows * 4);
+
   return (
     <ul
       aria-label={label}
-      className="grid aspect-[5/4] w-full grid-cols-5 grid-rows-4 gap-2.5 sm:gap-4 lg:w-[min(100cqw,125cqh)] lg:gap-5"
+      style={{
+        "--grid-ratio": ratio,
+        aspectRatio: ratio,
+        gridTemplateColumns: `repeat(${GRID_COLUMNS}, minmax(0, 1fr))`,
+        gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
+      }}
+      className="grid w-full gap-2.5 sm:gap-4 lg:w-[min(100cqw,calc(100cqh*var(--grid-ratio)))] lg:gap-5"
     >
       {empty.map((_, index) => {
         const timing = floatTiming(index);

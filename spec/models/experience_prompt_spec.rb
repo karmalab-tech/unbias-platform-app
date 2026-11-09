@@ -8,7 +8,7 @@ RSpec.describe ExperiencePrompt do
     instance_double(ImageGeneration::OpenaiClient, generate: ImageGeneration::Result.new(bytes: webp, format: "jpeg", model: "gpt-image-test"))
   end
 
-  before { ExperiencePrompt.sync! }
+  before { ExperiencePrompt.seed! }
 
   it "mirrors the prompt tree" do
     expect(described_class.in_tree.count).to eq(1 + 3 + 9 + 36 + 72)
@@ -18,21 +18,38 @@ RSpec.describe ExperiencePrompt do
   end
 
   it "keeps removed nodes out of the tree without deleting their images" do
-    described_class.create!(path: "person/robot", prompt: "Create a photo of a robot.", depth: 1, position: 999)
-    described_class.sync!
+    described_class.create!(path: "person/robot", prompt: "Create a photo of a robot.", prompt_fr: "Un robot.", depth: 1, position: 999)
+    described_class.seed!
     expect(described_class.find_by(path: "person/robot").in_tree).to be(false)
+  end
+
+  it "seeds French wording and never overwrites edited wording" do
+    woman = described_class.find_by(path: "person/woman/old")
+    expect(woman.prompt_fr).to eq("Crée une photo d’une femme âgée.")
+    woman.update!(prompt: "Create a photo of an elderly woman.", prompt_fr: "Crée une photo d’une vieille femme.")
+    described_class.seed!
+    expect(woman.reload.prompt).to eq("Create a photo of an elderly woman.")
+    expect(woman.prompt_fr).to eq("Crée une photo d’une vieille femme.")
+  end
+
+  it "highlights the words a prompt adds to its parent" do
+    segments = ExperienceTree.highlight("Create a photo of a young Black woman with braids.", "Create a photo of a young woman.")
+    expect(segments.select { |segment| segment[:added] }.pluck(:text)).to eq([ "Black", "with braids" ])
+    expect(segments.pluck(:text).join).to eq("Create a photo of a young Black woman with braids.")
+    expect(ExperienceTree.highlight("Create a photo of a person.", nil)).to eq([ { text: "Create a photo of a person." } ])
   end
 
   it "queues one job per missing or failed image" do
     prompt = described_class.find_by(path: "person")
-    expect { prompt.generate! }.to have_enqueued_job(GenerateExperienceImageJob).exactly(20).times
-    expect(prompt.images.count).to eq(20)
-    expect(prompt.images.queued.count).to eq(20)
+    expect { prompt.generate! }.to have_enqueued_job(GenerateExperienceImageJob).exactly(15).times
+    expect(prompt.images.count).to eq(15)
+    expect(prompt.images.queued.count).to eq(15)
 
     prompt.images.first.update!(status: :failed, error: "boom")
-    prompt.images.second.update!(status: :succeeded)
+    prompt.images.second.update!(status: :succeeded, prompt: prompt.prompt)
+    prompt.images.third.update!(status: :succeeded, prompt: "An older wording.")
     clear_enqueued_jobs
-    expect { prompt.generate! }.to have_enqueued_job(GenerateExperienceImageJob).exactly(1).times
+    expect { prompt.generate! }.to have_enqueued_job(GenerateExperienceImageJob).exactly(2).times
   end
 
   describe ExperienceImage do

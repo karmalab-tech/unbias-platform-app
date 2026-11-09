@@ -45,7 +45,7 @@ Rails.application.routes.draw do
       get "submissions/lookup", to: "submissions#lookup"
       post "submissions/:id/withdraw", to: "submissions#withdraw"
       post "assets/:id/withdraw", to: "submissions#withdraw_asset"
-      resources :experience_prompts, only: [ :index, :show ] do
+      resources :experience_prompts, only: [ :index, :show, :update ] do
         post :generate, on: :member
         post :generate_all, on: :collection
       end

@@ -3,14 +3,14 @@ class ExperienceImage < ApplicationRecord
   belongs_to :experience_prompt, touch: true
 
   has_one_attached :file do |attachable|
-    attachable.variant :display, resize_to_limit: [ 640, 640 ], format: :webp, preprocessed: true
+    attachable.variant :display, resize_to_limit: [ 600, 800 ], format: :webp, preprocessed: true
   end
 
   enum :status, { pending: "pending", queued: "queued", generating: "generating", succeeded: "succeeded", failed: "failed" },
        default: :pending
 
   def generate!(client: ImageGeneration::OpenaiClient.new)
-    return if succeeded?
+    return if succeeded? && prompt == experience_prompt.prompt
 
     update!(status: :generating, attempts: attempts + 1, error: nil)
     result = client.generate(prompt: experience_prompt.prompt)

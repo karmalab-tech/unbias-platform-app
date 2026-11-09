@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AdminShell from "~/components/admin/AdminShell";
+import AdminShell, { inputClass } from "~/components/admin/AdminShell";
 import Button from "~/components/ui/Button";
 import { adminApi } from "~/lib/admin";
 import usePolling from "~/lib/usePolling";
@@ -7,10 +7,18 @@ import { formatNumber } from "~/lib/format";
 import { useSettings } from "~/lib/settings";
 import { t } from "~/i18n";
 
-const STATUS_ORDER = ["succeeded", "generating", "queued", "failed", "pending"];
+const STATUS_ORDER = [
+  "succeeded",
+  "outdated",
+  "generating",
+  "queued",
+  "failed",
+  "pending",
+];
 
 const STATUS_CLASS = {
   succeeded: "bg-ink",
+  outdated: "bg-lime",
   generating: "hatch",
   queued: "bg-peach",
   failed: "bg-signal",
@@ -83,6 +91,9 @@ export default function AdminExperience() {
             onRegenerate={(id) =>
               act(() => adminApi.regenerateExperienceImage(id))
             }
+            onSave={(body) =>
+              act(() => adminApi.updateExperiencePrompt(prompt.id, body))
+            }
           />
         ))}
       </ul>
@@ -112,12 +123,13 @@ function PromptRow({
   onToggle,
   onGenerate,
   onRegenerate,
+  onSave,
   refresh,
 }) {
   const { counts } = prompt;
   const total = STATUS_ORDER.reduce((sum, status) => sum + counts[status], 0);
   const notStarted = counts.pending + Math.max(0, perPrompt - total);
-  const missing = notStarted + counts.failed;
+  const missing = notStarted + counts.failed + counts.outdated;
   const cells = STATUS_ORDER.flatMap((status) =>
     Array(status === "pending" ? notStarted : counts[status]).fill(status)
   );
@@ -132,7 +144,10 @@ function PromptRow({
           className="min-w-0 flex-1 cursor-pointer text-left text-[14.5px] hover:underline"
           style={{ paddingLeft: `${prompt.depth * 18}px` }}
         >
-          {prompt.prompt}
+          <span className="block">{prompt.prompt}</span>
+          <span className="text-ink-55 block text-[13px]">
+            {prompt.prompt_fr}
+          </span>
         </button>
         <span className="flex gap-0.5" aria-hidden="true">
           {cells.map((status, index) => (
@@ -153,21 +168,24 @@ function PromptRow({
         >
           {counts.failed > 0
             ? t("admin.experience.retry")
-            : t("admin.experience.generate")}
+            : counts.outdated > 0
+              ? t("admin.experience.update")
+              : t("admin.experience.generate")}
         </Button>
       </div>
       {open && (
-        <PromptImages
+        <PromptDetail
           id={prompt.id}
           refresh={refresh}
           onRegenerate={onRegenerate}
+          onSave={onSave}
         />
       )}
     </li>
   );
 }
 
-function PromptImages({ id, refresh, onRegenerate }) {
+function PromptDetail({ id, refresh, onRegenerate, onSave }) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -175,20 +193,77 @@ function PromptImages({ id, refresh, onRegenerate }) {
   }, [id, refresh]);
 
   if (!data) return null;
-  if (data.images.length === 0) {
-    return (
-      <p className="text-ink-55 mt-3 text-[13px]">
-        {t("admin.experience.noImages")}
-      </p>
-    );
-  }
 
   return (
-    <ul className="mt-3 grid grid-cols-4 gap-3 sm:grid-cols-8">
-      {data.images.map((image) => (
+    <div className="mt-3 flex flex-col gap-4">
+      <Wording
+        key={`${data.prompt}|${data.prompt_fr}`}
+        data={data}
+        onSave={onSave}
+      />
+      {data.images.length === 0 ? (
+        <p className="text-ink-55 text-[13px]">
+          {t("admin.experience.noImages")}
+        </p>
+      ) : (
+        <Images images={data.images} onRegenerate={onRegenerate} />
+      )}
+    </div>
+  );
+}
+
+function Wording({ data, onSave }) {
+  const [prompt, setPrompt] = useState(data.prompt);
+  const [promptFr, setPromptFr] = useState(data.prompt_fr);
+  const changed = prompt !== data.prompt || promptFr !== data.prompt_fr;
+
+  return (
+    <form
+      className="bg-surface border-ink flex flex-col gap-3 border-2 p-4"
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSave({ prompt, prompt_fr: promptFr });
+      }}
+    >
+      <label className="flex flex-col gap-1">
+        <span className="mono-caps text-[11px] font-bold">
+          {t("admin.experience.promptEn")}
+        </span>
+        <input
+          className={inputClass}
+          value={prompt}
+          onChange={(event) => setPrompt(event.target.value)}
+        />
+      </label>
+      <label className="flex flex-col gap-1">
+        <span className="mono-caps text-[11px] font-bold">
+          {t("admin.experience.promptFr")}
+        </span>
+        <input
+          className={inputClass}
+          value={promptFr}
+          onChange={(event) => setPromptFr(event.target.value)}
+        />
+      </label>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button size="sm" type="submit" disabled={!changed}>
+          {t("common.save")}
+        </Button>
+        <p className="text-ink-55 text-[13px]">
+          {t("admin.experience.wordingHint")}
+        </p>
+      </div>
+    </form>
+  );
+}
+
+function Images({ images, onRegenerate }) {
+  return (
+    <ul className="grid grid-cols-4 gap-3 sm:grid-cols-8">
+      {images.map((image) => (
         <li key={image.id} className="flex flex-col gap-1.5">
           <div
-            className={`border-ink aspect-square border-2 ${image.url ? "" : STATUS_CLASS[image.status]}`}
+            className={`border-ink aspect-[3/4] border-2 ${image.url ? "" : STATUS_CLASS[image.status]}`}
           >
             {image.url && (
               <img
@@ -200,7 +275,9 @@ function PromptImages({ id, refresh, onRegenerate }) {
           </div>
           <p className="mono-caps text-[10px] font-bold">
             {String(image.position).padStart(2, "0")} ·{" "}
-            {t(`admin.experience.status.${image.status}`)}
+            {t(
+              `admin.experience.status.${image.outdated ? "outdated" : image.status}`
+            )}
           </p>
           {image.error && (
             <p

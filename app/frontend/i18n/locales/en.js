@@ -414,8 +414,14 @@ export const en = {
       retry: "Retry failed",
       regenerate: "Regenerate",
       noImages: "Nothing generated yet.",
+      update: "Update outdated",
+      promptEn: "English prompt (sent to the model)",
+      promptFr: "French wording (shown to French visitors)",
+      wordingHint:
+        "Words not in the parent prompt are highlighted. Changing the English prompt marks its images outdated until Update replaces them.",
       status: {
         succeeded: "Done",
+        outdated: "Outdated",
         generating: "Generating",
         queued: "Queued",
         failed: "Failed",
@@ -489,6 +495,7 @@ export const en = {
     },
   },
   experience: {
+    wannaHelp: "Wanna help?",
     pick: "Pick a prompt",
     backTo: "Go back to this prompt",
     gridLabel: "{count} images generated from: {prompt}",

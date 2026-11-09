@@ -8,4 +8,4 @@ User.find_or_create_by!(email: admin_email) do |user|
 end
 
 RepresentationBucket.seed!
-ExperiencePrompt.sync!
+ExperiencePrompt.seed!

@@ -3,6 +3,7 @@ class CreateExperienceTables < ActiveRecord::Migration[8.0]
     create_table :experience_prompts do |t|
       t.string :path, null: false
       t.string :prompt, null: false
+      t.string :prompt_fr, null: false
       t.integer :depth, null: false
       t.integer :position, null: false
       t.boolean :in_tree, null: false, default: true
