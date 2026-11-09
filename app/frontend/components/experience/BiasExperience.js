@@ -46,7 +46,7 @@ export default function BiasExperience({ presentation = false }) {
     ? []
     : path
       ? (tree.children.get(path) ?? [])
-      : [tree.root];
+      : [tree.root].filter(Boolean);
 
   const run = async (target) => {
     if (busy) return;

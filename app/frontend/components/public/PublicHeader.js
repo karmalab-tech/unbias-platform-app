@@ -27,15 +27,6 @@ export default function PublicHeader({ onWatchVideo, hasVideo }) {
           <NavLink to="/about" className={navItem}>
             {t("nav.whatIsThis")}
           </NavLink>
-          {hasVideo && (
-            <button
-              type="button"
-              onClick={onWatchVideo}
-              className={`${navItem} cursor-pointer uppercase`}
-            >
-              {t("nav.watchVideo")}
-            </button>
-          )}
           <a
             href={INSTAGRAM_URL}
             target="_blank"
