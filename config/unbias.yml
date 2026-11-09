@@ -26,6 +26,8 @@ shared:
   launch_boost_people_floor: 1100
   launch_boost_until: 2500
   launch_boost_step: 10
+  experience_images_url: /experience-images
+  experience_idle_seconds: 90
 
 test:
   launch_boost_photos_floor: 0

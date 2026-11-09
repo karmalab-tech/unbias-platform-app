@@ -5,12 +5,14 @@ module Api
         render json: {
           limits: limits.slice(:max_photos_per_submission, :max_people_per_photo, :min_short_side_px, :max_file_bytes,
                                :accepted_content_types, :stats_poll_seconds, :installation_poll_seconds,
+                               :experience_idle_seconds,
                                :detection_min_score, :detection_min_area_ratio),
           consent_version: limits.consent_version,
           people_milestone: limits.people_milestone,
           intro_video_url: ENV["INTRO_VIDEO_URL"].presence || limits.intro_video_url,
           intro_video_poster_url: ENV["INTRO_VIDEO_POSTER_URL"].presence,
           intro_video_subtitles_url: ENV["INTRO_VIDEO_SUBTITLES_URL"].presence,
+          experience_images_url: ENV["EXPERIENCE_IMAGES_URL"].presence || limits.experience_images_url,
           taxonomy: {
             age: Representation::AGE, skin_tone: Representation::SKIN_TONE, gender: Representation::GENDER,
             body: Representation::BODY, disability: Representation::DISABILITY, monk_swatches: Representation::MONK_SWATCHES

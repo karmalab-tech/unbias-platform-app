@@ -474,6 +474,44 @@ export const fr = {
         "Supprimer toutes les photos de cette contribution du stockage et les retirer du jeu de données ? Irréversible.",
     },
   },
+  experience: {
+    stepOf: "Étape {step} sur {total}",
+    done: "Terminé",
+    run: "Lancer",
+    running: "{count} générations",
+    morePrecise: "Précisez le prompt",
+    backTo: "Revenir à ce prompt",
+    restart: "Recommencer",
+    caption: "{count} images · même prompt · mêmes réglages",
+    gridLabel: "{count} images générées à partir de : {prompt}",
+    gridEmpty: "Pas encore d’images",
+    stages: {
+      start: {
+        title: "Une phrase, vingt images",
+        hint: "Nous avons demandé vingt fois la même chose à un modèle d’image, avec exactement les mêmes réglages. Lancez le prompt.",
+      },
+      gender: {
+        title: "Ajoutez un genre",
+        hint: "Vingt générations de la même phrase, et toutes se ressemblent. Précisez le prompt.",
+      },
+      age: {
+        title: "Ajoutez un âge",
+        hint: "Vous avez corrigé une chose. Regardez ce que le modèle décide encore seul.",
+      },
+      origin: {
+        title: "Ajoutez une origine",
+        hint: "Regardez la peau, les cheveux, les yeux. Le modèle choisit encore pour vous.",
+      },
+      body: {
+        title: "Ajoutez un corps ou un handicap",
+        hint: "Regardez les corps, les visages, les lunettes, la santé. Toujours la même moyenne.",
+      },
+      end: {
+        title: "Toujours la norme",
+        hint: "Chaque mot ajouté a corrigé une chose. Tout ce que vous n’avez pas dit, le modèle l’a rempli avec sa moyenne, vingt fois. Un prompt plus long n’ajoute pas ce qui manque aux données d’entraînement.",
+      },
+    },
+  },
   installation: {
     chooseLanguage: "Choisissez votre langue",
     scan: "Scannez pour ajouter vos photos",

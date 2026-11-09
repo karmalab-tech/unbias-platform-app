@@ -468,6 +468,44 @@ export const en = {
         "Delete every photo of this contribution from storage and remove them from the dataset? This cannot be undone.",
     },
   },
+  experience: {
+    stepOf: "Step {step} of {total}",
+    done: "Done",
+    run: "Run",
+    running: "Running {count}×",
+    morePrecise: "Make the prompt more precise",
+    backTo: "Go back to this prompt",
+    restart: "Start again",
+    caption: "{count} images · same prompt · same settings",
+    gridLabel: "{count} images generated from: {prompt}",
+    gridEmpty: "No images yet",
+    stages: {
+      start: {
+        title: "One sentence, twenty images",
+        hint: "We asked an image model for the same thing twenty times, with exactly the same settings. Run the prompt.",
+      },
+      gender: {
+        title: "Add a gender",
+        hint: "Twenty runs of one sentence, and they all look alike. Make the prompt more precise.",
+      },
+      age: {
+        title: "Add an age",
+        hint: "You fixed one thing. Look at what the model still decides on its own.",
+      },
+      origin: {
+        title: "Add an origin",
+        hint: "Look at skin, hair and eyes. The model still picks for you.",
+      },
+      body: {
+        title: "Add a body or a disability",
+        hint: "Look at bodies, faces, glasses, health. Still the same average.",
+      },
+      end: {
+        title: "Still the default",
+        hint: "Each word you added fixed one thing. Everything you left unsaid, the model filled with its average, twenty times over. A longer prompt cannot add what the training data lacks.",
+      },
+    },
+  },
   installation: {
     chooseLanguage: "Choose your language",
     scan: "Scan to add your photos",

@@ -4,6 +4,7 @@ import Home from "~/pages/Home";
 import About from "~/pages/About";
 import Installation from "~/pages/Installation";
 import Video from "~/pages/Video";
+import Experience from "~/pages/Experience";
 import Contribute from "~/pages/Contribute";
 import Moderation from "~/pages/Moderation";
 import AdminDashboard from "~/pages/admin/AdminDashboard";
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/installation" element={<Installation />} />
           <Route path="/video" element={<Video />} />
+          <Route path="/experience" element={<Experience />} />
           <Route path="/contribute/*" element={<Contribute />} />
           <Route path="/moderation" element={<Moderation />} />
           <Route path="/moderation/:id" element={<Moderation />} />

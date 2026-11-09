@@ -284,3 +284,16 @@ Spec: `docs/DESIGN_LANGUAGE.md`. Every screen should look like the Home page: cr
 6. Open the password-reset email and the contribution code email (letter_opener): ink header bar, cream ground, signal call to action.
 7. Share the home URL in a chat app, or open `/og-image.png`: the preview is the eye icon, title and tagline in the same language. The browser tab shows the eye favicon.
 8. `yarn test` fails if a `rounded-*`, Tailwind default colour, `outline-none` or second typeface sneaks back into `app/frontend` or `app/views/gate`.
+
+## PR 7 — Bias experience
+
+Spec: `docs/BIAS_EXPERIENCE.md`. Before the real images exist, any square `.webp` files in `public/experience-images/<folder>/01.webp…20.webp` will do (folders are listed in `docs/experience-prompts.csv`); without them every tile shows its run number.
+
+1. Open `/experience`: the public header, a hatched grid of twenty tiles and one red prompt, *Create a photo of a person.*, marked Run.
+2. Run it: the prompt shows "Running 20×", then the tiles flip one by one from top left to bottom right. The prompt moves into the ink list and three suggestions appear with the new word highlighted.
+3. Pick *woman*: the other suggestions disappear, the grid flips again, the age suggestions appear. Carry on through origin and body or disability. Clicks are ignored while the tiles turn.
+4. After the fifth prompt the page says "Still the default" and offers Start again. Tapping an earlier prompt in the list goes back to it.
+5. `?lang=fr`: prompts read in French with correct agreement (*une femme noire âgée*, *un homme blanc âgé*).
+6. `/experience?present=true`: full screen, no header. Leave it untouched for `experience_idle_seconds` (90 s) after a choice and it returns to the first prompt.
+7. Phone width: the grid sits above the prompts.
+8. `bin/experience-prompts` prints the 193 prompts; it matches `docs/experience-prompts.csv`.
