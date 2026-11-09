@@ -5,6 +5,16 @@ namespace :experience do
     puts "#{ExperiencePrompt.in_tree.count} prompts in the tree"
   end
 
+  desc "Overwrite the wording of every prompt with the defaults from ExperienceTree (discards admin edits)"
+  task reset_wording: :environment do
+    ExperiencePrompt.seed!
+    ExperienceTree.selections.each do |selection|
+      ExperiencePrompt.find_by!(path: ExperienceTree.path(selection))
+                      .update!(prompt: ExperienceTree.prompt(selection), prompt_fr: ExperienceTree.prompt(selection, :fr))
+    end
+    puts "#{ExperiencePrompt.in_tree.count} prompts reset to the default wording"
+  end
+
   desc "Print every prompt of the bias experience as CSV (path, depth, images, English, French)"
   task prompts: :environment do
     require "csv"

@@ -38,14 +38,14 @@
   --spacing-s6: 44px;
   --spacing-gutter: 40px;
 
-  --animate-float: float 7s ease-in-out infinite;
+  --animate-float: float 9s ease-in-out infinite;
   @keyframes float {
     0%,
     100% {
-      transform: translate3d(0, -6px, 0) rotate(-0.4deg);
+      transform: translate3d(0, -2.5px, 0) rotate(-0.12deg);
     }
     50% {
-      transform: translate3d(0, 6px, 0) rotate(0.4deg);
+      transform: translate3d(0, 2.5px, 0) rotate(0.12deg);
     }
   }
 

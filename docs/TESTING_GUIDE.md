@@ -291,8 +291,8 @@ Spec: `docs/BIAS_EXPERIENCE.md`.
 
 ### 1. Generate the images (admin)
 
-1. `bin/rails db:seed` (or `bin/rails experience:seed`) creates the 121 prompts with their default English and French wording. Set `OPENAI_API_KEY` in `.env`, run `bin/dev` (the Solid Queue worker must run) and sign in as admin.
-2. Open `/admin/experience`: 121 prompts in tree order, indented by depth, French wording under each, 15 cream squares and 0/15. Without the key a signal notice says generation will fail.
+1. `bin/rails db:seed` (or `bin/rails experience:seed`) creates the 81 prompts with their default English and French wording (`bin/rails experience:reset_wording` brings existing ones back to the defaults). Set `OPENAI_API_KEY` in `.env`, run `bin/dev` (the Solid Queue worker must run) and sign in as admin.
+2. Open `/admin/experience`: 81 prompts in tree order, indented by depth, French wording under each, 15 cream squares and 0/15. Without the key a signal notice says generation will fail.
 3. Click Generate on *Create a photo of a person.*: the squares turn peach (queued), hatched (generating), then ink (done) as the list refreshes. Click the prompt to see its 15 portrait images.
 4. A refused or failing image turns signal with the API's message under its thumbnail; the row's button becomes "Retry failed". Regenerate under a thumbnail replaces just that image.
 5. "Generate everything missing" queues all prompts; at most `image_generation_concurrency` calls run at once.
@@ -300,13 +300,14 @@ Spec: `docs/BIAS_EXPERIENCE.md`.
 
 ### 2. Play it
 
-1. Open `/experience`: very dark page, fifteen faint portrait tiles (5 × 3) floating gently, one prompt under a small "Pick a prompt" line. No titles or other buttons.
-2. Pick it: the tiles turn one by one from top left to bottom right while they keep floating. The prompt becomes the bright current prompt (signal shadow, added word on signal), and three dimmer choices appear with the new word in lime.
-3. Pick *woman*: the other choices disappear, the previous prompt fades into the muted history, the grid turns again. Carry on through age, origin and body. Clicks are ignored while the tiles turn.
-4. Tap an earlier prompt in the history to go back to it.
-5. A prompt whose images are not generated yet shows empty tiles.
-6. `?lang=fr`: prompts read in French with correct agreement (*une femme noire âgée*, *un homme blanc âgé*).
-7. `/experience?present=true`: full screen, no header; the Unbias logo top left, the contribute QR code and "Wanna help?" bottom left (scan it: it opens `/contribute`). Untouched for `experience_idle_seconds` (90 s) after a choice, it returns to the blank first screen.
-8. Phone width: the grid sits above the prompts.
-9. With reduced motion turned on in the OS, tiles stop floating and swap without turning.
-10. Offline (production build only, like PR 5): open `/experience?present=true` online and wait a minute while it downloads every finished image (DevTools → Application → Cache storage → `unbias-experience-images`). Cut the network and reload: the page, logo, QR code and every path through the tree still play. Online `/experience` without `?present=true` only keeps the images already viewed.
+1. Open `/experience`: very dark page, fifteen faint portrait tiles (5 × 3) floating very gently, the two-line statement *Everyday, we create more images with Gen AI. / These images are not neutral.* and one prompt with a right arrow. No "Pick a prompt" line yet, no titles or other buttons.
+2. Pick it: the statement and the arrow fade out, the prompt glides up and becomes the bright current prompt (signal shadow), the tiles turn one by one from top left to bottom right, and "Pick a prompt" and two dimmer choices rise in one after the other, the new word in lime.
+3. Pick *woman*: *man* fades out, *woman* glides up while its border, text and highlight ease to the current style (lime word turns into a signal block), the previous prompt eases into the muted history, and the age choices rise in one by one. Carry on through age, origin (Black, Asian, Arab, white) and body. Clicks are ignored while the tiles turn.
+4. After the body step, *Do you want to help?* fades in below the prompts.
+5. Tap an earlier prompt in the history to go back to it.
+6. A prompt whose images are not generated yet shows empty tiles.
+7. `?lang=fr`: the statement and prompts read in French with correct agreement (*une femme noire âgée*, *un homme blanc âgé*, *une femme asiatique d’âge moyen*).
+8. `/experience?present=true`: full screen, no header; the Unbias logo top left, the contribute QR code and "Wanna help?" bottom left (scan it: it opens `/contribute`). Untouched for `experience_idle_seconds` (90 s) after a choice, it returns to the blank first screen.
+9. Phone width: the grid sits above the prompts.
+10. With reduced motion turned on in the OS, tiles stop floating and swap without turning, and prompts change place without gliding.
+11. Offline (production build only, like PR 5): open `/experience?present=true` online and wait a minute while it downloads every finished image (DevTools → Application → Cache storage → `unbias-experience-images`). Cut the network and reload: the page, logo, QR code and every path through the tree still play. Online `/experience` without `?present=true` only keeps the images already viewed.

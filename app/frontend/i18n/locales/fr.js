@@ -501,6 +501,9 @@ export const fr = {
     },
   },
   experience: {
+    introLine1: "Nous créons de plus en plus d’images avec l’IA générative.",
+    introLine2: "Mais ces images ne sont pas neutres.",
+    help: "Vous voulez nous aider ?",
     wannaHelp: "Envie d’aider ?",
     pick: "Choisissez un prompt",
     backTo: "Revenir à ce prompt",

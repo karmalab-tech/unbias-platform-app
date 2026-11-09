@@ -44,6 +44,6 @@ export function waveDelay(index, stepMs, columns = GRID_COLUMNS) {
 
 // Each tile drifts on its own rhythm so the grid never moves in unison.
 export function floatTiming(index) {
-  const duration = 5.5 + ((index * 37) % 31) / 10;
+  const duration = 7 + ((index * 37) % 31) / 10;
   return { duration, delay: -((index * 1.9) % duration) };
 }

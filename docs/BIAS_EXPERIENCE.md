@@ -7,13 +7,15 @@ An interactive page that shows what an image model does with the same sentence r
 
 ## The experience
 
-A dark stage (`bg-night`, a darker shade of ink). Left: the prompts. Right: the fifteen portrait images (3:4, 5 × 3, sized to fit a 16:9 screen) of the current prompt. Nothing else: no titles, no steps, no buttons besides the prompts, and one small `mono-caps` line, "Pick a prompt", above the choices.
+A dark stage (`bg-night`, a darker shade of ink). Left: the prompts. Right: the fifteen portrait images (3:4, 5 × 3, sized to fit a 16:9 screen) of the current prompt. Nothing else: no titles, no steps, no buttons besides the prompts, and one small `mono-caps` line, "Pick a prompt", above the choices once the experience has started.
 
-1. Only the base prompt is offered: *Create a photo of a person.* The grid is fifteen faint empty tiles.
-2. Picking it turns the fifteen tiles one by one, in a diagonal wave from top left to bottom right, onto its results.
+1. Only the base prompt is offered, with a right arrow, under a two-line bold statement: *Everyday, we create more images with Gen AI. / These images are not neutral.* (FR: *Nous créons de plus en plus d’images avec l’IA générative. / Mais ces images ne sont pas neutres.*). The grid is fifteen faint empty tiles.
+2. Picking it fades the statement and the arrow out and turns the fifteen tiles one by one, in a diagonal wave from top left to bottom right, onto its results.
 3. The picked prompt becomes the current one and the next prompts appear below it, the added words highlighted: *…of a woman / man / non-binary person.*
-4. Picking one adds it to the list, the other choices disappear, the grid turns again and the next choices appear. After the last step there are no more choices.
-5. Any earlier prompt in the list can be tapped to go back to it.
+4. Picking one: the other choices fade out, the picked prompt glides up into place as the current prompt, the grid turns, and the next choices rise in one after another. After the last step, *Do you want to help?* (FR: *Vous voulez nous aider ?*) fades in below instead of choices.
+5. Any earlier prompt in the list can be tapped to go back to it, with the same motion.
+
+Every state change (border, text, shadow, highlight colour) eases over 300 ms. The column motion is a FLIP animation keyed by prompt path (`BiasExperience.js`); it is skipped under `prefers-reduced-motion`.
 
 Three levels of emphasis, from loudest to quietest:
 
@@ -23,16 +25,16 @@ Three levels of emphasis, from loudest to quietest:
 | Next prompts | Cream at 80%, cream border at 40%; added words in lime. Full cream on hover, signal border while loading |
 | Earlier prompts | Cream at 35%, border at 10%; added words slightly brighter |
 
-The images have no border and no shadow. Every tile floats on its own slow rhythm (`animate-float`, a few pixels up and down with a slight tilt, different duration and phase per tile), and the flip wave runs on top of that motion. Both stop under `prefers-reduced-motion`.
+The images have no border and no shadow. Every tile floats on its own slow rhythm (`animate-float`, 2.5 px up and down with a barely visible tilt, 7–10 s per cycle, different phase per tile), and the flip wave runs on top of that motion. Both stop under `prefers-reduced-motion`.
 
 Each step covers one of the platform's dimensions:
 
 | Step | Dimension | Choices |
 |---|---|---|
 | 1 | — | person |
-| 2 | gender | woman, man, non-binary person |
+| 2 | gender | woman, man |
 | 3 | age | young, middle-aged, old |
-| 4 | skin tone (prompted as origin) | Black, East Asian, South Asian, white |
+| 4 | skin tone (prompted as origin) | Black, Asian, Arab, white |
 | 5 | body | thin, plus-size |
 
 ## The prompt tree
@@ -40,6 +42,7 @@ Each step covers one of the platform's dimensions:
 `ExperienceTree` (`app/models/experience_tree.rb`) defines the steps and the **default** English and French wording. The wording that is actually used lives in the database (`experience_prompts.prompt` and `prompt_fr`):
 
 - `bin/rails db:seed` (or `bin/rails experience:seed`, e.g. on Fly with `fly ssh console -C "bin/rails experience:seed"`) creates every prompt missing from the table with the default wording. It never overwrites wording already stored, so it is safe to run again; nodes removed from `ExperienceTree` are kept but left out of the tree. Opening `/admin/experience` runs the same seed.
+- `bin/rails experience:reset_wording` overwrites every prompt with the default wording, after the defaults change in code. It discards admin edits.
 - Admins then edit either wording from `/admin/experience` (click a prompt). Images are generated from the **English** prompt; the French wording is only what French visitors read.
 - The highlighted words are not stored: the page marks the words of a prompt that are not in its parent prompt (word-level diff), so edits keep their highlight.
 - `bin/rails experience:prompts` prints every prompt as CSV from the database; the default wording is committed as `docs/experience-prompts.csv`.
@@ -47,13 +50,15 @@ Each step covers one of the platform's dimensions:
 | Depth | Prompts | Example |
 |---|---|---|
 | 0 | 1 | Create a photo of a person. |
-| 1 | 3 | Create a photo of a woman. |
-| 2 | 9 | Create a photo of a young woman. |
-| 3 | 36 | Create a photo of a young Black woman. |
-| 4 | 72 | Create a photo of a young Black woman who is plus-size. |
-| **Total** | **121 prompts** | **1,815 images** |
+| 1 | 2 | Create a photo of a woman. |
+| 2 | 6 | Create a photo of a young woman. |
+| 3 | 24 | Create a photo of a young Black woman. |
+| 4 | 48 | Create a photo of a young Black woman who is plus-size. |
+| **Total** | **81 prompts** | **1,215 images** |
 
-One more body option costs 36 prompts (540 images); one more origin costs 9 + 18 = 27 prompts (405 images).
+One more body option costs 24 prompts (360 images); one more origin costs 6 + 12 = 18 prompts (270 images). At GPT Image 2's listed portrait prices (1024 × 1536) the full tree costs about $6 (low), $50 (medium) or $200 (high).
+
+Wording choices: *white* rather than *Caucasian* (a term from 18th-century race classification that US style guides advise against), *Arab* for people (*Arabic* is the language), and body kept as the last step rather than profession, because body is a platform dimension and a profession's strongest bias (gender) is already fixed by step 2.
 
 ## Generation
 
@@ -75,7 +80,7 @@ One more body option costs 36 prompts (540 images); one more origin costs 9 + 18
 
 `public/sw.js` covers `/experience` like the dashboard pages: the page, `/api/public/experience`, settings, the QR code and the built assets are served from cache when the network is slow (4 s) or gone. Images use a separate, unversioned cache (`unbias-experience-images`), cache first, since their URLs change whenever an image changes.
 
-- **Exhibition (`?present=true`):** once the tree loads, the page asks the worker to download every finished image (6 at a time) and to delete cached images no longer in the tree. 1,815 images at 600 × 800 WebP is in the order of 100 MB. Open the page online once on the day, wait for the download to finish, and the whole tree then plays without network.
+- **Exhibition (`?present=true`):** once the tree loads, the page asks the worker to download every finished image (6 at a time) and to delete cached images no longer in the tree. 1,215 images at 600 × 800 WebP is in the order of 70 MB. Open the page online once on the day, wait for the download to finish, and the whole tree then plays without network.
 - **Online:** only images the visitor has already seen are kept, so phones never download the whole tree.
 
 The service worker is registered in production builds only.

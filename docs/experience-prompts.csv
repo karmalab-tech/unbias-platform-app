@@ -5,38 +5,38 @@ person/woman/young,2,15,Create a photo of a young woman.,Crée une photo d’une
 person/woman/young/black,3,15,Create a photo of a young Black woman.,Crée une photo d’une jeune femme noire.
 person/woman/young/black/thin,4,15,Create a photo of a young Black woman who is thin.,Crée une photo d’une jeune femme noire mince.
 person/woman/young/black/plus_size,4,15,Create a photo of a young Black woman who is plus-size.,Crée une photo d’une jeune femme noire de forte corpulence.
-person/woman/young/east_asian,3,15,Create a photo of a young East Asian woman.,Crée une photo d’une jeune femme est-asiatique.
-person/woman/young/east_asian/thin,4,15,Create a photo of a young East Asian woman who is thin.,Crée une photo d’une jeune femme est-asiatique mince.
-person/woman/young/east_asian/plus_size,4,15,Create a photo of a young East Asian woman who is plus-size.,Crée une photo d’une jeune femme est-asiatique de forte corpulence.
-person/woman/young/south_asian,3,15,Create a photo of a young South Asian woman.,Crée une photo d’une jeune femme sud-asiatique.
-person/woman/young/south_asian/thin,4,15,Create a photo of a young South Asian woman who is thin.,Crée une photo d’une jeune femme sud-asiatique mince.
-person/woman/young/south_asian/plus_size,4,15,Create a photo of a young South Asian woman who is plus-size.,Crée une photo d’une jeune femme sud-asiatique de forte corpulence.
+person/woman/young/asian,3,15,Create a photo of a young Asian woman.,Crée une photo d’une jeune femme asiatique.
+person/woman/young/asian/thin,4,15,Create a photo of a young Asian woman who is thin.,Crée une photo d’une jeune femme asiatique mince.
+person/woman/young/asian/plus_size,4,15,Create a photo of a young Asian woman who is plus-size.,Crée une photo d’une jeune femme asiatique de forte corpulence.
+person/woman/young/arab,3,15,Create a photo of a young Arab woman.,Crée une photo d’une jeune femme arabe.
+person/woman/young/arab/thin,4,15,Create a photo of a young Arab woman who is thin.,Crée une photo d’une jeune femme arabe mince.
+person/woman/young/arab/plus_size,4,15,Create a photo of a young Arab woman who is plus-size.,Crée une photo d’une jeune femme arabe de forte corpulence.
 person/woman/young/white,3,15,Create a photo of a young white woman.,Crée une photo d’une jeune femme blanche.
 person/woman/young/white/thin,4,15,Create a photo of a young white woman who is thin.,Crée une photo d’une jeune femme blanche mince.
 person/woman/young/white/plus_size,4,15,Create a photo of a young white woman who is plus-size.,Crée une photo d’une jeune femme blanche de forte corpulence.
-person/woman/middle_aged,2,15,Create a photo of a middle-aged woman.,Crée une photo d’une femme d’âge mûr.
-person/woman/middle_aged/black,3,15,Create a photo of a middle-aged Black woman.,Crée une photo d’une femme noire d’âge mûr.
-person/woman/middle_aged/black/thin,4,15,Create a photo of a middle-aged Black woman who is thin.,Crée une photo d’une femme noire d’âge mûr mince.
-person/woman/middle_aged/black/plus_size,4,15,Create a photo of a middle-aged Black woman who is plus-size.,Crée une photo d’une femme noire d’âge mûr de forte corpulence.
-person/woman/middle_aged/east_asian,3,15,Create a photo of a middle-aged East Asian woman.,Crée une photo d’une femme est-asiatique d’âge mûr.
-person/woman/middle_aged/east_asian/thin,4,15,Create a photo of a middle-aged East Asian woman who is thin.,Crée une photo d’une femme est-asiatique d’âge mûr mince.
-person/woman/middle_aged/east_asian/plus_size,4,15,Create a photo of a middle-aged East Asian woman who is plus-size.,Crée une photo d’une femme est-asiatique d’âge mûr de forte corpulence.
-person/woman/middle_aged/south_asian,3,15,Create a photo of a middle-aged South Asian woman.,Crée une photo d’une femme sud-asiatique d’âge mûr.
-person/woman/middle_aged/south_asian/thin,4,15,Create a photo of a middle-aged South Asian woman who is thin.,Crée une photo d’une femme sud-asiatique d’âge mûr mince.
-person/woman/middle_aged/south_asian/plus_size,4,15,Create a photo of a middle-aged South Asian woman who is plus-size.,Crée une photo d’une femme sud-asiatique d’âge mûr de forte corpulence.
-person/woman/middle_aged/white,3,15,Create a photo of a middle-aged white woman.,Crée une photo d’une femme blanche d’âge mûr.
-person/woman/middle_aged/white/thin,4,15,Create a photo of a middle-aged white woman who is thin.,Crée une photo d’une femme blanche d’âge mûr mince.
-person/woman/middle_aged/white/plus_size,4,15,Create a photo of a middle-aged white woman who is plus-size.,Crée une photo d’une femme blanche d’âge mûr de forte corpulence.
+person/woman/middle_aged,2,15,Create a photo of a middle-aged woman.,Crée une photo d’une femme d’âge moyen.
+person/woman/middle_aged/black,3,15,Create a photo of a middle-aged Black woman.,Crée une photo d’une femme noire d’âge moyen.
+person/woman/middle_aged/black/thin,4,15,Create a photo of a middle-aged Black woman who is thin.,Crée une photo d’une femme noire d’âge moyen mince.
+person/woman/middle_aged/black/plus_size,4,15,Create a photo of a middle-aged Black woman who is plus-size.,Crée une photo d’une femme noire d’âge moyen de forte corpulence.
+person/woman/middle_aged/asian,3,15,Create a photo of a middle-aged Asian woman.,Crée une photo d’une femme asiatique d’âge moyen.
+person/woman/middle_aged/asian/thin,4,15,Create a photo of a middle-aged Asian woman who is thin.,Crée une photo d’une femme asiatique d’âge moyen mince.
+person/woman/middle_aged/asian/plus_size,4,15,Create a photo of a middle-aged Asian woman who is plus-size.,Crée une photo d’une femme asiatique d’âge moyen de forte corpulence.
+person/woman/middle_aged/arab,3,15,Create a photo of a middle-aged Arab woman.,Crée une photo d’une femme arabe d’âge moyen.
+person/woman/middle_aged/arab/thin,4,15,Create a photo of a middle-aged Arab woman who is thin.,Crée une photo d’une femme arabe d’âge moyen mince.
+person/woman/middle_aged/arab/plus_size,4,15,Create a photo of a middle-aged Arab woman who is plus-size.,Crée une photo d’une femme arabe d’âge moyen de forte corpulence.
+person/woman/middle_aged/white,3,15,Create a photo of a middle-aged white woman.,Crée une photo d’une femme blanche d’âge moyen.
+person/woman/middle_aged/white/thin,4,15,Create a photo of a middle-aged white woman who is thin.,Crée une photo d’une femme blanche d’âge moyen mince.
+person/woman/middle_aged/white/plus_size,4,15,Create a photo of a middle-aged white woman who is plus-size.,Crée une photo d’une femme blanche d’âge moyen de forte corpulence.
 person/woman/old,2,15,Create a photo of an old woman.,Crée une photo d’une femme âgée.
 person/woman/old/black,3,15,Create a photo of an old Black woman.,Crée une photo d’une femme noire âgée.
 person/woman/old/black/thin,4,15,Create a photo of an old Black woman who is thin.,Crée une photo d’une femme noire âgée mince.
 person/woman/old/black/plus_size,4,15,Create a photo of an old Black woman who is plus-size.,Crée une photo d’une femme noire âgée de forte corpulence.
-person/woman/old/east_asian,3,15,Create a photo of an old East Asian woman.,Crée une photo d’une femme est-asiatique âgée.
-person/woman/old/east_asian/thin,4,15,Create a photo of an old East Asian woman who is thin.,Crée une photo d’une femme est-asiatique âgée mince.
-person/woman/old/east_asian/plus_size,4,15,Create a photo of an old East Asian woman who is plus-size.,Crée une photo d’une femme est-asiatique âgée de forte corpulence.
-person/woman/old/south_asian,3,15,Create a photo of an old South Asian woman.,Crée une photo d’une femme sud-asiatique âgée.
-person/woman/old/south_asian/thin,4,15,Create a photo of an old South Asian woman who is thin.,Crée une photo d’une femme sud-asiatique âgée mince.
-person/woman/old/south_asian/plus_size,4,15,Create a photo of an old South Asian woman who is plus-size.,Crée une photo d’une femme sud-asiatique âgée de forte corpulence.
+person/woman/old/asian,3,15,Create a photo of an old Asian woman.,Crée une photo d’une femme asiatique âgée.
+person/woman/old/asian/thin,4,15,Create a photo of an old Asian woman who is thin.,Crée une photo d’une femme asiatique âgée mince.
+person/woman/old/asian/plus_size,4,15,Create a photo of an old Asian woman who is plus-size.,Crée une photo d’une femme asiatique âgée de forte corpulence.
+person/woman/old/arab,3,15,Create a photo of an old Arab woman.,Crée une photo d’une femme arabe âgée.
+person/woman/old/arab/thin,4,15,Create a photo of an old Arab woman who is thin.,Crée une photo d’une femme arabe âgée mince.
+person/woman/old/arab/plus_size,4,15,Create a photo of an old Arab woman who is plus-size.,Crée une photo d’une femme arabe âgée de forte corpulence.
 person/woman/old/white,3,15,Create a photo of an old white woman.,Crée une photo d’une femme blanche âgée.
 person/woman/old/white/thin,4,15,Create a photo of an old white woman who is thin.,Crée une photo d’une femme blanche âgée mince.
 person/woman/old/white/plus_size,4,15,Create a photo of an old white woman who is plus-size.,Crée une photo d’une femme blanche âgée de forte corpulence.
@@ -45,78 +45,38 @@ person/man/young,2,15,Create a photo of a young man.,Crée une photo d’un jeun
 person/man/young/black,3,15,Create a photo of a young Black man.,Crée une photo d’un jeune homme noir.
 person/man/young/black/thin,4,15,Create a photo of a young Black man who is thin.,Crée une photo d’un jeune homme noir mince.
 person/man/young/black/plus_size,4,15,Create a photo of a young Black man who is plus-size.,Crée une photo d’un jeune homme noir de forte corpulence.
-person/man/young/east_asian,3,15,Create a photo of a young East Asian man.,Crée une photo d’un jeune homme est-asiatique.
-person/man/young/east_asian/thin,4,15,Create a photo of a young East Asian man who is thin.,Crée une photo d’un jeune homme est-asiatique mince.
-person/man/young/east_asian/plus_size,4,15,Create a photo of a young East Asian man who is plus-size.,Crée une photo d’un jeune homme est-asiatique de forte corpulence.
-person/man/young/south_asian,3,15,Create a photo of a young South Asian man.,Crée une photo d’un jeune homme sud-asiatique.
-person/man/young/south_asian/thin,4,15,Create a photo of a young South Asian man who is thin.,Crée une photo d’un jeune homme sud-asiatique mince.
-person/man/young/south_asian/plus_size,4,15,Create a photo of a young South Asian man who is plus-size.,Crée une photo d’un jeune homme sud-asiatique de forte corpulence.
+person/man/young/asian,3,15,Create a photo of a young Asian man.,Crée une photo d’un jeune homme asiatique.
+person/man/young/asian/thin,4,15,Create a photo of a young Asian man who is thin.,Crée une photo d’un jeune homme asiatique mince.
+person/man/young/asian/plus_size,4,15,Create a photo of a young Asian man who is plus-size.,Crée une photo d’un jeune homme asiatique de forte corpulence.
+person/man/young/arab,3,15,Create a photo of a young Arab man.,Crée une photo d’un jeune homme arabe.
+person/man/young/arab/thin,4,15,Create a photo of a young Arab man who is thin.,Crée une photo d’un jeune homme arabe mince.
+person/man/young/arab/plus_size,4,15,Create a photo of a young Arab man who is plus-size.,Crée une photo d’un jeune homme arabe de forte corpulence.
 person/man/young/white,3,15,Create a photo of a young white man.,Crée une photo d’un jeune homme blanc.
 person/man/young/white/thin,4,15,Create a photo of a young white man who is thin.,Crée une photo d’un jeune homme blanc mince.
 person/man/young/white/plus_size,4,15,Create a photo of a young white man who is plus-size.,Crée une photo d’un jeune homme blanc de forte corpulence.
-person/man/middle_aged,2,15,Create a photo of a middle-aged man.,Crée une photo d’un homme d’âge mûr.
-person/man/middle_aged/black,3,15,Create a photo of a middle-aged Black man.,Crée une photo d’un homme noir d’âge mûr.
-person/man/middle_aged/black/thin,4,15,Create a photo of a middle-aged Black man who is thin.,Crée une photo d’un homme noir d’âge mûr mince.
-person/man/middle_aged/black/plus_size,4,15,Create a photo of a middle-aged Black man who is plus-size.,Crée une photo d’un homme noir d’âge mûr de forte corpulence.
-person/man/middle_aged/east_asian,3,15,Create a photo of a middle-aged East Asian man.,Crée une photo d’un homme est-asiatique d’âge mûr.
-person/man/middle_aged/east_asian/thin,4,15,Create a photo of a middle-aged East Asian man who is thin.,Crée une photo d’un homme est-asiatique d’âge mûr mince.
-person/man/middle_aged/east_asian/plus_size,4,15,Create a photo of a middle-aged East Asian man who is plus-size.,Crée une photo d’un homme est-asiatique d’âge mûr de forte corpulence.
-person/man/middle_aged/south_asian,3,15,Create a photo of a middle-aged South Asian man.,Crée une photo d’un homme sud-asiatique d’âge mûr.
-person/man/middle_aged/south_asian/thin,4,15,Create a photo of a middle-aged South Asian man who is thin.,Crée une photo d’un homme sud-asiatique d’âge mûr mince.
-person/man/middle_aged/south_asian/plus_size,4,15,Create a photo of a middle-aged South Asian man who is plus-size.,Crée une photo d’un homme sud-asiatique d’âge mûr de forte corpulence.
-person/man/middle_aged/white,3,15,Create a photo of a middle-aged white man.,Crée une photo d’un homme blanc d’âge mûr.
-person/man/middle_aged/white/thin,4,15,Create a photo of a middle-aged white man who is thin.,Crée une photo d’un homme blanc d’âge mûr mince.
-person/man/middle_aged/white/plus_size,4,15,Create a photo of a middle-aged white man who is plus-size.,Crée une photo d’un homme blanc d’âge mûr de forte corpulence.
+person/man/middle_aged,2,15,Create a photo of a middle-aged man.,Crée une photo d’un homme d’âge moyen.
+person/man/middle_aged/black,3,15,Create a photo of a middle-aged Black man.,Crée une photo d’un homme noir d’âge moyen.
+person/man/middle_aged/black/thin,4,15,Create a photo of a middle-aged Black man who is thin.,Crée une photo d’un homme noir d’âge moyen mince.
+person/man/middle_aged/black/plus_size,4,15,Create a photo of a middle-aged Black man who is plus-size.,Crée une photo d’un homme noir d’âge moyen de forte corpulence.
+person/man/middle_aged/asian,3,15,Create a photo of a middle-aged Asian man.,Crée une photo d’un homme asiatique d’âge moyen.
+person/man/middle_aged/asian/thin,4,15,Create a photo of a middle-aged Asian man who is thin.,Crée une photo d’un homme asiatique d’âge moyen mince.
+person/man/middle_aged/asian/plus_size,4,15,Create a photo of a middle-aged Asian man who is plus-size.,Crée une photo d’un homme asiatique d’âge moyen de forte corpulence.
+person/man/middle_aged/arab,3,15,Create a photo of a middle-aged Arab man.,Crée une photo d’un homme arabe d’âge moyen.
+person/man/middle_aged/arab/thin,4,15,Create a photo of a middle-aged Arab man who is thin.,Crée une photo d’un homme arabe d’âge moyen mince.
+person/man/middle_aged/arab/plus_size,4,15,Create a photo of a middle-aged Arab man who is plus-size.,Crée une photo d’un homme arabe d’âge moyen de forte corpulence.
+person/man/middle_aged/white,3,15,Create a photo of a middle-aged white man.,Crée une photo d’un homme blanc d’âge moyen.
+person/man/middle_aged/white/thin,4,15,Create a photo of a middle-aged white man who is thin.,Crée une photo d’un homme blanc d’âge moyen mince.
+person/man/middle_aged/white/plus_size,4,15,Create a photo of a middle-aged white man who is plus-size.,Crée une photo d’un homme blanc d’âge moyen de forte corpulence.
 person/man/old,2,15,Create a photo of an old man.,Crée une photo d’un homme âgé.
 person/man/old/black,3,15,Create a photo of an old Black man.,Crée une photo d’un homme noir âgé.
 person/man/old/black/thin,4,15,Create a photo of an old Black man who is thin.,Crée une photo d’un homme noir âgé mince.
 person/man/old/black/plus_size,4,15,Create a photo of an old Black man who is plus-size.,Crée une photo d’un homme noir âgé de forte corpulence.
-person/man/old/east_asian,3,15,Create a photo of an old East Asian man.,Crée une photo d’un homme est-asiatique âgé.
-person/man/old/east_asian/thin,4,15,Create a photo of an old East Asian man who is thin.,Crée une photo d’un homme est-asiatique âgé mince.
-person/man/old/east_asian/plus_size,4,15,Create a photo of an old East Asian man who is plus-size.,Crée une photo d’un homme est-asiatique âgé de forte corpulence.
-person/man/old/south_asian,3,15,Create a photo of an old South Asian man.,Crée une photo d’un homme sud-asiatique âgé.
-person/man/old/south_asian/thin,4,15,Create a photo of an old South Asian man who is thin.,Crée une photo d’un homme sud-asiatique âgé mince.
-person/man/old/south_asian/plus_size,4,15,Create a photo of an old South Asian man who is plus-size.,Crée une photo d’un homme sud-asiatique âgé de forte corpulence.
+person/man/old/asian,3,15,Create a photo of an old Asian man.,Crée une photo d’un homme asiatique âgé.
+person/man/old/asian/thin,4,15,Create a photo of an old Asian man who is thin.,Crée une photo d’un homme asiatique âgé mince.
+person/man/old/asian/plus_size,4,15,Create a photo of an old Asian man who is plus-size.,Crée une photo d’un homme asiatique âgé de forte corpulence.
+person/man/old/arab,3,15,Create a photo of an old Arab man.,Crée une photo d’un homme arabe âgé.
+person/man/old/arab/thin,4,15,Create a photo of an old Arab man who is thin.,Crée une photo d’un homme arabe âgé mince.
+person/man/old/arab/plus_size,4,15,Create a photo of an old Arab man who is plus-size.,Crée une photo d’un homme arabe âgé de forte corpulence.
 person/man/old/white,3,15,Create a photo of an old white man.,Crée une photo d’un homme blanc âgé.
 person/man/old/white/thin,4,15,Create a photo of an old white man who is thin.,Crée une photo d’un homme blanc âgé mince.
 person/man/old/white/plus_size,4,15,Create a photo of an old white man who is plus-size.,Crée une photo d’un homme blanc âgé de forte corpulence.
-person/non_binary,1,15,Create a photo of a non-binary person.,Crée une photo d’une personne non binaire.
-person/non_binary/young,2,15,Create a photo of a young non-binary person.,Crée une photo d’une jeune personne non binaire.
-person/non_binary/young/black,3,15,Create a photo of a young Black non-binary person.,Crée une photo d’une jeune personne non binaire noire.
-person/non_binary/young/black/thin,4,15,Create a photo of a young Black non-binary person who is thin.,Crée une photo d’une jeune personne non binaire noire mince.
-person/non_binary/young/black/plus_size,4,15,Create a photo of a young Black non-binary person who is plus-size.,Crée une photo d’une jeune personne non binaire noire de forte corpulence.
-person/non_binary/young/east_asian,3,15,Create a photo of a young East Asian non-binary person.,Crée une photo d’une jeune personne non binaire est-asiatique.
-person/non_binary/young/east_asian/thin,4,15,Create a photo of a young East Asian non-binary person who is thin.,Crée une photo d’une jeune personne non binaire est-asiatique mince.
-person/non_binary/young/east_asian/plus_size,4,15,Create a photo of a young East Asian non-binary person who is plus-size.,Crée une photo d’une jeune personne non binaire est-asiatique de forte corpulence.
-person/non_binary/young/south_asian,3,15,Create a photo of a young South Asian non-binary person.,Crée une photo d’une jeune personne non binaire sud-asiatique.
-person/non_binary/young/south_asian/thin,4,15,Create a photo of a young South Asian non-binary person who is thin.,Crée une photo d’une jeune personne non binaire sud-asiatique mince.
-person/non_binary/young/south_asian/plus_size,4,15,Create a photo of a young South Asian non-binary person who is plus-size.,Crée une photo d’une jeune personne non binaire sud-asiatique de forte corpulence.
-person/non_binary/young/white,3,15,Create a photo of a young white non-binary person.,Crée une photo d’une jeune personne non binaire blanche.
-person/non_binary/young/white/thin,4,15,Create a photo of a young white non-binary person who is thin.,Crée une photo d’une jeune personne non binaire blanche mince.
-person/non_binary/young/white/plus_size,4,15,Create a photo of a young white non-binary person who is plus-size.,Crée une photo d’une jeune personne non binaire blanche de forte corpulence.
-person/non_binary/middle_aged,2,15,Create a photo of a middle-aged non-binary person.,Crée une photo d’une personne non binaire d’âge mûr.
-person/non_binary/middle_aged/black,3,15,Create a photo of a middle-aged Black non-binary person.,Crée une photo d’une personne non binaire noire d’âge mûr.
-person/non_binary/middle_aged/black/thin,4,15,Create a photo of a middle-aged Black non-binary person who is thin.,Crée une photo d’une personne non binaire noire d’âge mûr mince.
-person/non_binary/middle_aged/black/plus_size,4,15,Create a photo of a middle-aged Black non-binary person who is plus-size.,Crée une photo d’une personne non binaire noire d’âge mûr de forte corpulence.
-person/non_binary/middle_aged/east_asian,3,15,Create a photo of a middle-aged East Asian non-binary person.,Crée une photo d’une personne non binaire est-asiatique d’âge mûr.
-person/non_binary/middle_aged/east_asian/thin,4,15,Create a photo of a middle-aged East Asian non-binary person who is thin.,Crée une photo d’une personne non binaire est-asiatique d’âge mûr mince.
-person/non_binary/middle_aged/east_asian/plus_size,4,15,Create a photo of a middle-aged East Asian non-binary person who is plus-size.,Crée une photo d’une personne non binaire est-asiatique d’âge mûr de forte corpulence.
-person/non_binary/middle_aged/south_asian,3,15,Create a photo of a middle-aged South Asian non-binary person.,Crée une photo d’une personne non binaire sud-asiatique d’âge mûr.
-person/non_binary/middle_aged/south_asian/thin,4,15,Create a photo of a middle-aged South Asian non-binary person who is thin.,Crée une photo d’une personne non binaire sud-asiatique d’âge mûr mince.
-person/non_binary/middle_aged/south_asian/plus_size,4,15,Create a photo of a middle-aged South Asian non-binary person who is plus-size.,Crée une photo d’une personne non binaire sud-asiatique d’âge mûr de forte corpulence.
-person/non_binary/middle_aged/white,3,15,Create a photo of a middle-aged white non-binary person.,Crée une photo d’une personne non binaire blanche d’âge mûr.
-person/non_binary/middle_aged/white/thin,4,15,Create a photo of a middle-aged white non-binary person who is thin.,Crée une photo d’une personne non binaire blanche d’âge mûr mince.
-person/non_binary/middle_aged/white/plus_size,4,15,Create a photo of a middle-aged white non-binary person who is plus-size.,Crée une photo d’une personne non binaire blanche d’âge mûr de forte corpulence.
-person/non_binary/old,2,15,Create a photo of an old non-binary person.,Crée une photo d’une personne non binaire âgée.
-person/non_binary/old/black,3,15,Create a photo of an old Black non-binary person.,Crée une photo d’une personne non binaire noire âgée.
-person/non_binary/old/black/thin,4,15,Create a photo of an old Black non-binary person who is thin.,Crée une photo d’une personne non binaire noire âgée mince.
-person/non_binary/old/black/plus_size,4,15,Create a photo of an old Black non-binary person who is plus-size.,Crée une photo d’une personne non binaire noire âgée de forte corpulence.
-person/non_binary/old/east_asian,3,15,Create a photo of an old East Asian non-binary person.,Crée une photo d’une personne non binaire est-asiatique âgée.
-person/non_binary/old/east_asian/thin,4,15,Create a photo of an old East Asian non-binary person who is thin.,Crée une photo d’une personne non binaire est-asiatique âgée mince.
-person/non_binary/old/east_asian/plus_size,4,15,Create a photo of an old East Asian non-binary person who is plus-size.,Crée une photo d’une personne non binaire est-asiatique âgée de forte corpulence.
-person/non_binary/old/south_asian,3,15,Create a photo of an old South Asian non-binary person.,Crée une photo d’une personne non binaire sud-asiatique âgée.
-person/non_binary/old/south_asian/thin,4,15,Create a photo of an old South Asian non-binary person who is thin.,Crée une photo d’une personne non binaire sud-asiatique âgée mince.
-person/non_binary/old/south_asian/plus_size,4,15,Create a photo of an old South Asian non-binary person who is plus-size.,Crée une photo d’une personne non binaire sud-asiatique âgée de forte corpulence.
-person/non_binary/old/white,3,15,Create a photo of an old white non-binary person.,Crée une photo d’une personne non binaire blanche âgée.
-person/non_binary/old/white/thin,4,15,Create a photo of an old white non-binary person who is thin.,Crée une photo d’une personne non binaire blanche âgée mince.
-person/non_binary/old/white/plus_size,4,15,Create a photo of an old white non-binary person who is plus-size.,Crée une photo d’une personne non binaire blanche âgée de forte corpulence.

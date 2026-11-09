@@ -495,6 +495,9 @@ export const en = {
     },
   },
   experience: {
+    introLine1: "Everyday, we create more images with Gen AI.",
+    introLine2: "These images are not neutral.",
+    help: "Do you want to help?",
     wannaHelp: "Wanna help?",
     pick: "Pick a prompt",
     backTo: "Go back to this prompt",
