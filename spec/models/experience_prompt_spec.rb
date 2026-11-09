@@ -11,10 +11,10 @@ RSpec.describe ExperiencePrompt do
   before { ExperiencePrompt.seed! }
 
   it "mirrors the prompt tree" do
-    expect(described_class.in_tree.count).to eq(1 + 2 + 6 + 24 + 48)
+    expect(described_class.in_tree.count).to eq(1 + 2 + 6 + 24)
     expect(described_class.in_tree.first.prompt).to eq("Create a photo of a person.")
-    expect(described_class.find_by(path: "person/man/old/arab/fat").prompt)
-      .to eq("Create a photo of a fat old Arab man.")
+    expect(described_class.find_by(path: "person/man/old/arab").prompt)
+      .to eq("Create a photo of an old Arab man.")
   end
 
   it "keeps removed nodes out of the tree without deleting their images" do

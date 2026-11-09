@@ -291,8 +291,8 @@ Spec: `docs/BIAS_EXPERIENCE.md`.
 
 ### 1. Generate the images (admin)
 
-1. `bin/rails db:seed` (or `bin/rails experience:seed`) creates the 81 prompts with their default English and French wording (`bin/rails experience:reset_wording` brings existing ones back to the defaults). Set `OPENAI_API_KEY` in `.env`, run `bin/dev` (the Solid Queue worker must run) and sign in as admin.
-2. Open `/admin/experience`: 81 prompts in tree order, indented by depth, French wording under each, 15 cream squares and 0/15. Without the key a signal notice says generation will fail.
+1. `bin/rails db:seed` (or `bin/rails experience:seed`) creates the 33 prompts with their default English and French wording (`bin/rails experience:reset_wording` brings existing ones back to the defaults). Set `OPENAI_API_KEY` in `.env`, run `bin/dev` (the Solid Queue worker must run) and sign in as admin.
+2. Open `/admin/experience`: 33 prompts in tree order, indented by depth, French wording under each, 15 cream squares and 0/15. Without the key a signal notice says generation will fail.
 3. Click Generate on *Create a photo of a person.*: the squares turn peach (queued), hatched (generating), then ink (done) as the list refreshes. Click the prompt to see its 15 portrait images.
 4. A refused or failing image turns signal with the API's message under its thumbnail; the row's button becomes "Retry failed". Regenerate under a thumbnail replaces just that image.
 5. "Generate everything missing" queues all prompts; at most `image_generation_concurrency` calls run at once.
@@ -302,8 +302,8 @@ Spec: `docs/BIAS_EXPERIENCE.md`.
 
 1. Open `/experience`: very dark page, fifteen portrait tiles (5 × 3) floating very gently, showing a random mosaic of finished images (never two from the same prompt), the two-line statement *Everyday, we create more images with Gen AI. / These images are not neutral.* and one prompt with a right arrow. No "Pick a prompt" line yet, no titles or other buttons.
 2. Pick it, and watch the order: the statement and the arrow fade out first; then the tiles turn one by one from top left to bottom right while the prompt glides up and becomes the bright current prompt (signal shadow); only once the tiles have turned do "Pick a prompt" and the two dimmer choices rise in, the new word in lime.
-3. Pick *woman*: *man* fades out, *woman* glides up while its border, text and highlight ease to the current style (lime word turns into a signal block), the previous prompt eases into the muted history, and the age choices rise in one by one. Carry on through age, origin (Black, Asian, Arab, white) and body. Clicks are ignored while the tiles turn.
-4. After the body step (*thin* / *fat*), *Do you want to help?* rises in, then online a *Learn more →* button that opens the dashboard.
+3. Pick *woman*: *man* fades out, *woman* glides up while its border, text and highlight ease to the current style (lime word turns into a signal block), the previous prompt eases into the muted history, and the age choices rise in one by one. Carry on through age and origin (Black, Asian, Arab, white). Clicks are ignored while the tiles turn.
+4. After the origin step, *Do you want to help?* rises in, then online a *Learn more →* button that opens the dashboard.
 5. Tap an earlier prompt in the history to go back to it.
 6. A prompt whose images are not generated yet shows empty tiles.
 7. `?lang=fr`: the statement and prompts read in French with correct agreement (*une femme noire âgée*, *un homme blanc âgé*, *une femme asiatique d’âge moyen*).

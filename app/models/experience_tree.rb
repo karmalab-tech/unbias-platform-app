@@ -6,15 +6,13 @@ module ExperienceTree
   STEPS = [
     { key: "gender", dimension: "gender", options: %w[woman man] },
     { key: "age", dimension: "age", options: %w[young middle_aged old] },
-    { key: "origin", dimension: "skin_tone", options: %w[black asian arab white] },
-    { key: "body", dimension: "body", options: %w[thin fat] }
+    { key: "origin", dimension: "skin_tone", options: %w[black asian arab white] }
   ].freeze
 
   EN = {
     "gender" => { "woman" => "woman", "man" => "man" },
     "age" => { "young" => "young", "middle_aged" => "middle-aged", "old" => "old" },
-    "origin" => { "black" => "Black", "asian" => "Asian", "arab" => "Arab", "white" => "white" },
-    "body" => { "thin" => "thin", "fat" => "fat" }
+    "origin" => { "black" => "Black", "asian" => "Asian", "arab" => "Arab", "white" => "white" }
   }.freeze
 
   FR_FEMININE = { "woman" => true, "man" => false }.freeze
@@ -23,8 +21,7 @@ module ExperienceTree
     "gender" => { "woman" => "femme", "man" => "homme" },
     "origin" => { "black" => %w[noire noir], "asian" => %w[asiatique asiatique], "arab" => %w[arabe arabe],
                   "white" => %w[blanche blanc] },
-    "old" => %w[âgée âgé],
-    "body" => { "thin" => %w[mince mince], "fat" => [ "en surpoids", "en surpoids" ] }
+    "old" => %w[âgée âgé]
   }.freeze
 
   module_function
@@ -96,7 +93,6 @@ module ExperienceTree
 
   def english(pick)
     words = []
-    words << { text: EN["body"][pick["body"]] } if pick["body"]
     words << { text: EN["age"][pick["age"]] } if pick["age"]
     words << { text: EN["origin"][pick["origin"]] } if pick["origin"]
     words << (pick["gender"] ? { text: EN["gender"][pick["gender"]] } : { text: "person" })
@@ -115,7 +111,6 @@ module ExperienceTree
     segments.push({ text: " " }, { text: FR["origin"][pick["origin"]][form] }) if pick["origin"]
     segments.push({ text: " " }, { text: "d’âge moyen" }) if pick["age"] == "middle_aged"
     segments.push({ text: " " }, { text: FR["old"][form] }) if pick["age"] == "old"
-    segments.push({ text: " " }, { text: FR["body"][pick["body"]][form] }) if pick["body"]
     segments << { text: "." }
   end
 end

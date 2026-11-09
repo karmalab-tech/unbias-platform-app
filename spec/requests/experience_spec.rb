@@ -42,7 +42,7 @@ RSpec.describe "Bias experience", type: :request do
     sign_in admin
     get "/api/admin/experience_prompts"
 
-    expect(json["prompts"].size).to eq(81)
+    expect(json["prompts"].size).to eq(33)
     root = json["prompts"].first
     expect(root).to include("path" => "person", "prompt" => "Create a photo of a person.", "depth" => 0)
     expect(root["counts"]).to include("succeeded" => 0, "failed" => 0)
@@ -52,7 +52,7 @@ RSpec.describe "Bias experience", type: :request do
     expect(response).to have_http_status(:accepted)
 
     expect { post "/api/admin/experience_prompts/generate_all" }
-      .to have_enqueued_job(GenerateExperiencePromptJob).exactly(81).times
+      .to have_enqueued_job(GenerateExperiencePromptJob).exactly(33).times
   end
 
   it "edits the wording, which marks earlier images outdated" do

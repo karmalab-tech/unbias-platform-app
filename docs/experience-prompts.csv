@@ -3,80 +3,32 @@ person,0,15,Create a photo of a person.,Crée une photo d’une personne.
 person/woman,1,15,Create a photo of a woman.,Crée une photo d’une femme.
 person/woman/young,2,15,Create a photo of a young woman.,Crée une photo d’une jeune femme.
 person/woman/young/black,3,15,Create a photo of a young Black woman.,Crée une photo d’une jeune femme noire.
-person/woman/young/black/thin,4,15,Create a photo of a thin young Black woman.,Crée une photo d’une jeune femme noire mince.
-person/woman/young/black/fat,4,15,Create a photo of a fat young Black woman.,Crée une photo d’une jeune femme noire en surpoids.
 person/woman/young/asian,3,15,Create a photo of a young Asian woman.,Crée une photo d’une jeune femme asiatique.
-person/woman/young/asian/thin,4,15,Create a photo of a thin young Asian woman.,Crée une photo d’une jeune femme asiatique mince.
-person/woman/young/asian/fat,4,15,Create a photo of a fat young Asian woman.,Crée une photo d’une jeune femme asiatique en surpoids.
 person/woman/young/arab,3,15,Create a photo of a young Arab woman.,Crée une photo d’une jeune femme arabe.
-person/woman/young/arab/thin,4,15,Create a photo of a thin young Arab woman.,Crée une photo d’une jeune femme arabe mince.
-person/woman/young/arab/fat,4,15,Create a photo of a fat young Arab woman.,Crée une photo d’une jeune femme arabe en surpoids.
 person/woman/young/white,3,15,Create a photo of a young white woman.,Crée une photo d’une jeune femme blanche.
-person/woman/young/white/thin,4,15,Create a photo of a thin young white woman.,Crée une photo d’une jeune femme blanche mince.
-person/woman/young/white/fat,4,15,Create a photo of a fat young white woman.,Crée une photo d’une jeune femme blanche en surpoids.
 person/woman/middle_aged,2,15,Create a photo of a middle-aged woman.,Crée une photo d’une femme d’âge moyen.
 person/woman/middle_aged/black,3,15,Create a photo of a middle-aged Black woman.,Crée une photo d’une femme noire d’âge moyen.
-person/woman/middle_aged/black/thin,4,15,Create a photo of a thin middle-aged Black woman.,Crée une photo d’une femme noire d’âge moyen mince.
-person/woman/middle_aged/black/fat,4,15,Create a photo of a fat middle-aged Black woman.,Crée une photo d’une femme noire d’âge moyen en surpoids.
 person/woman/middle_aged/asian,3,15,Create a photo of a middle-aged Asian woman.,Crée une photo d’une femme asiatique d’âge moyen.
-person/woman/middle_aged/asian/thin,4,15,Create a photo of a thin middle-aged Asian woman.,Crée une photo d’une femme asiatique d’âge moyen mince.
-person/woman/middle_aged/asian/fat,4,15,Create a photo of a fat middle-aged Asian woman.,Crée une photo d’une femme asiatique d’âge moyen en surpoids.
 person/woman/middle_aged/arab,3,15,Create a photo of a middle-aged Arab woman.,Crée une photo d’une femme arabe d’âge moyen.
-person/woman/middle_aged/arab/thin,4,15,Create a photo of a thin middle-aged Arab woman.,Crée une photo d’une femme arabe d’âge moyen mince.
-person/woman/middle_aged/arab/fat,4,15,Create a photo of a fat middle-aged Arab woman.,Crée une photo d’une femme arabe d’âge moyen en surpoids.
 person/woman/middle_aged/white,3,15,Create a photo of a middle-aged white woman.,Crée une photo d’une femme blanche d’âge moyen.
-person/woman/middle_aged/white/thin,4,15,Create a photo of a thin middle-aged white woman.,Crée une photo d’une femme blanche d’âge moyen mince.
-person/woman/middle_aged/white/fat,4,15,Create a photo of a fat middle-aged white woman.,Crée une photo d’une femme blanche d’âge moyen en surpoids.
 person/woman/old,2,15,Create a photo of an old woman.,Crée une photo d’une femme âgée.
 person/woman/old/black,3,15,Create a photo of an old Black woman.,Crée une photo d’une femme noire âgée.
-person/woman/old/black/thin,4,15,Create a photo of a thin old Black woman.,Crée une photo d’une femme noire âgée mince.
-person/woman/old/black/fat,4,15,Create a photo of a fat old Black woman.,Crée une photo d’une femme noire âgée en surpoids.
 person/woman/old/asian,3,15,Create a photo of an old Asian woman.,Crée une photo d’une femme asiatique âgée.
-person/woman/old/asian/thin,4,15,Create a photo of a thin old Asian woman.,Crée une photo d’une femme asiatique âgée mince.
-person/woman/old/asian/fat,4,15,Create a photo of a fat old Asian woman.,Crée une photo d’une femme asiatique âgée en surpoids.
 person/woman/old/arab,3,15,Create a photo of an old Arab woman.,Crée une photo d’une femme arabe âgée.
-person/woman/old/arab/thin,4,15,Create a photo of a thin old Arab woman.,Crée une photo d’une femme arabe âgée mince.
-person/woman/old/arab/fat,4,15,Create a photo of a fat old Arab woman.,Crée une photo d’une femme arabe âgée en surpoids.
 person/woman/old/white,3,15,Create a photo of an old white woman.,Crée une photo d’une femme blanche âgée.
-person/woman/old/white/thin,4,15,Create a photo of a thin old white woman.,Crée une photo d’une femme blanche âgée mince.
-person/woman/old/white/fat,4,15,Create a photo of a fat old white woman.,Crée une photo d’une femme blanche âgée en surpoids.
 person/man,1,15,Create a photo of a man.,Crée une photo d’un homme.
 person/man/young,2,15,Create a photo of a young man.,Crée une photo d’un jeune homme.
 person/man/young/black,3,15,Create a photo of a young Black man.,Crée une photo d’un jeune homme noir.
-person/man/young/black/thin,4,15,Create a photo of a thin young Black man.,Crée une photo d’un jeune homme noir mince.
-person/man/young/black/fat,4,15,Create a photo of a fat young Black man.,Crée une photo d’un jeune homme noir en surpoids.
 person/man/young/asian,3,15,Create a photo of a young Asian man.,Crée une photo d’un jeune homme asiatique.
-person/man/young/asian/thin,4,15,Create a photo of a thin young Asian man.,Crée une photo d’un jeune homme asiatique mince.
-person/man/young/asian/fat,4,15,Create a photo of a fat young Asian man.,Crée une photo d’un jeune homme asiatique en surpoids.
 person/man/young/arab,3,15,Create a photo of a young Arab man.,Crée une photo d’un jeune homme arabe.
-person/man/young/arab/thin,4,15,Create a photo of a thin young Arab man.,Crée une photo d’un jeune homme arabe mince.
-person/man/young/arab/fat,4,15,Create a photo of a fat young Arab man.,Crée une photo d’un jeune homme arabe en surpoids.
 person/man/young/white,3,15,Create a photo of a young white man.,Crée une photo d’un jeune homme blanc.
-person/man/young/white/thin,4,15,Create a photo of a thin young white man.,Crée une photo d’un jeune homme blanc mince.
-person/man/young/white/fat,4,15,Create a photo of a fat young white man.,Crée une photo d’un jeune homme blanc en surpoids.
 person/man/middle_aged,2,15,Create a photo of a middle-aged man.,Crée une photo d’un homme d’âge moyen.
 person/man/middle_aged/black,3,15,Create a photo of a middle-aged Black man.,Crée une photo d’un homme noir d’âge moyen.
-person/man/middle_aged/black/thin,4,15,Create a photo of a thin middle-aged Black man.,Crée une photo d’un homme noir d’âge moyen mince.
-person/man/middle_aged/black/fat,4,15,Create a photo of a fat middle-aged Black man.,Crée une photo d’un homme noir d’âge moyen en surpoids.
 person/man/middle_aged/asian,3,15,Create a photo of a middle-aged Asian man.,Crée une photo d’un homme asiatique d’âge moyen.
-person/man/middle_aged/asian/thin,4,15,Create a photo of a thin middle-aged Asian man.,Crée une photo d’un homme asiatique d’âge moyen mince.
-person/man/middle_aged/asian/fat,4,15,Create a photo of a fat middle-aged Asian man.,Crée une photo d’un homme asiatique d’âge moyen en surpoids.
 person/man/middle_aged/arab,3,15,Create a photo of a middle-aged Arab man.,Crée une photo d’un homme arabe d’âge moyen.
-person/man/middle_aged/arab/thin,4,15,Create a photo of a thin middle-aged Arab man.,Crée une photo d’un homme arabe d’âge moyen mince.
-person/man/middle_aged/arab/fat,4,15,Create a photo of a fat middle-aged Arab man.,Crée une photo d’un homme arabe d’âge moyen en surpoids.
 person/man/middle_aged/white,3,15,Create a photo of a middle-aged white man.,Crée une photo d’un homme blanc d’âge moyen.
-person/man/middle_aged/white/thin,4,15,Create a photo of a thin middle-aged white man.,Crée une photo d’un homme blanc d’âge moyen mince.
-person/man/middle_aged/white/fat,4,15,Create a photo of a fat middle-aged white man.,Crée une photo d’un homme blanc d’âge moyen en surpoids.
 person/man/old,2,15,Create a photo of an old man.,Crée une photo d’un homme âgé.
 person/man/old/black,3,15,Create a photo of an old Black man.,Crée une photo d’un homme noir âgé.
-person/man/old/black/thin,4,15,Create a photo of a thin old Black man.,Crée une photo d’un homme noir âgé mince.
-person/man/old/black/fat,4,15,Create a photo of a fat old Black man.,Crée une photo d’un homme noir âgé en surpoids.
 person/man/old/asian,3,15,Create a photo of an old Asian man.,Crée une photo d’un homme asiatique âgé.
-person/man/old/asian/thin,4,15,Create a photo of a thin old Asian man.,Crée une photo d’un homme asiatique âgé mince.
-person/man/old/asian/fat,4,15,Create a photo of a fat old Asian man.,Crée une photo d’un homme asiatique âgé en surpoids.
 person/man/old/arab,3,15,Create a photo of an old Arab man.,Crée une photo d’un homme arabe âgé.
-person/man/old/arab/thin,4,15,Create a photo of a thin old Arab man.,Crée une photo d’un homme arabe âgé mince.
-person/man/old/arab/fat,4,15,Create a photo of a fat old Arab man.,Crée une photo d’un homme arabe âgé en surpoids.
 person/man/old/white,3,15,Create a photo of an old white man.,Crée une photo d’un homme blanc âgé.
-person/man/old/white/thin,4,15,Create a photo of a thin old white man.,Crée une photo d’un homme blanc âgé mince.
-person/man/old/white/fat,4,15,Create a photo of a fat old white man.,Crée une photo d’un homme blanc âgé en surpoids.

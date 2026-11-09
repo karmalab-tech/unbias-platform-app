@@ -35,7 +35,6 @@ Each step covers one of the platform's dimensions:
 | 2 | gender | woman, man |
 | 3 | age | young, middle-aged, old |
 | 4 | skin tone (prompted as origin) | Black, Asian, Arab, white |
-| 5 | body | thin, fat |
 
 ## The prompt tree
 
@@ -53,12 +52,13 @@ Each step covers one of the platform's dimensions:
 | 1 | 2 | Create a photo of a woman. |
 | 2 | 6 | Create a photo of a young woman. |
 | 3 | 24 | Create a photo of a young Black woman. |
-| 4 | 48 | Create a photo of a fat young Black woman. |
-| **Total** | **81 prompts** | **1,215 images** |
+| **Total** | **33 prompts** | **495 images** |
 
-One more body option costs 24 prompts (360 images); one more origin costs 6 + 12 = 18 prompts (270 images). At GPT Image 2's listed portrait prices (1024 × 1536) the full tree costs about $6 (low), $50 (medium) or $200 (high).
+One more origin costs 6 prompts (90 images); one more age costs 1 + 4 per gender, 10 prompts (150 images). At GPT Image 2's listed portrait prices (1024 × 1536) the full tree costs about $2.50 (low), $20 (medium) or $82 (high).
 
-Wording choices: prompts are written the way people actually type them. *white* rather than *Caucasian* (a term from 18th-century race classification that US style guides advise against), *Arab* for people (*Arabic* is the language), body as a plain adjective (*thin* / *fat*, FR *mince* / *en surpoids*), placed where English puts size adjectives (*a fat young Black woman*). Highlights ignore *a/an* and *un/une* swaps. The body step is still under review: dropping it leaves 33 prompts (495 images), and the images then still show the default body without anyone asking for it.
+Wording choices: prompts are written the way people actually type them. *white* rather than *Caucasian* (a term from 18th-century race classification that US style guides advise against), *Arab* for people (*Arabic* is the language). Highlights ignore *a/an* and *un/une* swaps.
+
+There is deliberately no body (or beauty, or character) step: after gender, age and origin the images still show the default body, health and looks without anyone asking for them, which is the point, and pairing an ethnicity with *fat*, *ugly* or *angry* on a public screen is a risk not worth taking. Body is still a platform dimension; it is just not prompted here.
 
 ## Generation
 
@@ -80,7 +80,7 @@ Wording choices: prompts are written the way people actually type them. *white* 
 
 `public/sw.js` covers `/experience` like the dashboard pages: the page, `/api/public/experience`, settings, the QR code and the built assets are served from cache when the network is slow (4 s) or gone. Images use a separate, unversioned cache (`unbias-experience-images`), cache first, since their URLs change whenever an image changes.
 
-- **Exhibition (`?present=true`):** once the tree loads, the page asks the worker to download every finished image (6 at a time) and to delete cached images no longer in the tree. 1,215 images at 600 × 800 WebP is in the order of 70 MB. Open the page online once on the day, wait for the download to finish, and the whole tree then plays without network.
+- **Exhibition (`?present=true`):** once the tree loads, the page asks the worker to download every finished image (6 at a time) and to delete cached images no longer in the tree. 495 images at 600 × 800 WebP is in the order of 30 MB. Open the page online once on the day, wait for the download to finish, and the whole tree then plays without network.
 - **Online:** only images the visitor has already seen are kept, so phones never download the whole tree.
 
 The service worker is registered in production builds only.
