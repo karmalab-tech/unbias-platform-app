@@ -1,6 +1,10 @@
 const CACHE = "unbias-dashboard-v1";
-const PAGES = ["/", "/installation", "/video"];
-const DATA = ["/api/public/stats", "/api/public/settings", "/qr.svg"];
+const PAGES = ["/", "/installation", "/video", "/experience"];
+const DATA = ["/api/public/stats", "/api/public/settings", "/api/public/experience", "/qr.svg"];
+// Experience images live at content-addressed URLs, so they never need revalidating and survive cache version bumps.
+const IMAGES = "unbias-experience-images";
+const IMAGE_PATH = "/rails/active_storage/representations/proxy/";
+const IMAGE_CONCURRENCY = 6;
 const FALLBACK_MS = 4000;
 
 const key = (url) => url.origin + url.pathname;
@@ -40,8 +44,8 @@ async function networkFirst(request, cacheKey, event) {
   return Promise.race([settled, wait(FALLBACK_MS).then(() => cached)]);
 }
 
-async function cacheFirst(request) {
-  const cache = await caches.open(CACHE);
+async function cacheFirst(request, name = CACHE) {
+  const cache = await caches.open(name);
   const cached = await cache.match(request);
   if (cached) return cached;
   const response = await fetch(request);
@@ -61,6 +65,8 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(networkFirst(request, key(url), event));
   } else if (url.pathname.startsWith("/vite/")) {
     event.respondWith(cacheFirst(request));
+  } else if (url.pathname.startsWith(IMAGE_PATH)) {
+    event.respondWith(cacheFirst(request, IMAGES));
   }
 });
 
@@ -70,8 +76,33 @@ async function precache(url, accept) {
   if (response.ok && !response.redirected) await cache.put(url, response);
 }
 
+// Downloads every image of the experience tree and drops cached ones that are no longer in it.
+async function precacheImages(paths) {
+  const cache = await caches.open(IMAGES);
+  const wanted = new Set(paths.map((path) => self.location.origin + path));
+  const cached = await cache.keys();
+  await Promise.all(cached.filter((request) => !wanted.has(request.url)).map((request) => cache.delete(request)));
+  const have = new Set(cached.map((request) => request.url));
+  const queue = [...wanted].filter((url) => !have.has(url));
+  const worker = async () => {
+    for (let url = queue.shift(); url; url = queue.shift()) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) await cache.put(url, response);
+      } catch {
+        // Offline or a missing image: the next visit tries again.
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: IMAGE_CONCURRENCY }, worker));
+}
+
 // The first visit loads everything before this worker controls the page, so the page lists what it used.
 self.addEventListener("message", (event) => {
+  if (event.data?.type === "precache-images") {
+    event.waitUntil(precacheImages(event.data.paths ?? []));
+    return;
+  }
   if (event.data?.type !== "precache") return;
   const origin = self.location.origin;
   const jobs = [];

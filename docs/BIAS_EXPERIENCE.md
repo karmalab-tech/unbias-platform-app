@@ -69,4 +69,13 @@ One more body option costs 36 prompts (540 images); one more origin costs 9 + 18
 
 ## Serving
 
-`GET /api/public/experience` returns the whole tree: for each prompt its `path`, `parent`, `step`, wording as segments in `en` and `fr` (`added: true` on the words not in the parent prompt) and 15 image paths (`null` where the image is not finished or outdated). Paths go through Active Storage's representation redirect, so the S3 bucket stays private. The response is cached in Solid Cache and served with an ETag that changes when a prompt or an image changes. The page preloads a prompt's images before turning the tiles, and the next choices' images once the wave has finished.
+`GET /api/public/experience` returns the whole tree: for each prompt its `path`, `parent`, `step`, wording as segments in `en` and `fr` (`added: true` on the words not in the parent prompt) and 15 image paths (`null` where the image is not finished or outdated). Paths go through Active Storage's proxy route (`/rails/active_storage/representations/proxy/…`): images are served from the app's own domain, so the S3 bucket stays private and the service worker can cache them. The response is cached in Solid Cache and served with an ETag that changes when a prompt or an image changes. The page preloads a prompt's images before turning the tiles, and the next choices' images once the wave has finished.
+
+## Offline
+
+`public/sw.js` covers `/experience` like the dashboard pages: the page, `/api/public/experience`, settings, the QR code and the built assets are served from cache when the network is slow (4 s) or gone. Images use a separate, unversioned cache (`unbias-experience-images`), cache first, since their URLs change whenever an image changes.
+
+- **Exhibition (`?present=true`):** once the tree loads, the page asks the worker to download every finished image (6 at a time) and to delete cached images no longer in the tree. 1,815 images at 600 × 800 WebP is in the order of 100 MB. Open the page online once on the day, wait for the download to finish, and the whole tree then plays without network.
+- **Online:** only images the visitor has already seen are kept, so phones never download the whole tree.
+
+The service worker is registered in production builds only.

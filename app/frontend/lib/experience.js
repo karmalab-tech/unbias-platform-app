@@ -16,6 +16,10 @@ export function indexTree(payload) {
   return { root, byPath, children, imagesPerPrompt: payload.images_per_prompt };
 }
 
+export function imagePaths(payload) {
+  return payload.prompts.flatMap((prompt) => prompt.images.filter(Boolean));
+}
+
 // Root first, down to the prompt at `path`.
 export function lineage(tree, path) {
   const chain = [];

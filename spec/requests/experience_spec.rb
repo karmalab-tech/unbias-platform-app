@@ -29,7 +29,7 @@ RSpec.describe "Bias experience", type: :request do
     expect(woman.dig("segments", "en")).to include({ "text" => "woman", "added" => true })
     expect(woman.dig("segments", "fr").pluck("text").join).to eq("Crée une photo d’une femme.")
     expect(woman["images"][0]).to be_nil
-    expect(woman["images"][1]).to start_with("/rails/active_storage/representations/redirect/")
+    expect(woman["images"][1]).to start_with("/rails/active_storage/representations/proxy/")
   end
 
   it "keeps generation admin only" do

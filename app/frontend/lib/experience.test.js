@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   floatTiming,
+  imagePaths,
   indexTree,
   lineage,
   segmentsFor,
@@ -44,6 +45,14 @@ describe("experience tree", () => {
       "person/woman/young",
     ]);
     expect(lineage(tree, "nowhere")).toEqual([]);
+  });
+
+  it("lists every finished image of the tree", () => {
+    expect(
+      imagePaths({
+        prompts: [{ images: ["/a", null] }, { images: [null, "/b"] }],
+      })
+    ).toEqual(["/a", "/b"]);
   });
 
   it("falls back to English wording", () => {

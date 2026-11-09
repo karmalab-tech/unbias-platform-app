@@ -27,7 +27,8 @@ class ExperienceImage < ApplicationRecord
   def display_path
     return unless file.attached?
 
-    Rails.application.routes.url_helpers.rails_representation_path(file.variant(:display), only_path: true)
+    # Same-origin proxy, not the S3 redirect, so the exhibition's service worker can cache the image itself.
+    Rails.application.routes.url_helpers.rails_storage_proxy_path(file.variant(:display), only_path: true)
   end
 
   def fail!(message)

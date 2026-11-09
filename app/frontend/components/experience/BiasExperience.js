@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import FlipGrid, { waveTotalMs } from "~/components/experience/FlipGrid";
 import iconEye from "~/images/icons/icon_eye.png";
 import { api } from "~/lib/api";
-import { indexTree, lineage, segmentsFor } from "~/lib/experience";
+import { imagePaths, indexTree, lineage, segmentsFor } from "~/lib/experience";
+import { precacheExperienceImages } from "~/lib/offline";
 import { useSettings } from "~/lib/settings";
 import { locale, t } from "~/i18n";
 
@@ -24,7 +25,7 @@ function preload(urls) {
   return Promise.race([Promise.all(loads), timeout]);
 }
 
-// History muted, current prompt bright, next prompts in between; the twenty results float on the right.
+// History muted, current prompt bright, next prompts in between; the results float on the right.
 export default function BiasExperience({ presentation = false }) {
   const settings = useSettings();
   const [tree, setTree] = useState(null);
@@ -34,10 +35,11 @@ export default function BiasExperience({ presentation = false }) {
   const runRef = useRef(0);
 
   useEffect(() => {
-    api
-      .get("/api/public/experience")
-      .then((payload) => setTree(indexTree(payload)));
-  }, []);
+    api.get("/api/public/experience").then((payload) => {
+      setTree(indexTree(payload));
+      if (presentation) precacheExperienceImages(imagePaths(payload));
+    });
+  }, [presentation]);
 
   const count = tree?.imagesPerPrompt ?? 15;
   const current = tree && path ? tree.byPath.get(path) : null;

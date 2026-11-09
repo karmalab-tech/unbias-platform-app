@@ -260,7 +260,7 @@ turns the boost off so the other specs see real numbers.
 
 ## PR 5 — Dashboard keeps working without network
 
-Only the home page (`/`), `/installation` and `/video` are cached, by `public/sw.js`. The contribute flow, staff pages and everything behind a login are never cached. The worker is registered in production builds only, so test it on a deployed or production-built server (not `bin/dev`).
+Only the home page (`/`), `/installation`, `/video` and `/experience` are cached, by `public/sw.js`. The contribute flow, staff pages and everything behind a login are never cached. The worker is registered in production builds only, so test it on a deployed or production-built server (not `bin/dev`).
 
 1. Open `/` (or `/installation`) with network and wait a few seconds for the numbers to load.
 2. Cut the network (airplane mode, or Chrome DevTools → Network → Offline) and refresh: the page loads with the last numbers, charts, fonts and QR code.
@@ -309,3 +309,4 @@ Spec: `docs/BIAS_EXPERIENCE.md`.
 7. `/experience?present=true`: full screen, no header; the Unbias logo top left, the contribute QR code and "Wanna help?" bottom left (scan it: it opens `/contribute`). Untouched for `experience_idle_seconds` (90 s) after a choice, it returns to the blank first screen.
 8. Phone width: the grid sits above the prompts.
 9. With reduced motion turned on in the OS, tiles stop floating and swap without turning.
+10. Offline (production build only, like PR 5): open `/experience?present=true` online and wait a minute while it downloads every finished image (DevTools → Application → Cache storage → `unbias-experience-images`). Cut the network and reload: the page, logo, QR code and every path through the tree still play. Online `/experience` without `?present=true` only keeps the images already viewed.
