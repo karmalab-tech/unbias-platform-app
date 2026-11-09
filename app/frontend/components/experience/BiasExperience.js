@@ -1,9 +1,16 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import FlipGrid, { waveTotalMs } from "~/components/experience/FlipGrid";
 import iconEye from "~/images/icons/icon_eye.png";
 import { api } from "~/lib/api";
-import { imagePaths, indexTree, lineage, segmentsFor } from "~/lib/experience";
+import {
+  imagePaths,
+  indexTree,
+  lineage,
+  randomMosaic,
+  segmentsFor,
+} from "~/lib/experience";
 import { precacheExperienceImages } from "~/lib/offline";
 import { useSettings } from "~/lib/settings";
 import { locale, t } from "~/i18n";
@@ -11,6 +18,7 @@ import { locale, t } from "~/i18n";
 const PRELOAD_TIMEOUT_MS = 4000;
 const LEAVE_MS = 260;
 const MOVE_MS = 480;
+const IDLE_PARAM = "idle";
 const APPEAR_MS = 380;
 const APPEAR_STAGGER_MS = 110;
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
@@ -56,7 +64,10 @@ function columnItems(tree, path) {
           { key: "pick", kind: "pick" },
           ...next.map((prompt) => ({ key: prompt.path, kind: "next", prompt })),
         ]
-      : [{ key: "help", kind: "help" }]),
+      : [
+          { key: "help", kind: "help" },
+          { key: "help-action", kind: "helpAction" },
+        ]),
   ];
 }
 
@@ -67,6 +78,8 @@ export default function BiasExperience({ presentation = false }) {
   const [path, setPath] = useState(null);
   const [pending, setPending] = useState(null);
   const [busy, setBusy] = useState(false);
+  const [mosaic, setMosaic] = useState(null);
+  const [round, setRound] = useState(0);
   const runRef = useRef(0);
   const columnRef = useRef(null);
   const snapshotRef = useRef(null);
@@ -74,6 +87,7 @@ export default function BiasExperience({ presentation = false }) {
   useEffect(() => {
     api.get("/api/public/experience").then((payload) => {
       setTree(indexTree(payload));
+      setMosaic(randomMosaic(payload.prompts, payload.images_per_prompt));
       if (presentation) precacheExperienceImages(imagePaths(payload));
     });
   }, [presentation]);
@@ -106,16 +120,19 @@ export default function BiasExperience({ presentation = false }) {
     snapshotRef.current = measure();
     setPath(target.path);
     setPending(null);
-    setTimeout(() => {
-      if (runId !== runRef.current) return;
-      setBusy(false);
-      (tree.children.get(target.path) ?? []).forEach((child) =>
-        preload(child.images)
-      );
-    }, waveTotalMs(count));
+    setTimeout(
+      () => {
+        if (runId !== runRef.current) return;
+        setBusy(false);
+        (tree.children.get(target.path) ?? []).forEach((child) =>
+          preload(child.images)
+        );
+      },
+      waveTotalMs(count) + APPEAR_MS
+    );
   };
 
-  // FLIP: items that stay glide from their old place to the new one, new items rise in one after another.
+  // FLIP: items that stay glide to their new place while the tiles turn; new items rise in once the tiles have turned.
   useLayoutEffect(() => {
     const before = snapshotRef.current;
     snapshotRef.current = null;
@@ -142,7 +159,7 @@ export default function BiasExperience({ presentation = false }) {
           ],
           {
             duration: APPEAR_MS,
-            delay: MOVE_MS * 0.7 + appearing++ * APPEAR_STAGGER_MS,
+            delay: waveTotalMs(count) + appearing++ * APPEAR_STAGGER_MS,
             easing: EASE,
             fill: "backwards",
           }
@@ -151,7 +168,9 @@ export default function BiasExperience({ presentation = false }) {
     }
   }, [path]);
 
-  const idleSeconds = settings?.limits?.experience_idle_seconds;
+  const idleSeconds =
+    Number(new URLSearchParams(window.location.search).get(IDLE_PARAM)) ||
+    settings?.limits?.experience_idle_seconds;
   useEffect(() => {
     if (!presentation || path === null || !idleSeconds) return;
     let timer;
@@ -162,6 +181,10 @@ export default function BiasExperience({ presentation = false }) {
         setPath(null);
         setPending(null);
         setBusy(false);
+        if (tree) {
+          setMosaic(randomMosaic([...tree.byPath.values()], count));
+          setRound((n) => n + 1);
+        }
       }, idleSeconds * 1000);
     };
     arm();
@@ -172,7 +195,7 @@ export default function BiasExperience({ presentation = false }) {
       window.removeEventListener("pointerdown", arm);
       window.removeEventListener("keydown", arm);
     };
-  }, [presentation, path, idleSeconds]);
+  }, [presentation, path, idleSeconds, tree, count]);
 
   const plainText = (prompt) =>
     segmentsFor(prompt, locale)
@@ -203,6 +226,7 @@ export default function BiasExperience({ presentation = false }) {
             >
               <ColumnItem
                 item={item}
+                presentation={presentation}
                 first={path === null}
                 busy={busy}
                 loading={pending?.path === item.key}
@@ -211,26 +235,12 @@ export default function BiasExperience({ presentation = false }) {
             </div>
           ))}
         </div>
-        {presentation && (
-          <div className="flex items-end gap-4">
-            <img
-              src="/qr.svg"
-              alt=""
-              width="112"
-              height="112"
-              className="bg-cream h-28 w-28 p-2"
-            />
-            <p className="mono-caps text-cream/70 text-[12px] font-bold tracking-[0.14em]">
-              {t("experience.wannaHelp")}
-            </p>
-          </div>
-        )}
       </div>
 
       <div className="order-first flex min-h-0 items-center justify-center lg:[container-type:size] lg:order-none">
         <FlipGrid
-          version={path}
-          urls={current?.images ?? null}
+          version={path ?? (mosaic ? `start-${round}` : null)}
+          urls={current?.images ?? mosaic}
           count={count}
           label={
             current
@@ -256,7 +266,7 @@ const STATEMENT =
 const BUTTON =
   "w-full border-2 px-4 py-3 text-left transition-[color,border-color,box-shadow] duration-300 ease-out";
 
-function ColumnItem({ item, first, busy, loading, onRun }) {
+function ColumnItem({ item, presentation, first, busy, loading, onRun }) {
   if (item.kind === "intro") {
     return (
       <div className={`${STATEMENT} mb-6`}>
@@ -267,6 +277,30 @@ function ColumnItem({ item, first, busy, loading, onRun }) {
   }
   if (item.kind === "help") {
     return <p className={`${STATEMENT} mt-6`}>{t("experience.help")}</p>;
+  }
+  if (item.kind === "helpAction") {
+    return presentation ? (
+      <div className="mt-2 flex items-end gap-4">
+        <img
+          src="/qr.svg"
+          alt=""
+          width="128"
+          height="128"
+          className="bg-cream h-32 w-32 p-2"
+        />
+        <p className="mono-caps text-cream/60 text-[11px] font-bold tracking-[0.14em]">
+          {t("experience.scanQr")}
+        </p>
+      </div>
+    ) : (
+      <Link
+        to="/"
+        className="border-cream text-cream hover:bg-cream hover:text-night mono-caps mt-2 inline-flex min-h-12 items-center gap-3 border-2 px-5 text-[13px] font-bold transition-colors duration-300"
+      >
+        {t("experience.learnMore")}
+        <ArrowRightIcon aria-hidden="true" className="h-5 w-5" />
+      </Link>
+    );
   }
   if (item.kind === "pick") {
     return (

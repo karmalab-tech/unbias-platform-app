@@ -142,6 +142,6 @@ RSpec.describe "Contribution flow", type: :request do
     expect(json.dig("limits", "max_photos_per_submission")).to eq(20)
     expect(json.dig("taxonomy", "monk_swatches").size).to eq(10)
     expect(json["consent_version"]).to eq("v0-draft")
-    expect(json.dig("limits", "experience_idle_seconds")).to eq(90)
+    expect(json.dig("limits", "experience_idle_seconds")).to eq(30)
   end
 end

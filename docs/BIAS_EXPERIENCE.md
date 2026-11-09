@@ -3,16 +3,16 @@
 An interactive page that shows what an image model does with the same sentence run many times: it does not return a random person, it returns the average one. Each step lets the visitor remove one bias from the prompt, and the results show that everything left unsaid still falls back to the default.
 
 - **Online:** `/experience`, under the public header. The introduction before it and the "what we can do" ending after it (leading to the dashboard and the contribute button) come later.
-- **Exhibition:** `/experience?present=true`, full screen, no navigation, touch first, back to the blank first screen after `experience_idle_seconds` (config/unbias.yml, default 90) without a touch. The Unbias logo sits top left and the contribute QR code (`/qr.svg`, the same as the installation) bottom left with "Wanna help?".
+- **Exhibition:** `/experience?present=true`, full screen, no navigation, touch first, the Unbias logo top left. It goes back to the first screen (with a new mosaic) after `experience_idle_seconds` (config/unbias.yml, default 30) without a touch; `?idle=60` overrides it for one screen.
 
 ## The experience
 
 A dark stage (`bg-night`, a darker shade of ink). Left: the prompts. Right: the fifteen portrait images (3:4, 5 × 3, sized to fit a 16:9 screen) of the current prompt. Nothing else: no titles, no steps, no buttons besides the prompts, and one small `mono-caps` line, "Pick a prompt", above the choices once the experience has started.
 
-1. Only the base prompt is offered, with a right arrow, under a two-line bold statement: *Everyday, we create more images with Gen AI. / These images are not neutral.* (FR: *Nous créons de plus en plus d’images avec l’IA générative. / Mais ces images ne sont pas neutres.*). The grid is fifteen faint empty tiles.
-2. Picking it fades the statement and the arrow out and turns the fifteen tiles one by one, in a diagonal wave from top left to bottom right, onto its results.
+1. Only the base prompt is offered, with a right arrow, under a two-line bold statement: *Everyday, we create more images with Gen AI. / These images are not neutral.* (FR: *Nous créons de plus en plus d’images avec l’IA générative. / Mais ces images ne sont pas neutres.*). The grid shows a random mosaic of fifteen finished images from the whole tree, never two from the same prompt (`randomMosaic`), drawn again at every idle reset.
+2. Picking it fades the statement and the arrow out, then turns the fifteen tiles one by one, in a diagonal wave from top left to bottom right, onto its results.
 3. The picked prompt becomes the current one and the next prompts appear below it, the added words highlighted: *…of a woman / man / non-binary person.*
-4. Picking one: the other choices fade out, the picked prompt glides up into place as the current prompt, the grid turns, and the next choices rise in one after another. After the last step, *Do you want to help?* (FR: *Vous voulez nous aider ?*) fades in below instead of choices.
+4. Picking one, in this order: the other choices (and on the first step the statement) fade out; the tiles turn while the picked prompt glides up into place as the current prompt; once the tiles have turned, the next choices rise in one after another. After the last step, *Do you want to help?* (FR: *Vous voulez nous aider ?*) rises in instead, followed in exhibition mode by the contribute QR code (`/qr.svg`) with a small *Scan this QR code*, and online by a *Learn more →* button to the dashboard (`/`).
 5. Any earlier prompt in the list can be tapped to go back to it, with the same motion.
 
 Every state change (border, text, shadow, highlight colour) eases over 300 ms. The column motion is a FLIP animation keyed by prompt path (`BiasExperience.js`); it is skipped under `prefers-reduced-motion`.
@@ -35,7 +35,7 @@ Each step covers one of the platform's dimensions:
 | 2 | gender | woman, man |
 | 3 | age | young, middle-aged, old |
 | 4 | skin tone (prompted as origin) | Black, Asian, Arab, white |
-| 5 | body | thin, plus-size |
+| 5 | body | thin, fat |
 
 ## The prompt tree
 
@@ -53,12 +53,12 @@ Each step covers one of the platform's dimensions:
 | 1 | 2 | Create a photo of a woman. |
 | 2 | 6 | Create a photo of a young woman. |
 | 3 | 24 | Create a photo of a young Black woman. |
-| 4 | 48 | Create a photo of a young Black woman who is plus-size. |
+| 4 | 48 | Create a photo of a fat young Black woman. |
 | **Total** | **81 prompts** | **1,215 images** |
 
 One more body option costs 24 prompts (360 images); one more origin costs 6 + 12 = 18 prompts (270 images). At GPT Image 2's listed portrait prices (1024 × 1536) the full tree costs about $6 (low), $50 (medium) or $200 (high).
 
-Wording choices: *white* rather than *Caucasian* (a term from 18th-century race classification that US style guides advise against), *Arab* for people (*Arabic* is the language), and body kept as the last step rather than profession, because body is a platform dimension and a profession's strongest bias (gender) is already fixed by step 2.
+Wording choices: prompts are written the way people actually type them. *white* rather than *Caucasian* (a term from 18th-century race classification that US style guides advise against), *Arab* for people (*Arabic* is the language), body as a plain adjective (*thin* / *fat*, FR *mince* / *en surpoids*), placed where English puts size adjectives (*a fat young Black woman*). Highlights ignore *a/an* and *un/une* swaps. The body step is still under review: dropping it leaves 33 prompts (495 images), and the images then still show the default body without anyone asking for it.
 
 ## Generation
 

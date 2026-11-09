@@ -4,6 +4,7 @@ import {
   imagePaths,
   indexTree,
   lineage,
+  randomMosaic,
   segmentsFor,
   waveDelay,
 } from "~/lib/experience";
@@ -53,6 +54,26 @@ describe("experience tree", () => {
         prompts: [{ images: ["/a", null] }, { images: [null, "/b"] }],
       })
     ).toEqual(["/a", "/b"]);
+  });
+
+  it("builds a starting mosaic with at most one image per prompt", () => {
+    const prompts = Array.from({ length: 30 }, (_, p) => ({
+      images: [`/${p}/1`, null, `/${p}/3`],
+    }));
+    const mosaic = randomMosaic(prompts, 15);
+    expect(mosaic).toHaveLength(15);
+    expect(new Set(mosaic.map((url) => url.split("/")[1])).size).toBe(15);
+  });
+
+  it("leaves tiles empty when fewer prompts have images", () => {
+    const prompts = [
+      { images: ["/a"] },
+      { images: [null] },
+      { images: ["/b"] },
+    ];
+    const mosaic = randomMosaic(prompts, 4);
+    expect(mosaic.filter(Boolean).sort()).toEqual(["/a", "/b"]);
+    expect(mosaic.slice(2)).toEqual([null, null]);
   });
 
   it("falls back to English wording", () => {

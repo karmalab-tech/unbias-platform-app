@@ -20,6 +20,21 @@ export function imagePaths(payload) {
   return payload.prompts.flatMap((prompt) => prompt.images.filter(Boolean));
 }
 
+// One random finished image from each of `count` random prompts, so no two tiles share a prompt.
+export function randomMosaic(prompts, count, random = Math.random) {
+  const pool = prompts
+    .map((prompt) => prompt.images.filter(Boolean))
+    .filter((images) => images.length > 0);
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return Array.from({ length: count }, (_, index) => {
+    const images = pool[index];
+    return images ? images[Math.floor(random() * images.length)] : null;
+  });
+}
+
 // Root first, down to the prompt at `path`.
 export function lineage(tree, path) {
   const chain = [];

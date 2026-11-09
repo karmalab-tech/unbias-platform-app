@@ -7,14 +7,14 @@ module ExperienceTree
     { key: "gender", dimension: "gender", options: %w[woman man] },
     { key: "age", dimension: "age", options: %w[young middle_aged old] },
     { key: "origin", dimension: "skin_tone", options: %w[black asian arab white] },
-    { key: "body", dimension: "body", options: %w[thin plus_size] }
+    { key: "body", dimension: "body", options: %w[thin fat] }
   ].freeze
 
   EN = {
     "gender" => { "woman" => "woman", "man" => "man" },
     "age" => { "young" => "young", "middle_aged" => "middle-aged", "old" => "old" },
     "origin" => { "black" => "Black", "asian" => "Asian", "arab" => "Arab", "white" => "white" },
-    "body" => { "thin" => "who is thin", "plus_size" => "who is plus-size" }
+    "body" => { "thin" => "thin", "fat" => "fat" }
   }.freeze
 
   FR_FEMININE = { "woman" => true, "man" => false }.freeze
@@ -24,7 +24,7 @@ module ExperienceTree
     "origin" => { "black" => %w[noire noir], "asian" => %w[asiatique asiatique], "arab" => %w[arabe arabe],
                   "white" => %w[blanche blanc] },
     "old" => %w[âgée âgé],
-    "body" => { "thin" => %w[mince mince], "plus_size" => [ "de forte corpulence", "de forte corpulence" ] }
+    "body" => { "thin" => %w[mince mince], "fat" => [ "en surpoids", "en surpoids" ] }
   }.freeze
 
   module_function
@@ -65,8 +65,13 @@ module ExperienceTree
     end
   end
 
+  # Articles that only change form with the next word ("a old" → "an old") don't count as added.
+  SAME_WORD = { "an" => "a", "une" => "un" }.freeze
+
   # Longest common subsequence over tokens; whatever the child does not share with the parent is added.
   def added_flags(tokens, parent)
+    tokens = tokens.map { |token| SAME_WORD.fetch(token.downcase, token) }
+    parent = parent.map { |token| SAME_WORD.fetch(token.downcase, token) }
     table = Array.new(tokens.size + 1) { Array.new(parent.size + 1, 0) }
     tokens.each_index.reverse_each do |i|
       parent.each_index.reverse_each do |j|
@@ -91,13 +96,13 @@ module ExperienceTree
 
   def english(pick)
     words = []
+    words << { text: EN["body"][pick["body"]] } if pick["body"]
     words << { text: EN["age"][pick["age"]] } if pick["age"]
     words << { text: EN["origin"][pick["origin"]] } if pick["origin"]
     words << (pick["gender"] ? { text: EN["gender"][pick["gender"]] } : { text: "person" })
     article = words.first[:text].match?(/\A[aeiou]/i) ? "an" : "a"
     segments = [ { text: "Create a photo of #{article}" } ]
     words.each { |word| segments.push({ text: " " }, word) }
-    segments.push({ text: " " }, { text: EN["body"][pick["body"]] }) if pick["body"]
     segments << { text: "." }
   end
 
