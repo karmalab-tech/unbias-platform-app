@@ -105,6 +105,10 @@ Plain, short, about people. State what is true and what is needed; do not celebr
 
 Where a taxonomy comes from outside the product, name it and link out (the Monk Skin Tone scale links to its source).
 
+## Dark stage (bias experience)
+
+`/experience` is the one surface on an `ink` ground. It keeps the language (square corners, 2px lines, Archivo, `mono-caps`, hard shadow) but inverts it: cream text and lines on ink, and emphasis comes from cream opacity instead of fills. Current prompt: full cream with a `shadow-hard-signal`, added words on a signal block. Next prompts: cream at 80% with a 40% border, added words in lime. History: cream at 35% with a 10% border. Photos sit borderless and shadowless and float (`animate-float`). Empty tiles are cream at 5%. No titles, no step counters; the only label is one 10px `mono-caps` instruction at 40%. See `docs/BIAS_EXPERIENCE.md`.
+
 ## Outside the app
 
 Surfaces that cannot use Tailwind follow the same tokens by hand: static error pages (`public/4xx.html`, `500.html`: cream ground, ink header, signal shadow card), emails (`app/views/layouts/mailer.html.erb`: ink header bar, cream ground, 2px ink borders, signal call to action) and the `<meta>` tags in the application layout.

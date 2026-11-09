@@ -11,6 +11,7 @@ import AdminDashboard from "~/pages/admin/AdminDashboard";
 import AdminCallsToAction from "~/pages/admin/AdminCallsToAction";
 import AdminSettings from "~/pages/admin/AdminSettings";
 import AdminLookup from "~/pages/admin/AdminLookup";
+import AdminExperience from "~/pages/admin/AdminExperience";
 import Login from "~/pages/Login";
 import ForgotPassword from "~/pages/ForgotPassword";
 import ResetPassword from "~/pages/ResetPassword";
@@ -35,6 +36,7 @@ export default function App() {
           />
           <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="/admin/lookup" element={<AdminLookup />} />
+          <Route path="/admin/experience" element={<AdminExperience />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />

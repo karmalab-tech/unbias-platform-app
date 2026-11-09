@@ -8,6 +8,7 @@ const TABS = [
   { to: "/admin/calls-to-action", key: "ctas" },
   { to: "/admin/settings", key: "settings" },
   { to: "/admin/lookup", key: "lookup" },
+  { to: "/admin/experience", key: "experience" },
 ];
 
 export default function AdminShell({ title, children }) {

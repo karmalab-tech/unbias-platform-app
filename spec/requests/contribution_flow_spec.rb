@@ -143,6 +143,5 @@ RSpec.describe "Contribution flow", type: :request do
     expect(json.dig("taxonomy", "monk_swatches").size).to eq(10)
     expect(json["consent_version"]).to eq("v0-draft")
     expect(json.dig("limits", "experience_idle_seconds")).to eq(90)
-    expect(json["experience_images_url"]).to eq("/experience-images")
   end
 end

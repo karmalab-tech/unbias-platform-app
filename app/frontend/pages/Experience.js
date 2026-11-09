@@ -8,14 +8,14 @@ export default function Experience() {
 
   if (presentation) {
     return (
-      <div className="bg-canvas text-ink flex h-dvh touch-manipulation flex-col overflow-hidden select-none">
+      <div className="bg-ink text-cream flex h-dvh touch-manipulation flex-col overflow-hidden select-none">
         <BiasExperience presentation />
       </div>
     );
   }
 
   return (
-    <div className="bg-canvas text-ink flex min-h-dvh flex-col lg:h-dvh">
+    <div className="bg-ink text-cream flex min-h-dvh flex-col lg:h-dvh">
       <PublicHeader />
       <BiasExperience />
     </div>

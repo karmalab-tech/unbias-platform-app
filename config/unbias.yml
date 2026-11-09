@@ -26,8 +26,13 @@ shared:
   launch_boost_people_floor: 1100
   launch_boost_until: 2500
   launch_boost_step: 10
-  experience_images_url: /experience-images
   experience_idle_seconds: 90
+  experience_images_per_prompt: 20
+  image_generation_model: gpt-image-2
+  image_generation_size: 1024x1024
+  image_generation_quality: medium
+  image_generation_format: webp
+  image_generation_concurrency: 4
 
 test:
   launch_boost_photos_floor: 0

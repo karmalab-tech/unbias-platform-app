@@ -12,7 +12,6 @@ module Api
           intro_video_url: ENV["INTRO_VIDEO_URL"].presence || limits.intro_video_url,
           intro_video_poster_url: ENV["INTRO_VIDEO_POSTER_URL"].presence,
           intro_video_subtitles_url: ENV["INTRO_VIDEO_SUBTITLES_URL"].presence,
-          experience_images_url: ENV["EXPERIENCE_IMAGES_URL"].presence || limits.experience_images_url,
           taxonomy: {
             age: Representation::AGE, skin_tone: Representation::SKIN_TONE, gender: Representation::GENDER,
             body: Representation::BODY, disability: Representation::DISABILITY, monk_swatches: Representation::MONK_SWATCHES

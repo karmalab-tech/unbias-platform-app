@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_09_13_160001) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_09_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -92,6 +92,33 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_13_160001) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["submission_id"], name: "index_consents_on_submission_id", unique: true
+  end
+
+  create_table "experience_images", force: :cascade do |t|
+    t.bigint "experience_prompt_id", null: false
+    t.integer "position", null: false
+    t.string "status", default: "pending", null: false
+    t.string "prompt"
+    t.string "model"
+    t.integer "attempts", default: 0, null: false
+    t.text "error"
+    t.datetime "generated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["experience_prompt_id", "position"], name: "index_experience_images_on_experience_prompt_id_and_position", unique: true
+    t.index ["experience_prompt_id"], name: "index_experience_images_on_experience_prompt_id"
+    t.index ["status"], name: "index_experience_images_on_status"
+  end
+
+  create_table "experience_prompts", force: :cascade do |t|
+    t.string "path", null: false
+    t.string "prompt", null: false
+    t.integer "depth", null: false
+    t.integer "position", null: false
+    t.boolean "in_tree", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["path"], name: "index_experience_prompts_on_path", unique: true
   end
 
   create_table "moderation_decisions", force: :cascade do |t|
@@ -321,6 +348,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_13_160001) do
   add_foreign_key "asset_enrichments", "assets"
   add_foreign_key "assets", "submissions"
   add_foreign_key "consents", "submissions"
+  add_foreign_key "experience_images", "experience_prompts"
   add_foreign_key "moderation_decisions", "assets"
   add_foreign_key "moderation_decisions", "users", column: "moderator_id"
   add_foreign_key "person_annotations", "assets"

@@ -59,6 +59,3 @@ node_modules
 # Playwright
 /test-results
 /playwright-report
-
-# Pre-generated images of the bias experience (hosted on S3/CDN in production)
-/public/experience-images

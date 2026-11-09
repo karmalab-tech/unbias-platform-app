@@ -287,13 +287,24 @@ Spec: `docs/DESIGN_LANGUAGE.md`. Every screen should look like the Home page: cr
 
 ## PR 7 — Bias experience
 
-Spec: `docs/BIAS_EXPERIENCE.md`. Before the real images exist, any square `.webp` files in `public/experience-images/<folder>/01.webp…20.webp` will do (folders are listed in `docs/experience-prompts.csv`); without them every tile shows its run number.
+Spec: `docs/BIAS_EXPERIENCE.md`.
 
-1. Open `/experience`: the public header, a hatched grid of twenty tiles and one red prompt, *Create a photo of a person.*, marked Run.
-2. Run it: the prompt shows "Running 20×", then the tiles flip one by one from top left to bottom right. The prompt moves into the ink list and three suggestions appear with the new word highlighted.
-3. Pick *woman*: the other suggestions disappear, the grid flips again, the age suggestions appear. Carry on through origin and body or disability. Clicks are ignored while the tiles turn.
-4. After the fifth prompt the page says "Still the default" and offers Start again. Tapping an earlier prompt in the list goes back to it.
-5. `?lang=fr`: prompts read in French with correct agreement (*une femme noire âgée*, *un homme blanc âgé*).
-6. `/experience?present=true`: full screen, no header. Leave it untouched for `experience_idle_seconds` (90 s) after a choice and it returns to the first prompt.
-7. Phone width: the grid sits above the prompts.
-8. `bin/experience-prompts` prints the 193 prompts; it matches `docs/experience-prompts.csv`.
+### 1. Generate the images (admin)
+
+1. Set `OPENAI_API_KEY` in `.env`, run `bin/dev` (the Solid Queue worker must run) and sign in as admin.
+2. Open `/admin/experience`: 121 prompts in tree order, indented by depth, each with 20 cream squares and 0/20. Without the key a signal notice says generation will fail.
+3. Click Generate on *Create a photo of a person.*: the squares turn peach (queued), hatched (generating), then ink (done) as the list refreshes. Click the prompt to see its 20 images.
+4. A refused or failing image turns signal with the API's message under its thumbnail; the row's button becomes "Retry failed". Regenerate under a thumbnail replaces just that image.
+5. "Generate everything missing" queues all prompts; at most `image_generation_concurrency` calls run at once.
+
+### 2. Play it
+
+1. Open `/experience`: dark page, twenty faint tiles floating gently, one prompt under a small "Pick a prompt" line. No titles or other buttons.
+2. Pick it: the tiles turn one by one from top left to bottom right while they keep floating. The prompt becomes the bright current prompt (signal shadow, added word on signal), and three dimmer choices appear with the new word in lime.
+3. Pick *woman*: the other choices disappear, the previous prompt fades into the muted history, the grid turns again. Carry on through age, origin and body. Clicks are ignored while the tiles turn.
+4. Tap an earlier prompt in the history to go back to it.
+5. A prompt whose images are not generated yet shows empty tiles.
+6. `?lang=fr`: prompts read in French with correct agreement (*une femme noire âgée*, *un homme blanc âgé*).
+7. `/experience?present=true`: full screen, no header. Untouched for `experience_idle_seconds` (90 s) after a choice, it returns to the blank first screen.
+8. Phone width: the grid sits above the prompts.
+9. With reduced motion turned on in the OS, tiles stop floating and swap without turning.

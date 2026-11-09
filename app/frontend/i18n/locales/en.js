@@ -403,11 +403,31 @@ export const en = {
     },
   },
   admin: {
+    experience: {
+      intro:
+        "Every prompt of the bias experience, run {count} times with the same settings through the OpenAI Images API. Generation runs in the background, one job per image; failed images can be retried.",
+      notConfigured:
+        "OPENAI_API_KEY is not set: generation will fail until it is.",
+      images: "images generated",
+      generateAll: "Generate everything missing",
+      generate: "Generate",
+      retry: "Retry failed",
+      regenerate: "Regenerate",
+      noImages: "Nothing generated yet.",
+      status: {
+        succeeded: "Done",
+        generating: "Generating",
+        queued: "Queued",
+        failed: "Failed",
+        pending: "Not started",
+      },
+    },
     tabs: {
       dashboard: "Dashboard",
       ctas: "Calls to action",
       settings: "Settings",
       lookup: "Find a contribution",
+      experience: "Experience",
     },
     dash: {
       peopleApproved: "People approved",
@@ -469,42 +489,10 @@ export const en = {
     },
   },
   experience: {
-    stepOf: "Step {step} of {total}",
-    done: "Done",
-    run: "Run",
-    running: "Running {count}×",
-    morePrecise: "Make the prompt more precise",
+    pick: "Pick a prompt",
     backTo: "Go back to this prompt",
-    restart: "Start again",
-    caption: "{count} images · same prompt · same settings",
     gridLabel: "{count} images generated from: {prompt}",
     gridEmpty: "No images yet",
-    stages: {
-      start: {
-        title: "One sentence, twenty images",
-        hint: "We asked an image model for the same thing twenty times, with exactly the same settings. Run the prompt.",
-      },
-      gender: {
-        title: "Add a gender",
-        hint: "Twenty runs of one sentence, and they all look alike. Make the prompt more precise.",
-      },
-      age: {
-        title: "Add an age",
-        hint: "You fixed one thing. Look at what the model still decides on its own.",
-      },
-      origin: {
-        title: "Add an origin",
-        hint: "Look at skin, hair and eyes. The model still picks for you.",
-      },
-      body: {
-        title: "Add a body or a disability",
-        hint: "Look at bodies, faces, glasses, health. Still the same average.",
-      },
-      end: {
-        title: "Still the default",
-        hint: "Each word you added fixed one thing. Everything you left unsaid, the model filled with its average, twenty times over. A longer prompt cannot add what the training data lacks.",
-      },
-    },
   },
   installation: {
     chooseLanguage: "Choose your language",

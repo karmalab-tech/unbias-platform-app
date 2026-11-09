@@ -409,11 +409,31 @@ export const fr = {
     },
   },
   admin: {
+    experience: {
+      intro:
+        "Chaque prompt de l’expérience sur les biais, lancé {count} fois avec les mêmes réglages via l’API Images d’OpenAI. La génération tourne en arrière-plan, une tâche par image ; les images en échec peuvent être relancées.",
+      notConfigured:
+        "OPENAI_API_KEY n’est pas défini : la génération échouera tant qu’il ne l’est pas.",
+      images: "images générées",
+      generateAll: "Générer tout ce qui manque",
+      generate: "Générer",
+      retry: "Relancer les échecs",
+      regenerate: "Régénérer",
+      noImages: "Rien de généré pour l’instant.",
+      status: {
+        succeeded: "Terminée",
+        generating: "En cours",
+        queued: "En attente",
+        failed: "Échec",
+        pending: "Pas commencée",
+      },
+    },
     tabs: {
       dashboard: "Tableau de bord",
       ctas: "Appels à contribution",
       settings: "Réglages",
       lookup: "Retrouver une contribution",
+      experience: "Expérience",
     },
     dash: {
       peopleApproved: "Personnes approuvées",
@@ -475,42 +495,10 @@ export const fr = {
     },
   },
   experience: {
-    stepOf: "Étape {step} sur {total}",
-    done: "Terminé",
-    run: "Lancer",
-    running: "{count} générations",
-    morePrecise: "Précisez le prompt",
+    pick: "Choisissez un prompt",
     backTo: "Revenir à ce prompt",
-    restart: "Recommencer",
-    caption: "{count} images · même prompt · mêmes réglages",
     gridLabel: "{count} images générées à partir de : {prompt}",
     gridEmpty: "Pas encore d’images",
-    stages: {
-      start: {
-        title: "Une phrase, vingt images",
-        hint: "Nous avons demandé vingt fois la même chose à un modèle d’image, avec exactement les mêmes réglages. Lancez le prompt.",
-      },
-      gender: {
-        title: "Ajoutez un genre",
-        hint: "Vingt générations de la même phrase, et toutes se ressemblent. Précisez le prompt.",
-      },
-      age: {
-        title: "Ajoutez un âge",
-        hint: "Vous avez corrigé une chose. Regardez ce que le modèle décide encore seul.",
-      },
-      origin: {
-        title: "Ajoutez une origine",
-        hint: "Regardez la peau, les cheveux, les yeux. Le modèle choisit encore pour vous.",
-      },
-      body: {
-        title: "Ajoutez un corps ou un handicap",
-        hint: "Regardez les corps, les visages, les lunettes, la santé. Toujours la même moyenne.",
-      },
-      end: {
-        title: "Toujours la norme",
-        hint: "Chaque mot ajouté a corrigé une chose. Tout ce que vous n’avez pas dit, le modèle l’a rempli avec sa moyenne, vingt fois. Un prompt plus long n’ajoute pas ce qui manque aux données d’entraînement.",
-      },
-    },
   },
   installation: {
     chooseLanguage: "Choisissez votre langue",
