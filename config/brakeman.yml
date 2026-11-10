@@ -1,0 +1,5 @@
+---
+# End-of-support warnings fire on a date, not on a code change; Rails and Ruby upgrades are tracked by hand.
+:skip_checks:
+  - CheckEOLRails
+  - CheckEOLRuby
