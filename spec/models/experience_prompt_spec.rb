@@ -11,10 +11,10 @@ RSpec.describe ExperiencePrompt do
   before { ExperiencePrompt.seed! }
 
   it "mirrors the prompt tree" do
-    expect(described_class.in_tree.count).to eq(1 + 2 + 6 + 24)
+    expect(described_class.in_tree.count).to eq(1 + 3 + 12)
     expect(described_class.in_tree.first.prompt).to eq("Create a photo of a person.")
-    expect(described_class.find_by(path: "person/man/old/arab").prompt)
-      .to eq("Create a photo of an old Arab man.")
+    expect(described_class.find_by(path: "person/old/arab").prompt)
+      .to eq("Create a photo of an old Arab person.")
   end
 
   it "keeps removed nodes out of the tree without deleting their images" do
@@ -24,12 +24,12 @@ RSpec.describe ExperiencePrompt do
   end
 
   it "seeds French wording and never overwrites edited wording" do
-    woman = described_class.find_by(path: "person/woman/old")
-    expect(woman.prompt_fr).to eq("Crée une photo d’une femme âgée.")
-    woman.update!(prompt: "Create a photo of an elderly woman.", prompt_fr: "Crée une photo d’une vieille femme.")
+    old = described_class.find_by(path: "person/old")
+    expect(old.prompt_fr).to eq("Crée une photo d’une personne âgée.")
+    old.update!(prompt: "Create a photo of an elderly person.", prompt_fr: "Crée une photo d’une vieille personne.")
     described_class.seed!
-    expect(woman.reload.prompt).to eq("Create a photo of an elderly woman.")
-    expect(woman.prompt_fr).to eq("Crée une photo d’une vieille femme.")
+    expect(old.reload.prompt).to eq("Create a photo of an elderly person.")
+    expect(old.prompt_fr).to eq("Crée une photo d’une vieille personne.")
   end
 
   it "highlights the words a prompt adds to its parent" do
@@ -92,14 +92,14 @@ RSpec.describe ExperiencePrompt do
   end
 
   describe ExperienceImage do
-    let(:image) { described_class.create!(experience_prompt: ExperiencePrompt.find_by(path: "person/woman"), position: 3) }
+    let(:image) { described_class.create!(experience_prompt: ExperiencePrompt.find_by(path: "person/old"), position: 3) }
 
     it "stores the generated file and the prompt used" do
       image.generate!(client: client)
       expect(image.reload).to be_succeeded
       expect(image.file).to be_attached
       expect(image.file.filename.to_s).to eq("03.jpeg")
-      expect(image.prompt).to eq("Create a photo of a woman.")
+      expect(image.prompt).to eq("Create a photo of an old person.")
       expect(image.model).to eq("gpt-image-test")
       expect(image.attempts).to eq(1)
     end

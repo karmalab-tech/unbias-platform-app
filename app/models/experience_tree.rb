@@ -1,27 +1,23 @@
 # Prompt tree of the bias experience: each step adds one detail to "Create a photo of a person."
+# No gender step: the model picks one per image, so each prompt's split of men and women shows its own bias.
 # Holds the default wording that ExperiencePrompt.seed! writes once; admins edit the stored wording afterwards.
 module ExperienceTree
   ROOT = "person".freeze
 
   STEPS = [
-    { key: "gender", dimension: "gender", options: %w[woman man] },
     { key: "age", dimension: "age", options: %w[young middle_aged old] },
     { key: "origin", dimension: "skin_tone", options: %w[black asian arab white] }
   ].freeze
 
   EN = {
-    "gender" => { "woman" => "woman", "man" => "man" },
     "age" => { "young" => "young", "middle_aged" => "middle-aged", "old" => "old" },
     "origin" => { "black" => "Black", "asian" => "Asian", "arab" => "Arab", "white" => "white" }
   }.freeze
 
-  FR_FEMININE = { "woman" => true, "man" => false }.freeze
-
+  # Agrees with "personne", which is feminine.
   FR = {
-    "gender" => { "woman" => "femme", "man" => "homme" },
-    "origin" => { "black" => %w[noire noir], "asian" => %w[asiatique asiatique], "arab" => %w[arabe arabe],
-                  "white" => %w[blanche blanc] },
-    "old" => %w[âgée âgé]
+    "origin" => { "black" => "noire", "asian" => "asiatique", "arab" => "arabe", "white" => "blanche" },
+    "old" => "âgée"
   }.freeze
 
   module_function
@@ -95,7 +91,7 @@ module ExperienceTree
     words = []
     words << { text: EN["age"][pick["age"]] } if pick["age"]
     words << { text: EN["origin"][pick["origin"]] } if pick["origin"]
-    words << (pick["gender"] ? { text: EN["gender"][pick["gender"]] } : { text: "person" })
+    words << { text: "person" }
     article = words.first[:text].match?(/\A[aeiou]/i) ? "an" : "a"
     segments = [ { text: "Create a photo of #{article}" } ]
     words.each { |word| segments.push({ text: " " }, word) }
@@ -103,14 +99,12 @@ module ExperienceTree
   end
 
   def french(pick)
-    feminine = pick["gender"] ? FR_FEMININE[pick["gender"]] : true
-    form = feminine ? 0 : 1
-    segments = [ { text: "Crée une photo d’#{feminine ? "une" : "un"} " } ]
+    segments = [ { text: "Crée une photo d’une " } ]
     segments.push({ text: "jeune" }, { text: " " }) if pick["age"] == "young"
-    segments << (pick["gender"] ? { text: FR["gender"][pick["gender"]] } : { text: "personne" })
-    segments.push({ text: " " }, { text: FR["origin"][pick["origin"]][form] }) if pick["origin"]
+    segments << { text: "personne" }
+    segments.push({ text: " " }, { text: FR["origin"][pick["origin"]] }) if pick["origin"]
     segments.push({ text: " " }, { text: "d’âge moyen" }) if pick["age"] == "middle_aged"
-    segments.push({ text: " " }, { text: FR["old"][form] }) if pick["age"] == "old"
+    segments.push({ text: " " }, { text: FR["old"] }) if pick["age"] == "old"
     segments << { text: "." }
   end
 end

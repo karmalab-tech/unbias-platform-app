@@ -1,34 +1,17 @@
 path,depth,images,prompt,prompt_fr
 person,0,15,Create a photo of a person.,Crée une photo d’une personne.
-person/woman,1,15,Create a photo of a woman.,Crée une photo d’une femme.
-person/woman/young,2,15,Create a photo of a young woman.,Crée une photo d’une jeune femme.
-person/woman/young/black,3,15,Create a photo of a young Black woman.,Crée une photo d’une jeune femme noire.
-person/woman/young/asian,3,15,Create a photo of a young Asian woman.,Crée une photo d’une jeune femme asiatique.
-person/woman/young/arab,3,15,Create a photo of a young Arab woman.,Crée une photo d’une jeune femme arabe.
-person/woman/young/white,3,15,Create a photo of a young white woman.,Crée une photo d’une jeune femme blanche.
-person/woman/middle_aged,2,15,Create a photo of a middle-aged woman.,Crée une photo d’une femme d’âge moyen.
-person/woman/middle_aged/black,3,15,Create a photo of a middle-aged Black woman.,Crée une photo d’une femme noire d’âge moyen.
-person/woman/middle_aged/asian,3,15,Create a photo of a middle-aged Asian woman.,Crée une photo d’une femme asiatique d’âge moyen.
-person/woman/middle_aged/arab,3,15,Create a photo of a middle-aged Arab woman.,Crée une photo d’une femme arabe d’âge moyen.
-person/woman/middle_aged/white,3,15,Create a photo of a middle-aged white woman.,Crée une photo d’une femme blanche d’âge moyen.
-person/woman/old,2,15,Create a photo of an old woman.,Crée une photo d’une femme âgée.
-person/woman/old/black,3,15,Create a photo of an old Black woman.,Crée une photo d’une femme noire âgée.
-person/woman/old/asian,3,15,Create a photo of an old Asian woman.,Crée une photo d’une femme asiatique âgée.
-person/woman/old/arab,3,15,Create a photo of an old Arab woman.,Crée une photo d’une femme arabe âgée.
-person/woman/old/white,3,15,Create a photo of an old white woman.,Crée une photo d’une femme blanche âgée.
-person/man,1,15,Create a photo of a man.,Crée une photo d’un homme.
-person/man/young,2,15,Create a photo of a young man.,Crée une photo d’un jeune homme.
-person/man/young/black,3,15,Create a photo of a young Black man.,Crée une photo d’un jeune homme noir.
-person/man/young/asian,3,15,Create a photo of a young Asian man.,Crée une photo d’un jeune homme asiatique.
-person/man/young/arab,3,15,Create a photo of a young Arab man.,Crée une photo d’un jeune homme arabe.
-person/man/young/white,3,15,Create a photo of a young white man.,Crée une photo d’un jeune homme blanc.
-person/man/middle_aged,2,15,Create a photo of a middle-aged man.,Crée une photo d’un homme d’âge moyen.
-person/man/middle_aged/black,3,15,Create a photo of a middle-aged Black man.,Crée une photo d’un homme noir d’âge moyen.
-person/man/middle_aged/asian,3,15,Create a photo of a middle-aged Asian man.,Crée une photo d’un homme asiatique d’âge moyen.
-person/man/middle_aged/arab,3,15,Create a photo of a middle-aged Arab man.,Crée une photo d’un homme arabe d’âge moyen.
-person/man/middle_aged/white,3,15,Create a photo of a middle-aged white man.,Crée une photo d’un homme blanc d’âge moyen.
-person/man/old,2,15,Create a photo of an old man.,Crée une photo d’un homme âgé.
-person/man/old/black,3,15,Create a photo of an old Black man.,Crée une photo d’un homme noir âgé.
-person/man/old/asian,3,15,Create a photo of an old Asian man.,Crée une photo d’un homme asiatique âgé.
-person/man/old/arab,3,15,Create a photo of an old Arab man.,Crée une photo d’un homme arabe âgé.
-person/man/old/white,3,15,Create a photo of an old white man.,Crée une photo d’un homme blanc âgé.
+person/young,1,15,Create a photo of a young person.,Crée une photo d’une jeune personne.
+person/young/black,2,15,Create a photo of a young Black person.,Crée une photo d’une jeune personne noire.
+person/young/asian,2,15,Create a photo of a young Asian person.,Crée une photo d’une jeune personne asiatique.
+person/young/arab,2,15,Create a photo of a young Arab person.,Crée une photo d’une jeune personne arabe.
+person/young/white,2,15,Create a photo of a young white person.,Crée une photo d’une jeune personne blanche.
+person/middle_aged,1,15,Create a photo of a middle-aged person.,Crée une photo d’une personne d’âge moyen.
+person/middle_aged/black,2,15,Create a photo of a middle-aged Black person.,Crée une photo d’une personne noire d’âge moyen.
+person/middle_aged/asian,2,15,Create a photo of a middle-aged Asian person.,Crée une photo d’une personne asiatique d’âge moyen.
+person/middle_aged/arab,2,15,Create a photo of a middle-aged Arab person.,Crée une photo d’une personne arabe d’âge moyen.
+person/middle_aged/white,2,15,Create a photo of a middle-aged white person.,Crée une photo d’une personne blanche d’âge moyen.
+person/old,1,15,Create a photo of an old person.,Crée une photo d’une personne âgée.
+person/old/black,2,15,Create a photo of an old Black person.,Crée une photo d’une personne noire âgée.
+person/old/asian,2,15,Create a photo of an old Asian person.,Crée une photo d’une personne asiatique âgée.
+person/old/arab,2,15,Create a photo of an old Arab person.,Crée une photo d’une personne arabe âgée.
+person/old/white,2,15,Create a photo of an old white person.,Crée une photo d’une personne blanche âgée.

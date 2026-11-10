@@ -11,7 +11,7 @@ A dark stage (`bg-night`, a darker shade of ink). Left: the prompts. Right: the 
 
 1. Only the base prompt is offered, with a right arrow, under a two-line bold statement: *Everyday, we create more images with Gen AI. / These images are not neutral.* (FR: *Nous créons de plus en plus d’images avec l’IA générative. / Mais ces images ne sont pas neutres.*). The grid shows a random mosaic of fifteen finished images from the whole tree, never two from the same prompt (`randomMosaic`), drawn again at every idle reset.
 2. Picking it fades the statement and the arrow out, then turns the fifteen tiles one by one, in a diagonal wave from top left to bottom right, onto its results.
-3. The picked prompt becomes the current one and the next prompts appear below it, the added words highlighted: *…of a woman / man / non-binary person.*
+3. The picked prompt becomes the current one and the next prompts appear below it, the added words highlighted: *…of a young / middle-aged / old person.*
 4. Picking one, in this order: the other choices (and on the first step the statement) fade out; the tiles turn while the picked prompt glides up into place as the current prompt; once the tiles have turned, the next choices rise in one after another. After the last step, *Do you want to help?* (FR: *Vous voulez nous aider ?*) rises in instead, followed in exhibition mode by the contribute QR code (`/qr.svg`) with a small *Scan this QR code*, and online by a *Learn more →* button to the dashboard (`/`).
 5. Any earlier prompt in the list can be tapped to go back to it, with the same motion.
 
@@ -32,9 +32,10 @@ Each step covers one of the platform's dimensions:
 | Step | Dimension | Choices |
 |---|---|---|
 | 1 | — | person |
-| 2 | gender | woman, man |
-| 3 | age | young, middle-aged, old |
-| 4 | skin tone (prompted as origin) | Black, Asian, Arab, white |
+| 2 | age | young, middle-aged, old |
+| 3 | skin tone (prompted as origin) | Black, Asian, Arab, white |
+
+There is deliberately no gender step. The model picks a gender for every image, so each prompt shows its own split of men and women (a different one for *old person* than for *young person*), which illustrates the bias better than letting the visitor correct it. Prompts therefore say *person* (FR *personne*, so French adjectives are feminine: *une personne noire âgée*).
 
 ## The prompt tree
 
@@ -49,20 +50,19 @@ Each step covers one of the platform's dimensions:
 | Depth | Prompts | Example |
 |---|---|---|
 | 0 | 1 | Create a photo of a person. |
-| 1 | 2 | Create a photo of a woman. |
-| 2 | 6 | Create a photo of a young woman. |
-| 3 | 24 | Create a photo of a young Black woman. |
-| **Total** | **33 prompts** | **495 images** |
+| 1 | 3 | Create a photo of a young person. |
+| 2 | 12 | Create a photo of a young Black person. |
+| **Total** | **16 prompts** | **240 images** |
 
-One more origin costs 6 prompts (90 images); one more age costs 1 + 4 per gender, 10 prompts (150 images). At GPT Image 2's listed portrait prices (1024 × 1536) the full tree costs about $2.50 (low), $20 (medium) or $82 (high).
+One more origin costs 3 prompts (45 images); one more age costs 5 prompts (75 images). At GPT Image 2's listed portrait prices (1024 × 1536) the full tree costs about $1.20 (low), $10 (medium) or $40 (high), less when a prompt uses uploaded images.
 
 Wording choices: prompts are written the way people actually type them. *white* rather than *Caucasian* (a term from 18th-century race classification that US style guides advise against), *Arab* for people (*Arabic* is the language). Highlights ignore *a/an* and *un/une* swaps.
 
-There is deliberately no body (or beauty, or character) step: after gender, age and origin the images still show the default body, health and looks without anyone asking for them, which is the point, and pairing an ethnicity with *fat*, *ugly* or *angry* on a public screen is a risk not worth taking. Body is still a platform dimension; it is just not prompted here.
+There is deliberately no body (or beauty, or character) step: after age and origin the images still show the default body, health and looks without anyone asking for them, which is the point, and pairing an ethnicity with *fat*, *ugly* or *angry* on a public screen is a risk not worth taking. Body is still a platform dimension; it is just not prompted here.
 
 ## Generation
 
-- `ExperiencePrompt` is one node of the tree (`path` such as `person/woman/young`, English `prompt`, French `prompt_fr`, `depth`, `position` in tree order).
+- `ExperiencePrompt` is one node of the tree (`path` such as `person/young/black`, English `prompt`, French `prompt_fr`, `depth`, `position` in tree order).
 - `ExperienceImage` is one run of a prompt (`position` 1–15) with its own `status` (`pending → queued → generating → succeeded | failed`), `attempts`, `error`, the `prompt` and `model` used, and the image as an Active Storage attachment (`file`) with a preprocessed WebP `display` variant (600 × 800 max).
 - `GenerateExperiencePromptJob` creates the 15 rows of a prompt and enqueues one `GenerateExperienceImageJob` per image that is pending, failed, or **outdated** (made from an older English prompt). Finished, queued and running images are left alone, so the button is safe to press twice. Outdated images are hidden from the public page until they are replaced.
 - `GenerateExperienceImageJob` calls the OpenAI Images API (`ImageGeneration::OpenaiClient`, `POST /v1/images/generations`, one image per call). Rate limits, server errors and timeouts are retried with backoff (6 attempts) and then marked failed; other errors (content policy, bad request, missing key) fail at once with the API's message. `limits_concurrency` keeps at most `image_generation_concurrency` calls in flight.
@@ -86,7 +86,7 @@ Uploaded images are stored like generated ones but with `source: uploaded`: they
 
 `public/sw.js` covers `/experience` like the dashboard pages: the page, `/api/public/experience`, settings, the QR code and the built assets are served from cache when the network is slow (4 s) or gone. Images use a separate, unversioned cache (`unbias-experience-images`), cache first, since their URLs change whenever an image changes.
 
-- **Exhibition (`?present=true`):** once the tree loads, the page asks the worker to download every finished image (6 at a time) and to delete cached images no longer in the tree. 495 images at 600 × 800 WebP is in the order of 30 MB. Open the page online once on the day, wait for the download to finish, and the whole tree then plays without network.
+- **Exhibition (`?present=true`):** once the tree loads, the page asks the worker to download every finished image (6 at a time) and to delete cached images no longer in the tree. 240 images at 600 × 800 WebP is in the order of 15 MB. Open the page online once on the day, wait for the download to finish, and the whole tree then plays without network.
 - **Online:** only images the visitor has already seen are kept, so phones never download the whole tree.
 
 The service worker is registered in production builds only.
