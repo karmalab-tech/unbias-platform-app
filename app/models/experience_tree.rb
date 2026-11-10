@@ -115,10 +115,14 @@ module ExperienceTree
   end
 
   def english(pick)
-    noun = if pick["gender"] then EN["gendered"][pick["gender"]][pick["profession"]]
-    elsif pick["profession"] then EN["profession"][pick["profession"]]
-    else "person"
-    end
+    noun =
+      if pick["gender"]
+        EN["gendered"][pick["gender"]][pick["profession"]]
+      elsif pick["profession"]
+        EN["profession"][pick["profession"]]
+      else
+        "person"
+      end
     words = [ EN["age"][pick["age"]], EN["origin"][pick["origin"]], noun ].compact
     article = words.first.match?(/\A[aeiou]/i) ? "an" : "a"
     [ { text: "Create a photo of #{article} #{words.join(" ")}." } ]

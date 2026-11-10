@@ -31,7 +31,7 @@ Unbias AI is a public, image-only contribution platform building a consented, hu
 | QR               | `rqrcode` (`/qr.svg`)                                                  |
 | Config           | dotenv-rails (`.env`, see `.env.example`); product limits in `config/unbias.yml` |
 | Testing          | RSpec, Vitest 2, Playwright (`e2e/`)                                   |
-| Linting / tools  | RuboCop (rails-omakase), Brakeman, ESLint 9, Prettier 3, annotaterb, pry-rails |
+| Linting / tools  | RuboCop (Lint cops only), Brakeman, ESLint 9, Prettier 3, annotaterb, pry-rails |
 | Deploy           | Fly.io (`fly.toml`: `web` + `worker` processes), Dockerfile fetches ML models |
 | Node             | 22.14 (`.node-version`)                                               |
 
@@ -81,7 +81,7 @@ Unbias AI is a public, image-only contribution platform building a consented, hu
 
 ## Backend Conventions
 
-- Follow `rubocop-rails-omakase`.
+- RuboCop runs only the Lint cops (`.rubocop.yml`), no style rules; CI shows findings as PR annotations and fails only on syntax errors. Keep the surrounding code's style.
 - Controllers stay thin; keep business logic in models (`Submission#submit!`, `Asset#approve!` / `#reject!`, `Submission#withdraw!`).
 - Product limits are read from `Rails.configuration.x.unbias` (`config/unbias.yml`), never literal numbers.
 - Jobs in `app/jobs/` call a single method on a model or service; they run on Solid Queue, backed by the primary Postgres database. Recurring jobs live in `config/recurring.yml`.

@@ -1,8 +1,8 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+# Only the Lint cops, which flag likely bugs (unused variables, shadowing, duplicate keys…). No style or layout rules.
+AllCops:
+  DisabledByDefault: true
+  NewCops: disable
+  SuggestExtensions: false
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+Lint:
+  Enabled: true
