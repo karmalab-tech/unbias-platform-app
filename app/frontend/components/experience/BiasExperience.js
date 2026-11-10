@@ -21,6 +21,7 @@ const MOVE_MS = 480;
 const IDLE_PARAM = "idle";
 const APPEAR_MS = 380;
 const APPEAR_STAGGER_MS = 110;
+const PICK_KEY = "pick";
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -61,7 +62,7 @@ function columnItems(tree, path) {
     })),
     ...(next.length
       ? [
-          { key: "pick", kind: "pick" },
+          { key: PICK_KEY, kind: "pick" },
           ...next.map((prompt) => ({ key: prompt.path, kind: "next", prompt })),
         ]
       : [
@@ -96,7 +97,11 @@ export default function BiasExperience({ presentation = false }) {
   const current = tree && path ? tree.byPath.get(path) : null;
   const items = columnItems(tree, path);
   const staying = pending
-    ? new Set(columnItems(tree, pending.path).map((item) => item.key))
+    ? new Set(
+        columnItems(tree, pending.path)
+          .map((item) => item.key)
+          .filter((key) => key !== PICK_KEY)
+      )
     : null;
 
   const measure = () =>
@@ -141,7 +146,7 @@ export default function BiasExperience({ presentation = false }) {
     for (const node of columnRef.current.children) {
       const top = node.getBoundingClientRect().top;
       const old = before.get(node.dataset.key);
-      if (old !== undefined) {
+      if (old !== undefined && node.dataset.key !== PICK_KEY) {
         if (Math.abs(old - top) > 1) {
           node.animate(
             [
