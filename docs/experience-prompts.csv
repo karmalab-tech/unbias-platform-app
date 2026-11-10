@@ -2,16 +2,124 @@ path,depth,images,prompt,prompt_fr
 person,0,15,Create a photo of a person.,Crée une photo d’une personne.
 person/young,1,15,Create a photo of a young person.,Crée une photo d’une jeune personne.
 person/young/black,2,15,Create a photo of a young Black person.,Crée une photo d’une jeune personne noire.
+person/young/black/doctor,3,15,Create a photo of a young Black doctor.,Crée une photo d’un·e jeune médecin noir·e.
+person/young/black/doctor/female,4,15,Create a photo of a young Black female doctor.,Crée une photo d’une jeune femme médecin noire.
+person/young/black/doctor/male,4,15,Create a photo of a young Black male doctor.,Crée une photo d’un jeune homme médecin noir.
+person/young/black/teacher,3,15,Create a photo of a young Black teacher.,Crée une photo d’un·e jeune enseignant·e noir·e.
+person/young/black/teacher/female,4,15,Create a photo of a young Black female teacher.,Crée une photo d’une jeune femme enseignante noire.
+person/young/black/teacher/male,4,15,Create a photo of a young Black male teacher.,Crée une photo d’un jeune homme enseignant noir.
+person/young/black/parent,3,15,Create a photo of a young Black parent.,Crée une photo d’un·e jeune parent noir·e.
+person/young/black/parent/female,4,15,Create a photo of a young Black mother.,Crée une photo d’une jeune mère noire.
+person/young/black/parent/male,4,15,Create a photo of a young Black father.,Crée une photo d’un jeune père noir.
 person/young/asian,2,15,Create a photo of a young Asian person.,Crée une photo d’une jeune personne asiatique.
+person/young/asian/doctor,3,15,Create a photo of a young Asian doctor.,Crée une photo d’un·e jeune médecin asiatique.
+person/young/asian/doctor/female,4,15,Create a photo of a young Asian female doctor.,Crée une photo d’une jeune femme médecin asiatique.
+person/young/asian/doctor/male,4,15,Create a photo of a young Asian male doctor.,Crée une photo d’un jeune homme médecin asiatique.
+person/young/asian/teacher,3,15,Create a photo of a young Asian teacher.,Crée une photo d’un·e jeune enseignant·e asiatique.
+person/young/asian/teacher/female,4,15,Create a photo of a young Asian female teacher.,Crée une photo d’une jeune femme enseignante asiatique.
+person/young/asian/teacher/male,4,15,Create a photo of a young Asian male teacher.,Crée une photo d’un jeune homme enseignant asiatique.
+person/young/asian/parent,3,15,Create a photo of a young Asian parent.,Crée une photo d’un·e jeune parent asiatique.
+person/young/asian/parent/female,4,15,Create a photo of a young Asian mother.,Crée une photo d’une jeune mère asiatique.
+person/young/asian/parent/male,4,15,Create a photo of a young Asian father.,Crée une photo d’un jeune père asiatique.
 person/young/arab,2,15,Create a photo of a young Arab person.,Crée une photo d’une jeune personne arabe.
+person/young/arab/doctor,3,15,Create a photo of a young Arab doctor.,Crée une photo d’un·e jeune médecin arabe.
+person/young/arab/doctor/female,4,15,Create a photo of a young Arab female doctor.,Crée une photo d’une jeune femme médecin arabe.
+person/young/arab/doctor/male,4,15,Create a photo of a young Arab male doctor.,Crée une photo d’un jeune homme médecin arabe.
+person/young/arab/teacher,3,15,Create a photo of a young Arab teacher.,Crée une photo d’un·e jeune enseignant·e arabe.
+person/young/arab/teacher/female,4,15,Create a photo of a young Arab female teacher.,Crée une photo d’une jeune femme enseignante arabe.
+person/young/arab/teacher/male,4,15,Create a photo of a young Arab male teacher.,Crée une photo d’un jeune homme enseignant arabe.
+person/young/arab/parent,3,15,Create a photo of a young Arab parent.,Crée une photo d’un·e jeune parent arabe.
+person/young/arab/parent/female,4,15,Create a photo of a young Arab mother.,Crée une photo d’une jeune mère arabe.
+person/young/arab/parent/male,4,15,Create a photo of a young Arab father.,Crée une photo d’un jeune père arabe.
 person/young/white,2,15,Create a photo of a young white person.,Crée une photo d’une jeune personne blanche.
+person/young/white/doctor,3,15,Create a photo of a young white doctor.,Crée une photo d’un·e jeune médecin blanc·he.
+person/young/white/doctor/female,4,15,Create a photo of a young white female doctor.,Crée une photo d’une jeune femme médecin blanche.
+person/young/white/doctor/male,4,15,Create a photo of a young white male doctor.,Crée une photo d’un jeune homme médecin blanc.
+person/young/white/teacher,3,15,Create a photo of a young white teacher.,Crée une photo d’un·e jeune enseignant·e blanc·he.
+person/young/white/teacher/female,4,15,Create a photo of a young white female teacher.,Crée une photo d’une jeune femme enseignante blanche.
+person/young/white/teacher/male,4,15,Create a photo of a young white male teacher.,Crée une photo d’un jeune homme enseignant blanc.
+person/young/white/parent,3,15,Create a photo of a young white parent.,Crée une photo d’un·e jeune parent blanc·he.
+person/young/white/parent/female,4,15,Create a photo of a young white mother.,Crée une photo d’une jeune mère blanche.
+person/young/white/parent/male,4,15,Create a photo of a young white father.,Crée une photo d’un jeune père blanc.
 person/middle_aged,1,15,Create a photo of a middle-aged person.,Crée une photo d’une personne d’âge moyen.
 person/middle_aged/black,2,15,Create a photo of a middle-aged Black person.,Crée une photo d’une personne noire d’âge moyen.
+person/middle_aged/black/doctor,3,15,Create a photo of a middle-aged Black doctor.,Crée une photo d’un·e médecin noir·e d’âge moyen.
+person/middle_aged/black/doctor/female,4,15,Create a photo of a middle-aged Black female doctor.,Crée une photo d’une femme médecin noire d’âge moyen.
+person/middle_aged/black/doctor/male,4,15,Create a photo of a middle-aged Black male doctor.,Crée une photo d’un homme médecin noir d’âge moyen.
+person/middle_aged/black/teacher,3,15,Create a photo of a middle-aged Black teacher.,Crée une photo d’un·e enseignant·e noir·e d’âge moyen.
+person/middle_aged/black/teacher/female,4,15,Create a photo of a middle-aged Black female teacher.,Crée une photo d’une femme enseignante noire d’âge moyen.
+person/middle_aged/black/teacher/male,4,15,Create a photo of a middle-aged Black male teacher.,Crée une photo d’un homme enseignant noir d’âge moyen.
+person/middle_aged/black/parent,3,15,Create a photo of a middle-aged Black parent.,Crée une photo d’un·e parent noir·e d’âge moyen.
+person/middle_aged/black/parent/female,4,15,Create a photo of a middle-aged Black mother.,Crée une photo d’une mère noire d’âge moyen.
+person/middle_aged/black/parent/male,4,15,Create a photo of a middle-aged Black father.,Crée une photo d’un père noir d’âge moyen.
 person/middle_aged/asian,2,15,Create a photo of a middle-aged Asian person.,Crée une photo d’une personne asiatique d’âge moyen.
+person/middle_aged/asian/doctor,3,15,Create a photo of a middle-aged Asian doctor.,Crée une photo d’un·e médecin asiatique d’âge moyen.
+person/middle_aged/asian/doctor/female,4,15,Create a photo of a middle-aged Asian female doctor.,Crée une photo d’une femme médecin asiatique d’âge moyen.
+person/middle_aged/asian/doctor/male,4,15,Create a photo of a middle-aged Asian male doctor.,Crée une photo d’un homme médecin asiatique d’âge moyen.
+person/middle_aged/asian/teacher,3,15,Create a photo of a middle-aged Asian teacher.,Crée une photo d’un·e enseignant·e asiatique d’âge moyen.
+person/middle_aged/asian/teacher/female,4,15,Create a photo of a middle-aged Asian female teacher.,Crée une photo d’une femme enseignante asiatique d’âge moyen.
+person/middle_aged/asian/teacher/male,4,15,Create a photo of a middle-aged Asian male teacher.,Crée une photo d’un homme enseignant asiatique d’âge moyen.
+person/middle_aged/asian/parent,3,15,Create a photo of a middle-aged Asian parent.,Crée une photo d’un·e parent asiatique d’âge moyen.
+person/middle_aged/asian/parent/female,4,15,Create a photo of a middle-aged Asian mother.,Crée une photo d’une mère asiatique d’âge moyen.
+person/middle_aged/asian/parent/male,4,15,Create a photo of a middle-aged Asian father.,Crée une photo d’un père asiatique d’âge moyen.
 person/middle_aged/arab,2,15,Create a photo of a middle-aged Arab person.,Crée une photo d’une personne arabe d’âge moyen.
+person/middle_aged/arab/doctor,3,15,Create a photo of a middle-aged Arab doctor.,Crée une photo d’un·e médecin arabe d’âge moyen.
+person/middle_aged/arab/doctor/female,4,15,Create a photo of a middle-aged Arab female doctor.,Crée une photo d’une femme médecin arabe d’âge moyen.
+person/middle_aged/arab/doctor/male,4,15,Create a photo of a middle-aged Arab male doctor.,Crée une photo d’un homme médecin arabe d’âge moyen.
+person/middle_aged/arab/teacher,3,15,Create a photo of a middle-aged Arab teacher.,Crée une photo d’un·e enseignant·e arabe d’âge moyen.
+person/middle_aged/arab/teacher/female,4,15,Create a photo of a middle-aged Arab female teacher.,Crée une photo d’une femme enseignante arabe d’âge moyen.
+person/middle_aged/arab/teacher/male,4,15,Create a photo of a middle-aged Arab male teacher.,Crée une photo d’un homme enseignant arabe d’âge moyen.
+person/middle_aged/arab/parent,3,15,Create a photo of a middle-aged Arab parent.,Crée une photo d’un·e parent arabe d’âge moyen.
+person/middle_aged/arab/parent/female,4,15,Create a photo of a middle-aged Arab mother.,Crée une photo d’une mère arabe d’âge moyen.
+person/middle_aged/arab/parent/male,4,15,Create a photo of a middle-aged Arab father.,Crée une photo d’un père arabe d’âge moyen.
 person/middle_aged/white,2,15,Create a photo of a middle-aged white person.,Crée une photo d’une personne blanche d’âge moyen.
+person/middle_aged/white/doctor,3,15,Create a photo of a middle-aged white doctor.,Crée une photo d’un·e médecin blanc·he d’âge moyen.
+person/middle_aged/white/doctor/female,4,15,Create a photo of a middle-aged white female doctor.,Crée une photo d’une femme médecin blanche d’âge moyen.
+person/middle_aged/white/doctor/male,4,15,Create a photo of a middle-aged white male doctor.,Crée une photo d’un homme médecin blanc d’âge moyen.
+person/middle_aged/white/teacher,3,15,Create a photo of a middle-aged white teacher.,Crée une photo d’un·e enseignant·e blanc·he d’âge moyen.
+person/middle_aged/white/teacher/female,4,15,Create a photo of a middle-aged white female teacher.,Crée une photo d’une femme enseignante blanche d’âge moyen.
+person/middle_aged/white/teacher/male,4,15,Create a photo of a middle-aged white male teacher.,Crée une photo d’un homme enseignant blanc d’âge moyen.
+person/middle_aged/white/parent,3,15,Create a photo of a middle-aged white parent.,Crée une photo d’un·e parent blanc·he d’âge moyen.
+person/middle_aged/white/parent/female,4,15,Create a photo of a middle-aged white mother.,Crée une photo d’une mère blanche d’âge moyen.
+person/middle_aged/white/parent/male,4,15,Create a photo of a middle-aged white father.,Crée une photo d’un père blanc d’âge moyen.
 person/old,1,15,Create a photo of an old person.,Crée une photo d’une personne âgée.
 person/old/black,2,15,Create a photo of an old Black person.,Crée une photo d’une personne noire âgée.
+person/old/black/doctor,3,15,Create a photo of an old Black doctor.,Crée une photo d’un·e médecin noir·e âgé·e.
+person/old/black/doctor/female,4,15,Create a photo of an old Black female doctor.,Crée une photo d’une femme médecin noire âgée.
+person/old/black/doctor/male,4,15,Create a photo of an old Black male doctor.,Crée une photo d’un homme médecin noir âgé.
+person/old/black/teacher,3,15,Create a photo of an old Black teacher.,Crée une photo d’un·e enseignant·e noir·e âgé·e.
+person/old/black/teacher/female,4,15,Create a photo of an old Black female teacher.,Crée une photo d’une femme enseignante noire âgée.
+person/old/black/teacher/male,4,15,Create a photo of an old Black male teacher.,Crée une photo d’un homme enseignant noir âgé.
+person/old/black/parent,3,15,Create a photo of an old Black parent.,Crée une photo d’un·e parent noir·e âgé·e.
+person/old/black/parent/female,4,15,Create a photo of an old Black mother.,Crée une photo d’une mère noire âgée.
+person/old/black/parent/male,4,15,Create a photo of an old Black father.,Crée une photo d’un père noir âgé.
 person/old/asian,2,15,Create a photo of an old Asian person.,Crée une photo d’une personne asiatique âgée.
+person/old/asian/doctor,3,15,Create a photo of an old Asian doctor.,Crée une photo d’un·e médecin asiatique âgé·e.
+person/old/asian/doctor/female,4,15,Create a photo of an old Asian female doctor.,Crée une photo d’une femme médecin asiatique âgée.
+person/old/asian/doctor/male,4,15,Create a photo of an old Asian male doctor.,Crée une photo d’un homme médecin asiatique âgé.
+person/old/asian/teacher,3,15,Create a photo of an old Asian teacher.,Crée une photo d’un·e enseignant·e asiatique âgé·e.
+person/old/asian/teacher/female,4,15,Create a photo of an old Asian female teacher.,Crée une photo d’une femme enseignante asiatique âgée.
+person/old/asian/teacher/male,4,15,Create a photo of an old Asian male teacher.,Crée une photo d’un homme enseignant asiatique âgé.
+person/old/asian/parent,3,15,Create a photo of an old Asian parent.,Crée une photo d’un·e parent asiatique âgé·e.
+person/old/asian/parent/female,4,15,Create a photo of an old Asian mother.,Crée une photo d’une mère asiatique âgée.
+person/old/asian/parent/male,4,15,Create a photo of an old Asian father.,Crée une photo d’un père asiatique âgé.
 person/old/arab,2,15,Create a photo of an old Arab person.,Crée une photo d’une personne arabe âgée.
+person/old/arab/doctor,3,15,Create a photo of an old Arab doctor.,Crée une photo d’un·e médecin arabe âgé·e.
+person/old/arab/doctor/female,4,15,Create a photo of an old Arab female doctor.,Crée une photo d’une femme médecin arabe âgée.
+person/old/arab/doctor/male,4,15,Create a photo of an old Arab male doctor.,Crée une photo d’un homme médecin arabe âgé.
+person/old/arab/teacher,3,15,Create a photo of an old Arab teacher.,Crée une photo d’un·e enseignant·e arabe âgé·e.
+person/old/arab/teacher/female,4,15,Create a photo of an old Arab female teacher.,Crée une photo d’une femme enseignante arabe âgée.
+person/old/arab/teacher/male,4,15,Create a photo of an old Arab male teacher.,Crée une photo d’un homme enseignant arabe âgé.
+person/old/arab/parent,3,15,Create a photo of an old Arab parent.,Crée une photo d’un·e parent arabe âgé·e.
+person/old/arab/parent/female,4,15,Create a photo of an old Arab mother.,Crée une photo d’une mère arabe âgée.
+person/old/arab/parent/male,4,15,Create a photo of an old Arab father.,Crée une photo d’un père arabe âgé.
 person/old/white,2,15,Create a photo of an old white person.,Crée une photo d’une personne blanche âgée.
+person/old/white/doctor,3,15,Create a photo of an old white doctor.,Crée une photo d’un·e médecin blanc·he âgé·e.
+person/old/white/doctor/female,4,15,Create a photo of an old white female doctor.,Crée une photo d’une femme médecin blanche âgée.
+person/old/white/doctor/male,4,15,Create a photo of an old white male doctor.,Crée une photo d’un homme médecin blanc âgé.
+person/old/white/teacher,3,15,Create a photo of an old white teacher.,Crée une photo d’un·e enseignant·e blanc·he âgé·e.
+person/old/white/teacher/female,4,15,Create a photo of an old white female teacher.,Crée une photo d’une femme enseignante blanche âgée.
+person/old/white/teacher/male,4,15,Create a photo of an old white male teacher.,Crée une photo d’un homme enseignant blanc âgé.
+person/old/white/parent,3,15,Create a photo of an old white parent.,Crée une photo d’un·e parent blanc·he âgé·e.
+person/old/white/parent/female,4,15,Create a photo of an old white mother.,Crée une photo d’une mère blanche âgée.
+person/old/white/parent/male,4,15,Create a photo of an old white father.,Crée une photo d’un père blanc âgé.

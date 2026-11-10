@@ -27,15 +27,19 @@ Three levels of emphasis, from loudest to quietest:
 
 The images have no border and no shadow. Every tile floats on its own slow rhythm (`animate-float`, 2.5 px up and down with a barely visible tilt, 7–10 s per cycle, different phase per tile), and the flip wave runs on top of that motion. Both stop under `prefers-reduced-motion`.
 
-Each step covers one of the platform's dimensions:
+The steps:
 
 | Step | Dimension | Choices |
 |---|---|---|
 | 1 | — | person |
 | 2 | age | young, middle-aged, old |
 | 3 | skin tone (prompted as origin) | Black, Asian, Arab, white |
+| 4 | profession | doctor, teacher, parent |
+| 5 | gender | female, male (*mother* / *father* for a parent) |
 
-There is deliberately no gender step. The model picks a gender for every image, so each prompt shows its own split of men and women (a different one for *old person* than for *young person*), which illustrates the bias better than letting the visitor correct it. Prompts therefore say *person* (FR *personne*, so French adjectives are feminine: *une personne noire âgée*).
+Until the last step nobody names a gender: the model picks one for every image, so each prompt shows its own split of men and women. The profession step is there to swing that split hardest (*doctor* tends towards men, *parent* towards women); it comes after origin because the difference between an Arab and a white doctor matters less than between a person and a doctor. Gender comes last to see whether naming it actually pulls the images away from the default.
+
+French: before the profession, prompts say *une personne* and adjectives agree with it (*une personne noire âgée*). A bare profession uses inclusive spelling, as on the posters (*un·e médecin noir·e âgé·e*, *un·e enseignant·e*, *un·e parent*). The gender step then writes the gendered form (*une femme médecin noire âgée*, *un homme enseignant blanc*, *une mère*, *un père*).
 
 ## The prompt tree
 
@@ -52,17 +56,19 @@ There is deliberately no gender step. The model picks a gender for every image, 
 | 0 | 1 | Create a photo of a person. |
 | 1 | 3 | Create a photo of a young person. |
 | 2 | 12 | Create a photo of a young Black person. |
-| **Total** | **16 prompts** | **240 images** |
+| 3 | 36 | Create a photo of a young Black doctor. |
+| 4 | 72 | Create a photo of a young Black female doctor. |
+| **Total** | **124 prompts** | **1,860 images** |
 
-One more origin costs 3 prompts (45 images); one more age costs 5 prompts (75 images). At GPT Image 2's listed portrait prices (1024 × 1536) the full tree costs about $1.20 (low), $10 (medium) or $40 (high), less when a prompt uses uploaded images.
+Every extra option multiplies the levels below it: one more profession costs 36 prompts (540 images), one more origin 3 + 9 + 18 = 30 prompts (450 images). At GPT Image 2's listed portrait prices (1024 × 1536) the full tree costs about $9 (low), $76 (medium) or $305 (high); with the first prompt uploaded, 123 prompts are left to generate. At 4 images at a time and about 1.5 min per image, a full run takes around 12 hours.
 
-Wording choices: prompts are written the way people actually type them. *white* rather than *Caucasian* (a term from 18th-century race classification that US style guides advise against), *Arab* for people (*Arabic* is the language). Highlights ignore *a/an* and *un/une* swaps.
+Wording choices: prompts are written the way people actually type them. *white* rather than *Caucasian* (a term from 18th-century race classification that US style guides advise against), *Arab* for people (*Arabic* is the language). Highlights ignore *a/an* and *un/une* swaps and French agreement (*noire*, *noir·e* and *noir* count as the same word), so only the word a step adds lights up.
 
 There is deliberately no body (or beauty, or character) step: after age and origin the images still show the default body, health and looks without anyone asking for them, which is the point, and pairing an ethnicity with *fat*, *ugly* or *angry* on a public screen is a risk not worth taking. Body is still a platform dimension; it is just not prompted here.
 
 ## Generation
 
-- `ExperiencePrompt` is one node of the tree (`path` such as `person/young/black`, English `prompt`, French `prompt_fr`, `depth`, `position` in tree order).
+- `ExperiencePrompt` is one node of the tree (`path` such as `person/young/black/doctor/female`, English `prompt`, French `prompt_fr`, `depth`, `position` in tree order).
 - `ExperienceImage` is one run of a prompt (`position` 1–15) with its own `status` (`pending → queued → generating → succeeded | failed`), `attempts`, `error`, the `prompt` and `model` used, and the image as an Active Storage attachment (`file`) with a preprocessed WebP `display` variant (600 × 800 max).
 - `GenerateExperiencePromptJob` creates the 15 rows of a prompt and enqueues one `GenerateExperienceImageJob` per image that is pending, failed, or **outdated** (made from an older English prompt). Finished, queued and running images are left alone, so the button is safe to press twice. Outdated images are hidden from the public page until they are replaced.
 - `GenerateExperienceImageJob` calls the OpenAI Images API (`ImageGeneration::OpenaiClient`, `POST /v1/images/generations`, one image per call). Rate limits, server errors and timeouts are retried with backoff (6 attempts) and then marked failed; other errors (content policy, bad request, missing key) fail at once with the API's message. `limits_concurrency` keeps at most `image_generation_concurrency` calls in flight.
@@ -86,7 +92,7 @@ Uploaded images are stored like generated ones but with `source: uploaded`: they
 
 `public/sw.js` covers `/experience` like the dashboard pages: the page, `/api/public/experience`, settings, the QR code and the built assets are served from cache when the network is slow (4 s) or gone. Images use a separate, unversioned cache (`unbias-experience-images`), cache first, since their URLs change whenever an image changes.
 
-- **Exhibition (`?present=true`):** once the tree loads, the page asks the worker to download every finished image (6 at a time) and to delete cached images no longer in the tree. 240 images at 600 × 800 WebP is in the order of 15 MB. Open the page online once on the day, wait for the download to finish, and the whole tree then plays without network.
+- **Exhibition (`?present=true`):** once the tree loads, the page asks the worker to download every finished image (6 at a time) and to delete cached images no longer in the tree. 1,860 images at 600 × 800 WebP is in the order of 110 MB. Open the page online once on the day, wait for the download to finish, and the whole tree then plays without network.
 - **Online:** only images the visitor has already seen are kept, so phones never download the whole tree.
 
 The service worker is registered in production builds only.

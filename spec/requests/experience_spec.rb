@@ -42,7 +42,7 @@ RSpec.describe "Bias experience", type: :request do
     sign_in admin
     get "/api/admin/experience_prompts"
 
-    expect(json["prompts"].size).to eq(16)
+    expect(json["prompts"].size).to eq(124)
     root = json["prompts"].first
     expect(root).to include("path" => "person", "prompt" => "Create a photo of a person.", "depth" => 0)
     expect(root["counts"]).to include("succeeded" => 0, "failed" => 0)
@@ -52,7 +52,7 @@ RSpec.describe "Bias experience", type: :request do
     expect(response).to have_http_status(:accepted)
 
     expect { post "/api/admin/experience_prompts/generate_all" }
-      .to have_enqueued_job(GenerateExperiencePromptJob).exactly(16).times
+      .to have_enqueued_job(GenerateExperiencePromptJob).exactly(124).times
   end
 
   it "uploads an admin's own images and clears one" do

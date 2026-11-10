@@ -11,10 +11,12 @@ RSpec.describe ExperiencePrompt do
   before { ExperiencePrompt.seed! }
 
   it "mirrors the prompt tree" do
-    expect(described_class.in_tree.count).to eq(1 + 3 + 12)
+    expect(described_class.in_tree.count).to eq(1 + 3 + 12 + 36 + 72)
     expect(described_class.in_tree.first.prompt).to eq("Create a photo of a person.")
-    expect(described_class.find_by(path: "person/old/arab").prompt)
-      .to eq("Create a photo of an old Arab person.")
+    expect(described_class.find_by(path: "person/old/arab/doctor/female").prompt)
+      .to eq("Create a photo of an old Arab female doctor.")
+    expect(described_class.find_by(path: "person/old/arab/doctor").prompt_fr)
+      .to eq("Crée une photo d’un·e médecin arabe âgé·e.")
   end
 
   it "keeps removed nodes out of the tree without deleting their images" do
@@ -39,6 +41,10 @@ RSpec.describe ExperiencePrompt do
     expect(ExperienceTree.highlight("Create a photo of a person.", nil)).to eq([ { text: "Create a photo of a person." } ])
     thin = ExperienceTree.highlight("Create a photo of a thin old Arab man.", "Create a photo of an old Arab man.")
     expect(thin.select { |segment| segment[:added] }.pluck(:text)).to eq([ "thin" ])
+    inclusive = ExperienceTree.highlight("Crée une photo d’un·e médecin blanc·he âgé·e.", "Crée une photo d’une personne blanche âgée.")
+    expect(inclusive.select { |segment| segment[:added] }.pluck(:text)).to eq([ "médecin" ])
+    gendered = ExperienceTree.highlight("Crée une photo d’un homme médecin blanc âgé.", "Crée une photo d’un·e médecin blanc·he âgé·e.")
+    expect(gendered.select { |segment| segment[:added] }.pluck(:text)).to eq([ "homme" ])
   end
 
   it "queues one job per missing or failed image" do
