@@ -111,7 +111,7 @@ the frontend by `/api/public/settings`.
 ```bash
 bin/rspec                     # backend
 yarn test                     # Vitest, detection helpers
-yarn lint && bin/rubocop      # style
+yarn lint && bin/rubocop      # lint (likely bugs only)
 bin/brakeman --no-pager       # security scan
 yarn build:vite               # production build
 

@@ -4,12 +4,14 @@ import Home from "~/pages/Home";
 import About from "~/pages/About";
 import Installation from "~/pages/Installation";
 import Video from "~/pages/Video";
+import Experience from "~/pages/Experience";
 import Contribute from "~/pages/Contribute";
 import Moderation from "~/pages/Moderation";
 import AdminDashboard from "~/pages/admin/AdminDashboard";
 import AdminCallsToAction from "~/pages/admin/AdminCallsToAction";
 import AdminSettings from "~/pages/admin/AdminSettings";
 import AdminLookup from "~/pages/admin/AdminLookup";
+import AdminExperience from "~/pages/admin/AdminExperience";
 import Login from "~/pages/Login";
 import ForgotPassword from "~/pages/ForgotPassword";
 import ResetPassword from "~/pages/ResetPassword";
@@ -23,6 +25,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/installation" element={<Installation />} />
           <Route path="/video" element={<Video />} />
+          <Route path="/experience" element={<Experience />} />
           <Route path="/contribute/*" element={<Contribute />} />
           <Route path="/moderation" element={<Moderation />} />
           <Route path="/moderation/:id" element={<Moderation />} />
@@ -33,6 +36,7 @@ export default function App() {
           />
           <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="/admin/lookup" element={<AdminLookup />} />
+          <Route path="/admin/experience" element={<AdminExperience />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />

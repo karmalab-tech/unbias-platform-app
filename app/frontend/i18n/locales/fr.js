@@ -409,11 +409,53 @@ export const fr = {
     },
   },
   admin: {
+    experience: {
+      intro:
+        "Chaque prompt de l’expérience sur les biais, lancé {count} fois avec les mêmes réglages via l’API Images d’OpenAI. La génération tourne en arrière-plan, une tâche par image ; les images en échec peuvent être relancées.",
+      notConfigured:
+        "OPENAI_API_KEY n’est pas défini : la génération échouera tant qu’il ne l’est pas.",
+      images: "images générées",
+      generateAll: "Générer tout ce qui manque",
+      generate: "Générer",
+      retry: "Relancer les échecs",
+      regenerate: "Régénérer",
+      noImages: "Rien de généré pour l’instant.",
+      update: "Mettre à jour",
+      dropHere: "Déposez vos propres images ici",
+      chooseFiles: "Choisir des fichiers",
+      dropHint:
+        "Elles remplissent les emplacements libres dans l’ordre ({count} libres). Déposez une image sur un emplacement pour la remplacer. JPEG, PNG ou WebP ; affichées recadrées en 3:4. Les images importées sont conservées si le texte change.",
+      dropOnSlot: "Déposez une image ici pour remplacer cet emplacement",
+      uploading: "Import {done} sur {total}…",
+      uploadFailed: "{name} : {reason} ({count} fichier(s) non importé(s)).",
+      remove: "Retirer",
+      uploadErrors: {
+        unsupported_type: "utilisez JPEG, PNG ou WebP",
+        too_large: "fichier trop lourd",
+        no_free_position:
+          "plus d’emplacement libre, retirez ou remplacez d’abord une image",
+        bad_position: "emplacement inconnu",
+      },
+      promptEn: "Prompt anglais (envoyé au modèle)",
+      promptFr: "Texte français (montré aux visiteurs francophones)",
+      wordingHint:
+        "Les mots absents du prompt parent sont surlignés. Modifier le prompt anglais rend ses images obsolètes jusqu’à ce que « Mettre à jour » les remplace.",
+      status: {
+        succeeded: "Terminée",
+        outdated: "Obsolète",
+        uploaded: "Importée",
+        generating: "En cours",
+        queued: "En attente",
+        failed: "Échec",
+        pending: "Pas commencée",
+      },
+    },
     tabs: {
       dashboard: "Tableau de bord",
       ctas: "Appels à contribution",
       settings: "Réglages",
       lookup: "Retrouver une contribution",
+      experience: "Expérience",
     },
     dash: {
       peopleApproved: "Personnes approuvées",
@@ -473,6 +515,17 @@ export const fr = {
       confirmAll:
         "Supprimer toutes les photos de cette contribution du stockage et les retirer du jeu de données ? Irréversible.",
     },
+  },
+  experience: {
+    introLine1: "Nous créons de plus en plus d’images avec l’IA générative.",
+    introLine2: "Mais ces images ne sont pas neutres.",
+    help: "Vous voulez nous aider ?",
+    scanQr: "Scannez ce QR code",
+    learnMore: "En savoir plus",
+    pick: "Choisissez un prompt",
+    backTo: "Revenir à ce prompt",
+    gridLabel: "{count} images générées à partir de : {prompt}",
+    gridEmpty: "Pas encore d’images",
   },
   installation: {
     chooseLanguage: "Choisissez votre langue",

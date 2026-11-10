@@ -9,6 +9,7 @@ Unbias AI is a public, image-only contribution platform building a consented, hu
 - All eight phases of `docs/IMPLEMENTATION_PLAN.md` are implemented and merged: contribution flow, browser-side detection, server-side processing with Claude, moderation, public dashboard, installation mode, admin, EN + FR, CI with RSpec + Vitest + Playwright. `docs/TESTING_GUIDE.md` is the click-through walkthrough of every feature and the place to document any new one.
 - Product decisions (hero counts approved people only, admin-managed calls to action, "today" = last 24 h, drafts purged after 24 h, rejected media kept 30 days, Claude Sonnet 5 with a small budget, EN + FR, Fly.io + S3, Postmark) are recorded in the status line and §3 of `IMPLEMENTATION_PLAN.md`. Do not reopen them silently.
 - Open items, in order: run one real Claude enrichment with an API key and check the description never names sensitive attributes; tune the Monk suggestion on a diverse set (FACET subset, provided by the product owner); replace the placeholder consent wording and bump `consent_version`; first Fly.io deployment (private S3 bucket with a CORS `PUT` rule, secrets from `.env.example`, intro video URLs); keep the `PASSWORD` gate until launch.
+- The bias experience (`/experience`, `?present=true` for exhibitions) replays image-model results generated ahead of time from `/admin/experience` (`ExperiencePrompt`, one `GenerateExperienceImageJob` per image, OpenAI Images API); tree, generation and design are in `docs/BIAS_EXPERIENCE.md`.
 - Work ships as a few milestone PRs, each with its own section in `docs/TESTING_GUIDE.md` so a reviewer can test by clicking. CI must be green before asking for review.
 
 ## Tech Stack
@@ -30,7 +31,7 @@ Unbias AI is a public, image-only contribution platform building a consented, hu
 | QR               | `rqrcode` (`/qr.svg`)                                                  |
 | Config           | dotenv-rails (`.env`, see `.env.example`); product limits in `config/unbias.yml` |
 | Testing          | RSpec, Vitest 2, Playwright (`e2e/`)                                   |
-| Linting / tools  | RuboCop (rails-omakase), Brakeman, ESLint 9, Prettier 3, annotaterb, pry-rails |
+| Linting / tools  | RuboCop (Lint cops only), Brakeman, ESLint 9, Prettier 3, annotaterb, pry-rails |
 | Deploy           | Fly.io (`fly.toml`: `web` + `worker` processes), Dockerfile fetches ML models |
 | Node             | 22.14 (`.node-version`)                                               |
 
@@ -80,7 +81,7 @@ Unbias AI is a public, image-only contribution platform building a consented, hu
 
 ## Backend Conventions
 
-- Follow `rubocop-rails-omakase`.
+- RuboCop runs only the Lint cops (`.rubocop.yml`), no style rules; CI shows findings as PR annotations and fails only on syntax errors. Keep the surrounding code's style.
 - Controllers stay thin; keep business logic in models (`Submission#submit!`, `Asset#approve!` / `#reject!`, `Submission#withdraw!`).
 - Product limits are read from `Rails.configuration.x.unbias` (`config/unbias.yml`), never literal numbers.
 - Jobs in `app/jobs/` call a single method on a model or service; they run on Solid Queue, backed by the primary Postgres database. Recurring jobs live in `config/recurring.yml`.

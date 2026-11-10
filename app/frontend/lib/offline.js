@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
-const DASHBOARD_PAGES = ["/", "/installation", "/video"];
+const DASHBOARD_PAGES = ["/", "/installation", "/video", "/experience"];
 
-// Caches the dashboard so a refresh without network still shows the last numbers.
+// Caches the dashboard and the experience so a refresh without network still shows the last data.
 export function useOfflineDashboard() {
   useEffect(() => {
     if (!import.meta.env.PROD || !("serviceWorker" in navigator)) return;
@@ -37,4 +37,15 @@ export function useOfflineDashboard() {
       window.removeEventListener("load", register);
     };
   }, []);
+}
+
+// Exhibition only: stores every experience image so any path through the tree plays without network.
+export async function precacheExperienceImages(paths) {
+  if (!import.meta.env.PROD || !("serviceWorker" in navigator)) return;
+  try {
+    const { active } = await navigator.serviceWorker.ready;
+    active?.postMessage({ type: "precache-images", paths });
+  } catch {
+    // Offline support is an enhancement; the experience works without it.
+  }
 }

@@ -403,11 +403,52 @@ export const en = {
     },
   },
   admin: {
+    experience: {
+      intro:
+        "Every prompt of the bias experience, run {count} times with the same settings through the OpenAI Images API. Generation runs in the background, one job per image; failed images can be retried.",
+      notConfigured:
+        "OPENAI_API_KEY is not set: generation will fail until it is.",
+      images: "images generated",
+      generateAll: "Generate everything missing",
+      generate: "Generate",
+      retry: "Retry failed",
+      regenerate: "Regenerate",
+      noImages: "Nothing generated yet.",
+      update: "Update outdated",
+      dropHere: "Drop your own images here",
+      chooseFiles: "Choose files",
+      dropHint:
+        "They fill the free spots in order ({count} free). Drop an image on a single spot to replace it. JPEG, PNG or WebP; shown cropped to 3:4. Uploaded images are kept when the wording changes.",
+      dropOnSlot: "Drop an image here to replace this spot",
+      uploading: "Uploading {done} of {total}…",
+      uploadFailed: "{name}: {reason} ({count} file(s) not uploaded).",
+      remove: "Remove",
+      uploadErrors: {
+        unsupported_type: "use JPEG, PNG or WebP",
+        too_large: "file too large",
+        no_free_position: "no free spot left, remove or replace an image first",
+        bad_position: "unknown spot",
+      },
+      promptEn: "English prompt (sent to the model)",
+      promptFr: "French wording (shown to French visitors)",
+      wordingHint:
+        "Words not in the parent prompt are highlighted. Changing the English prompt marks its images outdated until Update replaces them.",
+      status: {
+        succeeded: "Done",
+        outdated: "Outdated",
+        uploaded: "Uploaded",
+        generating: "Generating",
+        queued: "Queued",
+        failed: "Failed",
+        pending: "Not started",
+      },
+    },
     tabs: {
       dashboard: "Dashboard",
       ctas: "Calls to action",
       settings: "Settings",
       lookup: "Find a contribution",
+      experience: "Experience",
     },
     dash: {
       peopleApproved: "People approved",
@@ -467,6 +508,17 @@ export const en = {
       confirmAll:
         "Delete every photo of this contribution from storage and remove them from the dataset? This cannot be undone.",
     },
+  },
+  experience: {
+    introLine1: "Everyday, we create more images with Gen AI.",
+    introLine2: "These images are not neutral.",
+    help: "Do you want to help?",
+    scanQr: "Scan this QR code",
+    learnMore: "Learn more",
+    pick: "Pick a prompt",
+    backTo: "Go back to this prompt",
+    gridLabel: "{count} images generated from: {prompt}",
+    gridEmpty: "No images yet",
   },
   installation: {
     chooseLanguage: "Choose your language",

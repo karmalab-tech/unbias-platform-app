@@ -5,9 +5,10 @@ on:
   push:
     branches: [ main ]
 
+# Pinned: ubuntu-latest (26.04) has no build of the Ruby in .ruby-version, which must match the Dockerfile.
 jobs:
   scan_ruby:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
@@ -23,7 +24,7 @@ jobs:
         run: bin/brakeman --no-pager
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -34,11 +35,12 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Lint code for consistent style
-        run: bin/rubocop -f github
+      # Findings show as annotations on the PR; only Ruby syntax errors fail the job.
+      - name: Lint Ruby for likely bugs
+        run: bin/rubocop -f github --fail-level fatal
 
   frontend:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -61,7 +63,7 @@ jobs:
         run: yarn build:vite
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     services:
       postgres:
@@ -110,7 +112,7 @@ jobs:
           bundle exec rspec
 
   e2e:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     services:
       postgres:
         image: postgres

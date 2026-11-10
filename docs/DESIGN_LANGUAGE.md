@@ -24,6 +24,7 @@ Five colours plus ink at fixed opacities. All are Tailwind `@theme` tokens (`bg-
 | `lime` | `#dfe75c` | Secondary stat card, hover on links, success notice, press shadow variant |
 | `peach` | `#f0ad98` | Pending data, tertiary card, hover on secondary controls, hatch ground, disabled primary |
 | `surface` | `#f8ebd0` | Inset panels that need a quiet ground (consent text, summaries) |
+| `night` | `#191312` | Ground of the bias experience only (see Dark stage) |
 | `ink-72 / 60 / 55 / 45 / 40` | ink at that % | Body copy, secondary copy, captions, placeholders, empty values |
 
 Rules:
@@ -104,6 +105,10 @@ Plain, short, about people. State what is true and what is needed; do not celebr
 | Scan to add photos from your phone | Scan to contribute on your phone |
 
 Where a taxonomy comes from outside the product, name it and link out (the Monk Skin Tone scale links to its source).
+
+## Dark stage (bias experience)
+
+`/experience` is the one surface on a dark ground, `night` (`#191312`, ink's hue, darker; used nowhere else). It keeps the language (square corners, 2px lines, Archivo, `mono-caps`, hard shadow) but inverts it: cream text and lines on night, and emphasis comes from cream opacity instead of fills. Current prompt: full cream with a `shadow-hard-signal`, added words on a signal block. Next prompts: cream at 80% with a 40% border, added words in lime. History: cream at 35% with a 10% border. Photos are 3:4 portraits, borderless and shadowless, and float (`animate-float`). Empty tiles are cream at 5%. No titles, no step counters; the only label is one 10px `mono-caps` instruction at 40%, plus a bold cream statement at the start and the end. Every colour, border and shadow change eases over 300 ms; prompts glide to their new place and new ones rise in one by one. In exhibition mode the header's eye icon and wordmark sit top left; the contribute QR code appears only at the end, under the closing statement, with an 11px `mono-caps` caption. Online, the end offers a cream-bordered `mono-caps` *Learn more →* link that fills cream on hover. See `docs/BIAS_EXPERIENCE.md`.
 
 ## Outside the app
 
