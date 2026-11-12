@@ -522,6 +522,18 @@ export const fr = {
     help: "Vous voulez nous aider ?",
     scanQr: "Scannez ce QR code",
     learnMore: "En savoir plus",
+    start: "Montrez-moi comment",
+    explain1:
+      "Quand vous demandez une image à un modèle d’IA générative, il vous donne toujours le résultat le plus moyen.",
+    explain2: "Même si vous recommencez encore et encore.",
+    explain3: "Voilà comment fonctionnent les modèles d’IA.",
+    explain4: "Essayez par vous-même.",
+    observation1:
+      "Ces personnes n’existent pas, elles ont été générées à partir de données.",
+    observation2: "Et elles se ressemblent toutes étrangement.",
+    observation3: "Jeunes, en bonne santé, parfaites.",
+    executed:
+      "« {prompt} » exécuté {count} fois de suite avec OpenAI gpt-image-2 en 2026",
     pick: "Choisissez un prompt",
     backTo: "Revenir à ce prompt",
     gridLabel: "{count} images générées à partir de : {prompt}",
