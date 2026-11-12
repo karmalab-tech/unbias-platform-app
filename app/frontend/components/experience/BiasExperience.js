@@ -24,6 +24,17 @@ const APPEAR_STAGGER_MS = 110;
 const PICK_KEY = "pick";
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
+const EXPLAIN_LINES = ["explain1", "explain2", "explain3", "explain4"];
+const OBSERVATION_LINES = ["observation1", "observation2", "observation3"];
+
+const lineItems = (keys, classes = {}) =>
+  keys.map((key) => ({
+    key,
+    kind: "line",
+    text: key,
+    className: classes[key],
+  }));
+
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const reducedMotion = () =>
@@ -49,7 +60,10 @@ function columnItems(tree, path, started) {
     if (!tree.root) return [];
     return started
       ? [
-          { key: "explain", kind: "explain" },
+          ...lineItems(EXPLAIN_LINES, {
+            explain3: "mt-1",
+            explain4: "text-lime mb-4",
+          }),
           { key: tree.root.path, kind: "next", prompt: tree.root },
         ]
       : [
@@ -65,7 +79,10 @@ function columnItems(tree, path, started) {
       prompt,
     })),
     ...(path === tree.root?.path
-      ? [{ key: "observation", kind: "observation" }]
+      ? lineItems(OBSERVATION_LINES, {
+          observation1: "mt-4",
+          observation3: "mb-2",
+        })
       : []),
     ...(next.length
       ? [
@@ -229,8 +246,8 @@ export default function BiasExperience({ presentation = false }) {
     };
   }, [presentation, path, started, idleSeconds, tree, count]);
 
-  const plainText = (prompt) =>
-    segmentsFor(prompt, locale)
+  const plainText = (prompt, lang = locale) =>
+    segmentsFor(prompt, lang)
       .map((segment) => segment.text)
       .join("");
 
@@ -270,20 +287,29 @@ export default function BiasExperience({ presentation = false }) {
         </div>
       </div>
 
-      <div className="order-first flex min-h-0 items-center justify-center lg:[container-type:size] lg:order-none">
-        <FlipGrid
-          version={path ?? (mosaic ? `start-${round}` : null)}
-          urls={current?.images ?? mosaic}
-          count={count}
-          label={
-            current
-              ? t("experience.gridLabel", {
-                  count,
-                  prompt: plainText(current),
-                })
-              : t("experience.gridEmpty")
-          }
-        />
+      <div className="order-first flex min-h-0 flex-col items-center gap-4 lg:order-none">
+        <div className="flex min-h-0 w-full flex-1 items-center justify-center lg:[container-type:size]">
+          <FlipGrid
+            version={path ?? (mosaic ? `start-${round}` : null)}
+            urls={current?.images ?? mosaic}
+            count={count}
+            label={
+              current
+                ? t("experience.gridLabel", {
+                    count,
+                    prompt: plainText(current),
+                  })
+                : t("experience.gridEmpty")
+            }
+          />
+        </div>
+        {current && (
+          <ExecutionNote
+            key={current.path}
+            prompt={plainText(current, "en")}
+            count={count}
+          />
+        )}
         <p className="sr-only" aria-live="polite">
           {current &&
             t("experience.gridLabel", { count, prompt: plainText(current) })}
@@ -329,23 +355,11 @@ function ColumnItem({
       </button>
     );
   }
-  if (item.kind === "explain") {
+  if (item.kind === "line") {
     return (
-      <div className={`${STATEMENT} mb-6 space-y-3`}>
-        <p>{t("experience.explain1")}</p>
-        <p>{t("experience.explain2")}</p>
-        <p>{t("experience.explain3")}</p>
-        <p className="text-lime">{t("experience.explain4")}</p>
-      </div>
-    );
-  }
-  if (item.kind === "observation") {
-    return (
-      <div className={`${STATEMENT} my-4`}>
-        <p>{t("experience.observation1")}</p>
-        <p>{t("experience.observation2")}</p>
-        <p>{t("experience.observation3")}</p>
-      </div>
+      <p className={`${STATEMENT} ${item.className ?? ""}`}>
+        {t(`experience.${item.text}`)}
+      </p>
     );
   }
   if (item.kind === "help") {
@@ -422,6 +436,28 @@ function ColumnItem({
         }
       />
     </button>
+  );
+}
+
+// The prompt is shown in English: it is the sentence the model actually received.
+function ExecutionNote({ prompt, count }) {
+  const ref = useRef(null);
+  useLayoutEffect(() => {
+    if (reducedMotion()) return;
+    ref.current?.animate([{ opacity: 0 }, { opacity: 1 }], {
+      duration: APPEAR_MS,
+      delay: waveTotalMs(count),
+      easing: EASE,
+      fill: "backwards",
+    });
+  }, [count]);
+  return (
+    <p
+      ref={ref}
+      className="text-cream/40 font-mono text-[10px] leading-snug tracking-[0.04em] lg:text-[11px]"
+    >
+      {t("experience.executed", { prompt, count })}
+    </p>
   );
 }
 

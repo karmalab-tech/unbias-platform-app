@@ -532,6 +532,8 @@ export const fr = {
       "Ces personnes n’existent pas, elles ont été générées à partir de données.",
     observation2: "Et elles se ressemblent toutes étrangement.",
     observation3: "Jeunes, en bonne santé, parfaites.",
+    executed:
+      "« {prompt} » exécuté {count} fois de suite avec OpenAI gpt-image-2 en 2026",
     pick: "Choisissez un prompt",
     backTo: "Revenir à ce prompt",
     gridLabel: "{count} images générées à partir de : {prompt}",
