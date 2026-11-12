@@ -43,15 +43,19 @@ function preload(urls) {
 }
 
 // Everything the prompt column shows for a path, in order; keys stay stable so a prompt keeps its node as it moves.
-function columnItems(tree, path) {
+function columnItems(tree, path, started) {
   if (!tree) return [];
   if (path === null) {
-    return tree.root
+    if (!tree.root) return [];
+    return started
       ? [
-          { key: "intro", kind: "intro" },
+          { key: "explain", kind: "explain" },
           { key: tree.root.path, kind: "next", prompt: tree.root },
         ]
-      : [];
+      : [
+          { key: "intro", kind: "intro" },
+          { key: "start", kind: "start" },
+        ];
   }
   const next = tree.children.get(path) ?? [];
   return [
@@ -60,6 +64,9 @@ function columnItems(tree, path) {
       kind: prompt.path === path ? "active" : "history",
       prompt,
     })),
+    ...(path === tree.root?.path
+      ? [{ key: "observation", kind: "observation" }]
+      : []),
     ...(next.length
       ? [
           { key: PICK_KEY, kind: "pick" },
@@ -77,6 +84,8 @@ export default function BiasExperience({ presentation = false }) {
   const settings = useSettings();
   const [tree, setTree] = useState(null);
   const [path, setPath] = useState(null);
+  const [started, setStarted] = useState(false);
+  const [leaving, setLeaving] = useState(false);
   const [pending, setPending] = useState(null);
   const [busy, setBusy] = useState(false);
   const [mosaic, setMosaic] = useState(null);
@@ -84,6 +93,7 @@ export default function BiasExperience({ presentation = false }) {
   const runRef = useRef(0);
   const columnRef = useRef(null);
   const snapshotRef = useRef(null);
+  const delayRef = useRef(0);
 
   useEffect(() => {
     api.get("/api/public/experience").then((payload) => {
@@ -95,10 +105,10 @@ export default function BiasExperience({ presentation = false }) {
 
   const count = tree?.imagesPerPrompt ?? 15;
   const current = tree && path ? tree.byPath.get(path) : null;
-  const items = columnItems(tree, path);
+  const items = columnItems(tree, path, started);
   const staying = pending
     ? new Set(
-        columnItems(tree, pending.path)
+        columnItems(tree, pending.path, started)
           .map((item) => item.key)
           .filter((key) => key !== PICK_KEY)
       )
@@ -123,6 +133,7 @@ export default function BiasExperience({ presentation = false }) {
     ]);
     if (runId !== runRef.current) return;
     snapshotRef.current = measure();
+    delayRef.current = waveTotalMs(count);
     setPath(target.path);
     setPending(null);
     setTimeout(
@@ -135,6 +146,20 @@ export default function BiasExperience({ presentation = false }) {
       },
       waveTotalMs(count) + APPEAR_MS
     );
+  };
+
+  const start = async () => {
+    if (busy) return;
+    const runId = ++runRef.current;
+    setBusy(true);
+    setLeaving(true);
+    await wait(reducedMotion() ? 0 : LEAVE_MS);
+    if (runId !== runRef.current) return;
+    snapshotRef.current = measure();
+    delayRef.current = 0;
+    setStarted(true);
+    setLeaving(false);
+    setBusy(false);
   };
 
   // FLIP: items that stay glide to their new place while the tiles turn; new items rise in once the tiles have turned.
@@ -164,26 +189,28 @@ export default function BiasExperience({ presentation = false }) {
           ],
           {
             duration: APPEAR_MS,
-            delay: waveTotalMs(count) + appearing++ * APPEAR_STAGGER_MS,
+            delay: delayRef.current + appearing++ * APPEAR_STAGGER_MS,
             easing: EASE,
             fill: "backwards",
           }
         );
       }
     }
-  }, [path]);
+  }, [path, started]);
 
   const idleSeconds =
     Number(new URLSearchParams(window.location.search).get(IDLE_PARAM)) ||
     settings?.limits?.experience_idle_seconds;
   useEffect(() => {
-    if (!presentation || path === null || !idleSeconds) return;
+    if (!presentation || (path === null && !started) || !idleSeconds) return;
     let timer;
     const arm = () => {
       clearTimeout(timer);
       timer = setTimeout(() => {
         runRef.current += 1;
         setPath(null);
+        setStarted(false);
+        setLeaving(false);
         setPending(null);
         setBusy(false);
         if (tree) {
@@ -200,7 +227,7 @@ export default function BiasExperience({ presentation = false }) {
       window.removeEventListener("pointerdown", arm);
       window.removeEventListener("keydown", arm);
     };
-  }, [presentation, path, idleSeconds, tree, count]);
+  }, [presentation, path, started, idleSeconds, tree, count]);
 
   const plainText = (prompt) =>
     segmentsFor(prompt, locale)
@@ -226,7 +253,7 @@ export default function BiasExperience({ presentation = false }) {
             <div
               key={item.key}
               data-key={item.key}
-              className={`transition-opacity ease-out ${staying && !staying.has(item.key) ? "pointer-events-none opacity-0" : ""}`}
+              className={`transition-opacity ease-out ${leaving || (staying && !staying.has(item.key)) ? "pointer-events-none opacity-0" : ""}`}
               style={{ transitionDuration: `${LEAVE_MS}ms` }}
             >
               <ColumnItem
@@ -236,6 +263,7 @@ export default function BiasExperience({ presentation = false }) {
                 busy={busy}
                 loading={pending?.path === item.key}
                 onRun={run}
+                onStart={start}
               />
             </div>
           ))}
@@ -271,12 +299,52 @@ const STATEMENT =
 const BUTTON =
   "w-full border-2 px-4 py-3 text-left transition-[color,border-color,box-shadow] duration-300 ease-out";
 
-function ColumnItem({ item, presentation, first, busy, loading, onRun }) {
+function ColumnItem({
+  item,
+  presentation,
+  first,
+  busy,
+  loading,
+  onRun,
+  onStart,
+}) {
   if (item.kind === "intro") {
     return (
       <div className={`${STATEMENT} mb-6`}>
         <p>{t("experience.introLine1")}</p>
         <p>{t("experience.introLine2")}</p>
+      </div>
+    );
+  }
+  if (item.kind === "start") {
+    return (
+      <button
+        type="button"
+        disabled={busy}
+        onClick={onStart}
+        className="border-cream text-cream enabled:hover:bg-cream enabled:hover:text-night mono-caps flex min-h-12 w-full items-center justify-between gap-3 border-2 px-5 text-[13px] font-bold transition-colors duration-300 enabled:cursor-pointer"
+      >
+        {t("experience.start")}
+        <ArrowRightIcon aria-hidden="true" className="h-5 w-5" />
+      </button>
+    );
+  }
+  if (item.kind === "explain") {
+    return (
+      <div className={`${STATEMENT} mb-6 space-y-3`}>
+        <p>{t("experience.explain1")}</p>
+        <p>{t("experience.explain2")}</p>
+        <p>{t("experience.explain3")}</p>
+        <p className="text-lime">{t("experience.explain4")}</p>
+      </div>
+    );
+  }
+  if (item.kind === "observation") {
+    return (
+      <div className={`${STATEMENT} my-4`}>
+        <p>{t("experience.observation1")}</p>
+        <p>{t("experience.observation2")}</p>
+        <p>{t("experience.observation3")}</p>
       </div>
     );
   }
