@@ -325,8 +325,8 @@ export default function BiasExperience({ presentation = false }) {
 const STATEMENT =
   "text-cream text-[22px] leading-[1.2] font-bold lg:text-[clamp(22px,1.8vw,32px)]";
 const STATEMENT_PRESENT =
-  "text-cream text-[clamp(22px,1.7vw,36px)] leading-[1.15] font-bold pb-4";
-const PROMPT_SIZE_PRESENT = "text-[clamp(20px,1.5vw,32px)]";
+  "text-cream text-[clamp(24px,2vw,42px)] leading-[1.15] font-bold pb-4";
+const PROMPT_SIZE_PRESENT = "text-[clamp(22px,1.75vw,36px)]";
 
 const BUTTON =
   "w-full border-2 px-4 py-3 text-left transition-[color,border-color,box-shadow] duration-300 ease-out";
@@ -359,7 +359,7 @@ function ColumnItem({
         onClick={onStart}
         className={
           presentation
-            ? `${BUTTON} border-signal bg-signal text-ink enabled:hover:border-cream flex items-center gap-4 px-6 py-5 enabled:cursor-pointer`
+            ? `${BUTTON} border-cream text-cream shadow-hard-signal flex items-center gap-4 px-6 py-5 enabled:cursor-pointer`
             : "border-cream text-cream enabled:hover:bg-cream enabled:hover:text-night mono-caps flex min-h-12 w-full items-center justify-between gap-3 border-2 px-5 text-[13px] font-bold transition-colors duration-300 enabled:cursor-pointer"
         }
       >
