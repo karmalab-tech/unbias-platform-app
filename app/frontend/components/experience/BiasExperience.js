@@ -253,13 +253,13 @@ export default function BiasExperience({ presentation = false }) {
 
   return (
     <section
-      className={`md:px-gutter mx-auto grid w-full max-w-[1900px] gap-8 px-4 py-6 lg:min-h-0 lg:flex-1 ${presentation ? "lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1.5fr)]" : "lg:grid-cols-[minmax(340px,1fr)_minmax(0,1.9fr)]"} lg:gap-14 lg:py-10`}
+      className={`md:px-gutter mx-auto grid w-full max-w-[1900px] gap-8 px-4 py-6 lg:min-h-0 lg:flex-1 ${presentation ? "lg:grid-cols-[minmax(0,1fr)_min(68vw,calc((100dvh_-_8.5rem)_*_1.25))]" : "lg:grid-cols-[minmax(340px,1fr)_minmax(0,1.9fr)]"} lg:gap-14 lg:py-10`}
     >
       <div className="flex min-h-0 flex-col gap-6">
         {presentation && (
           <div className="flex items-center gap-3">
-            <img src={iconEye} alt="" className="h-20 w-20" />
-            <span className="display-caps text-[48px] leading-none tracking-[0.04em]">
+            <img src={iconEye} alt="" className="h-16 w-16" />
+            <span className="display-caps text-[38px] leading-none tracking-[0.04em]">
               Unbias
             </span>
           </div>
@@ -325,8 +325,8 @@ export default function BiasExperience({ presentation = false }) {
 const STATEMENT =
   "text-cream text-[22px] leading-[1.2] font-bold lg:text-[clamp(22px,1.8vw,32px)]";
 const STATEMENT_PRESENT =
-  "text-cream text-[clamp(28px,2vw,42px)] leading-[1.15] font-bold pb-5";
-const LABEL_PRESENT = "min-h-20 text-[clamp(26px,1.9vw,40px)] px-8";
+  "text-cream text-[clamp(22px,1.7vw,36px)] leading-[1.15] font-bold pb-4";
+const PROMPT_SIZE_PRESENT = "text-[clamp(20px,1.5vw,32px)]";
 
 const BUTTON =
   "w-full border-2 px-4 py-3 text-left transition-[color,border-color,box-shadow] duration-300 ease-out";
@@ -344,7 +344,7 @@ function ColumnItem({
   if (item.kind === "intro") {
     return (
       <div
-        className={`${statement} ${presentation ? "mb-10 space-y-10" : "mb-6 space-y-4"}`}
+        className={`${statement} ${presentation ? "mb-8 space-y-8" : "mb-6 space-y-4"}`}
       >
         <p>{t("experience.introLine1")}</p>
         <p>{t("experience.introLine2")}</p>
@@ -357,12 +357,22 @@ function ColumnItem({
         type="button"
         disabled={busy}
         onClick={onStart}
-        className={`border-cream text-cream enabled:hover:bg-cream enabled:hover:text-night mono-caps flex w-full items-center justify-between gap-3 border-2 font-bold transition-colors duration-300 enabled:cursor-pointer ${presentation ? LABEL_PRESENT : "min-h-12 px-5 text-[13px]"}`}
+        className={
+          presentation
+            ? `${BUTTON} border-signal bg-signal text-ink enabled:hover:border-cream flex items-center gap-4 px-6 py-5 enabled:cursor-pointer`
+            : "border-cream text-cream enabled:hover:bg-cream enabled:hover:text-night mono-caps flex min-h-12 w-full items-center justify-between gap-3 border-2 px-5 text-[13px] font-bold transition-colors duration-300 enabled:cursor-pointer"
+        }
       >
-        {t("experience.start")}
+        {presentation ? (
+          <span className={`leading-[1.3] font-bold ${PROMPT_SIZE_PRESENT}`}>
+            {t("experience.start")}
+          </span>
+        ) : (
+          t("experience.start")
+        )}
         <ArrowRightIcon
           aria-hidden="true"
-          className={presentation ? "h-8 w-8" : "h-5 w-5"}
+          className={`${presentation ? "ml-auto h-8 w-8 shrink-0" : "h-5 w-5"}`}
         />
       </button>
     );
@@ -387,7 +397,7 @@ function ColumnItem({
           height="200"
           className="bg-cream h-48 w-48 p-3"
         />
-        <p className="mono-caps text-cream/60 text-[20px] font-bold tracking-[0.14em]">
+        <p className="mono-caps text-cream/60 text-[18px] font-bold tracking-[0.14em]">
           {t("experience.scanQr")}
         </p>
       </div>
@@ -404,7 +414,7 @@ function ColumnItem({
   if (item.kind === "pick") {
     return (
       <p
-        className={`mono-caps text-cream/40 mt-5 tracking-[0.16em] ${presentation ? "text-[18px]" : "text-[10px]"}`}
+        className={`mono-caps text-cream/40 mt-5 tracking-[0.16em] ${presentation ? "text-[16px]" : "text-[10px]"}`}
       >
         {t("experience.pick")}
       </p>
@@ -426,7 +436,7 @@ function ColumnItem({
         {first && (
           <ArrowRightIcon
             aria-hidden="true"
-            className={`ml-auto ${presentation ? "h-10 w-10" : "h-6 w-6"} shrink-0 transition-opacity duration-300 ${loading ? "opacity-0" : ""}`}
+            className={`ml-auto ${presentation ? "h-8 w-8" : "h-6 w-6"} shrink-0 transition-opacity duration-300 ${loading ? "opacity-0" : ""}`}
           />
         )}
       </button>
@@ -470,7 +480,7 @@ function ExecutionNote({ prompt, count, presentation }) {
   return (
     <p
       ref={ref}
-      className={`text-cream/40 font-mono leading-snug tracking-[0.04em] ${presentation ? "text-[18px]" : "text-[10px] lg:text-[11px]"}`}
+      className={`text-cream/40 font-mono leading-snug tracking-[0.04em] ${presentation ? "text-[15px]" : "text-[10px] lg:text-[11px]"}`}
     >
       {t("experience.executed", { prompt, count })}
     </p>
@@ -480,7 +490,7 @@ function ExecutionNote({ prompt, count, presentation }) {
 function Prompt({ prompt, mark, presentation }) {
   return (
     <span
-      className={`leading-[1.3] font-bold ${presentation ? "text-[clamp(26px,1.9vw,40px)]" : "text-[17px] lg:text-[clamp(17px,1.25vw,22px)]"}`}
+      className={`leading-[1.3] font-bold ${presentation ? PROMPT_SIZE_PRESENT : "text-[17px] lg:text-[clamp(17px,1.25vw,22px)]"}`}
     >
       {segmentsFor(prompt, locale).map((segment, index) =>
         segment.added ? (
