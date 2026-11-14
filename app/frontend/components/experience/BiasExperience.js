@@ -27,6 +27,9 @@ const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 const EXPLAIN_LINES = ["explain1", "explain2", "explain3", "explain4"];
 const OBSERVATION_LINES = ["observation1", "observation2", "observation3"];
 
+// Keyed by prompt depth: 2 = age picked, 3 = origin picked.
+const STEP_REMARKS = { 2: "remarkAge", 3: "remarkOrigin" };
+
 const lineItems = (keys, classes = {}) =>
   keys.map((key) => ({
     key,
@@ -72,8 +75,10 @@ function columnItems(tree, path, started) {
         ];
   }
   const next = tree.children.get(path) ?? [];
+  const chain = lineage(tree, path);
+  const remark = STEP_REMARKS[chain.length];
   return [
-    ...lineage(tree, path).map((prompt) => ({
+    ...chain.map((prompt) => ({
       key: prompt.path,
       kind: prompt.path === path ? "active" : "history",
       prompt,
@@ -84,6 +89,7 @@ function columnItems(tree, path, started) {
           observation3: "mb-2",
         })
       : []),
+    ...(remark ? lineItems([remark], { [remark]: "mt-4 mb-2" }) : []),
     ...(next.length
       ? [
           { key: PICK_KEY, kind: "pick" },

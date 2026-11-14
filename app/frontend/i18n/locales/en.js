@@ -525,6 +525,8 @@ export const en = {
     observation1: "These people do not exist, they were generated from data.",
     observation2: "And they all look oddly similar.",
     observation3: "Young, healthy, perfect.",
+    remarkAge: "All these people are white. Why?",
+    remarkOrigin: "What if we give them a job?",
     executed:
       "“{prompt}” executed {count} times in a row with OpenAI gpt-image-2 in 2026",
     pick: "Pick a prompt",
