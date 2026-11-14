@@ -252,12 +252,14 @@ export default function BiasExperience({ presentation = false }) {
       .join("");
 
   return (
-    <section className="md:px-gutter mx-auto grid w-full max-w-[1900px] gap-8 px-4 py-6 lg:min-h-0 lg:flex-1 lg:grid-cols-[minmax(340px,1fr)_minmax(0,1.9fr)] lg:gap-14 lg:py-10">
+    <section
+      className={`md:px-gutter mx-auto grid w-full max-w-[1900px] gap-8 px-4 py-6 lg:min-h-0 lg:flex-1 ${presentation ? "lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1.5fr)]" : "lg:grid-cols-[minmax(340px,1fr)_minmax(0,1.9fr)]"} lg:gap-14 lg:py-10`}
+    >
       <div className="flex min-h-0 flex-col gap-6">
         {presentation && (
           <div className="flex items-center gap-3">
-            <img src={iconEye} alt="" className="h-12 w-12" />
-            <span className="display-caps text-[28px] leading-none tracking-[0.04em]">
+            <img src={iconEye} alt="" className="h-20 w-20" />
+            <span className="display-caps text-[48px] leading-none tracking-[0.04em]">
               Unbias
             </span>
           </div>
@@ -306,6 +308,7 @@ export default function BiasExperience({ presentation = false }) {
         {current && (
           <ExecutionNote
             key={current.path}
+            presentation={presentation}
             prompt={plainText(current, "en")}
             count={count}
           />
@@ -321,6 +324,9 @@ export default function BiasExperience({ presentation = false }) {
 
 const STATEMENT =
   "text-cream text-[22px] leading-[1.2] font-bold lg:text-[clamp(22px,1.8vw,32px)]";
+const STATEMENT_PRESENT =
+  "text-cream text-[clamp(36px,2.6vw,56px)] leading-[1.15] font-bold";
+const LABEL_PRESENT = "min-h-20 text-[22px] px-8";
 
 const BUTTON =
   "w-full border-2 px-4 py-3 text-left transition-[color,border-color,box-shadow] duration-300 ease-out";
@@ -334,9 +340,10 @@ function ColumnItem({
   onRun,
   onStart,
 }) {
+  const statement = presentation ? STATEMENT_PRESENT : STATEMENT;
   if (item.kind === "intro") {
     return (
-      <div className={`${STATEMENT} mb-6 space-y-4`}>
+      <div className={`${statement} mb-6 space-y-4`}>
         <p>{t("experience.introLine1")}</p>
         <p>{t("experience.introLine2")}</p>
       </div>
@@ -348,22 +355,25 @@ function ColumnItem({
         type="button"
         disabled={busy}
         onClick={onStart}
-        className="border-cream text-cream enabled:hover:bg-cream enabled:hover:text-night mono-caps flex min-h-12 w-full items-center justify-between gap-3 border-2 px-5 text-[13px] font-bold transition-colors duration-300 enabled:cursor-pointer"
+        className={`border-cream text-cream enabled:hover:bg-cream enabled:hover:text-night mono-caps flex w-full items-center justify-between gap-3 border-2 font-bold transition-colors duration-300 enabled:cursor-pointer ${presentation ? LABEL_PRESENT : "min-h-12 px-5 text-[13px]"}`}
       >
         {t("experience.start")}
-        <ArrowRightIcon aria-hidden="true" className="h-5 w-5" />
+        <ArrowRightIcon
+          aria-hidden="true"
+          className={presentation ? "h-8 w-8" : "h-5 w-5"}
+        />
       </button>
     );
   }
   if (item.kind === "line") {
     return (
-      <p className={`${STATEMENT} ${item.className ?? ""}`}>
+      <p className={`${statement} ${item.className ?? ""}`}>
         {t(`experience.${item.text}`)}
       </p>
     );
   }
   if (item.kind === "help") {
-    return <p className={`${STATEMENT} mt-6`}>{t("experience.help")}</p>;
+    return <p className={`${statement} mt-6`}>{t("experience.help")}</p>;
   }
   if (item.kind === "helpAction") {
     return presentation ? (
@@ -371,11 +381,11 @@ function ColumnItem({
         <img
           src="/qr.svg"
           alt=""
-          width="128"
-          height="128"
-          className="bg-cream h-32 w-32 p-2"
+          width="200"
+          height="200"
+          className="bg-cream h-48 w-48 p-3"
         />
-        <p className="mono-caps text-cream/60 text-[11px] font-bold tracking-[0.14em]">
+        <p className="mono-caps text-cream/60 text-[20px] font-bold tracking-[0.14em]">
           {t("experience.scanQr")}
         </p>
       </div>
@@ -391,7 +401,9 @@ function ColumnItem({
   }
   if (item.kind === "pick") {
     return (
-      <p className="mono-caps text-cream/40 mt-5 text-[10px] tracking-[0.16em]">
+      <p
+        className={`mono-caps text-cream/40 mt-5 tracking-[0.16em] ${presentation ? "text-[18px]" : "text-[10px]"}`}
+      >
         {t("experience.pick")}
       </p>
     );
@@ -402,16 +414,17 @@ function ColumnItem({
         type="button"
         disabled={busy}
         onClick={() => onRun(item.prompt)}
-        className={`${BUTTON} flex items-center gap-4 enabled:cursor-pointer ${loading ? "border-signal text-cream" : "border-cream/40 text-cream/80 enabled:hover:border-cream enabled:hover:text-cream"}`}
+        className={`${BUTTON} ${presentation ? "px-6 py-5" : ""} flex items-center gap-4 enabled:cursor-pointer ${loading ? "border-signal text-cream" : "border-cream/40 text-cream/80 enabled:hover:border-cream enabled:hover:text-cream"}`}
       >
         <Prompt
+          presentation={presentation}
           prompt={item.prompt}
           mark="bg-transparent text-lime shadow-[0_0_0_4px_transparent]"
         />
         {first && (
           <ArrowRightIcon
             aria-hidden="true"
-            className={`ml-auto h-6 w-6 shrink-0 transition-opacity duration-300 ${loading ? "opacity-0" : ""}`}
+            className={`ml-auto ${presentation ? "h-10 w-10" : "h-6 w-6"} shrink-0 transition-opacity duration-300 ${loading ? "opacity-0" : ""}`}
           />
         )}
       </button>
@@ -425,9 +438,10 @@ function ColumnItem({
       aria-current={active ? "step" : undefined}
       title={active ? undefined : t("experience.backTo")}
       onClick={() => onRun(item.prompt)}
-      className={`${BUTTON} ${active ? "border-cream text-cream shadow-hard-signal" : "border-cream/10 text-cream/35 enabled:hover:text-cream/60 enabled:cursor-pointer"}`}
+      className={`${BUTTON} ${presentation ? "px-6 py-5" : ""} ${active ? "border-cream text-cream shadow-hard-signal" : "border-cream/10 text-cream/35 enabled:hover:text-cream/60 enabled:cursor-pointer"}`}
     >
       <Prompt
+        presentation={presentation}
         prompt={item.prompt}
         mark={
           active
@@ -440,7 +454,7 @@ function ColumnItem({
 }
 
 // The prompt is shown in English: it is the sentence the model actually received.
-function ExecutionNote({ prompt, count }) {
+function ExecutionNote({ prompt, count, presentation }) {
   const ref = useRef(null);
   useLayoutEffect(() => {
     if (reducedMotion()) return;
@@ -454,16 +468,18 @@ function ExecutionNote({ prompt, count }) {
   return (
     <p
       ref={ref}
-      className="text-cream/40 font-mono text-[10px] leading-snug tracking-[0.04em] lg:text-[11px]"
+      className={`text-cream/40 font-mono leading-snug tracking-[0.04em] ${presentation ? "text-[18px]" : "text-[10px] lg:text-[11px]"}`}
     >
       {t("experience.executed", { prompt, count })}
     </p>
   );
 }
 
-function Prompt({ prompt, mark }) {
+function Prompt({ prompt, mark, presentation }) {
   return (
-    <span className="text-[17px] leading-[1.3] font-bold lg:text-[clamp(17px,1.25vw,22px)]">
+    <span
+      className={`leading-[1.3] font-bold ${presentation ? "text-[clamp(26px,1.9vw,40px)]" : "text-[17px] lg:text-[clamp(17px,1.25vw,22px)]"}`}
+    >
       {segmentsFor(prompt, locale).map((segment, index) =>
         segment.added ? (
           <mark
