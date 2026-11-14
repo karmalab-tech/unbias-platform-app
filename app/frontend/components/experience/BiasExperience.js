@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { ArrowPathIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import FlipGrid, { waveTotalMs } from "~/components/experience/FlipGrid";
 import iconEye from "~/images/icons/icon_eye.png";
 import { api } from "~/lib/api";
@@ -393,7 +393,7 @@ function ColumnItem({
   }
   if (item.kind === "helpAction") {
     return presentation ? (
-      <div className="mt-2 flex items-stretch gap-6">
+      <div className="mt-2 flex items-stretch gap-5">
         <img
           src="/qr.svg"
           alt=""
@@ -405,11 +405,15 @@ function ColumnItem({
           <button
             type="button"
             onClick={onRestart}
-            className={`${BUTTON} border-cream text-cream shadow-hard-signal flex items-center gap-4 px-6 py-5 enabled:cursor-pointer`}
+            className={`${BUTTON} border-cream text-cream shadow-hard-signal flex items-center gap-3 px-5 py-5 whitespace-nowrap enabled:cursor-pointer`}
           >
             <span className={`leading-[1.3] font-bold ${PROMPT_SIZE_PRESENT}`}>
               {t("experience.restart")}
             </span>
+            <ArrowPathIcon
+              aria-hidden="true"
+              className="ml-auto h-7 w-7 shrink-0"
+            />
           </button>
           <p className="mono-caps text-cream/60 text-[18px] font-bold tracking-[0.14em]">
             {t("experience.scanQr")}
