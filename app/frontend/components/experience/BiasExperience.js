@@ -215,6 +215,19 @@ export default function BiasExperience({ presentation = false }) {
     }
   }, [path, started]);
 
+  const restart = () => {
+    runRef.current += 1;
+    setPath(null);
+    setStarted(false);
+    setLeaving(false);
+    setPending(null);
+    setBusy(false);
+    if (tree) {
+      setMosaic(randomMosaic([...tree.byPath.values()], count));
+      setRound((n) => n + 1);
+    }
+  };
+
   const idleSeconds =
     Number(new URLSearchParams(window.location.search).get(IDLE_PARAM)) ||
     settings?.limits?.experience_idle_seconds;
@@ -223,18 +236,7 @@ export default function BiasExperience({ presentation = false }) {
     let timer;
     const arm = () => {
       clearTimeout(timer);
-      timer = setTimeout(() => {
-        runRef.current += 1;
-        setPath(null);
-        setStarted(false);
-        setLeaving(false);
-        setPending(null);
-        setBusy(false);
-        if (tree) {
-          setMosaic(randomMosaic([...tree.byPath.values()], count));
-          setRound((n) => n + 1);
-        }
-      }, idleSeconds * 1000);
+      timer = setTimeout(restart, idleSeconds * 1000);
     };
     arm();
     window.addEventListener("pointerdown", arm);
@@ -283,6 +285,7 @@ export default function BiasExperience({ presentation = false }) {
                 loading={pending?.path === item.key}
                 onRun={run}
                 onStart={start}
+                onRestart={restart}
               />
             </div>
           ))}
@@ -339,6 +342,7 @@ function ColumnItem({
   loading,
   onRun,
   onStart,
+  onRestart,
 }) {
   const statement = presentation ? STATEMENT_PRESENT : STATEMENT;
   if (item.kind === "intro") {
@@ -389,7 +393,7 @@ function ColumnItem({
   }
   if (item.kind === "helpAction") {
     return presentation ? (
-      <div className="mt-2 flex items-end gap-4">
+      <div className="mt-2 flex items-stretch gap-6">
         <img
           src="/qr.svg"
           alt=""
@@ -397,9 +401,20 @@ function ColumnItem({
           height="200"
           className="bg-cream h-48 w-48 p-3"
         />
-        <p className="mono-caps text-cream/60 text-[18px] font-bold tracking-[0.14em]">
-          {t("experience.scanQr")}
-        </p>
+        <div className="flex min-w-0 flex-1 flex-col items-start justify-between">
+          <button
+            type="button"
+            onClick={onRestart}
+            className={`${BUTTON} border-cream text-cream shadow-hard-signal flex items-center gap-4 px-6 py-5 enabled:cursor-pointer`}
+          >
+            <span className={`leading-[1.3] font-bold ${PROMPT_SIZE_PRESENT}`}>
+              {t("experience.restart")}
+            </span>
+          </button>
+          <p className="mono-caps text-cream/60 text-[18px] font-bold tracking-[0.14em]">
+            {t("experience.scanQr")}
+          </p>
+        </div>
       </div>
     ) : (
       <Link

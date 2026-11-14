@@ -521,6 +521,7 @@ export const fr = {
     introLine2: "Mais ces images ne sont pas neutres.",
     help: "Vous voulez nous aider ?",
     scanQr: "Scannez ce QR code",
+    restart: "Revenir au début",
     learnMore: "En savoir plus",
     start: "Montrez-moi comment",
     explain1:
