@@ -325,8 +325,8 @@ export default function BiasExperience({ presentation = false }) {
 const STATEMENT =
   "text-cream text-[22px] leading-[1.2] font-bold lg:text-[clamp(22px,1.8vw,32px)]";
 const STATEMENT_PRESENT =
-  "text-cream text-[clamp(36px,2.6vw,56px)] leading-[1.15] font-bold";
-const LABEL_PRESENT = "min-h-20 text-[22px] px-8";
+  "text-cream text-[clamp(28px,2vw,42px)] leading-[1.15] font-bold pb-5";
+const LABEL_PRESENT = "min-h-20 text-[clamp(26px,1.9vw,40px)] px-8";
 
 const BUTTON =
   "w-full border-2 px-4 py-3 text-left transition-[color,border-color,box-shadow] duration-300 ease-out";
@@ -343,7 +343,9 @@ function ColumnItem({
   const statement = presentation ? STATEMENT_PRESENT : STATEMENT;
   if (item.kind === "intro") {
     return (
-      <div className={`${statement} mb-6 space-y-4`}>
+      <div
+        className={`${statement} ${presentation ? "mb-10 space-y-10" : "mb-6 space-y-4"}`}
+      >
         <p>{t("experience.introLine1")}</p>
         <p>{t("experience.introLine2")}</p>
       </div>
