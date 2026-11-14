@@ -266,7 +266,7 @@ export default function BiasExperience({ presentation = false }) {
         )}
         <div
           ref={columnRef}
-          className="flex min-h-0 flex-1 flex-col justify-center gap-2.5 lg:overflow-y-auto lg:py-2 lg:pr-2"
+          className={`flex min-h-0 flex-1 flex-col justify-center gap-2.5 lg:overflow-y-auto lg:py-2 lg:pr-2 ${presentation ? "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden" : ""}`}
         >
           {items.map((item) => (
             <div
