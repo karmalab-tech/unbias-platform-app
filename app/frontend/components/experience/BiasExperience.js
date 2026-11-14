@@ -336,7 +336,7 @@ function ColumnItem({
 }) {
   if (item.kind === "intro") {
     return (
-      <div className={`${STATEMENT} mb-6`}>
+      <div className={`${STATEMENT} mb-6 space-y-4`}>
         <p>{t("experience.introLine1")}</p>
         <p>{t("experience.introLine2")}</p>
       </div>

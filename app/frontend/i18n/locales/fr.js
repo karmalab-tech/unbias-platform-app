@@ -517,19 +517,19 @@ export const fr = {
     },
   },
   experience: {
-    introLine1: "Nous créons de plus en plus d’images avec l’IA générative.",
+    introLine1: "Nous créons de plus en plus d'images avec l'IA générative.",
     introLine2: "Mais ces images ne sont pas neutres.",
     help: "Vous voulez nous aider ?",
     scanQr: "Scannez ce QR code",
     learnMore: "En savoir plus",
     start: "Montrez-moi comment",
     explain1:
-      "Quand vous demandez une image à un modèle d’IA générative, il vous donne toujours le résultat le plus moyen.",
+      "Quand vous utilisez un modèle d'IA générative, il vous donne le résultat le plus moyen.",
     explain2: "Même si vous recommencez encore et encore.",
-    explain3: "Voilà comment fonctionnent les modèles d’IA.",
+    explain3: "C'est comme ça que fonctionnent les modèles d'IA.",
     explain4: "Essayez par vous-même.",
     observation1:
-      "Ces personnes n’existent pas, elles ont été générées à partir de données.",
+      "Ces personnes n'existent pas, elles ont été générées à partir de données.",
     observation2: "Et elles se ressemblent toutes étrangement.",
     observation3: "Jeunes, en bonne santé, parfaites.",
     executed:
@@ -537,7 +537,7 @@ export const fr = {
     pick: "Choisissez un prompt",
     backTo: "Revenir à ce prompt",
     gridLabel: "{count} images générées à partir de : {prompt}",
-    gridEmpty: "Pas encore d’images",
+    gridEmpty: "Pas encore d'images",
   },
   installation: {
     chooseLanguage: "Choisissez votre langue",

@@ -517,7 +517,7 @@ export const en = {
     learnMore: "Learn more",
     start: "Show me how",
     explain1:
-      "When you prompt an AI generation model, it always gives you the most average result.",
+      "When you prompt an AI generation model, it gives you the most average result.",
     explain2: "Even if you do it many, many times.",
     explain3: "This is how AI models work.",
     explain4: "Try it for yourself.",
