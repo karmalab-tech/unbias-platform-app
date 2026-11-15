@@ -23,6 +23,8 @@ export const fr = {
     },
   },
   nav: {
+    menu: "Menu",
+    openMenu: "Ouvrir le menu",
     main: "Principal",
     whatIsThis: "C'est quoi ?",
     watchVideo: "Voir la vidéo",
