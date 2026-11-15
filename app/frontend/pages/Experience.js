@@ -1,4 +1,5 @@
 import PublicHeader from "~/components/public/PublicHeader";
+import PublicFooter from "~/components/public/PublicFooter";
 import BiasExperience from "~/components/experience/BiasExperience";
 import useQueryFlag from "~/hooks/useQueryFlag";
 import { useOfflineDashboard } from "~/lib/offline";
@@ -20,6 +21,7 @@ export default function Experience() {
     <div className="bg-night text-cream flex min-h-dvh flex-col lg:h-dvh">
       <PublicHeader />
       <BiasExperience />
+      <PublicFooter tone="dark" />
     </div>
   );
 }

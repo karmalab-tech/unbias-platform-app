@@ -12,6 +12,7 @@ import {
   segmentsFor,
 } from "~/lib/experience";
 import { precacheExperienceImages } from "~/lib/offline";
+import { INSTAGRAM_URL } from "~/lib/social";
 import { useSettings } from "~/lib/settings";
 import { locale, t } from "~/i18n";
 
@@ -336,6 +337,7 @@ const STATEMENT =
 const STATEMENT_PRESENT =
   "text-cream text-[clamp(24px,2vw,42px)] leading-[1.15] font-bold pb-4";
 const PROMPT_SIZE_PRESENT = "text-[clamp(22px,1.75vw,36px)]";
+const PROMPT_SIZE = "text-[17px] lg:text-[clamp(17px,1.25vw,22px)]";
 
 const BUTTON =
   "w-full border-2 px-4 py-3 text-left transition-[color,border-color,box-shadow] duration-300 ease-out";
@@ -367,22 +369,16 @@ function ColumnItem({
         type="button"
         disabled={busy}
         onClick={onStart}
-        className={
-          presentation
-            ? `${BUTTON} border-cream text-cream shadow-hard-signal flex items-center gap-4 px-6 py-5 enabled:cursor-pointer`
-            : "border-cream text-cream enabled:hover:bg-cream enabled:hover:text-night mono-caps flex min-h-12 w-full items-center justify-between gap-3 border-2 px-5 text-[13px] font-bold transition-colors duration-300 enabled:cursor-pointer"
-        }
+        className={`${BUTTON} border-cream text-cream shadow-hard-signal flex items-center gap-4 enabled:cursor-pointer ${presentation ? "px-6 py-5" : ""}`}
       >
-        {presentation ? (
-          <span className={`leading-[1.3] font-bold ${PROMPT_SIZE_PRESENT}`}>
-            {t("experience.start")}
-          </span>
-        ) : (
-          t("experience.start")
-        )}
+        <span
+          className={`leading-[1.3] font-bold ${presentation ? PROMPT_SIZE_PRESENT : PROMPT_SIZE}`}
+        >
+          {t("experience.start")}
+        </span>
         <ArrowRightIcon
           aria-hidden="true"
-          className={`${presentation ? "ml-auto h-8 w-8 shrink-0" : "h-5 w-5"}`}
+          className={`ml-auto shrink-0 ${presentation ? "h-8 w-8" : "h-6 w-6"}`}
         />
       </button>
     );
@@ -427,13 +423,28 @@ function ColumnItem({
         </div>
       </div>
     ) : (
-      <Link
-        to="/"
-        className="border-cream text-cream hover:bg-cream hover:text-night mono-caps mt-2 inline-flex min-h-12 items-center gap-3 border-2 px-5 text-[13px] font-bold transition-colors duration-300"
-      >
-        {t("experience.learnMore")}
-        <ArrowRightIcon aria-hidden="true" className="h-5 w-5" />
-      </Link>
+      <div className="mt-2 flex flex-col items-start gap-4">
+        <Link
+          to="/"
+          className={`${BUTTON} border-cream text-cream shadow-hard-signal flex items-center gap-4`}
+        >
+          <span className={`leading-[1.3] font-bold ${PROMPT_SIZE}`}>
+            {t("experience.home")}
+          </span>
+          <ArrowRightIcon
+            aria-hidden="true"
+            className="ml-auto h-6 w-6 shrink-0"
+          />
+        </Link>
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mono-caps text-cream/60 hover:text-cream inline-flex min-h-11 items-center text-[12px] font-bold tracking-[0.14em] underline underline-offset-4 transition-colors duration-300"
+        >
+          {t("experience.followInstagram")}
+        </a>
+      </div>
     );
   }
   if (item.kind === "pick") {
@@ -515,7 +526,7 @@ function ExecutionNote({ prompt, count, presentation }) {
 function Prompt({ prompt, mark, presentation }) {
   return (
     <span
-      className={`leading-[1.3] font-bold ${presentation ? PROMPT_SIZE_PRESENT : "text-[17px] lg:text-[clamp(17px,1.25vw,22px)]"}`}
+      className={`leading-[1.3] font-bold ${presentation ? PROMPT_SIZE_PRESENT : PROMPT_SIZE}`}
     >
       {segmentsFor(prompt, locale).map((segment, index) =>
         segment.added ? (

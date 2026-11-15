@@ -23,6 +23,8 @@ export const en = {
     },
   },
   nav: {
+    menu: "Menu",
+    openMenu: "Open the menu",
     main: "Main",
     whatIsThis: "What is this?",
     watchVideo: "Watch video",
@@ -515,7 +517,8 @@ export const en = {
     help: "Do you want to help?",
     scanQr: "Scan this QR code",
     restart: "Back to start",
-    learnMore: "Learn more",
+    home: "Go to the home page",
+    followInstagram: "Follow us on Instagram",
     start: "Show me how",
     explain1:
       "When you prompt an AI generation model, it gives you the most average result.",
