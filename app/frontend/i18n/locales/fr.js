@@ -522,7 +522,8 @@ export const fr = {
     help: "Vous voulez nous aider ?",
     scanQr: "Scannez ce QR code",
     restart: "Revenir au début",
-    learnMore: "En savoir plus",
+    home: "Aller à l'accueil",
+    followInstagram: "Suivez-nous sur Instagram",
     start: "Montrez-moi comment",
     explain1:
       "Quand vous utilisez un modèle d'IA générative, il vous donne le résultat le plus moyen.",

@@ -2,7 +2,7 @@
 
 An interactive page that shows what an image model does with the same sentence run many times: it does not return a random person, it returns the average one. Each step lets the visitor remove one bias from the prompt, and the results show that everything left unsaid still falls back to the default.
 
-- **Online:** `/experience`, under the public header. The introduction before it and the "what we can do" ending after it (leading to the dashboard and the contribute button) come later.
+- **Online:** `/experience`, under the same public header as the home page (nav links, an EN / FR language switcher, Contribute; on mobile the logo and Contribute share the first row, the links and the switcher the second). The first button and the prompts use the exhibition button style at a smaller size. The ending replaces the QR code and "Back to start" with a button to the home page and a smaller *Follow us on Instagram* link.
 - **Exhibition:** `/experience?present=true`, full screen, no navigation, touch first, the Unbias logo top left. It goes back to the first screen (with a new mosaic) after `experience_idle_seconds` (config/unbias.yml, default 30) without a touch; `?idle=60` overrides it for one screen.
 
 ## The experience
