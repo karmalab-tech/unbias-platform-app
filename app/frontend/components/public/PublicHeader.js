@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import InstagramIcon from "~/components/ui/InstagramIcon";
+import Wordmark from "~/components/ui/Wordmark";
 import iconEye from "~/images/icons/icon_eye.png";
 import { t } from "~/i18n";
 import { INSTAGRAM_URL } from "~/lib/social";
@@ -46,10 +47,7 @@ export default function PublicHeader() {
             alt=""
             className="h-10 w-10 max-[359px]:h-9 max-[359px]:w-9 md:h-13 md:w-13"
           />
-          <span className="display-caps flex flex-col text-[17px] leading-[0.95] tracking-[0.04em] max-[359px]:text-[14px] md:text-[26px]">
-            <span>{t("brand.line1")}</span>
-            <span>{t("brand.line2")}</span>
-          </span>
+          <Wordmark />
         </Link>
         <nav
           aria-label={t("nav.main")}

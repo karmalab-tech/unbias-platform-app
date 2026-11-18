@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Unbias AI" %></title>
+    <title><%= content_for(:title) || t("brand.name") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#29211f">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -24,8 +24,8 @@
 
     <meta name="description" content="A consented, human-reviewed image dataset to measure and correct representation bias in generative AI.">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Unbias AI">
-    <meta property="og:title" content="Unbias AI">
+    <meta property="og:site_name" content="<%= t("brand.name") %>">
+    <meta property="og:title" content="<%= t("brand.name") %>">
     <meta property="og:description" content="A consented, human-reviewed image dataset to measure and correct representation bias in generative AI.">
     <meta property="og:image" content="<%= request.base_url %>/og-image.png">
     <meta property="og:image:width" content="1200">

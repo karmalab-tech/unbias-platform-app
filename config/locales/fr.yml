@@ -1,4 +1,8 @@
 fr:
+  brand:
+    name: "Paramètres par défaut"
+    line1: "Paramètres"
+    line2: "par défaut"
   gate:
     password: "Mot de passe"
     submit: "Entrer"
@@ -21,7 +25,7 @@ fr:
     own_account: "Vous ne pouvez pas supprimer votre propre compte."
   contribution_mailer:
     code:
-      subject: "Votre code de contribution Unbias AI %{code}"
+      subject: "Votre code de contribution « Paramètres par défaut » %{code}"
       greeting: "Merci pour votre contribution."
       body:
         one: "Vous avez ajouté 1 personne au jeu de données."

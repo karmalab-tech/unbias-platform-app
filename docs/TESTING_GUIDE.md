@@ -310,7 +310,20 @@ Spec: `docs/BIAS_EXPERIENCE.md`.
 7. A prompt whose images are not generated yet shows empty tiles.
 8. `?lang=fr`: the statement and prompts read in French with correct agreement, inclusive spelling at the profession step (*un·e médecin noir·e âgé·e*) and gendered forms at the last step (*une femme médecin noire âgée*, *un père*); only the new word is highlighted.
 9. `/experience` on a phone (375 px, then 320 px): the header keeps the logo, *Contribute* and a burger button on one row, nothing wraps or scrolls sideways. The burger opens a drawer from the right with *What is this?* and Instagram (with icon); Escape, the close button, the backdrop and following a link close it. The EN / FR switcher is in the footer below the experience (also on `/`); click Français: the page reloads in French. The *Show me how* button has the same bordered look and red hard shadow as the prompts. Go to the end of any branch: under *Do you want to help?* there is a *Go to the home page* button and a smaller underlined *Follow us on Instagram* link, and no QR code or restart button. `?present=true` shows neither header nor footer.
-10. `/experience?present=true`: full screen, no header, the Unbias logo top left and no QR code until the end, where it appears under *Do you want to help?* with a small *Scan this QR code* (scan it: it opens `/contribute`). Untouched for 30 s after a choice, it returns to the first screen with a new mosaic; `?present=true&idle=10` shortens that to 10 s.
+10. `/experience?present=true`: full screen, no header, the "Default settings" wordmark top left and no QR code until the end, where it appears under *Do you want to help?* with a small *Scan this QR code* (scan it: it opens `/contribute`). Untouched for 30 s after a choice, it returns to the first screen with a new mosaic; `?present=true&idle=10` shortens that to 10 s.
 11. Phone width: the grid sits above the prompts.
 12. With reduced motion turned on in the OS, tiles stop floating and swap without turning, and prompts change place without gliding.
 13. Offline (production build only, like PR 5): open `/experience?present=true` online and wait a minute while it downloads every finished image (DevTools → Application → Cache storage → `unbias-experience-images`). Cut the network and reload: the page, logo, QR code and every path through the tree still play. Online `/experience` without `?present=true` only keeps the images already viewed.
+
+## PR 8 — New public name: "Default settings" / "Paramètres par défaut"
+
+Only user-facing text changed; code, infra and the subdomain keep the old identifiers.
+
+1. Home, desktop: the header wordmark sits on two lines (DEFAULT / SETTINGS), next to the eye icon, and the header is still 78 px tall.
+2. `?lang=fr`: PARAMÈTRES / PAR DÉFAUT. At 375 px the logo, *Contribute* and the burger stay on one row; at 320 px the wordmark and button shrink and the "+" disappears.
+3. Sign in at `/login` and open `/moderation`: the staff and auth headers use the same two-line wordmark.
+4. `/experience?present=true`: the wordmark sits top left.
+5. Footer and About page: "Default settings — platform", and the intro and FAQ answers name the project in quotes with correct agreement in French.
+6. Set `PASSWORD`, open the site in a private window: the gate shows the wordmark. Open `/nope.html`: the static error pages show it too.
+7. Submit a contribution with an email: the subject reads *Your "Default settings" contribution code UNB-…* (FR: *Votre code de contribution « Paramètres par défaut »…*) and the mail banner shows the wordmark.
+8. Browser tab title, link preview (`/og-image.png`) and `og:` tags read "Default settings".

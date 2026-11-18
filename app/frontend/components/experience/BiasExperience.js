@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowPathIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import FlipGrid, { waveTotalMs } from "~/components/experience/FlipGrid";
 import iconEye from "~/images/icons/icon_eye.png";
+import Wordmark from "~/components/ui/Wordmark";
 import { api } from "~/lib/api";
 import {
   imagePaths,
@@ -268,9 +269,7 @@ export default function BiasExperience({ presentation = false }) {
         {presentation && (
           <div className="flex items-center gap-3">
             <img src={iconEye} alt="" className="h-16 w-16" />
-            <span className="display-caps text-[38px] leading-none tracking-[0.04em]">
-              Unbias
-            </span>
+            <Wordmark className="text-[32px]" />
           </div>
         )}
         <div

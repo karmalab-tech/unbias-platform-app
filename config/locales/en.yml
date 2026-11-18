@@ -1,4 +1,8 @@
 en:
+  brand:
+    name: "Default settings"
+    line1: "Default"
+    line2: "settings"
   gate:
     password: "Password"
     submit: "Enter"
@@ -21,7 +25,7 @@ en:
     own_account: "You cannot remove your own account."
   contribution_mailer:
     code:
-      subject: "Your Unbias AI contribution code %{code}"
+      subject: "Your “Default settings” contribution code %{code}"
       greeting: "Thank you for contributing."
       body:
         one: "You added 1 person to the dataset."

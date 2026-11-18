@@ -1,5 +1,6 @@
 import { Link, Navigate, NavLink, useLocation } from "react-router-dom";
 import iconEye from "~/images/icons/icon_eye.png";
+import Wordmark from "~/components/ui/Wordmark";
 import { useAuth } from "~/lib/auth";
 import { t } from "~/i18n";
 
@@ -42,9 +43,7 @@ export default function StaffShell({ children, wide = true }) {
             className="flex items-center gap-3"
           >
             <img src={iconEye} alt="" className="h-13 w-13" />
-            <span className="display-caps text-[30px] leading-none tracking-[0.04em]">
-              Unbias
-            </span>
+            <Wordmark className="text-[26px]" />
           </Link>
           <nav className="mono-caps flex items-center gap-1 text-[13px] tracking-[0.08em]">
             <NavLink to="/moderation" className={link}>

@@ -335,7 +335,7 @@ export const en = {
   about: {
     title: "Let's build a better picture of ourselves",
     intro:
-      "Generative image models now take part in how people are pictured. Their picture of society is not neutral: ask for a neutral prompt and the same faces, bodies and settings tend to come back. Unbias AI is a cultural, open-source initiative that asks whether we can measure this bias, collectively build better representation data, adapt open models, and measure again.",
+      "Generative image models now take part in how people are pictured. Their picture of society is not neutral: ask for a neutral prompt and the same faces, bodies and settings tend to come back. “Default settings” is a cultural, open-source initiative that asks whether we can measure this bias, collectively build better representation data, adapt open models, and measure again.",
     loop: "This platform is the collecting step. People contribute their own photos, or photos of people who gave permission, describe who is visible, and a real person reviews every image before it joins the dataset. The goal of this first milestone is 10,000 people represented.",
     howTitle: "How it works",
     steps: {
@@ -399,12 +399,12 @@ export const en = {
       boost: {
         q: "Why does the dashboard show more photos than were really uploaded?",
         loading: "Loading the current figures…",
-        a: "People hesitate to be the first to take part; it is well documented that a project that already has contributors attracts more. So, to give Unbias AI momentum at launch, the dashboard temporarily adds a launch boost to these figures and to the approved bars of the charts by category. Photos contributed: {realPhotos} really uploaded + {addedPhotos} added = {shownPhotos} shown. People represented: {realPeople} really approved + {addedPeople} added = {shownPeople} shown. The added part is not real contributions. It shrinks as real contributions arrive and disappears completely once {until} photos have really been uploaded (for people: once {until} people are really approved). Each bar in the charts by category gets a proportional share of the people boost and loses it as that category fills up, so those bars are not real counts either. From then on the dashboard shows only real numbers. The pending counts always show real numbers only.",
+        a: "People hesitate to be the first to take part; it is well documented that a project that already has contributors attracts more. So, to give “Default settings” momentum at launch, the dashboard temporarily adds a launch boost to these figures and to the approved bars of the charts by category. Photos contributed: {realPhotos} really uploaded + {addedPhotos} added = {shownPhotos} shown. People represented: {realPeople} really approved + {addedPeople} added = {shownPeople} shown. The added part is not real contributions. It shrinks as real contributions arrive and disappears completely once {until} photos have really been uploaded (for people: once {until} people are really approved). Each bar in the charts by category gets a proportional share of the people boost and loses it as that category fills up, so those bars are not real counts either. From then on the dashboard shows only real numbers. The pending counts always show real numbers only.",
         over: "People hesitate to be the first to take part, so to give the project momentum at launch the dashboard temporarily added a launch boost to the photo and people counts. That boost has now ended: the dashboard shows only real numbers ({realPhotos} photos uploaded, {realPeople} people approved).",
       },
       who: {
         q: "Who is behind this?",
-        a: "Unbias AI is started by {karmalab} and designed to grow into a broader open collaboration. All code is open source under the MIT license; access to the dataset itself stays controlled.",
+        a: "“Default settings” is started by {karmalab} and designed to grow into a broader open collaboration. All code is open source under the MIT license; access to the dataset itself stays controlled.",
       },
     },
   },

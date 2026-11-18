@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import iconEye from "~/images/icons/icon_eye.png";
+import Wordmark from "~/components/ui/Wordmark";
 import { inputClass } from "~/components/ui/Field";
 import { t } from "~/i18n";
 
@@ -14,9 +15,7 @@ export default function AuthLayout({ title, subtitle, children }) {
             className="flex items-center gap-3"
           >
             <img src={iconEye} alt="" className="h-13 w-13" />
-            <span className="display-caps text-[30px] leading-none tracking-[0.04em]">
-              Unbias
-            </span>
+            <Wordmark className="text-[26px]" />
           </Link>
         </div>
       </header>

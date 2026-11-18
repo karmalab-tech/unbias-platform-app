@@ -8,7 +8,7 @@ A public dashboard for a photo-contribution project. It reports how many people 
 
 ## Structure (top to bottom)
 
-1. **Header.** Eye icon and "Unbias", links to What is this? and Watch video, primary Contribute action. Hidden in installation mode.
+1. **Header.** Eye icon and the two-line "Default settings" wordmark, links to What is this? and Watch video, primary Contribute action. Hidden in installation mode.
 2. **Hero.** Three columns that stretch to equal height: headline progress (approved count over target, caption "people represented", progress track, legend of Approved / Pending review / Still needed), optional secondary stats (`showSecondaryStats`: people represented, images contributed, contributions today), and a clickable video preview that opens the overlay.
 3. **Need cards.** Up to three admin-written requests ("More people aged 75+"), each linking to the contribute flow. Copy is a request, not a metric.
 4. **Representation.** Five dimension columns: age (labelled rows), skin tone (ten vertical swatch columns, with an outbound note naming the Monk Skin Tone scale), gender and body (label-above rows), visible disability / assistive devices (labelled rows). One legend for Approved and Pending; targets are printed once per column header, never per row.

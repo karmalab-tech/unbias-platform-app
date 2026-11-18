@@ -9,7 +9,9 @@ export default function PublicFooter({ tone = "light" }) {
     >
       <div className="mono-caps md:px-gutter mx-auto flex max-w-[1512px] flex-col gap-4 px-4 py-5 text-[12px] md:flex-row md:items-center md:justify-between">
         <nav className="flex flex-wrap items-center gap-x-3 gap-y-2">
-          <span>Unbias — {t("footer.platform")}</span>
+          <span>
+            {t("home.title")} — {t("footer.platform")}
+          </span>
           <span aria-hidden="true">·</span>
           <Link to="/about" className="hover:underline">
             {t("nav.whatIsThis")}
