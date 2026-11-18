@@ -66,7 +66,7 @@ All figures use `tabular`. Counts are absolute and comma-grouped, never percenta
 
 | Component | Spec |
 |---|---|
-| **Header** (public, staff, auth, gate) | `bg-ink text-cream border-b-2`, min height 76px, eye icon 52px + `display-caps` 30px "Unbias". Nav in `mono-caps` 13px; current item `bg-signal text-ink font-bold`; others `text-peach hover:text-cream`. |
+| **Header** (public, staff, auth, gate) | `bg-ink text-cream border-b-2`, min height 76px, eye icon 52px + two-line `display-caps` 26px wordmark ("Default settings" / "Paramètres par défaut"; 17px on mobile, 14px under 360px). Nav in `mono-caps` 13px; current item `bg-signal text-ink font-bold`; others `text-peach hover:text-cream`. |
 | **Button** (`ui/Button`) | `mono-caps font-bold border-2 border-ink`. `primary` signal + `press`; `ink` ink + signal shadow; `secondary` transparent, fills ink on hover; `ghost` underline. Disabled primary is peach without shadow. |
 | **Field** (`ui/Field`, `inputClass`) | `border-2 border-ink bg-cream px-4 py-3`, label in `mono-caps` 12px above, hint `ink-55`, error as `notice`. Focus uses the global signal outline. |
 | **Choice / MonkScale** | `border-2 border-ink bg-cream`; hover `bg-peach`; selected `bg-ink text-cream`. |

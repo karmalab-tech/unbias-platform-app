@@ -35,15 +35,20 @@ export default function PublicHeader() {
 
   return (
     <header className="bg-ink text-cream border-ink border-b-2">
-      <div className="md:px-gutter mx-auto flex min-h-19 max-w-[1512px] items-center gap-x-3 px-4 py-3 md:gap-x-8">
+      <div className="md:px-gutter mx-auto flex min-h-19 max-w-[1512px] items-center gap-x-3 px-4 py-3 max-[359px]:gap-x-2 max-[359px]:px-3 md:gap-x-8">
         <Link
           to="/"
           aria-label={t("home.title")}
           className="text-cream flex items-center gap-2 md:gap-3"
         >
-          <img src={iconEye} alt="" className="h-10 w-10 md:h-13 md:w-13" />
-          <span className="display-caps text-[24px] leading-none tracking-[0.04em] md:text-[30px]">
-            Unbias
+          <img
+            src={iconEye}
+            alt=""
+            className="h-10 w-10 max-[359px]:h-9 max-[359px]:w-9 md:h-13 md:w-13"
+          />
+          <span className="display-caps flex flex-col text-[17px] leading-[0.95] tracking-[0.04em] max-[359px]:text-[14px] md:text-[26px]">
+            <span>{t("brand.line1")}</span>
+            <span>{t("brand.line2")}</span>
           </span>
         </Link>
         <nav
@@ -65,10 +70,12 @@ export default function PublicHeader() {
         </nav>
         <Link
           to="/contribute"
-          className="press press-sm press-lime border-lime bg-signal text-ink mono-caps ml-auto flex min-h-11 items-center gap-2 border-2 px-3 text-[12px] font-bold md:ml-0 md:gap-3 md:px-4 md:text-[13px]"
+          className="press press-sm press-lime border-lime bg-signal text-ink mono-caps ml-auto flex min-h-11 items-center gap-2 border-2 px-3 text-[12px] font-bold max-[359px]:px-2 max-[359px]:text-[11px] md:ml-0 md:gap-3 md:px-4 md:text-[13px]"
         >
           {t("nav.contribute")}
-          <span aria-hidden="true">+</span>
+          <span aria-hidden="true" className="max-[359px]:hidden">
+            +
+          </span>
         </Link>
         <button
           ref={toggle}

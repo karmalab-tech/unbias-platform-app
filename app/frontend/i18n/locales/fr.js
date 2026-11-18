@@ -34,8 +34,12 @@ export const fr = {
     moderation: "Modération",
     admin: "Admin",
   },
+  brand: {
+    line1: "Paramètres",
+    line2: "par défaut",
+  },
   home: {
-    title: "Unbias AI",
+    title: "Paramètres par défaut",
     tagline:
       "Un jeu de données d'images public et consenti pour mesurer et corriger les biais de représentation des modèles génératifs.",
     upload: "Ajouter des photos",

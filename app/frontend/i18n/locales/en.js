@@ -34,8 +34,12 @@ export const en = {
     moderation: "Moderation",
     admin: "Admin",
   },
+  brand: {
+    line1: "Default",
+    line2: "settings",
+  },
   home: {
-    title: "Unbias AI",
+    title: "Default settings",
     tagline:
       "A public, consented image dataset built to measure and correct representation bias in generative models.",
     upload: "Upload photos",
